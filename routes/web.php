@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\PermissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit', [RoleController::class, 'edit'])->name('roles.edit');
         Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
         // Route::get('/change-permission/{id}', [RoleController::class, 'changePermission'])->name('roles.change-permission');
-        Route::get('/change-permission', [RoleController::class, 'changePermission'])->name('roles.change-permission');
+        // Route::get('/change-permission', [RoleController::class, 'changePermission'])->name('roles.change-permission');
+
+        Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
+        Route::post('/update-permission/{id}', [PermissionController::class, 'update'])->name('permission.update');
+
     });
 });
 require __DIR__ . '/auth.php';

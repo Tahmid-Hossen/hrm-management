@@ -100,9 +100,10 @@
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">EMAIL</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Phone</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Gender</th>
+                                <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Company Name</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">DESIGNATION</th>
-                                <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">DATE OF JOINING</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Action</th>
+                                
                             </tr>
                             </thead>
                             <tbody class="w-full divide-neutral-200 dark:divide-neutral-700">
@@ -116,10 +117,9 @@
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->email}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">	{{ $employee->phone}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->gender}}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->company_name}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->designation}}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->joining_date}}</td>
                                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
-
                                     <div class="flex gap-3">
                                         <div class="inline-block hs-tooltip">
                                             <button  data-hs-overlay="#edit-employee-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
@@ -144,7 +144,6 @@
                                             </a>
                                         </div>
                                     </div>
-
                                 </td>
                             </tr>
                             @endforeach

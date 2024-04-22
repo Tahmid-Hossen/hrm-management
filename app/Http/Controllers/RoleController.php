@@ -22,19 +22,19 @@ class RoleController extends Controller
     {
         return $request;
     }
-    public function edit($id)
+    public function edit()
     {
-
+      return view("roles.edit");
     }
 
     public function update(Request $request, $id)
     {
 
     }
-    public function changePermission($id)
+    public function changePermission()
     {
-
-        return $role=Role::find($id);
+        // return $role=Role::find($id);
+        return view("roles.permission");
     }
     public function delete()
     {

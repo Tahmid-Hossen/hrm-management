@@ -51,7 +51,7 @@
                         <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                         <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                     </svg>
-                    Staff
+                    Manage-User
 
                     <svg
                         class="hidden hs-accordion-active:block ms-auto size-4"
@@ -93,6 +93,15 @@
                                 User
                             </a>
                         </li>
+
+                        <li>
+                            <a
+                                class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{route('roles.index')}}">
+                                Role
+                            </a>
+                        </li>
+
                         <li>
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "

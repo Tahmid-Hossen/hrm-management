@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('birth_year');
             $table->enum('gender', ['Male', 'Female', 'Other']);
             $table->string('address');
+            $table->string('company_name');
             $table->string('designation');
             $table->date('joining_date');
             $table->string('password');

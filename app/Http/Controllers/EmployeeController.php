@@ -48,10 +48,9 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
-        $role = Employee::findOrFail($id); // Find the role by its ID
-        return $role;
-        // return view('roles.edit', compact('role')); // Pass the role data to the view
-    }
+        $employee = Employee::find($id); // Assuming you have an Employee model
+        return view('employees.edit', compact('employee'));
+    }    
 
     public function delete($id)
     {

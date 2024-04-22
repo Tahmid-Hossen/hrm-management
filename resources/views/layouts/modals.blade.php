@@ -537,14 +537,15 @@
 
 
 
-{{--06 edit Employee Modal--}}
+{{--06 update Employee Modal--}}
+@isset($employee)
 <div id="edit-employee-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
     <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-4xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
         <div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
             <!-- Header -->
             <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
                 <h3 class="font-bold text-gray-800 dark:text-white">
-                    Create Employee
+                    Edit Employee
                 </h3>
                 <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#edit-employee-modal">
                     <span class="sr-only">Close</span>
@@ -569,7 +570,7 @@
                             Manage your name, password and account settings.
                         </p>
                     </div>
-                    <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Grid -->
                         <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
@@ -620,7 +621,7 @@
                             <!-- End Col -->
                             <div class="sm:col-span-9">
                             <div class="sm:flex">
-                                <input id="employeeFullName" name="full_name" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Maria">
+                                <input id="employeeFullName" name="full_name" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}">
                             </div>
                             </div>
                             <!-- End Col -->
@@ -759,7 +760,7 @@
                                 Cancel
                             </button>
                             <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                Create a new employee
+                                Update employee
                             </button>
                         </div>
                     </form>
@@ -771,8 +772,12 @@
             <!-- End Body -->
         </div>
     </div>
-</div>
-{{--06 Create Employee Modal--}}
+</div> else
+<p>No employee data found.</p>
+@endisset
+
+
+{{--06 update Employee Modal--}}
 
 
 

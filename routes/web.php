@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create');
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('employees.edit');
-        // Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
+        Route::post('/update/{id}', [RoleController::class, 'update'])->name('employees.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
     });
 

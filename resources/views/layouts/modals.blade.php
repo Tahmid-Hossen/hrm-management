@@ -1101,7 +1101,7 @@
                         <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
                             <div class="sm:col-span-3">
                                 <label for="employeeDesignation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                Select Designation
+                                Assign Role
                                 </label>
                                 </div>
                                 <!-- End Col -->

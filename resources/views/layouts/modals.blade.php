@@ -391,14 +391,8 @@
                                     <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://preline.co/assets/img/160x160/img1.jpg" alt="Image Description">
                                     <div class="flex gap-x-2">
                                         <div>
-                                            <button type="file" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                                            <i class="fa-solid fa-download"></i>
-                                            <input type="file" name="profile_photo" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
-                                                file:bg-gray-50 file:border-0
-                                                file:me-4
-                                                file:py-3 file:px-4
-                                                dark:file:bg-neutral-700 dark:file:text-neutral-400">
-                                            </button>
+                                            <input type="file" name="profile_photo" id="employee_photo" class="file-input file-input-bordered w-full max-w-xs"/>
+
                                         </div>
                                     </div>
                                 </div>
@@ -645,7 +639,7 @@
                                 <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://preline.co/assets/img/160x160/img1.jpg" alt="Image Description">
                                 <div class="flex gap-x-2">
                                     <div>
-                                        <button type="file" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                                        {{-- <button type="file" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
                                         <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                             <polyline points="17 8 12 3 7 8"/>
@@ -656,7 +650,8 @@
                                             file:me-4
                                             file:py-3 file:px-4
                                             dark:file:bg-neutral-700 dark:file:text-neutral-400">
-                                        </button>
+                                        </button> --}}
+                                        <input type="file" name="profile_photo" value="{{ $employee->profile_photo }}" id="employee_photo" class="file-input file-input-bordered w-full max-w-xs" />
                                     </div>
                                 </div>
                             </div>

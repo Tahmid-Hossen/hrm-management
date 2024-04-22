@@ -49,9 +49,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('roles.index');
         Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
         Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
-        Route::get('/edit/{id}', [RoleController::class, 'edit'])->name('roles.edit');
+        Route::get('/edit', [RoleController::class, 'edit'])->name('roles.edit');
         Route::post('/update/{id}', [RoleController::class, 'update'])->name('roles.update');
-        Route::get('/change-permission/{id}', [RoleController::class, 'changePermission'])->name('roles.change-permission');
+        // Route::get('/change-permission/{id}', [RoleController::class, 'changePermission'])->name('roles.change-permission');
+        Route::get('/change-permission', [RoleController::class, 'changePermission'])->name('roles.change-permission');
     });
 });
 require __DIR__ . '/auth.php';

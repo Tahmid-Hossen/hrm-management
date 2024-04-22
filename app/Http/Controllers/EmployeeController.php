@@ -32,6 +32,7 @@ class EmployeeController extends Controller
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
         $employee->address = $request->address;
+        $employee->company_name = $request->company_name;
         $employee->designation = $request->designation;
         $employee->joining_date = $request->joining_date;
         $employee->password = bcrypt($request->password); // Hash the password

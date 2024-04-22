@@ -51,7 +51,43 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id); // Assuming you have an Employee model
         return view('employees.edit', compact('employee'));
-    }    
+    }
+    
+    public function update(Request $request, $id)
+    {
+        // Find the employee record by ID
+        $employee = Employee::find($id);
+        
+        // Check if the employee exists
+        if (!$employee) {
+            return redirect()->route('employees.index')->with('error', 'Employee not found.');
+        }
+
+        // Update employee fields
+        $employee->employee_id = $request->employee_id;
+        $employee->full_name = $request->full_name;
+        $employee->email = $request->email;
+        $employee->phone = $request->phone;
+        $employee->birth_year = $request->birth_year;
+        $employee->gender = $request->gender;
+        $employee->address = $request->address;
+        $employee->designation = $request->designation;
+        $employee->joining_date = $request->joining_date;
+
+        // Handle profile photo upload if provided
+        if ($request->hasFile('profile_photo')) {
+            $profilePhoto = $request->file('profile_photo');
+            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
+            $profilePhoto->storeAs('public/profile_photos', $profilePhotoName);
+            $employee->profile_photo = $profilePhotoName;
+        }
+
+        // Save the updated employee
+        $employee->save();
+
+        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+    }
+
 
     public function delete($id)
     {

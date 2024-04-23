@@ -984,18 +984,6 @@
                                 <img class="inline-block size-16 rounded-full ring-2 ring-white dark:ring-neutral-900" src="https://preline.co/assets/img/160x160/img1.jpg" alt="Image Description">
                                 <div class="flex gap-x-2">
                                     <div>
-                                        {{-- <button type="file" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                            <polyline points="17 8 12 3 7 8"/>
-                                            <line x1="12" x2="12" y1="3" y2="15"/>
-                                        </svg>
-                                        <input type="file" name="profile_photo" value="{{ $employee->profile_photo }}" id="file-input" class="block w-full border border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
-                                            file:bg-gray-50 file:border-0
-                                            file:me-4
-                                            file:py-3 file:px-4
-                                            dark:file:bg-neutral-700 dark:file:text-neutral-400">
-                                        </button> --}}
                                         <input type="file" name="profile_photo" value="{{ $employee->profile_photo }}" id="employee_photo" class="file-input file-input-bordered w-full max-w-xs" />
                                     </div>
                                 </div>
@@ -1082,10 +1070,10 @@
                                 <!-- End Col -->
                                 <div class="sm:col-span-9">
                                     <div class="space-y-2">
-                                        <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <select id="employeeDesignation" name="company_name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                             <option value="" disabled>Select Company</option>
-                                            <option value="Nexdecade Technology" @if($employee->designation == "Nexdecade Technology") selected @endif>Nexdecade Technology</option>
-                                            <option value="M2M Communication" @if($employee->designation == "M2M Communication") selected @endif>M2M Communication</option>
+                                            <option value="Nexdecade Technology" @if($employee->company_name == "Nexdecade Technology") selected @endif>Nexdecade Technology</option>
+                                            <option value="M2M Communication" @if($employee->company_name == "M2M Communication") selected @endif>M2M Communication</option>
                                         </select>
                                     </div>                                    
                             </div>
@@ -1100,10 +1088,10 @@
                             <div class="sm:col-span-9">
                             <div class="space-y-2">
                                 <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                    <option selected="">Open this select menu</option>
-                                    <option value="Web Developer">Web Developer</option>
-                                    <option value="Software Developer">Software Developer</option>
-                                    <option value="Lead Software Developer">Lead Software Developer</option>
+                                    <option selected="" disabled>Open this select menu</option>
+                                    <option value="Web Developer" @if($employee->designation == "Web Developer") selected @endif>Web Developer</option>
+                                    <option value="Software Developer" @if($employee->designation == "Software Developer") selected @endif>Software Developer</option>
+                                    <option value="Lead Software Developer" @if($employee->designation == "Lead Software Developer") selected @endif>Lead Software Developer</option>
                                 </select>
                             </div>
                             </div>
@@ -1123,6 +1111,40 @@
                             </div>
                             </div>
                             <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <div class="inline-block">
+                                    <label for="employeeEmmergencyPhone" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    Emergency Contact Number
+                                    </label>
+                                    <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                </div>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="sm:flex">
+                                    <input id="employeeEmergencyPhone" name="emergency_contact" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact }}">
+                                </div>
+                                </div>  
+
+                                {{-- End col --}}
+
+                                <div class="sm:col-span-3">
+                                    <div class="inline-block">
+                                        <label for="emergencyContactRelation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                        Emergency Contact Relation
+                                        </label>
+                                        <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                    </div>
+                                    </div>
+                                    <!-- End Col -->
+                                    <div class="sm:col-span-9">
+                                    <div class="sm:flex">
+                                        <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact_relation }}">
+                                    </div>
+                                    </div>
+                                    <!-- End Col -->
+
                             <div class="sm:col-span-3">
                             <div class="inline-block">
                                 <label for="employeeBirthday" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -1173,19 +1195,17 @@
                                 <div class="sm:col-span-9">
                                 <div class="space-y-2">
                                     <select id="employeeDesignation" name="is_user" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected="">Select User Type</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
+                                        <option selected="" disabled>Select User Type</option>
+                                        <option value="Yes" @if($employee->is_user == "yes") selected @endif>Yes</option>
+                                        <option value="No" @if($employee->is_user == "No") selected @endif>No</option>
                                     </select>
                                 </div>
                                 </div>
                                 <!-- End Col -->
-
-
                             
                             <div class="sm:col-span-3">
                                 <label for="employeeAddress" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                Address
+                                Present Address
                                 </label>
                             </div>
                             <!-- End Col -->
@@ -1195,6 +1215,8 @@
                                 </textarea>
                             </div>
                             <!-- End Col -->
+
+
 
                             <!-- End Col -->
                             <div class="sm:col-span-3">
@@ -1207,6 +1229,297 @@
                                 <textarea id="employeePermanentAddress" name="permanent_address" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="6">
                                     {{ $employee->permanent_address }}
                                 </textarea>
+                            </div>
+                            <!-- End Col -->
+                            {{-- first Education Record --}}
+                            <div class="sm:col-span-3">
+                                <label for="instituationOne" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Instituation Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_one }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="degreeType" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Select Degree Type
+                                </label>
+                            </div>
+                            <!-- End Col -->
+                            <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected="" disabled>Select Degree</option>
+                                        <option value="SSC" @if($employee->degree_one == "SSC") selected @endif>SSC</option>
+                                        <option value="HSC" @if($employee->degree_one == "HSC") selected @endif>HSC</option>
+                                        <option value="BSC" @if($employee->degree_one == "BSC") selected @endif>BSC</option>
+                                        <option value="MSC" @if($employee->degree_one == "MSC") selected @endif>MSC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="department_one" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Department Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_one }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="passing_year_one" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Passing Year
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="passing_year_one" name="passing_year_one" type="date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_one }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="result_one" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Result
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_one }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            
+                            {{-- 2nd education recored --}}
+                            <div class="sm:col-span-3">
+                                <label for="instituationOne" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Instituation Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="institution_name_two" name="institution_name_two" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_two }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="employeeId" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Select Degree Type
+                                </label>
+                            </div>
+                            <!-- End Col -->
+                            <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <select id="degree_two" name="degree_two" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected="" disabled>Select Degree</option>
+                                        <option value="SSC" @if($employee->degree_two == "SSC") selected @endif>SSC</option>
+                                        <option value="HSC" @if($employee->degree_two == "HSC") selected @endif>HSC</option>
+                                        <option value="BSC" @if($employee->degree_two == "BSC") selected @endif>BSC</option>
+                                        <option value="MSC" @if($employee->degree_two == "MSC") selected @endif>MSC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="department_one" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Department Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="department_two" name="department_two" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_two }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="passing_year_two" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Passing Year
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="passing_year_two" name="passing_year_two" type="date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_two }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="result_two" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Result
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="result_two" name="result_two" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_two }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+
+
+                            {{-- 3rd education recored --}}
+                            <div class="sm:col-span-3">
+                                <label for="instituationthree" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Instituation Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="institution_name_three" name="institution_name_three" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_three }}"> 
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="selectDegreeType" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Select Degree Type
+                                </label>
+                            </div>
+                            <!-- End Col -->
+                            <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <select id="degree_three" name="degree_three" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected="" disabled>Select Degree</option>
+                                        <option value="SSC" @if($employee->degree_three == "SSC") selected @endif>SSC</option>
+                                        <option value="HSC" @if($employee->degree_three == "HSC") selected @endif>HSC</option>
+                                        <option value="BSC" @if($employee->degree_three == "BSC") selected @endif>BSC</option>
+                                        <option value="MSC" @if($employee->degree_three == "MSC") selected @endif>MSC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="department_three" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Department Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="department_three" name="department_three" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_three }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="passing_year_three" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Passing Year
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="passing_year_three" name="passing_year_three" type="date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_three }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="result_three" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Result
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="result_three" name="result_three" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_three }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+
+                            {{-- 4th education recored --}}
+                            <div class="sm:col-span-3">
+                                <label for="instituationFour" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Instituation Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="institution_name-four" name="institution_name_four" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_four }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="selectDegreeType" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Select Degree Type
+                                </label>
+                            </div>
+                            <!-- End Col -->
+                            <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <select id="degree_four" name="degree_four" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <option selected="" disabled>Select Degree</option>
+                                        <option value="SSC" @if($employee->degree_four == "SSC") selected @endif>SSC</option>
+                                        <option value="HSC" @if($employee->degree_four == "HSC") selected @endif>HSC</option>
+                                        <option value="BSC" @if($employee->degree_four == "BSC") selected @endif>BSC</option>
+                                        <option value="MSC" @if($employee->degree_four == "MSC") selected @endif>MSC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="department_four" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Department Name
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="department_four" name="department_four" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_four }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="passing_year_three" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Passing Year
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="passing_year_four" name="passing_year_four" type="date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_four }}">
+                                </div>
+                            </div>
+                            <!-- End Col -->
+
+                            <div class="sm:col-span-3">
+                                <label for="result_four" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Result
+                                </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                <div class="space-y-2">
+                                    <input id="result_four" name="result_four" type="text" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_four }}">
+                                </div>
                             </div>
                             <!-- End Col -->
                         </div>

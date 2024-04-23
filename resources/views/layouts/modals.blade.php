@@ -1184,24 +1184,6 @@
                             </div>
                             <!-- End Col -->
 
-
-                            <!-- End Col -->
-                            <div class="sm:col-span-3">
-                                <label for="employeeDesignation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                Is_user
-                                </label>
-                                </div>
-                                <!-- End Col -->
-                                <div class="sm:col-span-9">
-                                <div class="space-y-2">
-                                    <select id="employeeDesignation" name="is_user" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected="" disabled>Select User Type</option>
-                                        <option value="Yes" @if($employee->is_user == "yes") selected @endif>Yes</option>
-                                        <option value="No" @if($employee->is_user == "No") selected @endif>No</option>
-                                    </select>
-                                </div>
-                                </div>
-                                <!-- End Col -->
                             
                             <div class="sm:col-span-3">
                                 <label for="employeeAddress" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">

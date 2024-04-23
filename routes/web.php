@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,8 @@ use App\Http\Controllers\PermissionController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::prefix('users')->group(function (){
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/create', [UserController::class, 'create'])->name('users.create');

@@ -104,8 +104,19 @@
     </div>
 
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+         @if ($errors->any())
+            <div class="col-span-3 text-center mb-4 mt-[-15px]">
+                @foreach ($errors->all() as $error)
+                <div class="text-red-600 bg-red-50 p-2 text-center flex gap-1 item-center border border-red-600 justify-center font-medium rounded-sm">
+                    <span><i class="fa-solid fa-circle-info"></i></span>{{ $error }}
+                </div>
+                @endforeach
+            </div>
+        @endif
         <form class="space-y-6" action="{{route('login')}}" method="post">
             @csrf
+
+            
             <div>
                 <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
                 <div class="mt-2">

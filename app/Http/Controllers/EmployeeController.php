@@ -31,7 +31,43 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
-        $employee->address = $request->address;
+        $employee->emergency_contact = $request->emergency_contact;
+        $employee->emergency_contact_relation = $request->emergency_contact_relation;
+        $employee->permanent_address = $request->permanent_address;
+        $employee->is_user = $request->is_user;
+
+
+        $employee->institution_name_one = $request->institution_name_one;
+        $employee->institution_name_two = $request->institution_name_two;
+        $employee->institution_name_three = $request->institution_name_three;
+        $employee->institution_name_four = $request->institution_name_four;
+
+
+        $employee->degree_one = $request->degree_one;
+        $employee->degree_two = $request->degree_two;
+        $employee->degree_three = $request->degree_three;
+        $employee->degree_four = $request->degree_four;
+
+
+        $employee->department_one = $request->department_one;
+        $employee->department_two = $request->department_two;
+        $employee->department_three = $request->department_three;
+        $employee->department_four = $request->department_four;
+
+
+        $employee->passing_year_one = $request->passing_year_one;
+        $employee->passing_year_two = $request->passing_year_two;
+        $employee->passing_year_three = $request->passing_year_three;
+        $employee->passing_year_four = $request->passing_year_four;
+
+
+        $employee->result_one = $request->result_one;
+        $employee->result_two = $request->result_two;
+        $employee->result_three = $request->result_three;
+        $employee->result_four = $request->result_four;
+
+
+        $employee->present_address = $request->present_address;
         $employee->company_name = $request->company_name;
         $employee->designation = $request->designation;
         $employee->joining_date = $request->joining_date;
@@ -70,9 +106,45 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
-        $employee->address = $request->address;
+        $employee->present_address = $request->present_address;
+        $employee->permanent_address = $request->permanent_address;
         $employee->designation = $request->designation;
+
+        $employee->institution_name_one = $request->institution_name_one;
+        $employee->institution_name_two = $request->institution_name_two;
+        $employee->institution_name_three = $request->institution_name_three;
+        $employee->institution_name_four = $request->institution_name_four;
+
+
+        $employee->degree_one = $request->degree_one;
+        $employee->degree_two = $request->degree_two;
+        $employee->degree_three = $request->degree_three;
+        $employee->degree_four = $request->degree_four;
+
+
+        $employee->department_one = $request->department_one;
+        $employee->department_two = $request->department_two;
+        $employee->department_three = $request->department_three;
+        $employee->department_four = $request->department_four;
+
+
+        $employee->passing_year_one = $request->passing_year_one;
+        $employee->passing_year_two = $request->passing_year_two;
+        $employee->passing_year_three = $request->passing_year_three;
+        $employee->passing_year_four = $request->passing_year_four;
+
+
+        $employee->result_one = $request->result_one;
+        $employee->result_two = $request->result_two;
+        $employee->result_three = $request->result_three;
+        $employee->result_four = $request->result_four;
+
+
         $employee->joining_date = $request->joining_date;
+        $employee->emergency_contact = $request->emergency_contact;
+        $employee->emergency_contact_relation = $request->emergency_contact_relation;
+        $employee->permanent_address = $request->permanent_address;
+        $employee->is_user = $request->is_user;
 
         // Handle profile photo upload if provided
         if ($request->hasFile('profile_photo')) {

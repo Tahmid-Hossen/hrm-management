@@ -91,7 +91,7 @@
                 <div
                     id="staff-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col  gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
                         @php $isSubActive = request()->is('users') ? 'true' : 'false'; @endphp
                         <li>
                             <a
@@ -186,7 +186,7 @@
                 <div
                     id="payroll-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col  gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
                         @php $isSubActive = request()->is('set-salary') ? 'true' : 'false'; @endphp
                         <li>
                             <a
@@ -250,7 +250,7 @@
                 <div
                     id="timesheet-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col  gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
                         @php $isSubActive = request()->is('timesheet', 'timesheet/*') ? 'true' : 'false'; @endphp
                         <li>
                             <a
@@ -363,7 +363,7 @@
                 <div
                     id="account-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                    <ul class="flex flex-col  gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
                         <li>
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
@@ -387,9 +387,9 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="hs-accordion" id="projects-accordion">
+            <!-- <li class="hs-accordion" id="projects-accordion">
                 <button
                     type="button"
                     class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none">
@@ -441,7 +441,7 @@
                 <div
                     id="projects-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                    <ul class="flex flex-col  gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
                         <li>
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
@@ -516,7 +516,7 @@
                     </svg>
                     Documentation
                 </a>
-            </li>
+            </li> -->
 
             <!-- List of Sidebar items -->
         </ul>

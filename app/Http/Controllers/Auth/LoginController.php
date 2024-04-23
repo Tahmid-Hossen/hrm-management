@@ -12,9 +12,9 @@ class LoginController extends Controller
 {
     public function login()
     {
-
         return view('auth.login');
     }
+    
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -25,7 +25,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
-
+        return redirect("/login");
     }
 
     public function logout()

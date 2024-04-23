@@ -40,9 +40,9 @@ class PermissionController extends Controller
     {
 
         $role = Role::find($id);
-        if($role->name=='superadmin'){
-            return redirect('/roles');
-        }
+        // if($role->name=='superadmin'){
+        //     return redirect('/roles');
+        // }
         // if (!userCan('role.change-permission')) {
         //     return view('unauthorized.unauthorized401');
         // }

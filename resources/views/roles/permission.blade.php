@@ -5,7 +5,7 @@
 <div class="w-full border rounded-md p-4">
     <h1 class="pb-2">
         <span class="text-lg font-medium">Permission for the role of</span>
-        <b class="text-xl italic uppercase">Super Admin:</b>
+        <b class="text-xl italic uppercase">{{ $role->name }} : </b>
     </h1>
     <hr>
     <div class="w-full py-4 gap-3 divide-x divide-gray-300">

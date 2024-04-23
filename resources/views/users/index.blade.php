@@ -41,6 +41,7 @@
 @section('content')
     <div class="grid gap-3 mt-5 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-3 sm:gap-6">
 
+    @foreach($users as $user)
         <div class="bg-white border border-gray-200 rounded-lg dark:bg-neutral-800 -800 dark:border-gray-700">
             <div class="flex justify-between px-4 pt-4">
 
@@ -98,7 +99,7 @@
                     class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                     type="button">
             <span
-                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500">HR</span>
+                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500">{{ $user->role->name}}</span>
 
 
                 </button>
@@ -107,8 +108,8 @@
                 <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
                      src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
                      alt="Bonnie image" />
-                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
+                <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $user->name}}</h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ $user->email}}</span>
                 <div class="flex mt-4 md:mt-6">
                     <a href="#"
                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Add
@@ -118,6 +119,7 @@
                 </div>
             </div>
         </div>
+    @endforeach
 
 
 

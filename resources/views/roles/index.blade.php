@@ -16,11 +16,11 @@
                         </tr>
                         </thead>
                         <tbody class="w-full divide-neutral-200 dark:divide-neutral-700">
-                       @foreach($roles as $role) 
+                       @foreach($roles as $key=>$role) 
                         <tr class="cursor-pointer text-start dark:hover:bg-neutral-800">
                             <td class="px-6 py-4 text-sm font-medium text-gray-800 whitespace-nowrap dark:text-gray-200">
                                 <a href="#"
-                                   class="inline-flex items-center py-2 text-sm font-medium text-center text-black">1</a>
+                                   class="inline-flex items-center py-2 text-sm font-medium text-center text-black">{{$key + 1}}</a>
                             </td>
                             <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $role->name }}</td>
                             <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $role->is_active ?  'Active' : 'Inactive'}}</td>

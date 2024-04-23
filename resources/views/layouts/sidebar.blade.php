@@ -267,7 +267,7 @@
                 </div>
             </li>
 
-            <li>
+            <!-- <li>
                 <a
                     class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                     href="inventory.html">
@@ -375,9 +375,9 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li class="hs-accordion" id="projects-accordion">
+            <!-- <li class="hs-accordion" id="projects-accordion">
                 <button
                     type="button"
                     class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none">
@@ -453,9 +453,9 @@
                         </li>
                     </ul>
                 </div>
-            </li>
+            </li> -->
 
-            <li>
+            <!-- <li>
                 <a
                     class="w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                     href="#">
@@ -504,7 +504,7 @@
                     </svg>
                     Documentation
                 </a>
-            </li>
+            </li> -->
 
             <!-- List of Sidebar items -->
         </ul>

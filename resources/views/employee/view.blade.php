@@ -143,7 +143,7 @@
                         <p
                             class="pt-2 text-sm font-semibold text-gray-800 dark:text-white"
                         >
-                            #EMP2024110
+                        {{ $employee->emp_id }}
                         </p>
                         <p
                             class="pt-2 text-sm font-semibold text-gray-800 dark:text-white"
@@ -235,7 +235,7 @@
                                     <p
                                         class="text-sm text-gray-500 dark:text-neutral-500"
                                     >
-                                        Technical lead engineer
+                                    {{ $employee->designation }}
                                     </p>
                                 </div>
                             </div>
@@ -331,7 +331,7 @@
                                         <span
                                             class="font-medium text-red-600 decoration-2 group-hover:underline dark:text-red-500"
                                         >
-                                            Not added yet
+                                           {{ $employee->joining_date }}
                                         </span>
                                     </p>
                                 </div>
@@ -451,7 +451,7 @@
                                                             name="full_name"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="Maria"
+                                                            value="{{ $employee->full_name }}"
                                                         />
                                                     </div>
                                                     <div>
@@ -467,7 +467,7 @@
                                                             name="employee_id"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="#EMP0000001"
+                                                            value="{{ $employee->emp_id }}"
                                                         />
                                                     </div>
                                                 </div>
@@ -487,7 +487,7 @@
                                                             type="email"
                                                             name="email"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="maria@site.com"
+                                                            value="{{ $employee->email }}"
                                                         />
                                                     </div>
                                                     <div>
@@ -502,7 +502,7 @@
                                                             name="password"
                                                             type="password"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="Enter password"
+                                                            value="{{ $employee->password }}"
                                                         />
                                                     </div>
                                                 </div>
@@ -522,7 +522,7 @@
                                                             name="joining_date"
                                                             type="date"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder=""
+                                                            value="{{ $employee->joining_date }}"
                                                         />
                                                     </div>
                                                     <div>
@@ -597,7 +597,7 @@
                                                             name="phone"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="+x(xxx)xxx-xx-xx"
+                                                            value="{{ $employee->phone }}"
                                                         />
                                                     </div>
                                                 </div>
@@ -623,7 +623,7 @@
                                                             name="emergency_contact"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="+x(xxx)xxx-xx-xx"
+                                                            value="{{ $employee->emergency_contact }}"
                                                         />
                                                     </div>
                                                     <div>
@@ -644,7 +644,7 @@
                                                             name="emergency_contact_relation"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="Enter Name"
+                                                            value="{{ $employee->emergency_contact_relation }}"
                                                         />
                                                     </div>
                                                 </div>
@@ -665,7 +665,7 @@
                                                                 name="birth_year"
                                                                 type="date"
                                                                 class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                                placeholder=""
+                                                                value="{{ $employee->birth_year }}"
                                                             />
                                                         </div>
                                                     </div>
@@ -821,8 +821,10 @@
                                                         name="present_address"
                                                         class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                         rows="4"
-                                                        placeholder="Type your address..."
-                                                    ></textarea>
+                                                        value="{{ $employee->present_address }}"
+                                                    >
+                                                      {{ $employee->present_address }}
+                                                    </textarea>
                                                 </div>
                                                 <div>
                                                     <label
@@ -836,8 +838,10 @@
                                                         name="permanent_address"
                                                         class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                         rows="4"
-                                                        placeholder="Type your address..."
-                                                    ></textarea>
+                                                        value="{{ $employee->permanent_address }}"
+                                                    >
+                                                    {{ $employee->permanent_address }}
+                                                    </textarea>
                                                 </div>
                                             </div>
 
@@ -908,10 +912,10 @@
                                                     </span>
                                                     <input
                                                         id="institution_name_one"
-                                                        name="institution_name_one"
+                                                        name="institution_name"
                                                         type="text"
                                                         class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                        placeholder="enter institution name"
+                                                        value="{{ $employee->institution_name }}"
                                                     />
                                                 </div>
                                                 <div>
@@ -970,7 +974,7 @@
                                                             name="department_one"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="enter department"
+                                                            value="{{ $employee->department_one }}"
                                                         />
                                                     </div>
                                                 </div>
@@ -995,7 +999,7 @@
                                                         name="passing_year_one"
                                                         type="date"
                                                         class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                        placeholder="enter passing year"
+                                                        value="{{ $employee->passing_year_one }}"
                                                     />
                                                 </div>
                                                 <div>
@@ -1017,7 +1021,7 @@
                                                             name="result_one"
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                                            placeholder="enter passing year"
+                                                            value="{{ $employee->result_one }}"
                                                         />
                                                     </div>
                                                 </div>

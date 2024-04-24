@@ -114,7 +114,7 @@ class EmployeeController extends Controller
             if($educationInfo){
                 EmployeeEducation::insert($educationInfo);
             }
-            return 1;
+            // return 1;
             return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
         }
     }

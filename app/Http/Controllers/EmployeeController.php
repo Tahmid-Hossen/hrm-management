@@ -160,6 +160,10 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
+    public function view(){
+        return view('employee.view');
+    }
+
 
     public function delete($id)
     {

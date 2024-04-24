@@ -25,7 +25,7 @@ class EmployeeController extends Controller
 
         // Create a new employee record
         $employee = new Employee();
-        $employee->employee_id = $request->employee_id;
+        $employee->emp_id = $request->employee_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;
@@ -100,7 +100,7 @@ class EmployeeController extends Controller
         }
 
         // Update employee fields
-        $employee->employee_id = $request->employee_id;
+        $employee->emp_id = $request->employee_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;

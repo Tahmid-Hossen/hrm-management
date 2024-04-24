@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('employee_id')->unique();
+            $table->string('emp_id')->unique();
             $table->string('full_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->unique();

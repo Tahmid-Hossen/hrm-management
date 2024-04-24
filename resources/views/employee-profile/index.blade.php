@@ -54,6 +54,19 @@
                     <div
                         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-gray-700"
                         aria-labelledby="hs-dropdown-custom-icon-trigger">
+
+                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white"
+                           href="#" data-hs-overlay="#edit-employee-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                 class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                <path fill-rule="evenodd"
+                                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                            </svg>
+                            View 
+                        </a>
+                         @if(auth()->user()->roles[0]->name !== 'staff' )
                         <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white"
                            href="#" data-hs-overlay="#edit-employee-modal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -65,9 +78,11 @@
                             </svg>
                             Edit
                         </a>
+                        @endif
 
 
-                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white"
+                        <!-- -->
+                        <!-- <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white"
                            href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-person-x" viewBox="0 0 16 16">
@@ -77,7 +92,7 @@
                                     d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
                             </svg>
                             Delete
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -92,12 +107,13 @@
                      alt="Bonnie image" />
                 <h5 class="mb-1 text-xl font-medium text-red-600 dark:text-red-600">{{ $employee->full_name}}</h5>
                 <span class="text-sm text-gray-500 dark:text-gray-400">{{ $employee->designation}}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{{ $employee->email}}</span>
 
 
 
-                <div class="flex mt-4 md:mt-6">
+                <div class="flex mt-2 md:mt-2">
                     <a href="#"
-                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-700 hover:text-white dark:text-white">#{{ $employee->employee_id}}</a>
+                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-700 hover:text-white dark:text-white">#{{ $employee->emp_id}}</a>
 
                 </div>
             </div>

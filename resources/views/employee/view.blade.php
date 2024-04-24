@@ -99,7 +99,6 @@
 @endsection
 
 @section("content")
-@foreach($employee as $employees)
     <div class="mt-4">
         <div
             class="flex flex-col rounded-lg border border-neutral-200 px-4 py-6 dark:border-neutral-700 dark:bg-neutral-800"
@@ -1148,7 +1147,6 @@
             </div>
         </div>
     </div>
-@endforeach
 @endsection
 
 

@@ -11,19 +11,19 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('employee.index', compact('employees')); 
+        return view('employee.index', compact('employees'));
     }
 
     public function store(Request $request)
     {
-        
+
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
             $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
         }
 
-        
+
         if ($request->hasFile('employee_resume')) {
             $resumeFile = $request->file('employee_resume');
             $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
@@ -96,7 +96,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id); // Assuming you have an Employee model
         return view('employee.edit', compact('employee'));
     }
-    
+
     public function update(Request $request, $id)
     {
         $employee = Employee::find($id);
@@ -183,7 +183,7 @@ class EmployeeController extends Controller
 
     public function view($id) {
         $employee = Employee::find($id);
-        
+
         return view('employee.view', compact('employee'));
     }
 

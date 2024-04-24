@@ -123,7 +123,7 @@
             </li>
             @endif
             @php $isActive = request()->is('employees', 'employees/*') ? 'true' : 'false'; @endphp
-            @if(userCan('user.view')) 
+            @if(userCan('user.view'))
             <li>
                 <a
                     class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -149,7 +149,7 @@
             @endif
 
             @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
-            @if(userCan('payroll.view')) 
+            @if(userCan('payroll.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button
                     type="button"
@@ -216,7 +216,7 @@
             @endif
 
             @php $isActive = request()->is('timesheet', 'timesheet/*', 'manage-leave', 'manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
-            @if(userCan('attendence.view')) 
+            @if(userCan('attendence.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="timesheet-accordion">
                 <button
                     type="button"
@@ -288,7 +288,7 @@
                             <button
                                 type="button"
                                 class="{{$isSubActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
-                                Timesheet
+                                Attendance
 
                                 <svg
                                     class="hidden hs-accordion-active:block ms-auto size-4"

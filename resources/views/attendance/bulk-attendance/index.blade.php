@@ -2,6 +2,8 @@
 @section('title', 'Manage Bulk Attendance')
 @section('pageTitle', 'Manage Bulk Attendance')
 @section('breadcumb')
+
+
     <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
             <a class="flex items-center text-sm text-gray-500 hover:text-red-600 dark:hover:text-red-600 focus:outline-none focus:text-neutral-600 dark:focus:text-neutral-600"
@@ -77,9 +79,9 @@
     <div class="mt-4 ">
         <div class="flex flex-col p-2 border rounded-lg dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700">
             <div class="p-2">
-                <div class="grid items-center grid-cols-1 gap-4 mt-2 sm:grid-cols-6 lg:gap-6">
+                <div class="grid items-end grid-cols-1 gap-4 mt-2 sm:grid-cols-5 lg:gap-6">
                     <!-- Attendance Type -->
-                    <div>
+                    <div id="attendance-type-container">
                         <label for="attendance-checkbox" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                             Type
                         </label>
@@ -87,7 +89,7 @@
                             <li class="inline-flex items-center gap-x-2.5 py-3 px-4 text-sm font-medium bg-neutral-100 dark:bg-neutral-700 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg sm:-ms-px sm:mt-0 sm:first:rounded-se-none sm:first:rounded-es-lg sm:last:rounded-es-none sm:last:rounded-se-lg dark:border-neutral-700 dark:text-white">
                                 <div class="relative flex items-start w-full">
                                     <div class="flex items-center h-5">
-                                        <input id="attendance-monthly" value="monthly" name="gender" type="radio" class="text-red-600 border-gray-300 rounded-full focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800" checked="">
+                                        <input id="attendance-monthly" value="monthly" name="attendance-type" type="radio" class="text-red-600 border-gray-300 rounded-full focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800" checked="">
                                     </div>
                                     <label for="attendance-monthly" class="block w-full text-sm text-gray-600 ms-3 dark:text-neutral-300">
                                         Monthly
@@ -97,7 +99,7 @@
                             <li class="inline-flex items-center gap-x-2.5 py-3 px-4 text-sm font-medium bg-neutral-100 dark:bg-neutral-700 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg sm:-ms-px sm:mt-0 sm:first:rounded-se-none sm:first:rounded-es-lg sm:last:rounded-es-none sm:last:rounded-se-lg dark:border-neutral-700 dark:text-white">
                                 <div class="relative flex items-start w-full">
                                     <div class="flex items-center h-5">
-                                        <input id="attendance-daily" value="daily" name="gender" type="radio" class="text-red-600 border-gray-300 rounded-full focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
+                                        <input id="attendance-daily" value="daily" name="attendance-type" type="radio" class="text-red-600 border-gray-300 rounded-full focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-red-500 dark:checked:border-red-500 dark:focus:ring-offset-gray-800">
                                     </div>
                                     <label for="attendance-daily" class="block w-full text-sm text-gray-600 ms-3 dark:text-neutral-300">
                                         Daily
@@ -106,25 +108,29 @@
                             </li>
                         </ul>
                     </div>
-                     <!-- Attendance Type -->
-                     
-                    <!-- Attendance Month -->
-                    <div>
-                        <label for="attendance-month" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
-                            Month
-                        </label>
-                        <input id="attendance-month" name="attendance-month" type="month" class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                    </div>
-                     <!-- Attendance Month -->
+                    <!-- Attendance Type -->
 
-                     <!-- Attendance Date -->
-                    <div>
-                        <label for="attendance-date" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
-                            Month
-                        </label>
-                        <input id="attendance-date" name="attendance-date" type="date" class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    <!-- Attendance Month -->
+                    <div id="attendance-month-container" style="display: none;">
+                        <div>
+                            <label for="attendance-month" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Month
+                            </label>
+                            <input id="attendance-month" name="attendance-month" type="month" class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        </div>
                     </div>
-                     <!-- Attendance Date -->
+                    <!-- Attendance Month -->
+
+                    <!-- Attendance Date -->
+                    <div id="attendance-date-container" style="display: none;">
+                        <div>
+                            <label for="attendance-date" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Date
+                            </label>
+                            <input id="attendance-date" name="attendance-date" type="date" class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        </div>
+                    </div>
+                    <!-- Attendance Date -->
 
                     <!-- Select Company -->
                     <div>
@@ -137,7 +143,7 @@
                             <option value="SSC">Nexdecade</option>
                             <option value="HSC">M2M</option>
                         </select>
-                    </div> 
+                    </div>
                     <!-- Select Company -->
 
                     <!-- Select Company -->
@@ -152,51 +158,51 @@
                             <option value="HSC">HR</option>
                             <option value="HSC">Admin</option>
                         </select>
-                    </div> 
+                    </div>
                     <!-- Select Company -->
 
                     <div>
                         <div class="flex flex-wrap justify-end gap-2">
-                        <!-- export button -->
-                        <div class="inline-block hs-tooltip">
-                            <a type="button" href="/"
-                            class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-                                </svg>
-                                <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                            <!-- export button -->
+                            <div class="inline-block hs-tooltip">
+                                <a type="button" href="/"
+                                   class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    </svg>
+                                    <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
                                 Search
                             </span>
-                            </a>
-                        </div>
-                        <!-- import button -->
-                        <div class="inline-block hs-tooltip">
-                            <a type="button" href="/"
-                            class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
-                                <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
-                                </svg>
-                                <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                                </a>
+                            </div>
+                            <!-- import button -->
+                            <div class="inline-block hs-tooltip">
+                                <a type="button" href="/"
+                                   class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                                        <path d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+                                    </svg>
+                                    <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
                                 Reset
                             </span>
-                            </a>
-                        </div>
-                        <!-- create button -->
-                        <div class="inline-block hs-tooltip">
-                            <button type="button" data-hs-overlay="#create-new-employee-modal"
-                                    class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
-                                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-                                </svg>
-                                <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                                </a>
+                            </div>
+                            <!-- create button -->
+                            <div class="inline-block hs-tooltip">
+                                <button type="button" data-hs-overlay="#create-new-employee-modal"
+                                        class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                                        <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
+                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
+                                    </svg>
+                                    <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
                                 Import
                             </span>
-                            </button>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>             
-            </div>
+                </div>
         </div>
     </div>
 

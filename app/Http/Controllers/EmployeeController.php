@@ -112,7 +112,6 @@ class EmployeeController extends Controller
                 }
             }
             if($educationInfo){
-                EmployeeEducation::where('emp_id', $employeeId)->delete();
                 EmployeeEducation::insert($educationInfo);
             }
             return 1;

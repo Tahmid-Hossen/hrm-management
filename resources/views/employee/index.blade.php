@@ -180,6 +180,11 @@
 @endsection
 
 
+{{-- Employee Edit Modal --}}
+
+ {{-- Employee Edit modal --}}
+
+
 {{-- <script>
     function deleteModalShow(){
         $("#delete-user-modal").modal("show")

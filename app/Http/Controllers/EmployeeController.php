@@ -16,16 +16,23 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        // Handle profile photo upload
+        
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->storeAs('public/profile_photos', $profilePhotoName); // Store the photo in storage/app/public/profile_photos directory
+            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
+        }
+
+        
+        if ($request->hasFile('employee_resume')) {
+            $resumeFile = $request->file('employee_resume');
+            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName); // Store the resume file in public/employee_resume directory
         }
 
         // Create a new employee record
         $employee = new Employee();
-        $employee->emp_id = $request->employee_id;
+        $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;
@@ -71,15 +78,16 @@ class EmployeeController extends Controller
         $employee->company_name = $request->company_name;
         $employee->designation = $request->designation;
         $employee->joining_date = $request->joining_date;
-        $employee->password = bcrypt($request->password); // Hash the password
-        // Handle profile photo upload if needed
-        if (isset($profilePhotoName)) {
-            $employee->profile_photo = $profilePhotoName; // Assign profile photo name to the profile_photo field
+        $employee->password = bcrypt($request->password);
+        if (isset($resumeFileName)) {
+            $employee->employee_resume = $resumeFileName;
         }
-        // dd($request->all());
-        $employee->save(); // Save the employee record
+        if (isset($profilePhotoName)) {
+            $employee->profile_photo = $profilePhotoName;
+        }
 
-        // Redirect to the index page or wherever appropriate
+        // dd($request->all());
+        $employee->save();
         return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
     }
 
@@ -91,16 +99,37 @@ class EmployeeController extends Controller
     
     public function update(Request $request, $id)
     {
-        // Find the employee record by ID
         $employee = Employee::find($id);
-        
-        // Check if the employee exists
-        if (!$employee) {
-            return redirect()->route('employees.index')->with('error', 'Employee not found.');
+
+        // Handle profile photo upload if provided
+        if ($request->hasFile('profile_photo')) {
+            $profilePhoto = $request->file('profile_photo');
+            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
+            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
+            // Delete old profile photo if exists
+            // if ($employee->profile_photo) {
+            //     unlink(public_path('profile_images/' . $employee->profile_photo));
+            // }
+            // Update profile photo field with new photo name
+            $employee->profile_photo = $profilePhotoName;
         }
 
+        // Handle CV file upload if provided
+        if ($request->hasFile('employee_resume')) {
+            $resumeFile = $request->file('employee_resume');
+            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
+            // Delete old resume file if exists
+            // if ($employee->employee_resume) {
+            //     unlink(public_path('employee_resume/' . $employee->employee_resume));
+            // }
+            // Update resume file field with new file name
+            $employee->employee_resume = $resumeFileName;
+        }
+
+
         // Update employee fields
-        $employee->emp_id = $request->employee_id;
+        $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;
@@ -145,14 +174,6 @@ class EmployeeController extends Controller
         $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
-
-        // Handle profile photo upload if provided
-        if ($request->hasFile('profile_photo')) {
-            $profilePhoto = $request->file('profile_photo');
-            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->storeAs('public/profile_photos', $profilePhotoName);
-            $employee->profile_photo = $profilePhotoName;
-        }
 
         // Save the updated employee
         $employee->save();

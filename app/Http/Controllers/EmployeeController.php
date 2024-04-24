@@ -94,7 +94,7 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id); // Assuming you have an Employee model
-        return view('employees.edit', compact('employee'));
+        return view('employee.edit', compact('employee'));
     }
     
     public function update(Request $request, $id)
@@ -181,8 +181,10 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
-    public function view(){
-        return view('employee.view');
+    public function view($id) {
+        $employee = Employee::find($id);
+        
+        return view('employee.view', compact('employee'));
     }
 
 

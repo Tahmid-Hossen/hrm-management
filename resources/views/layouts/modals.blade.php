@@ -478,7 +478,7 @@
                                             Instituation Name
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+                                        <input id="institution_name_one" name="institution_name[]" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
                                     </div>
                                     <div>
                                         <div>
@@ -487,7 +487,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <select id="degree_one" name="degree[]" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                                 <option selected="">Select Degree</option>
                                                 <option value="SSC">SSC</option>
                                                 <option value="HSC">HSC</option>
@@ -503,7 +503,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+                                            <input id="department_one" name="department[]" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
                                         </div>
                                     </div>
                                 </div>
@@ -513,7 +513,7 @@
                                             Passing Year
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="passing_year_one" name="passing_year_one" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+                                        <input id="passing_year_one" name="passing_year[]" type="number" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
                                     </div>
                                     <div>
                                         <div>
@@ -522,7 +522,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+                                            <input id="result_one" name="result[]" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
                                         </div>
                                     </div>
 

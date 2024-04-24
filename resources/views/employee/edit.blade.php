@@ -18,7 +18,7 @@
                 </svg>
              </button>
           </div> --}}
-          
+
 
 
 
@@ -203,7 +203,68 @@
                               </div>
                            </div>
                         </div>
-                        <div id="edit-bar-with-underline-3" class="hidden" role="tabpanel" aria-labelledby="tab-edit-employee-modal-3">
+                         @if($employee->empEducation)
+                            @foreach($employee->empEducation as $item)
+                                 <div class="mb-10">
+                                     <h3 class="text-sm text-gray-800 dark:text-white capitalize">Education - One</h3>
+                                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-2">
+                                         <div>
+                                             <label for="institution_name_one" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                 Instituation Name
+                                             </label>
+                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                             <input id="institution_name_one" name="institution_name[]" value="{{$item->institution_name}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_one }}">
+                                         </div>
+                                         <div>
+                                             <div>
+                                                 <label for="degree_one" class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                     Select Degree Type
+                                                 </label>
+                                                 <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                                 <select id="degree_one" name="degree[]" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                     <option selected="" disabled>Select Degree</option>
+                                                     <option value="SSC"  {{ $item->degree == 'SSC' ? 'selected' : '' }}>SSC</option>
+                                                     <option value="HSC"  {{ $item->degree == 'HSC' ? 'selected' : '' }}>HSC</option>
+                                                     <option value="BSC"  {{ $item->degree == 'BSC' ? 'selected' : '' }}>BSC</option>
+                                                     <option value="MSC"  {{ $item->degree == 'MSC' ? 'selected' : '' }}>MSC</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div>
+                                             <div>
+                                                 <label for="department_one" class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                     Department Name
+                                                 </label>
+                                                 <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                                 <input id="department_one" name="department[]" value="{{$item->department}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_one }}">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-2">
+                                         <div>
+                                             <label for="passing_year_one" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                 Passing Year
+                                             </label>
+                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                             <input id="passing_year_one" name="passing_year[]" value="{{$item->passing_year}}" type="number" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_one }}">
+                                         </div>
+                                         <div>
+                                             <div>
+                                                 <label for="result_one" class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                     Result
+                                                 </label>
+                                                 <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
+                                                 <input id="result_one" name="result[]" value="{{$item->result}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_one }}">
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div id="education-fields">
+                                         <!-- Dynamic education fields will be added here -->
+                                     </div>
+                                 </div>
+                            @endforeach
+                         @endif
+                        {{--<div id="edit-bar-with-underline-3" class="hidden" role="tabpanel" aria-labelledby="tab-edit-employee-modal-3">
                            <h3 class="text-sm text-gray-800 dark:text-white capitalize">Education - One</h3>
                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-2">
                               <div>
@@ -269,7 +330,8 @@
                                  Add Education
                               </button>
                            </div>
-                        </div>
+                        </div>--}}
+
                      </div>
                      <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
                         <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#edit-employee-modal">
@@ -289,7 +351,7 @@
 
 
 
-          
+
        {{-- </div>
     </div>
  </div> --}}

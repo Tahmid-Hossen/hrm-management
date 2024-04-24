@@ -103,7 +103,7 @@
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Company Name</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">DESIGNATION</th>
                                 <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Action</th>
-                                
+
                             </tr>
                             </thead>
                             <tbody class="w-full divide-neutral-200 dark:divide-neutral-700">
@@ -123,7 +123,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->designation}}</td>
                                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                                     <div class="flex gap-3">
-                                        <div class="inline-block hs-tooltip">
+                                        {{--<div class="inline-block hs-tooltip">
                                             <button data-hs-overlay="#edit-employee-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -133,9 +133,20 @@
                                                 Edit
                                               </span>
                                             </button>
-                                        </div>
+                                        </div>--}}
+                                        {{--<div class="inline-block hs-tooltip">
+                                            <button data-hs-overlay="#edit-employee-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                                </svg>
+                                                <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                                                Edit
+                                              </span>
+                                            </button>
+                                        </div>--}}
 
-                                        {{-- <div class="inline-block hs-tooltip">
+                                         <div class="inline-block hs-tooltip">
                                             <a href="{{route('employees.edit', $employee->id)}}" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -145,7 +156,7 @@
                                                 Edit
                                               </span>
                                             </a>
-                                        </div> --}}
+                                        </div>
 
                                         <!-- <div class="inline-block hs-tooltip">
                                             <a href="{{ route('employees.delete', $employee->id)}}" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
@@ -194,6 +205,7 @@
 
 {{-- Employee Edit Modal --}}
 
+{{--
 <div id="edit-employee-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]" data-hs-overlay-keyboard="false">
     <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-4xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
        <div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
@@ -375,9 +387,11 @@
                                   Upload Resume
                                   </label>
                                   <input id="employeeResume" name="employee_resume" type="file" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                  {{-- @if ($employee->employee_resume)
+                                  --}}
+{{-- @if ($employee->employee_resume)
                                   <p class="text-sm text-gray-500 mt-1 dark:text-neutral-300">Current Resume: {{ $employee->employee_resume }}</p>
-                                  @endif --}}
+                                  @endif --}}{{--
+
                                </div>
                             </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
@@ -481,6 +495,7 @@
        </div>
     </div>
  </div>
+--}}
 
  {{-- Employee Edit modal --}}
 

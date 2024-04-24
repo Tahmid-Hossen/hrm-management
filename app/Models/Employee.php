@@ -10,4 +10,9 @@ class Employee extends Model
 {
     use SoftDeletes;
     protected $table = 'employees';
+
+    public function empEducation()
+    {
+        return $this->hasMany(EmployeeEducation::class, 'emp_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeEducation;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
@@ -16,6 +17,9 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+
+
+
 
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
@@ -44,7 +48,7 @@ class EmployeeController extends Controller
         $employee->is_user = $request->is_user;
 
 
-        $employee->institution_name_one = $request->institution_name_one;
+        /*$employee->institution_name_one = $request->institution_name_one;
         $employee->institution_name_two = $request->institution_name_two;
         $employee->institution_name_three = $request->institution_name_three;
         $employee->institution_name_four = $request->institution_name_four;
@@ -71,7 +75,7 @@ class EmployeeController extends Controller
         $employee->result_one = $request->result_one;
         $employee->result_two = $request->result_two;
         $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;
+        $employee->result_four = $request->result_four;*/
 
 
         $employee->present_address = $request->present_address;
@@ -87,8 +91,33 @@ class EmployeeController extends Controller
         }
 
         // dd($request->all());
-        $employee->save();
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        if($employee->save()){
+            $employeeId=$employee->id;
+            $institutionNames=$request->institution_name;
+            $degree=$request->degree;
+            $department=$request->department;
+            $passing_year=$request->passing_year;
+            $result=$request->result;
+            $educationInfo=[];
+            if($institutionNames){
+                foreach ($institutionNames as $key=>$item){
+                    $educationInfo[]=[
+                        'emp_id'=>$employeeId,
+                        'institution_name'=>$item,
+                        'degree'=>$degree[$key],
+                        'department'=>$department[$key],
+                        'passing_year'=>$passing_year[$key],
+                        'result'=>$result[$key],
+                    ];
+                }
+            }
+            if($educationInfo){
+                EmployeeEducation::where('emp_id', $employeeId)->delete();
+                EmployeeEducation::insert($educationInfo);
+            }
+            return 1;
+            return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        }
     }
 
     public function edit($id)
@@ -139,7 +168,7 @@ class EmployeeController extends Controller
         $employee->permanent_address = $request->permanent_address;
         $employee->designation = $request->designation;
 
-        $employee->institution_name_one = $request->institution_name_one;
+        /*$employee->institution_name_one = $request->institution_name_one;
         $employee->institution_name_two = $request->institution_name_two;
         $employee->institution_name_three = $request->institution_name_three;
         $employee->institution_name_four = $request->institution_name_four;
@@ -166,7 +195,7 @@ class EmployeeController extends Controller
         $employee->result_one = $request->result_one;
         $employee->result_two = $request->result_two;
         $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;
+        $employee->result_four = $request->result_four;*/
 
 
         $employee->joining_date = $request->joining_date;
@@ -176,9 +205,33 @@ class EmployeeController extends Controller
         $employee->is_user = $request->is_user;
 
         // Save the updated employee
-        $employee->save();
+        if($employee->save()){
+            $employeeId=$employee->id;
+            $institutionNames=$request->institution_name;
+            $degree=$request->degree;
+            $department=$request->department;
+            $passing_year=$request->passing_year;
+            $result=$request->result;
+            $educationInfo=[];
+            if($institutionNames){
+                foreach ($institutionNames as $key=>$item){
+                    $educationInfo[]=[
+                        'emp_id'=>$employeeId,
+                        'institution_name'=>$item,
+                        'degree'=>$degree[$key],
+                        'department'=>$department[$key],
+                        'passing_year'=>$passing_year[$key],
+                        'result'=>$result[$key],
+                    ];
+                }
+            }
+            if($educationInfo){
+                EmployeeEducation::where('emp_id', $employeeId)->delete();
+                EmployeeEducation::insert($educationInfo);
+            }
+            return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+        }
 
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
     public function view($id) {

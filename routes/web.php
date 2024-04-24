@@ -9,6 +9,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\AttendenceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,12 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('manage-leave')->group(function (){
         Route::get('/', [LeaveController::class, 'index'])->name('leave.index');
+    });
+    Route::prefix('markattendance')->group(function (){
+        Route::get('/', [AttendenceController::class, 'markattendance'])->name('attendance.mark-attendance.index');
+    });
+    Route::prefix('bulkattendance')->group(function (){
+        Route::get('/', [AttendenceController::class, 'bulkattendance'])->name('attendance.bulk-attendance.index');
     });
 
     Route::prefix('roles')->group(function (){

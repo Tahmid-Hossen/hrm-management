@@ -31,7 +31,11 @@ function getRole($req='name'){
     }
     return strtolower($role);
 }
+
 function userCan($permissionName){
+
+//    dd($permissionName, auth()->user()->roles);
+    //dd(auth()->user()->can($permissionName));
     if(getRole()=='superadmin') return true;
     else{
         if(auth()->user()->can($permissionName)) {

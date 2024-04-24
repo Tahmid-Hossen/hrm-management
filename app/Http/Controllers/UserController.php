@@ -12,19 +12,20 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users=User::with('role')->paginate(10);
-
-        return view('users.index', compact('users'));
+        $roles = Role::get();
+        $companies = Company::get();
+        $users=User::paginate(50);
+        return view('users.index', compact('users', 'roles', 'companies'));
     }
     public function create()
     {
-        $roles=Role::get();
+        $roles = Role::get();
         $companies=Company::get();
+        
         return view('users.create', compact('roles', 'companies'));
     }
     public function store(Request $request)
     {
-
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|unique:users',
@@ -32,7 +33,7 @@ class UserController extends Controller
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->role_id = $request->role;
+        // $user->role_id = $request->role;
         $user->password = Hash::make($request->password);
         $user->company_id = $request->company;
         if ($user->save()) {
@@ -44,7 +45,9 @@ class UserController extends Controller
                 $user->user_image = $fileName;
                 $user->save();
             }
-            return redirect()->route('users.index')->with('success', 'User created successfully');
+            $userRole = Role::where('id', $request->role)->first();
+            $user->roles()->attach($userRole);
+            return response()->json(['message' => 'User created successfully', 'status' => 200], 200 );
         }
     }
     public function edit($id)

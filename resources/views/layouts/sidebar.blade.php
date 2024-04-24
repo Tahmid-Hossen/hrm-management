@@ -37,6 +37,7 @@
                 </a>
             </li>
             @php $isActive = request()->is('users', 'users/*', 'roles', 'roles/*' , 'employee-profile' , 'employee-profile/*') ? 'true' : 'false'; @endphp
+            @if(userCan('user.view'))
             <li class="hs-accordion {{$isActive =='true' ? 'active' : ''}}" id="staff-accordion">
                 <button
                     type="button"
@@ -120,7 +121,9 @@
                     </ul>
                 </div>
             </li>
+            @endif
             @php $isActive = request()->is('employees', 'employees/*') ? 'true' : 'false'; @endphp
+            @if(userCan('user.view')) 
             <li>
                 <a
                     class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
@@ -143,7 +146,10 @@
                     Employee
                 </a>
             </li>
+            @endif
+
             @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
+            @if(userCan('payroll.view')) 
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button
                     type="button"
@@ -207,7 +213,10 @@
                     </ul>
                 </div>
             </li>
+            @endif
+
             @php $isActive = request()->is('timesheet', 'timesheet/*', 'manage-leave', 'manage-leave/*', 'attendence', 'attendence/*') ? 'true' : 'false'; @endphp
+            @if(userCan('attendence.view')) 
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="timesheet-accordion">
                 <button
                     type="button"
@@ -278,8 +287,9 @@
                     </ul>
                 </div>
             </li>
+            @endif
             @php $isActive = request()->is('inventory', 'inventory/*') ? 'true' : 'false'; @endphp
-            <li>
+            <!-- <li>
                 <a
                     class="{{ $isActive == 'true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                     href="inventory.html">

@@ -28,8 +28,16 @@
     </ol>
 @endsection
 @section('additionalButton')
-    <button type="button" data-hs-overlay="#create-new-user-modal"
+    {{-- <button type="button" data-hs-overlay="#create-new-user-modal"
             class="inline-flex items-center px-4 py-3 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+             class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+            <path
+                d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+        </svg>
+        New User
+    </button> --}}
+    <button class="btn" onclick="my_modal_3.showModal()" class="dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
              class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
             <path
@@ -99,7 +107,7 @@
                     class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                     type="button">
             <span
-                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500">{{ $user->role->name}}</span>
+                class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium bg-red-100 text-red-800 dark:bg-red-800/30 dark:text-red-500">{{ $user->roles[0]->name ?? ''}}</span>
 
 
                 </button>
@@ -148,4 +156,298 @@
 
     </div>
 
+
+    {{-- daisy modal start --}}
+
+    <dialog id="my_modal_3" class="modal" id="create-new-user-modal">
+        <div class="modal-box">
+        <form method="dialog">
+           <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        {{-- 
+        <div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+           --}}
+           <div class="w-full flex flex-col">
+              <!-- Header -->
+              <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                 <h3 class="font-bold text-gray-800 dark:text-white">
+                    Create User 
+                 </h3>
+                 {{-- 
+                 <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#create-new-user-modal">
+                    <span class="sr-only">Close</span>
+                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                       <path d="M18 6 6 18"></path>
+                       <path d="m6 6 12 12"></path>
+                    </svg>
+                 </button>
+                 --}}
+              </div>
+              <!-- End Header -->
+              <!-- Start Body -->
+              <div class="p-4 overflow-y-auto">
+                 <form method="POST" id="createUserSubmit">
+                    <div class="max-w-full mt-3">
+                       <label for="user-name" class="block text-sm font-medium mb-2 dark:text-white">User Name</label>
+                       <input type="user-name" id="user-name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50  disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="John Doe" name="name">
+                    </div>
+                    <div class="max-w-full mt-3">
+                       <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
+                       <input type="email" id="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com" name="email">
+                    </div>
+                    <div class="max-w-full mt-3">
+                       <label class="block text-sm mb-2 dark:text-white">Password</label>
+                       <div class="relative">
+                          <input id="hs-toggle-password" type="password" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter password" value="12345qwerty" name="password">
+                          <button type="button" data-hs-toggle-password='{
+                             "target": "#hs-toggle-password"
+                             }' class="absolute top-0 end-0 p-3.5 rounded-e-md">
+                             <svg class="flex-shrink-0 size-3.5 text-gray-400 dark:text-neutral-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                                <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                                <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                                <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                                <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                                <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                             </svg>
+                          </button>
+                       </div>
+                    </div>
+                    <div class="max-w-full mt-3">
+                       <label for="user-role" class="block text-sm font-medium mb-2 dark:text-white">User Role</label>
+                       <div class="relative" id="user-role">
+                          <div class="relative hs-select">
+                             <!-- Select -->
+                             <select data-hs-select='{
+                                "placeholder": "Select option...",
+                                "toggleTag": "<button type=\"button\"></button>",
+                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-gray-500 focus:ring-gray-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400",
+                                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
+                                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-red-600 hover:bg-red-600 hover:text-neutral-200 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                                "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-gray-600 dark:text-gray-500\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                                }' class="hidden" style="display: none" name="role">
+                                <option value="">Choose</option>
+                                @foreach($roles as $role)
+                                <option value="{{$role->id}}" data-hs-select-option="{}">{{$role->name}}</option>
+                                @endforeach
+                             </select>
+                             <!-- End Select -->
+                          </div>
+                       </div>
+                    </div>
+                    <div class="max-w-full mt-3">
+                       <label for="user-role" class="block text-sm font-medium mb-2 dark:text-white">Select Company</label>
+                       <div class="relative" id="user-role">
+                          <div class="relative hs-select">
+                             <!-- Select -->
+                             <select data-hs-select='{
+                                "placeholder": "Select option...",
+                                "toggleTag": "<button type=\"button\"></button>",
+                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-gray-500 focus:ring-gray-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400",
+                                "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
+                                "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-red-600 hover:bg-red-600 hover:text-neutral-200 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                                "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-gray-600 dark:text-gray-500\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                                "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                                }' class="hidden" style="display: none" name="company">
+                                <option value="">Choose</option>
+                                @foreach($companies as $company)
+                                <option value="{{$company->id}}" data-hs-select-option="{}">{{$company->name}}</option>
+                                @endforeach
+                             </select>
+                             <!-- End Select -->
+                          </div>
+                       </div>
+                    </div>
+              </div>
+              <!-- End Body -->
+              <!-- Footer -->
+              <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-neutral-700">
+              <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#create-new-user-modal">
+              Cancel
+              </button>
+              <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+              Create User
+              </button>
+              </div>
+              </form>
+              <!-- End Footer -->
+           </div>
+        </div>
+    </dialog>
+
+    {{-- daisy modal end --}}
+
+   <!-- // MODAL START -->
+
+   
+{{-- <div id="create-new-user-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
+<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+<div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+    <!-- Header -->
+    <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+        <h3 class="font-bold text-gray-800 dark:text-white">
+            Create User 
+        </h3>
+        <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#create-new-user-modal">
+            <span class="sr-only">Close</span>
+            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+            </svg>
+        </button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Start Body -->
+    <div class="p-4 overflow-y-auto">
+        <form method="POST" id="createUserSubmit">
+
+        
+        <div class="max-w-full mt-3">
+            <label for="user-name" class="block text-sm font-medium mb-2 dark:text-white">User Name</label>
+            <input type="user-name" id="user-name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50  disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="John Doe" name="name">
+        </div>
+        <div class="max-w-full mt-3">
+            <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
+            <input type="email" id="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com" name="email">
+        </div>
+        <div class="max-w-full mt-3">
+            <label class="block text-sm mb-2 dark:text-white">Password</label>
+            <div class="relative">
+                <input id="hs-toggle-password" type="password" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter password" value="12345qwerty" name="password">
+                <button type="button" data-hs-toggle-password='{
+        "target": "#hs-toggle-password"
+    }' class="absolute top-0 end-0 p-3.5 rounded-e-md">
+                    <svg class="flex-shrink-0 size-3.5 text-gray-400 dark:text-neutral-600" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path class="hs-password-active:hidden" d="M9.88 9.88a3 3 0 1 0 4.24 4.24"></path>
+                        <path class="hs-password-active:hidden" d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"></path>
+                        <path class="hs-password-active:hidden" d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"></path>
+                        <line class="hs-password-active:hidden" x1="2" x2="22" y1="2" y2="22"></line>
+                        <path class="hidden hs-password-active:block" d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+                        <circle class="hidden hs-password-active:block" cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="max-w-full mt-3">
+            <label for="user-role" class="block text-sm font-medium mb-2 dark:text-white">User Role</label>
+            <div class="relative" id="user-role">
+                <div class="relative hs-select">
+                    <!-- Select -->
+                    <select data-hs-select='{
+                  "placeholder": "Select option...",
+                  "toggleTag": "<button type=\"button\"></button>",
+                  "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-gray-500 focus:ring-gray-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400",
+                  "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
+                  "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-red-600 hover:bg-red-600 hover:text-neutral-200 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-gray-600 dark:text-gray-500\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                  "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                }' class="hidden" style="display: none" name="role">
+                        <option value="">Choose</option>
+                        @foreach($roles as $role)
+                        <option value="{{$role->id}}" data-hs-select-option="{}">{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                    <!-- End Select -->
+                </div>
+            </div>
+        </div>
+              
+        <div class="max-w-full mt-3">
+            <label for="user-role" class="block text-sm font-medium mb-2 dark:text-white">Select Company</label>
+            <div class="relative" id="user-role">
+                <div class="relative hs-select">
+                    <!-- Select -->
+                    <select data-hs-select='{
+                  "placeholder": "Select option...",
+                  "toggleTag": "<button type=\"button\"></button>",
+                  "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-gray-500 focus:ring-gray-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400",
+                  "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
+                  "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-red-600 hover:bg-red-600 hover:text-neutral-200 dark:text-neutral-200 dark:focus:bg-neutral-800",
+                  "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-gray-600 dark:text-gray-500\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
+                  "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
+                }' class="hidden" style="display: none" name="company">
+                        <option value="">Choose</option>
+                        @foreach($companies as $company)
+                        <option value="{{$company->id}}" data-hs-select-option="{}">{{$company->name}}</option>
+                        @endforeach
+                    </select>
+                    <!-- End Select -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- End Body -->
+
+    <!-- Footer -->
+    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+        <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#create-new-user-modal">
+            Cancel
+        </button>
+
+        <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+            Create User
+        </button>
+    </div>
+
+            </form>
+
+    <!-- End Footer -->
+</div>
+</div>
+</div> --}}
+
+   <!-- // MODAL END -->
+
 @endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+
+       $(document).on('submit', '#createUserSubmit', function(e) {
+            e.preventDefault(); 
+
+            // Get the CSRF token value from the meta tag
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+            // AJAX request
+            $.ajax({
+                method: 'post',
+                url: "{{ route('users.store') }}",
+                data: $(this).serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response && response.status === 200) {
+                        // Close the modal
+                        console.log('called');
+                        // Trigger close event on the modal
+                        document.getElementById('my_modal_3').close();
+                        toastr.success('Successfully created user', 'Congratulation!');
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    } else {
+                        console.log('not called');
+                        toastr.error('Sorry!', 'something went wrong.');
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("Some error occurred");
+                    // Handle error
+                }
+            });
+        });
+
+    });
+</script>
+
+@endsection
+
+

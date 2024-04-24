@@ -53,6 +53,7 @@
     <!-- End Content -->
     @include('layouts.modals')
     <script src="{{asset('assets/js/theme-switcher.js')}}"></script>
+    <script src="{{asset('assets/js/script.js')}}"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="{{asset('assets/js/datatable.js')}}"></script>
 

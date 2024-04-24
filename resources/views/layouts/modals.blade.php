@@ -1883,25 +1883,35 @@
         <div class="p-4 overflow-y-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                 <div class="max-w-full mt-3">
-                    <label for="employee" class="block text-sm font-medium mb-2 dark:text-white">User Role</label>
+                    <label for="employee" class="block text-sm font-medium mb-2 dark:text-white">Employee</label>
                     <div class="relative" id="employee">
                         <div class="relative hs-select">
-                            <!-- Select -->
-                            <select data-hs-select='{
-                  "placeholder": "Select option...",
-                  "toggleTag": "<button type=\"button\"></button>",
-                  "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 relative py-3 px-4 pe-9 flex text-nowrap w-full cursor-pointer bg-white border border-gray-200 rounded-lg text-start text-sm focus:border-gray-500 focus:ring-gray-500 before:absolute before:inset-0 before:z-[1] dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400",
-                  "dropdownClasses": "mt-2 z-50 w-full max-h-72 p-1 space-y-0.5 bg-white border border-gray-200 rounded-lg overflow-hidden overflow-y-auto [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800 dark:border-neutral-700",
-                  "optionClasses": "py-2 px-4 w-full text-sm text-gray-800 cursor-pointer hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100 dark:bg-neutral-800 dark:hover:bg-red-600 hover:bg-red-600 hover:text-neutral-200 dark:text-neutral-200 dark:focus:bg-neutral-800",
-                  "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><svg class=\"flex-shrink-0 size-3.5 text-gray-600 dark:text-gray-500\" xmlns=\"http:.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg></span></div>",
-                  "extraMarkup": "<div class=\"absolute top-1/2 end-3 -translate-y-1/2\"><svg class=\"flex-shrink-0 size-3.5 text-gray-500 dark:text-neutral-500\" xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m7 15 5 5 5-5\"/><path d=\"m7 9 5-5 5 5\"/></svg></div>"
-                }' class="hidden" style="display: none">
+                            <select data-hs-select="{
+                                        &quot;placeholder&quot;: &quot;Select Employee&quot;,
+                                        &quot;hasSearch&quot;: true,
+                                        &quot;searchPlaceholder&quot;: &quot;Search Employee&quot;,
+                                        &quot;searchClasses&quot;: &quot;block w-full tvwcs sdjrs q8xeg border-neutral-500 focus:border-neutral-500 focus:ring-neutral-600 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 a5fil etaom&quot;,
+                                        &quot;searchWrapperClasses&quot;: &quot;nf52k w30jw -mx-1 cbvwz vhz8h dark:bg-neutral-800&quot;,
+                                        &quot;toggleTag&quot;: &quot;<button type=\&quot;button\&quot;><span data-icon></span><span class=\&quot;q9f8h dark:text-neutral-200 \&quot; data-title></span></button>&quot;,
+                                        &quot;toggleClasses&quot;: &quot;block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600&quot;,
+                                        &quot;dropdownClasses&quot;: &quot;apna3 r8726 a7srx p2xsq oe2wn w-full o7sec uf9bc nf52k border border-neutral-300 dark:border-neutral-700 jtemb shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] x35aa haqwf xv42z ghokw dark:[&amp;::-webkit-scrollbar-track]:bg-neutral-700 dark:[&amp;::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800&quot;,
+                                        &quot;optionClasses&quot;: &quot;xvcp7 dark:hs-selected:bg-red-600 a5fil una0h w-full tvwcs q9f8h cursor-pointer q8xeg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 hover:text-white hover:bg-red-700 dark:hover:bg-red-700 dark:focus:bg-neutral-800&quot;,
+                                        &quot;optionTemplate&quot;: &quot;<div><div class=\&quot;flex items-center \&quot;><div class=\&quot;vy8kl \&quot; data-icon></div><div class=\&quot; dark:text-neutral-200 \&quot; data-title></div></div></div>&quot;,
+                                        &quot;viewport&quot;: &quot;#hs-pro-create-new-user&quot;
+                                      }" class="hidden" style="display: none;">
                                 <option value="">Choose</option>
-                                <option value="Md. Iqbal Mahmud" data-hs-select-option="{}">Md. Iqbal Mahmud</option>
-                                <option value="Tahmid Hosen" data-hs-select-option="{}">Tahmid Hosen</option>
-                                <option value="...." data-hs-select-option="{}">....</option>
+
+                                <option value="HR" data-hs-select-option="{}">
+                                    Iqbal Mahmud
+                                </option>
+                                <option value="employee" data-hs-select-option="{}">
+                                    Tahmid Hossen
+                                </option>
+                                <option value="user" data-hs-select-option="{}">
+                                    Mamun Howladar
+                                </option>
+
                             </select>
-                            <!-- End Select -->
                         </div>
                     </div>
                 </div>
@@ -1911,13 +1921,15 @@
                 </div>
             </div>
 
-            <div class="max-w-full mt-3">
-                <label for="user-name" class="block text-sm font-medium mb-2 dark:text-white">User Name</label>
-                <input type="user-name" id="user-name" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="John Doe">
-            </div>
-            <div class="max-w-full mt-3">
-                <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
-                <input type="email" id="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                <div class="max-w-full mt-3">
+                    <label for="attendance-checkin" class="block text-sm font-medium mb-2 dark:text-white">Check-in Time</label>
+                    <input type="time" id="attendance-checkin" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="10:00">
+                </div>
+                <div class="max-w-full mt-3">
+                    <label for="attendance-checkout" class="block text-sm font-medium mb-2 dark:text-white">Check-out Time</label>
+                    <input type="time" id="attendance-checkout" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="18:00">
+                </div>
             </div>
 
         </div>

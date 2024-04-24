@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('emp_id')->unique();
             $table->string('full_name')->nullable();
             $table->string('email')->unique();
-            $table->string('phone')->unique();
+            $table->string('phone')->nullable();
             $table->string('emergency_contact')->nullable();
             $table->string('emergency_contact_relation')->nullable();
             $table->date('birth_year')->nullable();

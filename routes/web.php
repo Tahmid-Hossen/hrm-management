@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit');
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
+        Route::get('/view', [EmployeeController::class, 'view'])->name('employees.view');
     });
 
     Route::prefix('employee-profile')->group(function (){

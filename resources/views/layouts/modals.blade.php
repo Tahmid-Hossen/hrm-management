@@ -602,42 +602,42 @@
                 <!-- Card Section -->
                 <div class="mx-auto">
                 <!-- Card -->
-                <div class="bg-white px-4 dark:bg-neutral-800">
-
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <!-- End Col -->
-                        <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
-                            <div class="sm:col-span-3">
-                                <label for="employeeDesignation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                Create as user
-                                </label>
-                                </div>
-                                <!-- End Col -->
-                                <div class="sm:col-span-9">
-                                <div class="space-y-2">
-                                    <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        <option selected="">Select type</option>
-                                        <option value="Super Admin">Yes</option>
-                                        <option value="Manager">No</option>
-                                    </select>
+                    <div class="bg-white px-4 dark:bg-neutral-800">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <!-- End Col -->
+                            <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                                <div class="sm:col-span-3">
+                                    <label for="employeeDesignation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                    Create as user
+                                    </label>
+                                    </div>
+                                    <!-- End Col -->
+                                    <div class="sm:col-span-9">
+                                    <div class="space-y-2">
+                                        <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <option selected="">Select type</option>
+                                            <option value="Super Admin">Yes</option>
+                                            <option value="Manager">No</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- End Col -->
-                        <!-- End Grid -->
-                        <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-                            <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#assign-role-modal">
-                                Cancel
-                            </button>
-                            <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                Update
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <!-- End Card -->
+                            <!-- End Col -->
+                            <!-- End Grid -->
+                            <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Card -->
+                    </div>
                 </div>
                 <!-- End Card Section -->
             </div>
@@ -1370,200 +1370,50 @@
 
 
 
+{{-- Medium Modal --}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{--Sample Modal--}}
-
-
-{{--<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-small-modal">--}}
-{{--    Small--}}
-{{--</button>--}}
-
-
-
-{{--<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-medium-modal">--}}
-{{--    Medium--}}
-{{--</button>--}}
-
-
-
-{{--<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-large-modal">--}}
-{{--    Large--}}
-{{--</button>--}}
-
-
-{{--<button type="button" class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" data-hs-overlay="#hs-static-backdrop-modal">--}}
-{{--    Open modal--}}
-{{--</button>--}}
-
-<div id="hs-static-backdrop-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
-<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
-<div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
-    <!-- Header -->
-    <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-        <h3 class="font-bold text-gray-800 dark:text-white">
-            Modal title
-        </h3>
-        <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700" data-hs-overlay="#hs-static-backdrop-modal">
-            <span class="sr-only">Close</span>
-            <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 6 6 18"></path>
-                <path d="m6 6 12 12"></path>
-            </svg>
-        </button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Body -->
-    <div class="p-4 overflow-y-auto">
-        <p class="mt-1 text-gray-800 dark:text-neutral-400">
-            This is a wider card with supporting text below as a natural lead-in to additional content.
-        </p>
-    </div>
-    <!-- End Body -->
-
-    <!-- Footer -->
-    <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-overlay="#hs-static-backdrop-modal">
-            Close
-        </button>
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
-            Save changes
-        </button>
-    </div>
-    <!-- End Footer -->
-</div>
-</div>
-</div>
-
-
-
-
-<div id="hs-medium-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
-<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto">
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
-        <!-- Header -->
-        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-            <h3 class="font-bold text-gray-800 dark:text-white">
-                Modal title
-            </h3>
-            <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700" data-hs-overlay="#hs-medium-modal">
+<dialog id="mediumSizeModal" class="modal">
+    <div class="modal-box p-0 w-11/12 max-w-5xl relative bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <form method="dialog" class="sticky top-0 right-0">
+            <button class="absolute top-3 right-4 flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600">
                 <span class="sr-only">Close</span>
                 <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 6 6 18"></path>
                     <path d="m6 6 12 12"></path>
                 </svg>
             </button>
-        </div>
-        <!-- End Header -->
+        </form>
+        <div class="" id="mediumSizeModalBody">
 
-        <!-- Body -->
-        <div class="p-4 overflow-y-auto">
-            <p class="mt-1 text-gray-800 dark:text-neutral-400">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
         </div>
-        <!-- End Body -->
-
-
-        <!-- Footer -->
-        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-overlay="#hs-medium-modal">
-                Close
-            </button>
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
-                Save changes
-            </button>
-        </div>
-        <!-- End Footer -->
 
     </div>
-</div>
-</div>
+</dialog>
+
+{{-- Medium Modal --}}
 
 
-<div id="hs-large-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
-<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all lg:max-w-4xl lg:w-full m-3 lg:mx-auto">
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
-        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-            <h3 class="font-bold text-gray-800 dark:text-white">
-                Modal title
-            </h3>
-            <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700" data-hs-overlay="#hs-large-modal">
+{{-- Medium Modal --}}
+
+<dialog id="smallSizeModal" class="modal">
+    <div class="modal-box p-0 md:max-w-2xl md:w-full relative bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <form method="dialog" class="sticky top-0 right-0">
+            <button class="absolute top-3 right-4 flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600">
                 <span class="sr-only">Close</span>
                 <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M18 6 6 18"></path>
                     <path d="m6 6 12 12"></path>
                 </svg>
             </button>
+        </form>
+        <div class="" id="smallSizeModalBody">
+
         </div>
-        <div class="p-4 overflow-y-auto">
-            <p class="mt-1 text-gray-800 dark:text-neutral-400">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
-        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-overlay="#hs-large-modal">
-                Close
-            </button>
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
-                Save changes
-            </button>
-        </div>
+
     </div>
-</div>
-</div>
+</dialog>
 
-
-
-<div id="hs-small-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
-<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all sm:max-w-lg sm:w-full m-3 sm:mx-auto">
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
-        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-            <h3 class="font-bold text-gray-800 dark:text-white">
-                Modal title
-            </h3>
-            <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-neutral-700" data-hs-overlay="#hs-small-modal">
-                <span class="sr-only">Close</span>
-                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 6 6 18"></path>
-                    <path d="m6 6 12 12"></path>
-                </svg>
-            </button>
-        </div>
-        <div class="p-4 overflow-y-auto">
-            <p class="mt-1 text-gray-800 dark:text-neutral-400">
-                This is a wider card with supporting text below as a natural lead-in to additional content.
-            </p>
-        </div>
-        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800" data-hs-overlay="#hs-small-modal">
-                Close
-            </button>
-            <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-600 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">
-                Save changes
-            </button>
-        </div>
-    </div>
-</div>
-</div>
-
-{{--Sample Modal--}}
-
-
+{{-- Medium Modal --}}
 
 
 

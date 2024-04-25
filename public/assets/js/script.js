@@ -125,3 +125,22 @@ handleAttendanceTypeChange();
 
 // ---------- 02 For Handle Attendance Type Change Function Ends ------------ //
 
+
+
+
+// Modal script
+
+
+function editAttendance(id = 10) {
+    let htmlForm=$('#editAttendanceForm').html();
+    let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
+    $('#smallSizeModalBody').html(html)
+    smallSizeModal.showModal();
+}
+
+function assignRoleModal(id = 10) {
+    let htmlForm=$('#assignRoleModalForm').html();
+    // let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
+    $('#smallSizeModalBody').html(htmlForm)
+    smallSizeModal.showModal();
+}

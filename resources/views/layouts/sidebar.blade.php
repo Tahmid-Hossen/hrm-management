@@ -37,14 +37,14 @@
                 </a>
             </li>
 
-            @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
+            <!-- @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
             <li>
                 <a
                     class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
                     href="{{route('employee-profile.index')}}">
                     Employee Profile
                 </a>
-            </li>
+            </li> -->
 
              @php $isSubActive = request()->is('manage-leave','manage-leave/*') ? 'true' : 'false'; @endphp
             <li>
@@ -61,7 +61,7 @@
             <li class="hs-accordion {{$isActive =='true' ? 'active' : ''}}" id="staff-accordion">
                 <button
                     type="button"
-                    class="{{$isActive =='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none">
+                    class="{{$isActive =='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs- accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none">
                     <svg
                         class="flex-shrink-0 size-4"
                         xmlns="http://www.w3.org/2000/svg"

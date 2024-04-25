@@ -11,6 +11,7 @@ class LoginController extends Controller
 {
     public function login()
     {
+       
         return view('auth.login');
     }
     
@@ -20,10 +21,17 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
+
         if (Auth::attempt($credentials)) {
+
+            
+
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
+
+
         return Redirect::back()->withErrors([
             'message' => 'Invalied username or password!'
         ]);

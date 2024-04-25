@@ -34,6 +34,8 @@ class UserController extends Controller
             'email' => 'required|unique:users',
         ]);
 
+        $password = 'NexHRM#'. \Str::password(16, true, true, false, false);
+
         DB::beginTransaction();
 
         try {
@@ -41,7 +43,8 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             // $user->role_id = $request->role;
-            $user->password = Hash::make($request->password);
+            // $user->password = Hash::make($request->password);
+            $user->password = Hash::make($password);
             $user->company_id = $request->company;
             if ($request->hasFile('user_image')) {
                 $user_image = $request->user_image;
@@ -61,7 +64,7 @@ class UserController extends Controller
             $data = [
                 'name' => $user->name,
                 'email' => $user->email,
-                'password' => $request->password,
+                'password' => $password,
             ];
 
             $email = new NewUserMail($data);

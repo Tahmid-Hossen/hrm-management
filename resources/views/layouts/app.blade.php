@@ -19,6 +19,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{('assets/css/datatable.css')}}" rel="stylesheet">
     <link href="{{('assets/css/extra-css.css')}}" rel="stylesheet">
+    <link href="{{('assets/css/style.css')}}" rel="stylesheet">
 </head>
 
 <body class="dark:bg-neutral-900">

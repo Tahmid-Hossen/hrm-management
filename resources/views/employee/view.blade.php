@@ -468,6 +468,7 @@
                                                             type="text"
                                                             class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
                                                             value="{{ $employee->emp_id }}"
+                                                            placeholder="#EMP0000001"
                                                         />
                                                     </div>
                                                 </div>

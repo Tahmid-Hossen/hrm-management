@@ -1276,6 +1276,100 @@
 
 
 
+{{--11 Edit Attendance Modal--}}
+<div id="edit-employee-attendance" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard="false">
+<div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+    <div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+        <!-- Header -->
+        <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+            <h3 class="font-bold text-gray-800 dark:text-white">
+                Edit Attendance
+            </h3>
+            <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#edit-employee-attendance">
+                <span class="sr-only">Close</span>
+                <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- End Header -->
+
+        <!-- Body -->
+        <div class="p-4 overflow-y-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                <div class="max-w-full mt-3">
+                    <label for="employee" class="block text-sm font-medium mb-2 dark:text-white">Employee</label>
+                    <div class="relative" id="employee">
+                        <div class="relative hs-select">
+                            <select data-hs-select="{
+                                        &quot;placeholder&quot;: &quot;Select Employee&quot;,
+                                        &quot;hasSearch&quot;: true,
+                                        &quot;searchPlaceholder&quot;: &quot;Search Employee&quot;,
+                                        &quot;searchClasses&quot;: &quot;block w-full tvwcs sdjrs q8xeg border-neutral-500 focus:border-neutral-500 focus:ring-neutral-600 dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder:text-neutral-400 a5fil etaom&quot;,
+                                        &quot;searchWrapperClasses&quot;: &quot;nf52k w30jw -mx-1 cbvwz vhz8h dark:bg-neutral-800&quot;,
+                                        &quot;toggleTag&quot;: &quot;<button type=\&quot;button\&quot;><span data-icon></span><span class=\&quot;q9f8h dark:text-neutral-200 \&quot; data-title></span></button>&quot;,
+                                        &quot;toggleClasses&quot;: &quot;block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600&quot;,
+                                        &quot;dropdownClasses&quot;: &quot;apna3 r8726 a7srx p2xsq oe2wn w-full o7sec uf9bc nf52k border border-neutral-300 dark:border-neutral-700 jtemb shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] x35aa haqwf xv42z ghokw dark:[&amp;::-webkit-scrollbar-track]:bg-neutral-700 dark:[&amp;::-webkit-scrollbar-thumb]:bg-neutral-500 dark:bg-neutral-800&quot;,
+                                        &quot;optionClasses&quot;: &quot;xvcp7 dark:hs-selected:bg-red-600 a5fil una0h w-full tvwcs q9f8h cursor-pointer q8xeg focus:outline-none focus:bg-gray-100 dark:text-neutral-300 hover:text-white hover:bg-red-700 dark:hover:bg-red-700 dark:focus:bg-neutral-800&quot;,
+                                        &quot;optionTemplate&quot;: &quot;<div><div class=\&quot;flex items-center \&quot;><div class=\&quot;vy8kl \&quot; data-icon></div><div class=\&quot; dark:text-neutral-200 \&quot; data-title></div></div></div>&quot;,
+                                        &quot;viewport&quot;: &quot;#hs-pro-create-new-user&quot;
+                                      }" class="hidden" style="display: none;">
+                                <option value="">Choose</option>
+
+                                <option value="HR" data-hs-select-option="{}">
+                                    Iqbal Mahmud
+                                </option>
+                                <option value="employee" data-hs-select-option="{}">
+                                    Tahmid Hossen
+                                </option>
+                                <option value="user" data-hs-select-option="{}">
+                                    Mamun Howladar
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="max-w-full mt-3">
+                    <label for="attendance-date" class="block text-sm font-medium mb-2 dark:text-white">Date</label>
+                    <input type="date" id="attendance-date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                <div class="max-w-full mt-3">
+                    <label for="attendance-checkin" class="block text-sm font-medium mb-2 dark:text-white">Check-in Time</label>
+                    <input type="time" id="attendance-checkin" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="10:00">
+                </div>
+                <div class="max-w-full mt-3">
+                    <label for="attendance-checkout" class="block text-sm font-medium mb-2 dark:text-white">Check-out Time</label>
+                    <input type="time" id="attendance-checkout" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="18:00">
+                </div>
+            </div>
+
+        </div>
+        <!-- End Body -->
+
+        <!-- Footer -->
+        <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+            <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#edit-employee-attendance">
+                Cancel
+            </button>
+
+            <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" data-hs-overlay="#edit-employee-attendance">
+                Update Attendance
+            </button>
+        </div>
+        <!-- End Footer -->
+    </div>
+</div>
+</div>
+{{--11 Edit Attendance Modal--}}
+
+
+
+
 
 
 

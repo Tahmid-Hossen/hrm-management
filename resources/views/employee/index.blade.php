@@ -120,7 +120,7 @@
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">	{{ $employee->phone}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->gender}}</td>
                                 <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->company_name}}</td>
-                                <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->designation}}</td>
+                                <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">{{ $employee->empDesignation->name ?? ''}}</td>
                                 <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                                     <div class="flex gap-3">
                                         {{--<div class="inline-block hs-tooltip">

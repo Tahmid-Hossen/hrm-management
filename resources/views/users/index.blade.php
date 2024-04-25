@@ -356,7 +356,7 @@
                 Cancel
             </button>
 
-            <button  type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" >
+            <button id="edit-modal-close" type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" >
                 Update User
             </button>
         </div>
@@ -377,6 +377,7 @@
 <script>
 
     const modalClose = document.querySelector('#modal-close');
+    const editModalClose = document.querySelector('#edit-modal-close');
 
     $(document).ready(function(){
 
@@ -519,11 +520,11 @@
                     // Handle success
                     console.log("User data updated successfully:", response);
 
-                     modalClose.addEventListener('click', () => {
+                     editModalClose.addEventListener('click', () => {
                             HSOverlay.close('#update-user-modal');
                     });
 
-                    toastr.success('Successfully Updated user', 'Congratulation!');
+                     toastr.success('Successfully Updated user', 'Congratulation!');
                     window.location.reload();
 
 
@@ -532,7 +533,7 @@
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                     // Handle error
-                      modalClose.addEventListener('click', () => {
+                      editModalClose.addEventListener('click', () => {
                             HSOverlay.close('#update-user-modal');
                     });
                      toastr.success('Something went wrong, Please try again', 'Opps!');

@@ -91,7 +91,7 @@
                                  </label>
                                  <input id="employeePassword" name="password" type="password" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}">
                               </div>
-                           </div>
+                           </div>                          
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                               <div>
                                  <label for="employeeJoiningDate" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -116,10 +116,13 @@
                                  Select Designation
                                  </label>
                                  <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                    <option selected="" disabled>Open this select menu</option>
-                                    <option value="Web Developer" {{ $employee->designation == 'Web Developer' ? 'selected' : '' }}>Web Developer</option>
-                                    <option value="Software Developer" {{ $employee->designation == 'Software Developer' ? 'selected' : '' }}>Software Developer</option>
-                                    <option value="Lead Software Developer" {{ $employee->designation == 'Lead Software Developer' ? 'selected' : '' }}>Lead Software Developer</option>
+                                    @foreach ($designations as $designation)
+                                             {{-- <option value="{{ $department->id }}"> --}}
+                                                <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
+                                                {{ $designation->name }}
+                                             </option>
+                                             
+                                     @endforeach
                                  </select>
                               </div>
                               <div>
@@ -127,6 +130,24 @@
                                  Employee Profile Photo
                                  </label>
                                  <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}"/>
+                              </div>
+                           </div>
+                           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                              <div>
+                                 <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                 Blood Group
+                                 </label>
+                                 <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <option value="" selected disabled>Select Blood Group</option>
+                                    <option value="A+" {{ $employee->blood_group == 'A+' ? 'selected' : '' }}> A+ </option>
+                                    <option value="A-" {{ $employee->blood_group == 'A-' ? 'selected' : '' }}> A- </option>
+                                    <option value="B+" {{ $employee->blood_group == 'B+' ? 'selected' : '' }}>B+</option>
+                                    <option value="B-" {{ $employee->blood_group == 'B-' ? 'selected' : '' }}>B-</option>
+                                    <option value="O+" {{ $employee->blood_group == 'O+' ? 'selected' : '' }}>O+</option>
+                                    <option value="O-" {{ $employee->blood_group == 'O-' ? 'selected' : '' }}>O-</option>
+                                    <option value="AB+" {{ $employee->blood_group == 'AB+' ? 'selected' : '' }}>AB+</option>
+                                    <option value="AB-" {{ $employee->blood_group == 'AB-' ? 'selected' : '' }}>AB-</option>
+                                 </select>
                               </div>
                            </div>
                         </div>
@@ -151,12 +172,19 @@
                            </div>
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                               <div>
-                                 <label for="emergencyContactRelation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                 Emergency Contact Relation
+                                 <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                     Select Department  
                                  </label>
-                                 <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                 <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact_relation }}">
-                              </div>
+                                 <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                     @foreach ($departments as $department)
+                                             {{-- <option value="{{ $department->id }}"> --}}
+                                                <option value="{{ $department->id }}" {{ $employee->department == $department->id ? 'selected' : '' }}>
+                                                {{ $department->name }}
+                                             </option>
+                                             
+                                     @endforeach
+                                 </select>
+                             </div>
                               <div>
                                  <label for="employeeBirthday" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Birthday

@@ -2,25 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departments;
+use App\Models\Designations;
 use App\Models\EmployeeEducation;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
+    
 
     public function index()
     {
+        $designations = Designations::all();
+        $departments = Departments::all();
+        // return $departments;
         $employees = Employee::all();
-        return view('employee.index', compact('employees'));
+        return view('employee.index', compact('employees','designations','departments'));
     }
 
     public function store(Request $request)
     {
-
-
-
-
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
@@ -42,53 +44,43 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
+        $employee->blood_group = $request->blood_group;
         $employee->emergency_contact = $request->emergency_contact;
-        $employee->emergency_contact_relation = $request->emergency_contact_relation;
+        // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
-
-
-        /*$employee->institution_name_one = $request->institution_name_one;
-        $employee->institution_name_two = $request->institution_name_two;
-        $employee->institution_name_three = $request->institution_name_three;
-        $employee->institution_name_four = $request->institution_name_four;
-
-
-        $employee->degree_one = $request->degree_one;
-        $employee->degree_two = $request->degree_two;
-        $employee->degree_three = $request->degree_three;
-        $employee->degree_four = $request->degree_four;
-
-
-        $employee->department_one = $request->department_one;
-        $employee->department_two = $request->department_two;
-        $employee->department_three = $request->department_three;
-        $employee->department_four = $request->department_four;
-
-
-        $employee->passing_year_one = $request->passing_year_one;
-        $employee->passing_year_two = $request->passing_year_two;
-        $employee->passing_year_three = $request->passing_year_three;
-        $employee->passing_year_four = $request->passing_year_four;
-
-
-        $employee->result_one = $request->result_one;
-        $employee->result_two = $request->result_two;
-        $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;*/
 
 
         $employee->present_address = $request->present_address;
         $employee->company_name = $request->company_name;
         $employee->designation = $request->designation;
+        $employee->department = $request->emp_department;
         $employee->joining_date = $request->joining_date;
-        $employee->password = bcrypt($request->password);
+        // $employee->password = bcrypt($request->password);
         if (isset($resumeFileName)) {
             $employee->employee_resume = $resumeFileName;
         }
         if (isset($profilePhotoName)) {
             $employee->profile_photo = $profilePhotoName;
         }
+
+        //  // Associate department
+        // if ($request->has('department')) {
+        //     $department = Departments::find($request->department);
+        //     if ($department) {
+        //         $employee->department()->associate($department);
+        //         $employee->save();
+        //     }
+        // }
+
+        // // Associate designation
+        // if ($request->has('designation')) {
+        //     $designation = Designations::find($request->designation);
+        //     if ($designation) {
+        //         $employee->designation()->associate($designation);
+        //         $employee->save();
+        //     }
+        // }
 
         // dd($request->all());
         if($employee->save()){
@@ -122,7 +114,9 @@ class EmployeeController extends Controller
     public function edit($id)
     {
         $employee = Employee::find($id); // Assuming you have an Employee model
-        return view('employee.edit', compact('employee'));
+        $designations = Designations::all();
+        $departments = Departments::all();
+        return view('employee.edit', compact('employee','designations','departments'));
     }
 
     public function update(Request $request, $id)
@@ -134,11 +128,6 @@ class EmployeeController extends Controller
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
             $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
-            // Delete old profile photo if exists
-            // if ($employee->profile_photo) {
-            //     unlink(public_path('profile_images/' . $employee->profile_photo));
-            // }
-            // Update profile photo field with new photo name
             $employee->profile_photo = $profilePhotoName;
         }
 
@@ -147,11 +136,6 @@ class EmployeeController extends Controller
             $resumeFile = $request->file('employee_resume');
             $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
             $resumeFile->move(public_path('employee_resume'), $resumeFileName);
-            // Delete old resume file if exists
-            // if ($employee->employee_resume) {
-            //     unlink(public_path('employee_resume/' . $employee->employee_resume));
-            // }
-            // Update resume file field with new file name
             $employee->employee_resume = $resumeFileName;
         }
 
@@ -163,43 +147,31 @@ class EmployeeController extends Controller
         $employee->phone = $request->phone;
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
+        $employee->blood_group = $request->blood_group;
         $employee->present_address = $request->present_address;
         $employee->permanent_address = $request->permanent_address;
-        $employee->designation = $request->designation;
+        // $employee->designation = $request->designation;
+        // $employee->department = $request->emp_department;
 
-        /*$employee->institution_name_one = $request->institution_name_one;
-        $employee->institution_name_two = $request->institution_name_two;
-        $employee->institution_name_three = $request->institution_name_three;
-        $employee->institution_name_four = $request->institution_name_four;
+         // Update designation if provided
+        if ($request->has('designation')) {
+            $designation = Designations::find($request->designation);
+            if ($designation) {
+                $employee->designation()->associate($designation);
+            }
+        }
 
-
-        $employee->degree_one = $request->degree_one;
-        $employee->degree_two = $request->degree_two;
-        $employee->degree_three = $request->degree_three;
-        $employee->degree_four = $request->degree_four;
-
-
-        $employee->department_one = $request->department_one;
-        $employee->department_two = $request->department_two;
-        $employee->department_three = $request->department_three;
-        $employee->department_four = $request->department_four;
-
-
-        $employee->passing_year_one = $request->passing_year_one;
-        $employee->passing_year_two = $request->passing_year_two;
-        $employee->passing_year_three = $request->passing_year_three;
-        $employee->passing_year_four = $request->passing_year_four;
-
-
-        $employee->result_one = $request->result_one;
-        $employee->result_two = $request->result_two;
-        $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;*/
-
+        // Update department if provided
+        if ($request->has('emp_department')) {
+            $department = Departments::find($request->emp_department);
+            if ($department) {
+                $employee->department()->associate($department);
+            }
+        }
 
         $employee->joining_date = $request->joining_date;
         $employee->emergency_contact = $request->emergency_contact;
-        $employee->emergency_contact_relation = $request->emergency_contact_relation;
+        // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
 
@@ -235,8 +207,9 @@ class EmployeeController extends Controller
 
     public function view($id) {
         $employee = Employee::find($id);
-
-        return view('employee.view', compact('employee'));
+        $designations = Designations::all();
+        $departments = Departments::all();
+        return view('employee.view', compact('employee','designations','departments'));
     }
 
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserMail;
 use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Mail;
 
 class UserController extends Controller
 {
@@ -30,25 +33,50 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|unique:users',
         ]);
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        // $user->role_id = $request->role;
-        $user->password = Hash::make($request->password);
-        $user->company_id = $request->company;
-        if ($user->save()) {
+
+        DB::beginTransaction();
+
+        try {
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            // $user->role_id = $request->role;
+            $user->password = Hash::make($request->password);
+            $user->company_id = $request->company;
             if ($request->hasFile('user_image')) {
                 $user_image = $request->user_image;
                 $extension = $user_image->getClientOriginalExtension();
                 $fileName = $user->id . '.' . $extension;
                 $user_image->move(public_path("uploads/users"), $fileName);
                 $user->user_image = $fileName;
-                $user->save();
+                
             }
+
+            $user->save();
             $userRole = Role::where('id', $request->role)->first();
             $user->roles()->attach($userRole);
+
+            DB::commit();
+                
+            $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $request->password,
+            ];
+
+            $email = new NewUserMail($data);
+            $email->userData = $data;
+            \Mail::to($user->email)->send($email);
+
+
             return response()->json(['message' => 'User created successfully', 'status' => 200], 200 );
+            
+            // all good
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
         }
+        
     }
     public function edit($id)
     {

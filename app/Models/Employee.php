@@ -15,4 +15,14 @@ class Employee extends Model
     {
         return $this->hasMany(EmployeeEducation::class, 'emp_id');
     }
+
+    public function empDepartment()
+    {
+        return $this->hasOne(Departments::class, 'id', 'department');
+    }
+
+    public function empDesignation()
+    {
+        return $this->hasOne(Designations::class, 'id', 'designation');
+    }
 }

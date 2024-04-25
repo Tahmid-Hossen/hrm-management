@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewUserMail;
+use App\Mail\ResetPasswordMail;
 use App\Models\Company;
 use App\Models\Role;
 use App\Models\User;
@@ -46,14 +47,6 @@ class UserController extends Controller
             // $user->password = Hash::make($request->password);
             $user->password = Hash::make($password);
             $user->company_id = $request->company;
-            if ($request->hasFile('user_image')) {
-                $user_image = $request->user_image;
-                $extension = $user_image->getClientOriginalExtension();
-                $fileName = $user->id . '.' . $extension;
-                $user_image->move(public_path("uploads/users"), $fileName);
-                $user->user_image = $fileName;
-                
-            }
 
             $user->save();
             $userRole = Role::where('id', $request->role)->first();
@@ -83,54 +76,84 @@ class UserController extends Controller
     }
     public function edit($id)
     {
-        $user=User::find($id);
-        $roles=Role::get();
-        $companies=Company::get();
-        if($user){
-            return view('users.edit', compact('user', 'roles', 'companies'));
-        }
+         $user=User::find($id);
+         $roles=Role::get();
+         $companies=Company::get();
+
+        $data =[
+            'user' => $user,
+            'roles' => $roles,
+            'companies' => $companies,
+            'user_role' => $user->roles[0]->id
+        ];
+
+        return response()->json(['data' => $data, 'message' => 'User created successfully', 'status' => true], 200 );
+
+        // r
+        // if($user){
+        //     return view('users.edit', compact('user', 'roles', 'companies'));
+        // }
     }
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email,'.$id,
+            'edituserName' => 'required',
         ]);
 
-        $user = User::findOrFail($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role_id = $request->role;
-        $user->company_id = $request->company;
+         DB::beginTransaction();
+        try {
+            $user = User::findOrFail($id);
+            $user->name = $request->edituserName;
+            $user->email = $request->edituserEmail;
+ 
+            $user->company_id = $request->edituserCompany;
+            $user->is_active = $request->edituserIsActive;
 
-        if ($request->hasFile('user_image')) {
-            $user_image = $request->file('user_image');
-            $extension = $user_image->getClientOriginalExtension();
-            $fileName = $id . '.' . $extension;
-            $user_image->move(public_path("uploads/users"), $fileName);
-            $user->user_image = $fileName;
-        }
-        if ($request->filled('password')) {
-            $user->password = Hash::make($request->password);
-        }
+            $user->save();
 
-        if ($user->save()) {
-            return redirect()->route('users.index')->with('success', 'User updated successfully');
-        } else {
-            return redirect()->back()->with('error', 'Failed to update user');
+            $userRole = Role::where('id', $request->edituserRole)->first();
+            $user->roles()->sync($userRole);
+            DB::commit();
+
+         } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
         }
+       return response()->json(['data' =>  $user, 'message' => 'User updated successfully', 'status' => true], 201 );
     }
 
-    public function delete()
+    public function delete($id)
     {
-
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User has been deleted');
     }
+
     public function forceDelete()
     {
 
     }
     public function restore()
     {
+
+    }
+
+    public function resetPassword($id)
+    {
+        $password = 'NexHRM#'. \Str::password(16, true, true, false, false);
+        $user = User::find($id);
+        $user->password = Hash::make($password);
+        $user->save();
+         $data = [
+                'name' => $user->name,
+                'email' => $user->email,
+                'password' => $password,
+        ];
+        $email = new ResetPasswordMail($data);
+        $email->userData = $data;
+        \Mail::to($user->email)->send($email);
+
+         return redirect()->route('users.index')->with('success', 'Password reset successfully');
 
     }
 

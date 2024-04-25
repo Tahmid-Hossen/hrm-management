@@ -18,7 +18,7 @@
                 <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign in</h1>
                 <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
                     Don't have an account yet?
-                    <a class="font-medium text-blue-600 decoration-2 hover:underline" href="../examples/html/signup.html">
+                    <a class="font-medium text-red-600 decoration-2 hover:underline" href="../examples/html/signup.html">
                         Sign up here
                     </a>
                 </p>
@@ -37,18 +37,19 @@
 
                 <div class="flex items-center py-3 text-xs text-gray-400 uppercase before:flex-1 before:border-t before:border-gray-200 before:me-6 after:flex-1 after:border-t after:border-gray-200 after:ms-6 dark:text-gray-500 dark:before:border-gray-600 dark:after:border-gray-600">Or</div>
 
-                 @if ($errors->any())
-            <div class="col-span-3 text-center mb-4 mt-[-15px]">
-                @foreach ($errors->all() as $error)
-                <div class="text-red-600 bg-red-50 p-2 text-center flex gap-1 item-center border border-red-600 justify-center font-medium rounded-sm">
-                    <span><i class="fa-solid fa-circle-info"></i></span>{{ $error }}
-                </div>
-                @endforeach
-            </div>
-        @endif
 
 
-    
+                @if ($errors->any())
+                    <div class="col-span-3 text-center mb-4">
+                        @foreach ($errors->all() as $error)
+                            <div class="text-red-600 bg-red-50 p-2 text-center flex gap-1 item-center justify-center font-medium rounded-sm">
+                                <span><i class="fa-solid fa-circle-info"></i></span>{{ $error }}
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
+
+
 
                 <!-- Form -->
                 <form action="{{route('login')}}" method="post">
@@ -73,7 +74,7 @@
                         <div>
                             <div class="flex items-center justify-between">
                                 <label for="password" class="block mb-2 text-sm dark:text-white">Password</label>
-                                <a class="text-sm font-medium text-blue-600 decoration-2 hover:underline" href="#">Forgot password?</a>
+                                <a class="text-sm font-medium text-red-600 decoration-2 hover:underline" href="#">Forgot password?</a>
                             </div>
                             <div class="relative">
                                 <input type="password" id="password" name="password" class="block w-full px-4 py-3 text-sm bg-transparent border border-gray-200 rounded-lg disabled:pointer-events-none dark:bg-transparent dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" required aria-describedby="password-error" placeholder="Enter your password">
@@ -90,7 +91,8 @@
 
 
 
-                        <div class="grid gap-2 mt-4 md:grid-cols-2 justify-center">
+
+                        <div class="grid gap-2 mt-4 md:grid-cols-1 justify-center">
                             <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-3 text-sm font-semibold text-white bg-red-600 border border-transparent rounded-lg gap-x-2 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">Login</button>
 
                             {{--<button type="submit" class="inline-flex items-center justify-center w-full px-4 py-3 text-sm font-semibold text-white bg-red-600 border border-transparent rounded-lg gap-x-2 hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none">Employee Login</button>

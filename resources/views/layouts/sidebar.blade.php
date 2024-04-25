@@ -46,14 +46,14 @@
                 </a>
             </li> -->
 
-             @php $isSubActive = request()->is('manage-leave','manage-leave/*') ? 'true' : 'false'; @endphp
+             <!-- @php $isSubActive = request()->is('manage-leave','manage-leave/*') ? 'true' : 'false'; @endphp
             <li>
                 <a
                     class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
                     href="{{route('leave.index')}}">
                     Manage Leave
                 </a>
-            </li>
+            </li> -->
 
 
             @php $isActive = request()->is('users', 'users/*', 'roles', 'roles/*' ) ? 'true' : 'false'; @endphp
@@ -129,7 +129,6 @@
                                 Role
                             </a>
                         </li>
-                       
                      
                     </ul>
                 </div>

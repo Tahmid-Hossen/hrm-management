@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
+        Route::get('/reset-password/{id}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
     });
     Route::prefix('employees')->group(function (){
         Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');

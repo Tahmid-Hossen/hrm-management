@@ -197,7 +197,7 @@
                     <!-- End Card -->
 
                     <!-- Card -->
-                    <a
+                    {{-- <a
                         class="group flex flex-col rounded-xl border bg-white shadow-sm transition hover:shadow-md dark:border-neutral-600 dark:bg-neutral-700"
                         href="#"
                     >
@@ -242,7 +242,7 @@
                                 </div>
                             </div>
                         </div>
-                    </a>
+                    </a> --}}
                     <!-- End Card -->
                     <!-- Card -->
                     <a
@@ -1147,9 +1147,10 @@
                         <h3
                             class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white"
                         >
-                            Address Details
+                            {{-- Address Details --}}
+                            Coming Soon
                         </h3>
-                        <div class="overflow-y-auto">
+                        {{-- <div class="overflow-y-auto">
                             <!-- Card Section -->
                             <div class="mx-auto">
                                 <!-- Card -->
@@ -1217,7 +1218,7 @@
                                 <!-- End Card -->
                             </div>
                             <!-- End Card Section -->
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div
@@ -1230,9 +1231,10 @@
                         <h3
                             class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white"
                         >
-                            Education Details
+                            {{-- Education Details --}}
+                            Coming Soon
                         </h3>
-                        <div class="overflow-y-auto">
+                        {{-- <div class="overflow-y-auto">
                             <!-- Card Section -->
                             <div class="mx-auto">
                                 <!-- Card -->
@@ -1423,7 +1425,7 @@
                                 <!-- End Card -->
                             </div>
                             <!-- End Card Section -->
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div
@@ -1436,9 +1438,10 @@
                         <h3
                             class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white"
                         >
-                            Documents
+                            {{-- Documents --}}
+                            Coming Soon
                         </h3>
-                        <div class="overflow-y-auto">
+                        {{-- <div class="overflow-y-auto">
                             <!-- Card Section -->
                             <div class="mx-auto">
                                 <!-- Card -->
@@ -1485,7 +1488,7 @@
                                 <!-- End Card -->
                             </div>
                             <!-- End Card Section -->
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div
@@ -1494,15 +1497,17 @@
                     role="tabpanel"
                     aria-labelledby="segment-item-5"
                 >
-                    <p class="text-gray-500 dark:text-neutral-400">
-                        This is the
+                    <h3 class="text-gray-500 dark:text-neutral-400">
+                        {{-- This is the
                         <em
                             class="font-semibold text-gray-800 dark:text-neutral-200"
                         >
                             Fouth
                         </em>
-                        item's tab body.
-                    </p>
+                        item's tab body. --}}
+
+                        Coming Soon
+                    </h3>
                 </div>
             </div>
         </div>

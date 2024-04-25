@@ -170,7 +170,7 @@
                                         </div> -->
 
                                         <div class="inline-block hs-tooltip">
-                                            <button data-hs-overlay="#assign-role-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                            <button onclick="assignRoleModal()" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
                                                 <i class="fa-regular fa-user"></i>
                                                 <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
                                                 Assign Role
@@ -199,6 +199,62 @@
             </div>
         </div>
     </div>
+
+
+    {{--Assign Role Modal--}}
+    <div id="assignRoleModalForm" class="hidden">
+            <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                    Update User Role
+                </h3>
+
+            </div>
+            <!-- Body -->
+            <div class="p-4 overflow-y-auto">
+                <!-- Card Section -->
+                <div class="mx-auto">
+                    <!-- Card -->
+                    <div class="bg-white px-4 dark:bg-neutral-800">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <!-- End Col -->
+                            <div class="grid sm:grid-cols-12 gap-2 sm:gap-6">
+                                <div class="sm:col-span-3">
+                                    <label for="employeeDesignation" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                        Create as user
+                                    </label>
+                                </div>
+                                <!-- End Col -->
+                                <div class="sm:col-span-9">
+                                    <div class="space-y-2">
+                                        <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <option selected="">Select type</option>
+                                            <option value="Super Admin">Yes</option>
+                                            <option value="Manager">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- End Col -->
+                            <!-- End Grid -->
+                            <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                                <button onclick="smallSizeModal.close()" type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#assign-role-modal">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- End Card Section -->
+        <!-- End Body -->
+    </div>
+    {{--Assign Role Modal--}}
 
 @endsection
 
@@ -505,3 +561,6 @@
         $("#delete-user-modal").modal("show")
     }
 </script> --}}
+
+
+

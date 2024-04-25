@@ -236,7 +236,7 @@
                                     <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                                         <div class="flex gap-3">
                                             <div class="inline-block hs-tooltip">
-                                                <button data-hs-overlay="#edit-employee-attendance" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                                <button onclick="editAttendance()" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -268,7 +268,76 @@
                 </div>
             </div>
         </div>
+    </div>
 
+
+{{-- Edit Attendance Modal--}}
+    <div id="editAttendanceForm" class="hidden">
+        <div>
+            <!-- Body -->
+            <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                    Update Attendance
+                </h3>
+
+            </div>
+            <div class="p-4 overflow-y-auto">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                    <div class="max-w-full mt-3">
+                        <label for="employee" class="block text-sm font-medium mb-2 dark:text-white">Employee</label>
+                        <div class="relative" id="employee">
+                            <div class="relative hs-select">
+                                <select class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <option value="">Choose</option>
+
+                                    <option value="Iqbal Mahmud">
+                                        Iqbal Mahmud
+                                    </option>
+                                    <option value="employee" >
+                                        Tahmid Hossen
+                                    </option>
+                                    <option value="user">
+                                        Mamun Howladar
+                                    </option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="max-w-full mt-3">
+                        <label for="attendance-date" class="block text-sm font-medium mb-2 dark:text-white">Date</label>
+                        <input type="date" id="attendance-date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                    <div class="max-w-full mt-3">
+                        <label for="attendance-checkin" class="block text-sm font-medium mb-2 dark:text-white">Check-in Time</label>
+                        <input type="time" id="attendance-checkin" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="10:00">
+                    </div>
+                    <div class="max-w-full mt-3">
+                        <label for="attendance-checkout" class="block text-sm font-medium mb-2 dark:text-white">Check-out Time</label>
+                        <input type="time" id="attendance-checkout" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="18:00">
+                    </div>
+                </div>
+
+            </div>
+            <!-- End Body -->
+
+            <!-- Footer -->
+            <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                <button onclick="smallSizeModal.close()" type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                    Cancel
+                </button>
+
+                <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                    Update Attendance
+                </button>
+            </div>
+            <!-- End Footer -->
+        </div>
+    </div>
+{{-- Edit Attendance Modal--}}
 
 @endsection
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeEducation;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
@@ -11,21 +12,31 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('employee.index', compact('employees')); 
+        return view('employee.index', compact('employees'));
     }
 
     public function store(Request $request)
     {
-        // Handle profile photo upload
+
+
+
+
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->storeAs('public/profile_photos', $profilePhotoName); // Store the photo in storage/app/public/profile_photos directory
+            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
+        }
+
+
+        if ($request->hasFile('employee_resume')) {
+            $resumeFile = $request->file('employee_resume');
+            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName); // Store the resume file in public/employee_resume directory
         }
 
         // Create a new employee record
         $employee = new Employee();
-        $employee->emp_id = $request->employee_id;
+        $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;
@@ -37,7 +48,7 @@ class EmployeeController extends Controller
         $employee->is_user = $request->is_user;
 
 
-        $employee->institution_name_one = $request->institution_name_one;
+        /*$employee->institution_name_one = $request->institution_name_one;
         $employee->institution_name_two = $request->institution_name_two;
         $employee->institution_name_three = $request->institution_name_three;
         $employee->institution_name_four = $request->institution_name_four;
@@ -64,43 +75,89 @@ class EmployeeController extends Controller
         $employee->result_one = $request->result_one;
         $employee->result_two = $request->result_two;
         $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;
+        $employee->result_four = $request->result_four;*/
 
 
         $employee->present_address = $request->present_address;
         $employee->company_name = $request->company_name;
         $employee->designation = $request->designation;
         $employee->joining_date = $request->joining_date;
-        $employee->password = bcrypt($request->password); // Hash the password
-        // Handle profile photo upload if needed
-        if (isset($profilePhotoName)) {
-            $employee->profile_photo = $profilePhotoName; // Assign profile photo name to the profile_photo field
+        $employee->password = bcrypt($request->password);
+        if (isset($resumeFileName)) {
+            $employee->employee_resume = $resumeFileName;
         }
-        // dd($request->all());
-        $employee->save(); // Save the employee record
+        if (isset($profilePhotoName)) {
+            $employee->profile_photo = $profilePhotoName;
+        }
 
-        // Redirect to the index page or wherever appropriate
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        // dd($request->all());
+        if($employee->save()){
+            $employeeId=$employee->id;
+            $institutionNames=$request->institution_name;
+            $degree=$request->degree;
+            $department=$request->department;
+            $passing_year=$request->passing_year;
+            $result=$request->result;
+            $educationInfo=[];
+            if($institutionNames){
+                foreach ($institutionNames as $key=>$item){
+                    $educationInfo[]=[
+                        'emp_id'=>$employeeId,
+                        'institution_name'=>$item,
+                        'degree'=>$degree[$key],
+                        'department'=>$department[$key],
+                        'passing_year'=>$passing_year[$key],
+                        'result'=>$result[$key],
+                    ];
+                }
+            }
+            if($educationInfo){
+                EmployeeEducation::insert($educationInfo);
+            }
+            // return 1;
+            return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        }
     }
 
     public function edit($id)
     {
         $employee = Employee::find($id); // Assuming you have an Employee model
-        return view('employees.edit', compact('employee'));
+        return view('employee.edit', compact('employee'));
     }
-    
+
     public function update(Request $request, $id)
     {
-        // Find the employee record by ID
         $employee = Employee::find($id);
-        
-        // Check if the employee exists
-        if (!$employee) {
-            return redirect()->route('employees.index')->with('error', 'Employee not found.');
+
+        // Handle profile photo upload if provided
+        if ($request->hasFile('profile_photo')) {
+            $profilePhoto = $request->file('profile_photo');
+            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
+            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
+            // Delete old profile photo if exists
+            // if ($employee->profile_photo) {
+            //     unlink(public_path('profile_images/' . $employee->profile_photo));
+            // }
+            // Update profile photo field with new photo name
+            $employee->profile_photo = $profilePhotoName;
         }
 
+        // Handle CV file upload if provided
+        if ($request->hasFile('employee_resume')) {
+            $resumeFile = $request->file('employee_resume');
+            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
+            // Delete old resume file if exists
+            // if ($employee->employee_resume) {
+            //     unlink(public_path('employee_resume/' . $employee->employee_resume));
+            // }
+            // Update resume file field with new file name
+            $employee->employee_resume = $resumeFileName;
+        }
+
+
         // Update employee fields
-        $employee->emp_id = $request->employee_id;
+        $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
         $employee->email = $request->email;
         $employee->phone = $request->phone;
@@ -110,7 +167,7 @@ class EmployeeController extends Controller
         $employee->permanent_address = $request->permanent_address;
         $employee->designation = $request->designation;
 
-        $employee->institution_name_one = $request->institution_name_one;
+        /*$employee->institution_name_one = $request->institution_name_one;
         $employee->institution_name_two = $request->institution_name_two;
         $employee->institution_name_three = $request->institution_name_three;
         $employee->institution_name_four = $request->institution_name_four;
@@ -137,7 +194,7 @@ class EmployeeController extends Controller
         $employee->result_one = $request->result_one;
         $employee->result_two = $request->result_two;
         $employee->result_three = $request->result_three;
-        $employee->result_four = $request->result_four;
+        $employee->result_four = $request->result_four;*/
 
 
         $employee->joining_date = $request->joining_date;
@@ -146,22 +203,40 @@ class EmployeeController extends Controller
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
 
-        // Handle profile photo upload if provided
-        if ($request->hasFile('profile_photo')) {
-            $profilePhoto = $request->file('profile_photo');
-            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->storeAs('public/profile_photos', $profilePhotoName);
-            $employee->profile_photo = $profilePhotoName;
+        // Save the updated employee
+        if($employee->save()){
+            $employeeId=$employee->id;
+            $institutionNames=$request->institution_name;
+            $degree=$request->degree;
+            $department=$request->department;
+            $passing_year=$request->passing_year;
+            $result=$request->result;
+            $educationInfo=[];
+            if($institutionNames){
+                foreach ($institutionNames as $key=>$item){
+                    $educationInfo[]=[
+                        'emp_id'=>$employeeId,
+                        'institution_name'=>$item,
+                        'degree'=>$degree[$key],
+                        'department'=>$department[$key],
+                        'passing_year'=>$passing_year[$key],
+                        'result'=>$result[$key],
+                    ];
+                }
+            }
+            if($educationInfo){
+                EmployeeEducation::where('emp_id', $employeeId)->delete();
+                EmployeeEducation::insert($educationInfo);
+            }
+            return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
         }
 
-        // Save the updated employee
-        $employee->save();
-
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
-    public function view(){
-        return view('employee.view');
+    public function view($id) {
+        $employee = Employee::find($id);
+
+        return view('employee.view', compact('employee'));
     }
 
 

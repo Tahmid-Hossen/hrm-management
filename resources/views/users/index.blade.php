@@ -69,11 +69,11 @@
                     </button>
 
                     <div
-                       
+
                         class=" hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:border-gray-700"
-                       
+
                         aria-labelledby="hs-dropdown-custom-icon-trigger">
-                        <button class=" editUserBtn flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer"
+                        <a type="button" class="editUserBtn flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer"
                              data-hs-overlay="#update-user-modal"  data-user-id="{{ $user->id }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                  class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -83,7 +83,7 @@
                                       d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
                             </svg>
                             Edit
-                        </button>
+                        </a>
                         <a href="{{route('users.resetPassword', $user->id)}}" onclick="return confirm('Are you sure, want to reset password?');" class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer"
                              >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -112,13 +112,13 @@
                 <button
                     class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                     type="button">
-           
+
 
               <span
                 class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium  text-red-800 dark:bg-red-800/30 dark:text-red-500 {{ $user->is_active ? 'bg-green-100' : 'bg-red-100'}}"
-                    
+
                 >
-               {{ $user->is_active ? 'Active' : 'Inactive'}}     
+               {{ $user->is_active ? 'Active' : 'Inactive'}}
             </span>
 
 
@@ -247,10 +247,10 @@
                     <div class="max-w-full mt-3">
                         <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
                         <input type="email" id="email" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com" name="email" required>
-                        
+
                     </div>
-                
-                   
+
+
                     <!-- Footer -->
                     <div class="flex justify-end items-center gap-x-2 py-3 px-4 dark:border-neutral-700">
                         <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#create-new-user-modal">
@@ -308,7 +308,7 @@
                                 <div class="relative hs-select">
                                     <!-- Select -->
                                     <select id="edituserRole"name="edituserRole" required class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                        
+
                                     </select>
                                     <!-- End Select -->
                                 </div>
@@ -321,7 +321,7 @@
                                 <div class="relative hs-select">
                                     <!-- Select -->
                                     <select id="edituserCompany" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" name="edituserCompany" required>
-                                        
+
                                     </select>
                                     <!-- End Select -->
                                 </div>
@@ -334,7 +334,7 @@
                                 <div class="relative hs-select">
                                     <!-- Select -->
                                     <select id="edituserIsActive" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" name="edituserIsActive" required>
-                                        
+
                                     </select>
                                     <!-- End Select -->
                                 </div>
@@ -346,7 +346,7 @@
                     <label for="email" class="block text-sm font-medium mb-2 dark:text-white">Email</label>
                     <input type="email" id="edituserEmail" name="edituserEmail" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="you@site.com">
                 </div>
-        
+
         </div>
         <!-- End Body -->
 
@@ -381,8 +381,8 @@
     $(document).ready(function(){
 
        $(document).on('submit', '#createUserSubmit', function(e) {
-            e.preventDefault(); 
-           
+            e.preventDefault();
+
           $('#modal-close').text('Processing...');
 
             // Get the CSRF token value from the meta tag
@@ -410,7 +410,7 @@
 
                         toastr.success('Successfully created user', 'Congratulation!');
                         window.location.reload();
-                        
+
                         // setTimeout(function () {
                         //     window.location.reload();
                         // }, 300);
@@ -434,7 +434,7 @@
         $('.editUserBtn').click(function() {
             console.log('asdasd')
         var userId = $(this).data('user-id');
-        
+
         // AJAX request to fetch user data
         $.ajax({
             method: 'get',
@@ -505,8 +505,8 @@
             e.preventDefault();
 
             var csrfToken = $('input[name="_token"]').val();
-             
-            
+
+
             // AJAX request to update user data
             $.ajax({
                 method: 'post',

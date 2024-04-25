@@ -166,7 +166,7 @@
             <!-- Header -->
             <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
                 <h3 class="font-bold text-gray-800 dark:text-white">
-                    Update User
+                    Create User
                 </h3>
                 <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#create-new-user-modal">
                     <span class="sr-only">Close</span>

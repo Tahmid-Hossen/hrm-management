@@ -139,7 +139,7 @@ class EmployeeController extends Controller
             $employee->employee_resume = $resumeFileName;
         }
 
-
+        //return $request;
         // Update employee fields
         $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
@@ -150,24 +150,24 @@ class EmployeeController extends Controller
         $employee->blood_group = $request->blood_group;
         $employee->present_address = $request->present_address;
         $employee->permanent_address = $request->permanent_address;
-        // $employee->designation = $request->designation;
-        // $employee->department = $request->emp_department;
+        if($request->designation!='') $employee->designation = $request->designation;
+        if($request->emp_department!='') $employee->department = $request->emp_department;
 
-         // Update designation if provided
-        if ($request->has('designation')) {
-            $designation = Designations::find($request->designation);
-            if ($designation) {
-                $employee->designation()->associate($designation);
-            }
-        }
+        //  // Update designation if provided
+        // if ($request->has('designation')) {
+        //     $designation = Designations::find($request->designation);
+        //     if ($designation) {
+        //         $employee->designation()->associate($designation);
+        //     }
+        // }
 
-        // Update department if provided
-        if ($request->has('emp_department')) {
-            $department = Departments::find($request->emp_department);
-            if ($department) {
-                $employee->department()->associate($department);
-            }
-        }
+        // // Update department if provided
+        // if ($request->has('emp_department')) {
+        //     $department = Departments::find($request->emp_department);
+        //     if ($department) {
+        //         $employee->department()->associate($department);
+        //     }
+        // }
 
         $employee->joining_date = $request->joining_date;
         $employee->emergency_contact = $request->emergency_contact;
@@ -200,7 +200,7 @@ class EmployeeController extends Controller
                 EmployeeEducation::where('emp_id', $employeeId)->delete();
                 EmployeeEducation::insert($educationInfo);
             }
-            return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
+            return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
         }
 
     }

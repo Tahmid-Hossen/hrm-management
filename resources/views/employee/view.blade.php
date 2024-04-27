@@ -1512,11 +1512,12 @@
             </div>
         </div>
     </div>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
+        // console.log('hi');
             $("#edit-card").hide(); // Hide div-two initially
             $("#update-info-button").click(function() {
-                // console.log("hi");
+                console.log("hi");
                 $("#edit-card").removeClass("hidden");
                 $("#edit-card").show();
                 $("#disable-card").hide();

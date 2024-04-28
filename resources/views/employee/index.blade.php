@@ -23,7 +23,7 @@
 @endsection
 
 @section("additionalButton")
-\
+
 
 {{-- <button type="button" data-hs-overlay="#create-new-user-modal" --}}
 {{-- class="inline-flex items-center px-4 py-3 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 dark:hover:text-red-600 hover:text-red-600 dark:hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600 dark:hover:text-red-600"> --}}
@@ -137,8 +137,8 @@
                                 </td>
                                 <td class="whitespace-nowrap px-6 py-4 text-end text-sm font-medium">
                                     <div class="flex gap-3">
-                                        {{--
-                                                    <div class="inline-block hs-tooltip">
+
+                                        <!-- <div class="inline-block hs-tooltip">
                                                     <button data-hs-overlay="#edit-employee-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -148,8 +148,9 @@
                                                     Edit
                                                     </span>
                                                     </button>
-                                                    </div>
-                                                --}}
+                                                    </div> -->
+
+
                                         {{--
                                                     <div class="inline-block hs-tooltip">
                                                     <button data-hs-overlay="#edit-employee-modal" type="button" class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
@@ -187,14 +188,37 @@
                                             </a>
                                         </div> -->
 
+                                        @if($employee->user)
                                         <div class="hs-tooltip inline-block">
-                                            <button onclick="assignRoleModal({{$employee->id}})" type="button" class="assignRoleBtn hs-tooltip-toggle inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-2 py-2 text-sm font-semibold text-gray-500 hover:border-red-600 hover:text-red-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-gray-400 dark:hover:border-red-600 dark:hover:text-red-500" data-user-id="{{ $employee->id }}">
-                                                <i class="fa-regular fa-user"></i>
+                                            <button type="button" class="assignRoleBtn hs-tooltip-toggle inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-2 py-2 text-sm font-semibold text-teal-600 border-teal-600 hover:border-teal-600 hover:text-teal-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-gray-400 dark:hover:border-red-600 dark:hover:text-red-500" data-user-id="{{ $employee->id }}" data-user-data="{{ $employee->user->id ?? null }}" data-hs-overlay="#update-user-modal">
+                                                <!-- <i class="fa-regular fa-user"></i> -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                                                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                                                </svg>
+
                                                 <span class="hs-tooltip-content invisible absolute z-10 inline-block rounded-lg bg-red-600 px-2 py-1 text-white opacity-0 shadow-md transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100" role="tooltip">
                                                     Assign Role
                                                 </span>
                                             </button>
                                         </div>
+                                        @else
+
+                                        <div class="hs-tooltip inline-block">
+                                            <button type="button" class="assignRoleBtn hs-tooltip-toggle inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-2 py-2 text-sm font-semibold text-red-600 border-red-600 hover:border-red-600 hover:text-red-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-gray-400 dark:hover:border-red-600 dark:hover:text-red-500" data-user-id="{{ $employee->id }}" data-user-data="{{ $employee->user->id ?? null }}" data-hs-overlay="#update-user-modal">
+                                                <!-- <i class="fa-regular fa-user"></i> -->
+
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                                                    <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                                                    <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+                                                </svg>
+
+                                                <span class="hs-tooltip-content invisible absolute z-10 inline-block rounded-lg bg-red-600 px-2 py-1 text-white opacity-0 shadow-md transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100" role="tooltip">
+                                                    Assign Role
+                                                </span>
+                                            </button>
+                                        </div>
+                                        @endif
 
                                         <div class="hs-tooltip inline-block">
                                             <a href="{{ route('employees.view', $employee->id) }}" class="hs-tooltip-toggle inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-2 py-2 text-sm font-semibold text-gray-500 hover:border-red-600 hover:text-red-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-gray-400 dark:hover:border-red-600 dark:hover:text-red-500">
@@ -218,123 +242,148 @@
     </div>
 </div>
 
-{{-- Assign Role Modal --}}
-<div id="assignRoleModalForm" class="hidden">
-    <div class="flex items-center justify-between border-b px-4 py-3 dark:border-neutral-700">
-        <h3 class="font-bold text-gray-800 dark:text-white">
-            Set as a user
-        </h3>
-    </div>
-    <!-- Body -->
-    <div class="overflow-y-auto p-4">
-        <!-- Card Section -->
-        <div class="mx-auto">
-            <!-- Card -->
-            <div class="bg-white dark:bg-neutral-800">
-                <form action="{{route('employees.permission', $employee->id)}}" method="post" id="updateAsUserPermissionForm">
-                    <!-- @csrf -->
 
-                    @csrf
-                    <input type="hidden" id="employeeId" name="employeeId" />
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                    <!-- End Col -->
-                    <div class="grid gap-2 sm:grid-cols-12 sm:gap-6">
-                        <div class="sm:col-span-3">
-                            <label for="employeeDesignation" class="mt-2.5 inline-block text-sm text-gray-800 dark:text-neutral-200">
-                                Set as a user
-                            </label>
-                        </div>
-                        <!-- End Col -->
-                        <div class="sm:col-span-9">
-                            <div class="space-y-2">
-                                <select id="employeeDesignation" name="user_permission" class="-800 block w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" required>
-                                    <option value="1">
-                                        Add User Permission
-                                    </option>
-                                    <option value="0">
-                                        Remove User Permission
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- End Col -->
-                    <!-- End Grid -->
-                    <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
-                        <button onclick="smallSizeModal.close()" type="button" class="inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-4 py-2 text-sm font-semibold text-gray-500 hover:border-red-600 hover:text-red-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#assign-role-modal">
-                            Cancel
-                        </button>
-                        <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            Update
-                        </button>
-                    </div>
-                </form>
+<div id="update-user-modal" class="hs-overlay hidden size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto [--overlay-backdrop:static]' data-hs-overlay-keyboard=" false">
+    <div class="hs-overlay-open:mt-7 hs-overlay-open:opacity-100 hs-overlay-open:duration-500 mt-0 opacity-0 ease-out transition-all md:max-w-2xl md:w-full m-3 md:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+        <div class="w-full flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+            <!-- Header -->
+            <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+                <h3 class="font-bold text-gray-800 dark:text-white">
+                    Update Permission
+                </h3>
+                <button type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600" data-hs-overlay="#update-user-modal">
+                    <span class="sr-only">Close</span>
+                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 6 6 18"></path>
+                        <path d="m6 6 12 12"></path>
+                    </svg>
+                </button>
             </div>
-            <!-- End Card -->
+            <!-- End Header -->
+
+            <!-- Body -->
+
+
+
+            <form id="editUserForm">
+                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                <input type="hidden" id="employeeId" name="employeeId">
+                <input type="hidden" id="employeeData" name="employeeData">
+
+
+                <div class="p-4 sm:p-10 overflow-y-auto">
+                    <div class="flex gap-x-4 md:gap-x-7">
+                        <!-- Icon -->
+                        <span class="flex-shrink-0 inline-flex justify-center items-center size-[46px] sm:w-[62px] sm:h-[62px] rounded-full border-4 border-red-50 bg-red-100 text-red-500 dark:bg-red-700 dark:border-red-600 dark:text-red-100">
+                            <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                            </svg>
+                        </span>
+                        <!-- End Icon -->
+
+                        <div class="grow">
+                            <h3 class="mb-2 text-xl font-bold text-gray-800 dark:text-neutral-200">
+                                Are you sure?
+                            </h3>
+                            <p class="text-gray-500 dark:text-neutral-500 employeeDataText">
+                                You want remove from user.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-end px-4 py-3 border-t gap-x-2 dark:border-neutral-700">
+                    <button type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
+                        No
+                    </button>
+
+                    <button id="modal-close" type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Yes
+                    </button>
+                </div>
+
+
+
+                <!-- End Body -->
+
+
+            </form>
+            <!-- End Footer -->
         </div>
     </div>
-    <!-- End Card Section -->
-    <!-- End Body -->
 </div>
-{{-- Assign Role Modal --}}
+
 @endsection
 
 @section("scripts")
 <script>
-    function assignRoleModal(ID) {
-        // var userId = $(this).data('user-id');
-        let htmlForm = $('#assignRoleModalForm').html();
-        // let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
-        $('#smallSizeModalBody').html(htmlForm);
-        smallSizeModal.showModal();
-        $('#employeeId').val(ID);
-        console.log(ID);
-    }
+    // function assignRoleModal(ID) {
+    //     // var userId = $(this).data('user-id');
+    //     let htmlForm = $('#assignRoleModalForm').html();
+    //     // let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
+    //     $('#smallSizeModalBody').html(htmlForm);
+    //     smallSizeModal.showModal();
+    //     $('#employeeId').val(ID);
+    //     console.log(ID);
+    // }
 
 
     $(document).ready(function() {
-        $('#updateAsUserPermissionForm').submit(function(e) {
-            alert('updateAsUserPermissionForm called');
+        const modalClose = document.querySelector('#modal-close');
 
+        $('.assignRoleBtn').click(function() {
+            var userId = $(this).data('user-id');
+            var userData = $(this).data('user-data');
+            $('#employeeId').val(userId);
+            $('#employeeData').val(userData);
+            if (userData) {
+                $('.employeeDataText').html(' You want remove from user.');
+            } else {
+                $('.employeeDataText').html(' You want sync with user.');
+            }
+            console.log(userId);
+        });
+
+
+
+        $('#editUserForm').submit(function(e) {
+            $('#modal-close').text('Processing...');
             e.preventDefault();
-
-            // var employeeId = $('#employeeId').val();
-            // alert(employeeId);
-            // var csrfToken = $('input[name="_token"]').val();
-
-            // console.log(employeeId);
-
-
+            var userId = $('#employeeId').val();
+            var csrfToken = $('input[name="_token"]').val();
             // AJAX request to update user data
             $.ajax({
                 method: 'post',
-                url: '/employee-permission/27', // Adjust URL as per your route
+                url: '/employees/employee-permission/' + userId, // Adjust URL as per your route
                 data: $(this).serialize(),
                 headers: {
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(response) {
+                    $('#modal-close').text('Yes');
                     // Handle success
-                    console.log("Employee data updated successfully:", response);
+                    console.log("User data updated successfully:", response);
 
-                    editModalClose.addEventListener('click', () => {
-                        HSOverlay.close('#assignRoleModalForm');
+                    modalClose.addEventListener('click', () => {
+                        HSOverlay.close('#update-user-modal');
                     });
 
-                    toastr.success('Successfully Updated Employee', 'Congratulation!');
+                    toastr.success('Successfully Updated user', 'Congratulation!');
                     window.location.reload();
 
 
                     // Close the modal
-                    $('#assignRoleModalForm').hide();
+                    $('#editUserModal').hide();
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    $('#modal-close').text('Yes');
                     // Handle error
-                    // editModalClose.addEventListener('click', () => {
-                    //     HSOverlay.close('#assignRoleModalForm');
-                    // });
+                    modalClose.addEventListener('click', () => {
+                        HSOverlay.close('#update-user-modal');
+                    });
                     toastr.success('Something went wrong, Please try again', 'Opps!');
                     console.error("Error updating user data:", errorThrown);
                 }

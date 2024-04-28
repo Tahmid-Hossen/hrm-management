@@ -79,7 +79,7 @@ Route::middleware('auth')->group(function () {
 
 
     // Route start for settings menu
-    Route::prefix('departments')->group(function (){
+    Route::prefix('departments')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
         Route::post('/store', [DepartmentController::class, 'store'])->name('department.store');
@@ -89,7 +89,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
     });
 
-    Route::prefix('designations')->group(function (){
+    Route::prefix('designations')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
         Route::get('/create', [DesignationController::class, 'create'])->name('designation.create');
         Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');
@@ -98,9 +98,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [DesignationController::class, 'delete'])->name('designation.delete');
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
     });
-
-
-
 });
 require __DIR__ . '/auth.php';
 

@@ -353,7 +353,7 @@
             @endif
 
             {{-- Setting implementation  --}}
-            @php $isActive = request()->is('departments','departments/*','designations','designations/*') ? 'true' : 'false'; @endphp
+            @php $isActive = request()->is('company-list','company-list/*','departments','departments/*','designations','designations/*', 'leave-type','leave-type/*', 'document-type', 'document-type/*') ? 'true' : 'false'; @endphp
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="setting-accordion">
                 <button
                     type="button"
@@ -393,6 +393,14 @@
                     id="setting-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
                     <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                        @php $isSubActive = request()->is('company-list') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{ route('department.index') }}">
+                                Company List
+                            </a>
+                        </li>
                         @php $isSubActive = request()->is('departments') ? 'true' : 'false'; @endphp
                         <li>
                             <a
@@ -409,7 +417,22 @@
                                 Designation
                             </a>
                         </li>
-
+                        @php $isSubActive = request()->is('leave-type') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{ route('designation.index') }}">
+                                Leave Type
+                            </a>
+                        </li>
+                        @php $isSubActive = request()->is('document-type') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{ route('designation.index') }}">
+                                Document Type
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>

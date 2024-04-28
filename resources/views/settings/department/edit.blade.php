@@ -2,9 +2,9 @@
 @section('title', 'Department')
 @section('pageTitle', 'Departments')
 @section('breadcumb')
-    <ol class="flex items-center mt-2 whitespace-nowrap mr-2">
+    <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
-            <a class="flex items-center text-sm text-gray-500 hover:text-red-600 dark:hover:text-red-600 focus:outline-none focus:text-neutral-600 dark:hover:text-red-600 dark:focus:text-neutral-600 dark:hover:text-red-600"
+            <a class="flex items-center text-sm text-gray-500 hover:text-red-600 dark:hover:text-red-600 focus:outline-none focus:text-neutral-600 dark:focus:text-neutral-600"
                href="#">
                 <svg class="flex-shrink-0 me-3 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                      viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -22,7 +22,7 @@
         </li>
 
         <li class="inline-flex items-center">
-            <a class="flex items-center text-sm text-gray-500 hover:text-red-600 dark:hover:text-red-600 focus:outline-none focus:text-neutral-600 dark:hover:text-red-600 dark:focus:text-neutral-600 dark:hover:text-red-600"
+            <a class="flex items-center text-sm text-gray-500 hover:text-red-600 dark:hover:text-red-600 focus:outline-none focus:text-neutral-600 dark:focus:text-neutral-600"
                href="#">
                 Settings
             </a>
@@ -33,7 +33,7 @@
             </svg>
         </li>
 
-        <li class="inline-flex items-center text-sm font-semibold text-red-600 dark:hover:text-red-600 truncate dark:text-red-600 dark:hover:text-red-600"
+        <li class="inline-flex items-center text-sm font-semibold text-red-600 truncate dark:hover:text-red-600 dark:text-red-600"
             aria-current="page">
             Department
         </li>
@@ -45,38 +45,41 @@
             <div class="-m-1.5 overflow-x-auto">
                 <div class="p-1.5 w-full align-middle">
                     <div class="overflow-x-auto">
-                        <form class="w-full max-w-md" action="{{ route('department.update', $department->id) }}" method="POST" enctype="multipart/form-data">
+                        <div>
+                            <h3 class="m-2 text-xl font-semibold text-gray-800 dark:text-white">Update Department</h3>
+                        </div>
+                        <form
+                            class="items-center w-full"
+                            action="{{ route('department.update', $department->id) }}" method="POST" enctype="multipart/form-data"
+                        >
                             @csrf
-                            <div class="md:flex md:items-center mb-6">
-                                <div class="md:w-1/3">
-                                  <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-                                    Department Name
-                                  </label>
+                            <div class="m-2">
+
+                                <div class="max-w-full mt-3">
+                                    <label for="department_name" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Department Name</label>
+                                    <input class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                        id="department_name" name="name" type="text" value="{{ $department->name }}" autocomplete="off">
                                 </div>
-                                <div class="md:w-2/3">
-                                  <input class="bg-transparent border-2 border-gray-500 rounded w-full py-2 px-4 text-gray-400 leading-tight focus:outline-none focus:bg-transparent focus:border-gray-500" id="department_name" name="name" type="text" value="{{ $department->name }}" autocomplete="off">
+
+                                <div class="max-w-full mt-3">
+                                    <label for="is_active" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Is Active</label>
+                                    <div class="relative" id="is_active">
+                                        <div class="relative hs-select" >
+                                            <select  name="is_active" class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                <option value="1" {{ $department->is_active == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                <option value="0" {{ $department->is_active == 'No' ? 'selected' : '' }}>No</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="md:flex md:items-center mb-6">
-                                <div class="md:w-1/3">
-                                  <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-                                    Is Active
-                                  </label>
+
+                                <div class="flex items-center justify-end py-4 border-t gap-x-2 dark:border-neutral-700">
+
+                                    <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                        Update Department
+                                    </button>
                                 </div>
-                                <div class="md:w-2/3">
-                                    <select class="select bg-transparent border border-gray-500 w-full max-w-xs" name="is_active">
-                                        <option class="bg-transparent" value="1" {{ $department->is_active == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                        <option class="bg-transparent" value="0" {{ $department->is_active == 'No' ? 'selected' : '' }}>No</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="md:flex md:items-center">
-                              <div class="md:w-1/3"></div>
-                              <div class="md:w-2/3">
-                                <button class="shadow bg-green-700 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
-                                  Update
-                                </button>
-                              </div>
+
                             </div>
                         </form>
                     </div>

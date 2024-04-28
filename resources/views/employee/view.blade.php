@@ -32,7 +32,7 @@
         <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
             <div class="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 lg:gap-6">
                 <div class="flex justify-center">
-                    <img class="h-[200px] w-[200px] rounded-full bg-contain bg-center" src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" />
+                    <img src="{{ asset('profile_images/' . $employee->profile_photo) }}" alt="profile-images"/>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">
@@ -210,7 +210,7 @@
                             Personal Details
                         </h3>
                         {{-- <span class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600  rounded-lg hover:bg-red-700 dark:bg-red-600 dark:hover:text-red-white dark:hover:bg-red-700 hover:text-white dark:text-white"></span> --}}
-                        <span id="update-info-button" class="cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <span id="update-info-button" class="cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></span>
                     </div>
                     <div class="overflow-y-auto">
                         <!-- Card Section -->
@@ -440,7 +440,7 @@
                     <!-- End Card -->
 
 
-                    <div class="bg-white dark:bg-neutral-800 
+                    <div class="bg-white dark:bg-neutral-800
                                 hidden" id="edit-card">
                         <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf

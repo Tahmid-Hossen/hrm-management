@@ -275,19 +275,19 @@
     <div id="editAttendanceForm" class="hidden">
         <div>
             <!-- Body -->
-            <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
+            <div class="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
                 <h3 class="font-bold text-gray-800 dark:text-white">
                     Update Attendance
                 </h3>
 
             </div>
             <div class="p-4 overflow-y-auto">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                <div class="grid grid-cols-1 gap-4 mt-2 sm:grid-cols-2 lg:gap-6">
                     <div class="max-w-full mt-3">
-                        <label for="employee" class="block text-sm font-medium mb-2 dark:text-white">Employee</label>
+                        <label for="employee" class="block mb-2 text-sm font-semibold text-gray-800 dark:text-white">Employee</label>
                         <div class="relative" id="employee">
                             <div class="relative hs-select">
-                                <select class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <select class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                     <option value="">Choose</option>
 
                                     <option value="Iqbal Mahmud">
@@ -305,19 +305,19 @@
                         </div>
                     </div>
                     <div class="max-w-full mt-3">
-                        <label for="attendance-date" class="block text-sm font-medium mb-2 dark:text-white">Date</label>
-                        <input type="date" id="attendance-date" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                        <label for="attendance-date" class="block mb-2 text-sm font-semibold text-gray-800 dark:text-white">Date</label>
+                        <input type="date" id="attendance-date" class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                <div class="grid grid-cols-1 gap-4 mt-2 sm:grid-cols-2 lg:gap-6">
                     <div class="max-w-full mt-3">
-                        <label for="attendance-checkin" class="block text-sm font-medium mb-2 dark:text-white">Check-in Time</label>
-                        <input type="time" id="attendance-checkin" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="10:00">
+                        <label for="attendance-checkin" class="block mb-2 text-sm font-semibold text-gray-800 dark:text-white">Check-in Time</label>
+                        <input type="time" id="attendance-checkin" class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="10:00">
                     </div>
                     <div class="max-w-full mt-3">
-                        <label for="attendance-checkout" class="block text-sm font-medium mb-2 dark:text-white">Check-out Time</label>
-                        <input type="time" id="attendance-checkout" class="py-3 px-4 block w-full border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="18:00">
+                        <label for="attendance-checkout" class="block mb-2 text-sm font-semibold text-gray-800 dark:text-white">Check-out Time</label>
+                        <input type="time" id="attendance-checkout" class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="18:00">
                     </div>
                 </div>
 
@@ -325,7 +325,7 @@
             <!-- End Body -->
 
             <!-- Footer -->
-            <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+            <div class="flex items-center justify-end px-4 py-3 border-t gap-x-2 dark:border-neutral-700">
                 <button onclick="smallSizeModal.close()" type="button" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700">
                     Cancel
                 </button>

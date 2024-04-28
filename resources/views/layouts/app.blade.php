@@ -22,7 +22,7 @@
     <link href="{{('assets/css/style.css')}}" rel="stylesheet">
 </head>
 
-<body class="bg-white dark:bg-neutral-900 min-h-screen">
+<body class="min-h-screen bg-white dark:bg-neutral-900">
     <!-- ========== HEADER ========== -->
     @include('layouts.topnav')
     <!-- ========== END HEADER ========== -->
@@ -32,10 +32,10 @@
     <!-- End Sidebar -->
 
     <!-- Content -->
-    <div class="w-full px-4 pt-10 sm:px-6 md:px-8 lg:ps-72 bg-white dark:bg-neutral-900">
-        <div class="mb-4 flex items-center justify-between">
+    <div class="w-full px-4 pt-10 bg-white sm:px-6 md:px-8 lg:ps-72 dark:bg-neutral-900">
+        <div class="flex items-center justify-between mb-4">
             <div class="">
-                <h3 class="font-semibold dark:text-neutral-200 text-[16px]">@yield('pageTitle')</h3>
+                <h3 class="font-semibold text-gray-800 dark:text-neutral-200 text-[16px]">@yield('pageTitle')</h3>
                 {{--BREADCUMB--}}
                 <div class="">@yield('breadcumb')</div>
             </div>

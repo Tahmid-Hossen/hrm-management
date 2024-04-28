@@ -314,12 +314,12 @@
 
                                     <div>
                                         <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                            Select Department
+                                            Select Designation
                                         </label>
                                         <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                            @if(isset($departments))
-                                            @foreach ($departments as $department)
-                                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                            @if(isset($designations))
+                                            @foreach ($designations as $designation)
+                                                    <option value="{{ $designation->id }}">{{ $designation->name }}</option>
                                             @endforeach
                                             @endif
                                         </select>

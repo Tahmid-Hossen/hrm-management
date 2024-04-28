@@ -23,7 +23,7 @@
 @endsection
 
 @section("additionalButton")
-\
+
 
 {{-- <button type="button" data-hs-overlay="#create-new-user-modal" --}}
 {{-- class="inline-flex items-center px-4 py-3 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 dark:hover:text-red-600 hover:text-red-600 dark:hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600 dark:hover:text-red-600"> --}}

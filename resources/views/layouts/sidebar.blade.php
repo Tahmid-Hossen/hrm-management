@@ -56,6 +56,8 @@
             </li> -->
 
 
+
+
             @php $isActive = request()->is('users', 'users/*', 'roles', 'roles/*' ) ? 'true' : 'false'; @endphp
             @if(userCan('user.view'))
             <li class="hs-accordion {{$isActive =='true' ? 'active' : ''}}" id="staff-accordion">
@@ -227,7 +229,7 @@
             </li>
             @endif
 
-            @php $isActive = request()->is('timesheet', 'timesheet/*',  'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
+            @php $isActive = request()->is('timesheet', 'timesheet/*','manage-leave','manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
             @if(userCan('attendence.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="timesheet-accordion">
                 <button
@@ -278,6 +280,15 @@
                                 class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
                                 href="timesheet.html">
                                 Timesheet
+                            </a>
+                        </li>
+
+                        @php $isSubActive = request()->is('manage-leave','manage-leave/*') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{route('leave.index')}}">
+                                Manage Leave
                             </a>
                         </li>
 

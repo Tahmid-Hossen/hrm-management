@@ -13,6 +13,8 @@ use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\CompanyListController;
+use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\DocumentTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +111,24 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [DesignationController::class, 'update'])->name('designation.update');
         Route::get('/delete/{id}', [DesignationController::class, 'delete'])->name('designation.delete');
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
+    });
+
+        Route::prefix('leave-type')->group(function (){
+        Route::get('/', [LeaveTypeController::class, 'index'])->name('leave-type.index');
+        Route::get('/create', [LeaveTypeController::class, 'create'])->name('leave-type.create');
+        Route::post('/store', [LeaveTypeController::class, 'store'])->name('leave-type.store');
+        Route::get('/edit/{id}', [LeaveTypeController::class, 'edit'])->name('leave-type.edit');
+        Route::post('/update/{id}', [LeaveTypeController::class, 'update'])->name('leave-type.update');
+        Route::get('/delete/{id}', [LeaveTypeController::class, 'delete'])->name('leave-type.delete');
+    });
+
+        Route::prefix('document-type')->group(function (){
+        Route::get('/', [DocumentTypeController::class, 'index'])->name('document-type.index');
+        Route::get('/create', [DocumentTypeController::class, 'create'])->name('document-type.create');
+        Route::post('/store', [DocumentTypeController::class, 'store'])->name('document-type.store');
+        Route::get('/edit/{id}', [DocumentTypeController::class, 'edit'])->name('document-type.edit');
+        Route::post('/update/{id}', [DocumentTypeController::class, 'update'])->name('document-type.update');
+        Route::get('/delete/{id}', [DocumentTypeController::class, 'delete'])->name('document-type.delete');
     });
 
 

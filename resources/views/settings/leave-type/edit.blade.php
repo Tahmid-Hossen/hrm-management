@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Company List')
-@section('pageTitle', 'Company List')
+@section('title', 'Leave Type')
+@section('pageTitle', 'LeaveType')
 @section('breadcumb')
     <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
@@ -35,7 +35,7 @@
 
         <li class="inline-flex items-center text-sm font-semibold text-red-600 truncate dark:hover:text-red-600 dark:text-red-600"
             aria-current="page">
-            Company
+            Leave Type
         </li>
     </ol>
 @endsection
@@ -46,19 +46,19 @@
                 <div class="p-1.5 w-full align-middle">
                     <div class="overflow-x-auto">
                         <div>
-                            <h3 class="m-2 text-xl font-semibold text-gray-800 dark:text-white">Update Company</h3>
+                            <h3 class="m-2 text-xl font-semibold text-gray-800 dark:text-white">Update Leave Type</h3>
                         </div>
                         <form
                             class="items-center w-full"
-                            action="{{ route('company-list.update', $company->id) }}" method="POST" enctype="multipart/form-data"
+                            action="{{ route('leave-type.update', $leave_type->id) }}" method="POST" enctype="multipart/form-data"
                         >
                             @csrf
                             <div class="m-2">
 
                                 <div class="max-w-full mt-3">
-                                    <label for="company_name" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Company Name</label>
+                                    <label for="leave_type" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Leave Type Name</label>
                                     <input class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        id="company_name" name="name" type="text" value="{{ $company->name }}" autocomplete="off">
+                                        id="leave_type" name="name" type="text" value="{{ $leave_type->name }}" autocomplete="off">
                                 </div>
 
                                 <div class="max-w-full mt-3">
@@ -66,8 +66,8 @@
                                     <div class="relative" id="is_active">
                                         <div class="relative hs-select" >
                                             <select  name="is_active" class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                <option value="1" {{ $company->is_active == 'Yes' ? 'selected' : '' }}>Yes</option>
-                                                <option value="0" {{ $company->is_active == 'No' ? 'selected' : '' }}>No</option>
+                                                <option value="1" {{ $leave_type->is_active == 'Yes' ? 'selected' : '' }}>Yes</option>
+                                                <option value="0" {{ $leave_type->is_active == 'No' ? 'selected' : '' }}>No</option>
                                             </select>
                                         </div>
                                     </div>

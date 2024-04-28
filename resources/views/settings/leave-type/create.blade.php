@@ -1,6 +1,6 @@
 @extends("layouts.app")
-@section('title', 'Company List')
-@section('pageTitle', 'Company List')
+@section('title', 'Leave Type')
+@section('pageTitle', 'Leave Type')
 @section("breadcumb")
     <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
@@ -70,7 +70,7 @@
             class="inline-flex items-center text-sm font-semibold text-red-600 truncate dark:text-red-600 dark:hover:text-red-600"
             aria-current="page"
         >
-            Company
+            Leave Type
         </li>
     </ol>
 @endsection
@@ -84,11 +84,11 @@
                 <div class="w-full p-1.5 align-middle">
                     <div class="overflow-x-auto">
                         <div>
-                            <h3 class="m-2 text-xl font-semibold text-gray-800 dark:text-white">Create New Company</h3>
+                            <h3 class="m-2 text-xl font-semibold text-gray-800 dark:text-white">Create New Leave Type</h3>
                         </div>
                         <form
                             class="items-center w-full"
-                            action="{{ route("company-list.store") }}"
+                            action="{{ route("leave-type.store") }}"
                             method="POST"
                             enctype="multipart/form-data"
                         >
@@ -96,13 +96,13 @@
                             <div class="m-2">
 
                                 <div class="max-w-full mt-3">
-                                    <label for="company_name" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Company Name</label>
+                                    <label for="leave_type" class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Leave Type Name</label>
                                     <input class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                                        id="company_name"
+                                        id="leave_type"
                                         name="name"
                                         type="text"
                                         autocomplete="off"
-                                        placeholder="Company Name">
+                                        placeholder="Leave Type Name">
                                 </div>
 
                                 <div class="max-w-full mt-3">
@@ -124,7 +124,7 @@
                                 <div class="flex items-center justify-end py-4 border-t gap-x-2 dark:border-neutral-700">
 
                                     <button type="submit" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                        Create Company
+                                        Create Leave Type
                                     </button>
                                 </div>
 

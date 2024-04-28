@@ -33,6 +33,7 @@ class DepartmentController extends Controller
         $department->name = $request->name;
         $department->is_active = $request->is_active;
         $department->save();
+        // session()->flash('key', 'value');
         return redirect()->route('department.index')->with('success', 'department updated successfully');
     }
 

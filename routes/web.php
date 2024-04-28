@@ -103,7 +103,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
     });
 
-    Route::prefix('designations')->group(function (){
+    Route::prefix('designations')->group(function () {
         Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
         Route::get('/create', [DesignationController::class, 'create'])->name('designation.create');
         Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');

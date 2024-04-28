@@ -29,15 +29,11 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'name' => 'required',
-
-
             'email' => 'required|unique:users',
         ]);
-
         $password = 'NexHRM#' . \Str::password(16, true, true, false, false);
-
         DB::beginTransaction();
 
         try {
@@ -64,8 +60,6 @@ class UserController extends Controller
             $email = new NewUserMail($data);
             $email->userData = $data;
             \Mail::to($user->email)->send($email);
-
-
             return response()->json(['message' => 'User created successfully', 'status' => 200], 200);
 
             // all good

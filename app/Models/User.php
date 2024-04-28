@@ -37,9 +37,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function employee(): HasOne
+    public function employee()
     {
-        return $this->hasOne(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 
 
@@ -64,5 +64,4 @@ class User extends Authenticatable
     {
         return $this->hasOne(Company::class, 'id', 'company_id');
     }
-
 }

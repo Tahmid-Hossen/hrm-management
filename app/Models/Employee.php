@@ -25,4 +25,9 @@ class Employee extends Model
     {
         return $this->hasOne(Designations::class, 'id', 'designation');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

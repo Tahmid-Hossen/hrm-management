@@ -22,7 +22,9 @@ class EmployeeController extends Controller
         $designations = Designations::all();
         $departments = Departments::all();
         // return $departments;
-        $employees = Employee::with('empDesignation')->get();
+        $employees = Employee::with('empDesignation', 'user')->get();
+
+        // dd($employees);
         return view('employee.index', compact('employees', 'designations', 'departments'));
     }
 
@@ -228,9 +230,10 @@ class EmployeeController extends Controller
 
     public function employeePermission(Request $request, $id)
     {
+        // return $request->all();
         $employee = Employee::findOrFail($id);
 
-        if ($request->user_permission === 1) {
+        if (!$request->employeeData) {
             $password = 'NexHRM#' . \Str::password(16, true, true, false, false);
 
             DB::beginTransaction();
@@ -239,6 +242,7 @@ class EmployeeController extends Controller
                 $user = new User();
                 $user->name = $employee->full_name;
                 $user->email = $employee->email;
+                $user->employee_id = $id;
                 $user->password = Hash::make($password);
                 $user->save();
                 $userRole = Role::where('name', 'staff')->first();
@@ -264,6 +268,14 @@ class EmployeeController extends Controller
                 DB::rollback();
                 // something went wrong
             }
+        } else {
+
+            $User = User::findOrFail($request->employeeData);
+
+            $User->forceDelete();
+
+            return response()->json(['message' => 'User permission removed successfully', 'status' => true], 200);
+            //delete staff role in future 
         }
 
         return response()->json(['message' => 'User permission added Failed', 'status' => true], 400);

@@ -900,7 +900,8 @@
                         </em>
                         item's tab body. --}}
 
-        Coming Soon
+
+
     </h3>
 </div>
 </div>

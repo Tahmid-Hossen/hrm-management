@@ -17,4 +17,9 @@ class Departments extends Model
     // {
     //     return $this->belongsTo(Departments::class);
     // }
+
+    // public function empDepartment()
+    // {
+    //     return $this->hasOne(Departments::class, 'id', 'department');
+    // }
 }

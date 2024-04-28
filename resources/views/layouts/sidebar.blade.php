@@ -351,6 +351,69 @@
                 </div>
             </li>
             @endif
+  
+            {{-- Setting implementation  --}}
+            <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
+                <button
+                    type="button"
+                    class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                    <svg
+                        class="hidden hs-accordion-active:block ms-auto size-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m18 15-6-6-6 6" />
+                    </svg>
+
+                    <svg
+                        class="block hs-accordion-active:hidden ms-auto size-4"
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </button>
+
+                <div
+                    id="payroll-accordion-child"
+                    class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
+                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                        @php $isSubActive = request()->is('set-salary') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{ route('department.index') }}">
+                                Department
+                            </a>
+                        </li>
+                        @php $isSubActive = request()->is('payslip') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a
+                                class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                                href="{{ route('designation.index') }}">
+                                Designation
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+            
             @php $isActive = request()->is('inventory', 'inventory/*') ? 'true' : 'false'; @endphp
             <!-- <li>
                 <a

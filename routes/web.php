@@ -10,6 +10,9 @@ use App\Http\Controllers\EmployeeProfileController;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AttendenceController;
+use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DesignationController;
+use App\Models\Departments;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +75,32 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
         Route::post('/update-permission/{id}', [PermissionController::class, 'update'])->name('permission.update');
     });
+
+
+
+    // Route start for settings menu
+    Route::prefix('departments')->group(function (){
+        Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
+        Route::post('/store', [DepartmentController::class, 'store'])->name('department.store');
+        Route::get('/edit/{id}', [DepartmentController::class, 'edit'])->name('department.edit');
+        Route::post('/update/{id}', [DepartmentController::class, 'update'])->name('department.update');
+        Route::get('/delete/{id}', [DepartmentController::class, 'delete'])->name('department.delete');
+        // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
+    });
+
+    Route::prefix('designations')->group(function (){
+        Route::get('/', [DesignationController::class, 'index'])->name('designation.index');
+        Route::get('/create', [DesignationController::class, 'create'])->name('designation.create');
+        Route::post('/store', [DesignationController::class, 'store'])->name('designation.store');
+        Route::get('/edit/{id}', [DesignationController::class, 'edit'])->name('designation.edit');
+        Route::post('/update/{id}', [DesignationController::class, 'update'])->name('designation.update');
+        Route::get('/delete/{id}', [DesignationController::class, 'delete'])->name('designation.delete');
+        // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
+    });
+
+
+
 });
 require __DIR__ . '/auth.php';
 

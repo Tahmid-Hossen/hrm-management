@@ -440,7 +440,7 @@
                     <!-- End Card -->
 
 
-                    <div class="bg-white dark:bg-neutral-800 
+                    <div class="bg-white dark:bg-neutral-800
                                 hidden" id="edit-card">
                         <form action="{{ route('employees.update', $employee->id) }}" method="POST" enctype="multipart/form-data">
                             @csrf

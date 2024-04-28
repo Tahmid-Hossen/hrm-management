@@ -12,7 +12,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
-use App\Models\Departments;
+use App\Http\Controllers\CompanyListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +79,18 @@ Route::middleware('auth')->group(function () {
 
 
     // Route start for settings menu
+
+
+     Route::prefix('company-list')->group(function (){
+        Route::get('/', [CompanyListController::class, 'index'])->name('company-list.index');
+        Route::get('/create', [CompanyListController::class, 'create'])->name('company-list.create');
+        Route::post('/store', [CompanyListController::class, 'store'])->name('company-list.store');
+        Route::get('/edit/{id}', [CompanyListController::class, 'edit'])->name('company-list.edit');
+        Route::post('/update/{id}', [CompanyListController::class, 'update'])->name('company-list.update');
+        Route::get('/delete/{id}', [CompanyListController::class, 'delete'])->name('company-list.delete');
+    });
+
+
     Route::prefix('departments')->group(function (){
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');

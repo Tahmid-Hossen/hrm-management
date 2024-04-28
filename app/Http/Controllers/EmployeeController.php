@@ -155,8 +155,6 @@ class EmployeeController extends Controller
         $employee->birth_year = $request->birth_year;
         $employee->gender = $request->gender;
         $employee->blood_group = $request->blood_group;
-        $employee->present_address = $request->present_address;
-        $employee->permanent_address = $request->permanent_address;
         if ($request->designation != '') $employee->designation = $request->designation;
         if ($request->emp_department != '') $employee->department = $request->emp_department;
 
@@ -181,6 +179,7 @@ class EmployeeController extends Controller
         // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
+        // return $employee->emp_id;
 
         // Save the updated employee
         if ($employee->save()) {
@@ -209,6 +208,14 @@ class EmployeeController extends Controller
             }
             return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
         }
+    }
+
+    public function updateAdress(Request $request, $id){
+        $employee = Employee::find($id);
+        $employee->present_address = $request->present_address;
+        $employee->permanent_address = $request->permanent_address;
+        $employee->save();
+        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
     }
 
     public function view($id)
@@ -275,7 +282,7 @@ class EmployeeController extends Controller
             $User->forceDelete();
 
             return response()->json(['message' => 'User permission removed successfully', 'status' => true], 200);
-            //delete staff role in future 
+            //delete staff role in future
         }
 
         return response()->json(['message' => 'User permission added Failed', 'status' => true], 400);

@@ -103,54 +103,6 @@
                 <!-- End Card -->
 
                 <!-- Card -->
-                {{-- <a
-                        class="group flex flex-col rounded-xl border bg-white shadow-sm transition hover:shadow-md dark:border-neutral-600 dark:bg-neutral-700"
-                        href="#"
-                    >
-                        <div class="p-4 md:p-5">
-                            <div class="flex">
-                                <svg
-                                    class="mt-1 size-5 flex-shrink-0 text-gray-800 dark:text-neutral-200"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                >
-                                    <path
-                                        d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"
-                                    />
-                                    <path
-                                        d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"
-                                    />
-                                </svg>
-
-                                <div class="ms-5 grow">
-                                    <h3
-                                        class="font-semibold text-gray-800 group-hover:text-red-600 dark:text-neutral-200 dark:group-hover:text-red-600"
-                                    >
-                                        Work Shift
-                                    </h3>
-                                    <p
-                                        class="text-sm text-gray-500 dark:text-neutral-500"
-                                    >
-                                        Reach us at
-                                        <span
-                                            class="font-medium text-red-600 decoration-2 group-hover:underline dark:text-red-500"
-                                        >
-                                            Regular work shift
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </a> --}}
-                <!-- End Card -->
-                <!-- Card -->
                 <a class="group flex flex-col rounded-xl border bg-white shadow-sm transition hover:shadow-md dark:border-neutral-800 dark:bg-neutral-700" href="#">
                     <div class="p-4 md:p-5">
                         <div class="flex">
@@ -675,54 +627,96 @@
 </div>
 <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
     <div class="py-3">
-        <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
-            {{-- Address Details --}}
-            Coming Soon
-        </h3>
-        {{-- <div class="overflow-y-auto">
-                            <!-- Card Section -->
-                            <div class="mx-auto">
-                                <!-- Card -->
-                                <div class="bg-white dark:bg-neutral-800">
-                                    <form
-                                        action="{{ route("employees.store") }}"
-        method="POST"
-        enctype="multipart/form-data"
-        >
-        @csrf
-
-        <div class="mt-3">
-            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
-                <div>
-                    <label for="employeePresentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                        Present Address
-                    </label>
-                    <textarea id="employeePresentAddress" name="present_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->present_address }}">
-                    {{ $employee->present_address }}
-                    </textarea>
-                </div>
-                <div>
-                    <label for="employeePermanentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                        Permanent Address
-                    </label>
-                    <textarea id="employeePermanentAddress" name="permanent_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->permanent_address }}">
-                    {{ $employee->permanent_address }}
-                    </textarea>
-                </div>
-            </div>
-
-            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
-                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Update
-                </button>
-            </div>
+        <div class="flex justify-between">
+            <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
+                Address Details
+            </h3>
+            <span id="update-info-button-segment-two" class="cursor-pointer"><i class="fa-solid fa-pen-to-square"></i></span>
         </div>
-        </form>
-    </div>
+        <div class="overflow-y-auto">
+            <!-- Card Section -->
+            <div class="mx-auto">
+                <!-- Card -->
+                <div class="bg-white dark:bg-neutral-800" id="disable-card-segment-two">
+                    <form
+                        action="{{ route("employees.address.update", $employee->id) }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        >
+                        @csrf
+
+                        <div class="mt-3">
+                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                <div>
+                                    <label for="employeePresentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Present Address
+                                    </label>
+                                    <textarea disabled id="employeePresentAddress" name="present_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->present_address }}">
+                                    {{ $employee->present_address }}
+                                    </textarea>
+                                </div>
+                                <div>
+                                    <label for="employeePermanentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Permanent Address
+                                    </label>
+                                    <textarea disabled id="employeePermanentAddress" name="permanent_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->permanent_address }}">
+                                    {{ $employee->permanent_address }}
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="bg-white dark:bg-neutral-800" id="enable-card-segment-two">
+                    <form
+                        action="{{ route("employees.address.update", $employee->id) }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        >
+                        @csrf
+
+                        <div class="mt-3">
+                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                <div>
+                                    <label for="employeePresentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Present Address
+                                    </label>
+                                    <textarea id="employeePresentAddress" name="present_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->present_address }}">
+                                    {{ $employee->present_address }}
+                                    </textarea>
+                                </div>
+                                <div>
+                                    <label for="employeePermanentAddress" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Permanent Address
+                                    </label>
+                                    <textarea id="employeePermanentAddress" name="permanent_address" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->permanent_address }}">
+                                    {{ $employee->permanent_address }}
+                                    </textarea>
+                                </div>
+                            </div>
+
+                            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                                <button type="button" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
+                                    Close
+                                </button>
+                                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
     <!-- End Card -->
 </div>
 <!-- End Card Section -->
-</div> --}}
+</div>
 </div>
 </div>
 <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
@@ -913,25 +907,90 @@
 
 @section('scripts')
 <script>
+
+
+// For personal details
+const sectionIDBasicInfo1 = document.getElementById('disable-card');
+const sectionIDBasicInfo2 = document.getElementById('edit-card');
+const editBtnBasicInfo1 = document.getElementById('update-info-button');
+const closeBtnBasicInfo2 = document.getElementById('close-form-btn');
+
+
+editBtnBasicInfo1.addEventListener('click', () => {
+    sectionIDBasicInfo1.style.display = 'none'
+    sectionIDBasicInfo2.style.display = 'block'
+    $("input").prop("disabled", false);
+    $("select").prop("disabled", false);
+    $("option").prop("disabled", false);
+})
+closeBtnBasicInfo2.addEventListener('click', ()=> {
+    sectionIDBasicInfo2.style.display = 'none'
+    sectionIDBasicInfo1.style.display = 'block'
+    $("input").prop("disabled", true);
+    $("select").prop("disabled", true);
+    $("option").prop("disabled", true);
+})
+// End personal Details
+
+// For Address
+const sectionIDAddress1 = document.getElementById('disable-card-segment-two');
+const sectionIDAddress2 = document.getElementById('enable-card-segment-two');
+const editBtnAddress1 = document.getElementById('update-info-button-segment-two');
+const closeBtnAddress2 = document.getElementById('close-form-btn-for-address');
+sectionIDAddress2.style.display = 'none';
+
+
+editBtnAddress1.addEventListener('click', () => {
+    sectionIDAddress1.style.display = 'none'
+    sectionIDAddress2.style.display = 'block'
+})
+closeBtnAddress2.addEventListener('click', ()=> {
+    sectionIDAddress2.style.display = 'none'
+    sectionIDAddress1.style.display = 'block'
+})
+// End Address
+
+
     $(document).ready(function() {
-        $("#edit-card").hide(); // Hide div-two initially
-        $("#update-info-button").click(function() {
-            // console.log("hi");
-            $("#edit-card").removeClass("hidden");
-            $("#edit-card").show();
-            $("#disable-card").hide();
-            $("input").prop("disabled", false);
-            $("select").prop("disabled", false);
-            $("option").prop("disabled", false);
-        });
-        $("#close-form-btn").click(function() {
-            $("#edit-card").addClass("hidden");
-            $("#edit-card").hide();
-            $("#disable-card").show();
-            $("input").prop("disabled", true);
-            $("select").prop("disabled", true);
-            $("option").prop("disabled", true);
-        })
+        // $("#edit-card").hide();
+        // $("#enable-card-segment-two").hide();
+        //  // Hide div-two initially
+        // $("#update-info-button").click(function() {
+        //     // console.log("hi");
+        //     $("#edit-card").removeClass("hidden");
+        //     $("#edit-card").show();
+        //     $("#disable-card").hide();
+        //     $("input").prop("disabled", false);
+        //     $("select").prop("disabled", false);
+        //     $("option").prop("disabled", false);
+        // });
+        // $("#close-form-btn").click(function() {
+        //     $("#edit-card").addClass("hidden");
+        //     $("#edit-card").hide();
+        //     $("#disable-card").show();
+        //     $("input").prop("disabled", true);
+        //     $("select").prop("disabled", true);
+        //     $("option").prop("disabled", true);
+        // })
+
+        // update-info-button-segment-two
+        // $("#update-info-button-segment-two").click(function() {
+        //     // console.log("hi");
+        //     $("#enable-card-segment-two").removeClass("hidden");
+        //     $("#enable-card-segment-two").show();
+        //     $("#disable-card-segment-two").hide();
+        //     $("input").prop("disabled", false);
+        //     $("select").prop("disabled", false);
+        //     $("option").prop("disabled", false);
+        // });
+        // $("#close-form-btn").click(function() {
+        //     $("#enable-card-segment-two").addClass("hidden");
+        //     $("#enable-card-segment-two").hide();
+        //     $("#disable-card-segment-two").show();
+        //     $("input").prop("disabled", true);
+        //     $("select").prop("disabled", true);
+        //     $("option").prop("disabled", true);
+        // })
     });
 </script>
 

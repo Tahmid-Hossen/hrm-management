@@ -2,23 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewUserMail;
 use App\Models\Departments;
 use App\Models\Designations;
 use App\Models\EmployeeEducation;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Role;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    
+
 
     public function index()
     {
         $designations = Designations::all();
         $departments = Departments::all();
         // return $departments;
-        $employees = Employee::all();
-        return view('employee.index', compact('employees','designations','departments'));
+        $employees = Employee::with('empDesignation')->get();
+        return view('employee.index', compact('employees', 'designations', 'departments'));
     }
 
     public function store(Request $request)
@@ -83,27 +88,27 @@ class EmployeeController extends Controller
         // }
 
         // dd($request->all());
-        if($employee->save()){
-            $employeeId=$employee->id;
-            $institutionNames=$request->institution_name;
-            $degree=$request->degree;
-            $department=$request->department;
-            $passing_year=$request->passing_year;
-            $result=$request->result;
-            $educationInfo=[];
-            if($institutionNames){
-                foreach ($institutionNames as $key=>$item){
-                    $educationInfo[]=[
-                        'emp_id'=>$employeeId,
-                        'institution_name'=>$item,
-                        'degree'=>$degree[$key],
-                        'department'=>$department[$key],
-                        'passing_year'=>$passing_year[$key],
-                        'result'=>$result[$key],
+        if ($employee->save()) {
+            $employeeId = $employee->id;
+            $institutionNames = $request->institution_name;
+            $degree = $request->degree;
+            $department = $request->department;
+            $passing_year = $request->passing_year;
+            $result = $request->result;
+            $educationInfo = [];
+            if ($institutionNames) {
+                foreach ($institutionNames as $key => $item) {
+                    $educationInfo[] = [
+                        'emp_id' => $employeeId,
+                        'institution_name' => $item,
+                        'degree' => $degree[$key],
+                        'department' => $department[$key],
+                        'passing_year' => $passing_year[$key],
+                        'result' => $result[$key],
                     ];
                 }
             }
-            if($educationInfo){
+            if ($educationInfo) {
                 EmployeeEducation::insert($educationInfo);
             }
             // return 1;
@@ -116,7 +121,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id); // Assuming you have an Employee model
         $designations = Designations::all();
         $departments = Departments::all();
-        return view('employee.edit', compact('employee','designations','departments'));
+        return view('employee.edit', compact('employee', 'designations', 'departments'));
     }
 
     public function update(Request $request, $id)
@@ -150,8 +155,8 @@ class EmployeeController extends Controller
         $employee->blood_group = $request->blood_group;
         $employee->present_address = $request->present_address;
         $employee->permanent_address = $request->permanent_address;
-        if($request->designation!='') $employee->designation = $request->designation;
-        if($request->emp_department!='') $employee->department = $request->emp_department;
+        if ($request->designation != '') $employee->designation = $request->designation;
+        if ($request->emp_department != '') $employee->department = $request->emp_department;
 
         //  // Update designation if provided
         // if ($request->has('designation')) {
@@ -176,40 +181,40 @@ class EmployeeController extends Controller
         $employee->is_user = $request->is_user;
 
         // Save the updated employee
-        if($employee->save()){
-            $employeeId=$employee->id;
-            $institutionNames=$request->institution_name;
-            $degree=$request->degree;
-            $department=$request->department;
-            $passing_year=$request->passing_year;
-            $result=$request->result;
-            $educationInfo=[];
-            if($institutionNames){
-                foreach ($institutionNames as $key=>$item){
-                    $educationInfo[]=[
-                        'emp_id'=>$employeeId,
-                        'institution_name'=>$item,
-                        'degree'=>$degree[$key],
-                        'department'=>$department[$key],
-                        'passing_year'=>$passing_year[$key],
-                        'result'=>$result[$key],
+        if ($employee->save()) {
+            $employeeId = $employee->id;
+            $institutionNames = $request->institution_name;
+            $degree = $request->degree;
+            $department = $request->department;
+            $passing_year = $request->passing_year;
+            $result = $request->result;
+            $educationInfo = [];
+            if ($institutionNames) {
+                foreach ($institutionNames as $key => $item) {
+                    $educationInfo[] = [
+                        'emp_id' => $employeeId,
+                        'institution_name' => $item,
+                        'degree' => $degree[$key],
+                        'department' => $department[$key],
+                        'passing_year' => $passing_year[$key],
+                        'result' => $result[$key],
                     ];
                 }
             }
-            if($educationInfo){
+            if ($educationInfo) {
                 EmployeeEducation::where('emp_id', $employeeId)->delete();
                 EmployeeEducation::insert($educationInfo);
             }
             return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
         }
-
     }
 
-    public function view($id) {
+    public function view($id)
+    {
         $employee = Employee::find($id);
         $designations = Designations::all();
         $departments = Departments::all();
-        return view('employee.view', compact('employee','designations','departments'));
+        return view('employee.view', compact('employee', 'designations', 'departments'));
     }
 
 
@@ -221,4 +226,46 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
     }
 
+    public function employeePermission(Request $request, $id)
+    {
+        $employee = Employee::findOrFail($id);
+
+        if ($request->user_permission === 1) {
+            $password = 'NexHRM#' . \Str::password(16, true, true, false, false);
+
+            DB::beginTransaction();
+
+            try {
+                $user = new User();
+                $user->name = $employee->full_name;
+                $user->email = $employee->email;
+                $user->password = Hash::make($password);
+                $user->save();
+                $userRole = Role::where('name', 'staff')->first();
+                $user->roles()->attach($userRole);
+
+                DB::commit();
+
+                $data = [
+                    'name' => $user->name,
+                    'email' => $user->email,
+                    'password' => $password,
+                ];
+
+                $email = new NewUserMail($data);
+                $email->userData = $data;
+                \Mail::to($user->email)->send($email);
+
+
+                return response()->json(['message' => 'User permission added successfully', 'status' => true], 201);
+
+                // all good
+            } catch (\Exception $e) {
+                DB::rollback();
+                // something went wrong
+            }
+        }
+
+        return response()->json(['message' => 'User permission added Failed', 'status' => true], 400);
+    }
 }

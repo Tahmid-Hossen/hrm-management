@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-    Route::prefix('users')->group(function (){
+    Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/create', [UserController::class, 'create'])->name('users.create');
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [UserController::class, 'delete'])->name('users.delete');
         Route::get('/reset-password/{id}', [UserController::class, 'resetPassword'])->name('users.resetPassword');
     });
-    Route::prefix('employees')->group(function (){
+    Route::prefix('employees')->group(function () {
         Route::get('/', [EmployeeController::class, 'index'])->name('employees.index');
         Route::get('/create', [EmployeeController::class, 'create'])->name('employees.create');
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
@@ -43,23 +43,24 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
+        Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
     });
 
-    Route::prefix('employee-profile')->group(function (){
+    Route::prefix('employee-profile')->group(function () {
         Route::get('/', [EmployeeProfileController::class, 'index'])->name('employee-profile.index');
     });
 
-    Route::prefix('manage-leave')->group(function (){
+    Route::prefix('manage-leave')->group(function () {
         Route::get('/', [LeaveController::class, 'index'])->name('leave.index');
     });
-    Route::prefix('markattendance')->group(function (){
+    Route::prefix('markattendance')->group(function () {
         Route::get('/', [AttendenceController::class, 'markattendance'])->name('attendance.mark-attendance.index');
     });
-    Route::prefix('bulkattendance')->group(function (){
+    Route::prefix('bulkattendance')->group(function () {
         Route::get('/', [AttendenceController::class, 'bulkattendance'])->name('attendance.bulk-attendance.index');
     });
 
-    Route::prefix('roles')->group(function (){
+    Route::prefix('roles')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name('roles.index');
         Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
         Route::post('/store', [RoleController::class, 'store'])->name('roles.store');
@@ -70,7 +71,6 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/edit-permission/{id}', [PermissionController::class, 'edit'])->name('permission.edit');
         Route::post('/update-permission/{id}', [PermissionController::class, 'update'])->name('permission.update');
-
     });
 });
 require __DIR__ . '/auth.php';

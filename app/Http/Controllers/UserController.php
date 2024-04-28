@@ -18,24 +18,25 @@ class UserController extends Controller
     {
         $roles = Role::get();
         $companies = Company::get();
-        $users=User::paginate(50);
+        $users = User::paginate(50);
         return view('users.index', compact('users', 'roles', 'companies'));
     }
     public function create()
     {
         $roles = Role::get();
-        $companies=Company::get();
-        
+        $companies = Company::get();
         return view('users.create', compact('roles', 'companies'));
     }
     public function store(Request $request)
     {
         $validated = $request->validate([
             'name' => 'required',
+
+
             'email' => 'required|unique:users',
         ]);
 
-        $password = 'NexHRM#'. \Str::password(16, true, true, false, false);
+        $password = 'NexHRM#' . \Str::password(16, true, true, false, false);
 
         DB::beginTransaction();
 
@@ -53,7 +54,7 @@ class UserController extends Controller
             $user->roles()->attach($userRole);
 
             DB::commit();
-                
+
             $data = [
                 'name' => $user->name,
                 'email' => $user->email,
@@ -65,29 +66,28 @@ class UserController extends Controller
             \Mail::to($user->email)->send($email);
 
 
-            return response()->json(['message' => 'User created successfully', 'status' => 200], 200 );
-            
+            return response()->json(['message' => 'User created successfully', 'status' => 200], 200);
+
             // all good
         } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
         }
-        
     }
     public function edit($id)
     {
-         $user=User::find($id);
-         $roles=Role::get();
-         $companies=Company::get();
+        $user = User::find($id);
+        $roles = Role::get();
+        $companies = Company::get();
 
-        $data =[
+        $data = [
             'user' => $user,
             'roles' => $roles,
             'companies' => $companies,
             'user_role' => $user->roles[0]->id
         ];
 
-        return response()->json(['data' => $data, 'message' => 'User created successfully', 'status' => true], 200 );
+        return response()->json(['data' => $data, 'message' => 'User created successfully', 'status' => true], 200);
 
         // r
         // if($user){
@@ -100,12 +100,12 @@ class UserController extends Controller
             'edituserName' => 'required',
         ]);
 
-         DB::beginTransaction();
+        DB::beginTransaction();
         try {
             $user = User::findOrFail($id);
             $user->name = $request->edituserName;
             $user->email = $request->edituserEmail;
- 
+
             $user->company_id = $request->edituserCompany;
             $user->is_active = $request->edituserIsActive;
 
@@ -114,47 +114,42 @@ class UserController extends Controller
             $userRole = Role::where('id', $request->edituserRole)->first();
             $user->roles()->sync($userRole);
             DB::commit();
-
-         } catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             // something went wrong
         }
-       return response()->json(['data' =>  $user, 'message' => 'User updated successfully', 'status' => true], 201 );
+        return response()->json(['data' =>  $user, 'message' => 'User updated successfully', 'status' => true], 201);
     }
 
     public function delete($id)
     {
-        $user=User::find($id);
+        $user = User::find($id);
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User has been deleted');
     }
 
     public function forceDelete()
     {
-
     }
     public function restore()
     {
-
     }
 
     public function resetPassword($id)
     {
-        $password = 'NexHRM#'. \Str::password(16, true, true, false, false);
+        $password = 'NexHRM#' . \Str::password(16, true, true, false, false);
         $user = User::find($id);
         $user->password = Hash::make($password);
         $user->save();
-         $data = [
-                'name' => $user->name,
-                'email' => $user->email,
-                'password' => $password,
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'password' => $password,
         ];
         $email = new ResetPasswordMail($data);
         $email->userData = $data;
         \Mail::to($user->email)->send($email);
 
-         return redirect()->route('users.index')->with('success', 'Password reset successfully');
-
+        return redirect()->route('users.index')->with('success', 'Password reset successfully');
     }
-
 }

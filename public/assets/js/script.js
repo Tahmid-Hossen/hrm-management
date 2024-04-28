@@ -1,5 +1,3 @@
-
-
 // ---------- 01 For Education Dynamic Part Start ----------//
 function createEducationField(index) {
     return `
@@ -64,83 +62,128 @@ function createEducationField(index) {
     `;
 }
 
-
 function numberToWords(number) {
-    const words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-        "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen",
-        "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five", "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine",
-        "thirty", "thirty-one", "thirty-two", "thirty-three", "thirty-four", "thirty-five", "thirty-six", "thirty-seven", "thirty-eight", "thirty-nine",
-        "forty", "forty-one", "forty-two", "forty-three", "forty-four", "forty-five", "forty-six", "forty-seven", "forty-eight", "forty-nine",
-        "fifty"];
+    const words = [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+        "twenty",
+        "twenty-one",
+        "twenty-two",
+        "twenty-three",
+        "twenty-four",
+        "twenty-five",
+        "twenty-six",
+        "twenty-seven",
+        "twenty-eight",
+        "twenty-nine",
+        "thirty",
+        "thirty-one",
+        "thirty-two",
+        "thirty-three",
+        "thirty-four",
+        "thirty-five",
+        "thirty-six",
+        "thirty-seven",
+        "thirty-eight",
+        "thirty-nine",
+        "forty",
+        "forty-one",
+        "forty-two",
+        "forty-three",
+        "forty-four",
+        "forty-five",
+        "forty-six",
+        "forty-seven",
+        "forty-eight",
+        "forty-nine",
+        "fifty",
+    ];
     return words[number];
 }
 
 // Function to add a new education field
 function addEducationField() {
-    const educationFields = document.getElementById('education-fields');
+    const educationFields = document.getElementById("education-fields");
     const index = educationFields.children.length + 2; // Start index from 2
     const indexInWords = numberToWords(index);
     const newEducationField = createEducationField(indexInWords);
-    educationFields.insertAdjacentHTML('beforeend', newEducationField);
+    educationFields.insertAdjacentHTML("beforeend", newEducationField);
 }
 
 // Function to remove an education field
 function removeEducationField(event) {
     const button = event.target;
     const index = button.dataset.index;
-    const educationField = button.closest('.education-field');
+    const educationField = button.closest(".education-field");
     educationField.remove();
 }
 
 // Event listener to add a new education field
-document.getElementById('add-education-field').addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
-    addEducationField();
-});
+document
+    .getElementById("add-education-field")
+    .addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+        addEducationField();
+    });
 
 // Event delegation to handle remove button clicks
-document.addEventListener('click', function(event) {
-    if (event.target && event.target.classList.contains('remove-education-field')) {
+document.addEventListener("click", function (event) {
+    if (
+        event.target &&
+        event.target.classList.contains("remove-education-field")
+    ) {
         removeEducationField(event);
     }
 });
 // ---------- 01 For Education Dynamic Part Ends ----------//
 
-
 // ---------- 02 For Handle Attendance Type Change Function Start  ------------ //
 function handleAttendanceTypeChange(event) {
-    const monthlyRadio = document.getElementById('attendance-monthly');
-    const monthlyContainer = document.getElementById('attendance-month-container');
-    const dailyRadio = document.getElementById('attendance-daily');
-    const dateContainer = document.getElementById('attendance-date-container');
+    const monthlyRadio = document.getElementById("attendance-monthly");
+    const monthlyContainer = document.getElementById(
+        "attendance-month-container",
+    );
+    const dailyRadio = document.getElementById("attendance-daily");
+    const dateContainer = document.getElementById("attendance-date-container");
 
-    monthlyContainer.style.display = monthlyRadio.checked ? 'block' : 'none';
-    dateContainer.style.display = dailyRadio.checked ? 'block' : 'none';
+    monthlyContainer.style.display = monthlyRadio.checked ? "block" : "none";
+    dateContainer.style.display = dailyRadio.checked ? "block" : "none";
 }
 
-document.getElementById('attendance-monthly').addEventListener('change', handleAttendanceTypeChange);
-document.getElementById('attendance-daily').addEventListener('change', handleAttendanceTypeChange);
+document
+    .getElementById("attendance-monthly")
+    .addEventListener("change", handleAttendanceTypeChange);
+document
+    .getElementById("attendance-daily")
+    .addEventListener("change", handleAttendanceTypeChange);
 
 handleAttendanceTypeChange();
 
 // ---------- 02 For Handle Attendance Type Change Function Ends ------------ //
 
-
-
-
 // Modal script
 
-
 function editAttendance(id = 10) {
-    let htmlForm=$('#editAttendanceForm').html();
-    let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
-    $('#smallSizeModalBody').html(html)
-    smallSizeModal.showModal();
-}
-
-function assignRoleModal(id = 10) {
-    let htmlForm=$('#assignRoleModalForm').html();
-    // let html =`<form method="POST" action="/opop/${id}">${htmlForm}</form>`
-    $('#smallSizeModalBody').html(htmlForm)
+    let htmlForm = $("#editAttendanceForm").html();
+    let html = `<form method="POST" action="/opop/${id}">${htmlForm}</form>`;
+    $("#smallSizeModalBody").html(html);
     smallSizeModal.showModal();
 }

@@ -221,7 +221,7 @@
                                 Notifications
                             </a>
                             
-                           
+                           @if(auth()->user()->employee_id)
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 focus:ring-2 focus:ring-blue-500 dark:text-neutral-300 dark:hover:bg-red-600 hover:text-white dark:hover:text-gray-300"
                                 href="{{ route('employees.view', ['id' => auth()->user()->employee_id]) }}">
@@ -241,8 +241,9 @@
                                     <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                                 </svg>
-                                Profile
+                                My Profile
                             </a>
+                            @endif
 
                             <form action="{{ route('logout') }}" method="post">
                 @csrf

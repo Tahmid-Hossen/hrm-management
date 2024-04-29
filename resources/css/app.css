@@ -7,3 +7,32 @@ body{
     font-family: inter, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.button-red{
+    @apply inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800
+}
+.btn-teal {
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 gap-x-1;
+}
+.btn-red{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 gap-x-1
+}
+.btn-green{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 gap-x-1
+}
+.btn-edit{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-cyan-700 rounded-lg hover:bg-cyan-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800 gap-x-1
+}
+.btn-create{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-teal-500 rounded-lg hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-teal-600 dark:hover:bg-teal-600 dark:focus:ring-teal-600 gap-x-1
+}
+.btn-view{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-teal-500 rounded-lg hover:bg-teal-600 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-teal-600 dark:hover:bg-teal-600 dark:focus:ring-teal-600 gap-x-1
+}
+
+.btn-import{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-lime-700 rounded-lg hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 gap-x-1
+}
+.btn-export{
+    @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 gap-x-1
+}
+

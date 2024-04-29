@@ -1,4 +1,6 @@
 // ---------- 01 For Education Dynamic Part Start ----------//
+var baseUrl="http://127.0.0.1:8000"
+
 function createEducationField(index) {
     return `
     <div class="education-field">
@@ -187,3 +189,69 @@ function editAttendance(id = 10) {
     $("#smallSizeModalBody").html(html);
     smallSizeModal.showModal();
 }
+
+
+function createLeaveTypeModal() {
+    let htmlForm = $("#create-leave-type-modal-form").html();
+    $("#smallSizeModalBody").html(htmlForm);
+    smallSizeModal.showModal();
+}
+function updateLeaveTpeModal(id) {
+    $.ajax(`${baseUrl}/leave-type/edit/${id}`).then(function (response) {
+        $("#smallSizeModalBody").html(response);
+        smallSizeModal.showModal()
+    })
+}
+
+function createDocumentTypeModal() {
+    let htmlForm = $("#create-document-type-modal-form").html();
+    $("#smallSizeModalBody").html(htmlForm);
+    smallSizeModal.showModal();
+}
+function updateDocumentTypeModal(id) {
+    $.ajax(`${baseUrl}/document-type/edit/${id}`).then(function (response) {
+        $("#smallSizeModalBody").html(response);
+        smallSizeModal.showModal()
+    })
+}
+
+
+function createDesginationTypeModal() {
+    let htmlForm = $("#create-designation-type-modal-form").html();
+    $("#smallSizeModalBody").html(htmlForm);
+    smallSizeModal.showModal();
+}
+function updateDesignationTypeModal(id) {
+    $.ajax(`${baseUrl}/designations/edit/${id}`).then(function (response) {
+        $("#smallSizeModalBody").html(response);
+        smallSizeModal.showModal()
+    })
+}
+
+
+function createDepartmentTypeModal() {
+    let htmlForm = $("#create-department-type-modal-form").html();
+    $("#smallSizeModalBody").html(htmlForm);
+    smallSizeModal.showModal();
+}
+function updateDepartmentTypeModal(id) {
+    $.ajax(`${baseUrl}/departments/edit/${id}`).then(function (response) {
+        $("#smallSizeModalBody").html(response);
+        smallSizeModal.showModal()
+    })
+}
+function createCompanyTypeModal() {
+    let htmlForm = $("#create-company-type-modal-form").html();
+    $("#smallSizeModalBody").html(htmlForm);
+    smallSizeModal.showModal();
+}
+function updateCompanyTypeModal(id) {
+    $.ajax(`${baseUrl}/company-list/edit/${id}`).then(function (response) {
+        $("#smallSizeModalBody").html(response);
+        smallSizeModal.showModal()
+    })
+}
+
+
+
+

@@ -21,6 +21,13 @@ class UserController extends Controller
         $users = User::paginate(50);
         return view('users.index', compact('users', 'roles', 'companies'));
     }
+    public function usersList()
+    {
+        $roles = Role::get();
+        $companies = Company::get();
+        $users = User::paginate(50);
+        return view('users.users-list', compact('users', 'roles', 'companies'));
+    }
     public function create()
     {
         $roles = Role::get();

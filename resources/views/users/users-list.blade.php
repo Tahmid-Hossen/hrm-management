@@ -30,18 +30,18 @@
 @section('additionalButton')
 
     <div class="inline-block hs-tooltip">
-        <a href={{ route('users.users-list') }}
+        <a href={{ route('users.index') }}
             class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-teal-600 dark:hover:bg-teal-700 dark:focus:ring-teal-800 gap-x-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-view-list" viewBox="0 0 16 16">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid"
+                viewBox="0 0 16 16">
                 <path
-                    d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2m0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14" />
+                    d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z" />
             </svg>
-            List View
+            Grid View
             <span
                 class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                 role="tooltip">
-                List View
+                Grid View
             </span>
         </a>
     </div>
@@ -77,89 +77,91 @@
         </script>
     @endif
 
+
     <div class="mt-4">
-        <div class="flex flex-col p-2 border rounded-lg dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700">
-            <div class="p-2">
-                <div class="grid items-end justify-between grid-cols-1 gap-4 mt-2 sm:grid-cols-3 lg:gap-6">
+        <div class="mt-4">
+            <div class="flex flex-col p-2 border rounded-lg dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700">
+                <div class="p-2">
+                    <div class="grid items-end justify-between grid-cols-1 gap-4 mt-2 sm:grid-cols-3 lg:gap-6">
 
-                    <div>
-                        <label for="search-users"
-                            class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
-                            Search Users
-                        </label>
+                        <div>
+                            <label for="search-users"
+                                class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Search Users
+                            </label>
+                            <input id="search-users" name="icon"
+                                class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                placeholder="Search users" />
+                        </div>
 
-                        <input id="search-users" name="icon"
-                            class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                            placeholder="Search users" />
-                    </div>
+                        <div>
+                            <label for="select-filter"
+                                class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Filter
+                            </label>
 
-                    <div>
-                        <label for="select-filter"
-                            class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
-                            Filter
-                        </label>
-
-                        <select id="select-filter" name="select-filter"
-                            class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                            <option selected="">Active </option>
-                            <option value="SSC">In Active</option>
-                        </select>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap justify-between gap-2">
-                            <div>
-                                <!-- Search button -->
-                                <div class="inline-block hs-tooltip">
-                                    <a type="button" href="/" class="btn-teal">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                            <path
-                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                        </svg>
-                                        <span
-                                            class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
-                                            role="tooltip">
-                                            Search
-                                        </span>
-                                    </a>
-                                </div>
-                                <!-- Reset button -->
-                                <div class="inline-block hs-tooltip">
-                                    <a type="button" href="/" class="btn-red">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
-                                        </svg>
-                                        <span
-                                            class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
-                                            role="tooltip">
-                                            Reset
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- import button -->
-                            <div class="flex items-center align-middle gap-x-2">
+                            <select id="select-filter" name="select-filter"
+                                class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <option selected="">Active </option>
+                                <option value="SSC">In Active</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap justify-between gap-2">
                                 <div>
-                                    <h5 class="text-sm text-gray-800 dark:text-white">Action: </h5>
+                                    <!-- Search button -->
+                                    <div class="inline-block hs-tooltip">
+                                        <a type="button" href="/" class="btn-teal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                            </svg>
+                                            <span
+                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
+                                                role="tooltip">
+                                                Search
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <!-- Reset button -->
+                                    <div class="inline-block hs-tooltip">
+                                        <a type="button" href="/" class="btn-red">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                                            </svg>
+                                            <span
+                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
+                                                role="tooltip">
+                                                Reset
+                                            </span>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="inline-block hs-tooltip">
-                                    <button type="button" data-hs-overlay="#create-new-employee-modal"
-                                        class="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 gap-x-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z" />
-                                            <path
-                                                d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
-                                        </svg>
-                                        <span
-                                            class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
-                                            role="tooltip">
-                                            Import
-                                        </span>
-                                    </button>
+                                <div class="flex items-center align-middle gap-x-2">
+                                    <div>
+                                        <h5 class="text-sm text-gray-800 dark:text-white">Action: </h5>
+                                    </div>
+                                    <div class="inline-block hs-tooltip">
+                                        <button type="button" data-hs-overlay="#create-new-employee-modal"
+                                            class="inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 gap-x-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-file-earmark-arrow-up"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z" />
+                                                <path
+                                                    d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
+                                            </svg>
+                                            <span
+                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
+                                                role="tooltip">
+                                                Import
+                                            </span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -167,127 +169,139 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="grid gap-1 mt-5 sm:grid-cols-1 md:grid-cols-5 xl:grid-cols-5 sm:gap-2">
+        <div class="mt-4">
+            <div
+                class="flex flex-col p-2 border rounded-lg border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800">
+                <div class="-m-1.5 overflow-x-auto">
+                    <div class="w-full p-1.5 align-middle">
+                        <div class="overflow-x-auto">
+                            <table id="example" class="w-full display hover divide-neutral-200 dark:divide-neutral-700">
+                                <thead class="">
+                                    <tr class="dark:hover:bg-neutral-800">
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            NAME
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            EMAIL
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            User Role
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            Is New User
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            Is Active
+                                        </th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="w-full divide-neutral-200 dark:divide-neutral-700">
+                                    @foreach ($users as $user)
+                                        <tr class="cursor-pointer text-start dark:hover:bg-neutral-800">
+                                            <td
+                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
+                                                {{ $user->name }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
+                                                {{ $user->email }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
+                                                {{ $user->roles[0]->name ?? '' }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
+                                                {{ $user->is_new_user }}
+                                            </td>
+                                            <td
+                                                class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
+                                                {{ $user->is_active }}
+                                            </td>
 
-        @foreach ($users as $user)
-            <div class="bg-white border border-gray-200 rounded-lg dark:bg-neutral-800 dark:dark:border-neutral-700">
-                <div class="flex justify-between px-4 pt-4">
+                                            <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
+                                                <div class="flex gap-3">
+                                                    <div class="inline-block hs-tooltip">
+                                                        <a type="button" data-hs-overlay="#update-user-modal"
+                                                            data-user-id="{{ $user->id }} type="button"
+                                                            class="editUserBtn hs-tooltip-toggle btn-edit">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor"
+                                                                class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                                <path fill-rule="evenodd"
+                                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                                                            </svg>
+                                                            <span
+                                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
+                                                                role="tooltip">
+                                                                Edit User
+                                                            </span>
+                                                        </a>
+                                                    </div>
 
-                    <div class="relative inline-flex hs-dropdown">
-                        <button id="hs-dropdown-custom-icon-trigger" type="button"
-                            class="flex items-center justify-center text-sm font-semibold text-gray-800 bg-white border border-gray-200 rounded-lg shadow-sm hs-dropdown-toggle size-9 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                            <svg class="flex-none text-gray-600 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="1" />
-                                <circle cx="12" cy="5" r="1" />
-                                <circle cx="12" cy="19" r="1" />
-                            </svg>
-                        </button>
+                                                    <div class="inline-block hs-tooltip">
+                                                        <a href="{{ route('users.resetPassword', $user->id) }}"
+                                                            onclick="return confirm('Are you sure, want to reset password?');"
+                                                            type="button" class="hs-tooltip-toggle btn-red">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-key-fill"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                                                            </svg>
+                                                            <span
+                                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
+                                                                role="tooltip">
+                                                                Reset Password
+                                                            </span>
+                                                        </a>
+                                                    </div>
 
-                        <div class=" hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white shadow-md rounded-lg p-2 mt-2 dark:bg-neutral-800 dark:border dark:dark:border-neutral-700"
-                            aria-labelledby="hs-dropdown-custom-icon-trigger">
-                            <a type="button"
-                                class="editUserBtn flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer"
-                                data-hs-overlay="#update-user-modal" data-user-id="{{ $user->id }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                    <path
-                                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                                    <path fill-rule="evenodd"
-                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                                </svg>
-                                Edit
-                            </a>
-                            <a href="{{ route('users.resetPassword', $user->id) }}"
-                                onclick="return confirm('Are you sure, want to reset password?');"
-                                class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
-                                </svg>
-                                Reset Password
-                            </a>
+                                                    <div class="inline-block hs-tooltip">
+                                                        <a href="{{ route('users.delete', $user->id) }}"
+                                                            onclick="return confirm('Are you sure, want to delete?');"
+                                                            type="button" class="hs-tooltip-toggle btn-red">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                height="16" fill="currentColor" class="bi bi-person-x"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
+                                                                <path
+                                                                    d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
+                                                            </svg>
+                                                            <span
+                                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
+                                                                role="tooltip">
+                                                                Delete
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
-
-                            <a href="{{ route('users.delete', $user->id) }}"
-                                onclick="return confirm('Are you sure, want to delete?');"
-                                class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 hover:text-white dark:text-gray-400 dark:hover:bg-red-700 dark:hover:text-white cursor-pointer">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
-                                    <path
-                                        d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
-                                </svg>
-                                Delete
-                            </a>
-
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <button
-                        class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                        type="button">
-
-
-                        <span
-                            class="inline-flex items-center gap-x-1.5 py-1.5 px-3 rounded-lg text-xs font-medium  text-red-800 dark:bg-red-800/30 dark:text-white {{ $user->is_active ? 'bg-teal-100 dark:bg-teal-700' : 'bg-red-100 dark:bg-red-700' }}">
-                            {{ $user->is_active ? 'Active' : 'Inactive' }}
-                        </span>
-
-
-                    </button>
-                </div>
-                <div class="flex flex-col items-center pb-10">
-                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg"
-                        src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
-                        alt="Bonnie image" />
-                    <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{{ $user->name }}</h5>
-                    <span class="text-sm text-gray-500 dark:text-gray-400">{{ $user->email }}</span>
-                    <div class="flex mt-2 md:mt-3">
-                        <a href="#"
-                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">{{ $user->roles[0]->name ?? '' }}</a>
-                        <!-- <a href="#"
-                                               class="px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg ms-2 focus:outline-none hover:bg-gray-100 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-red-500 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Message</a> -->
-                    </div>
-                </div>
-            </div>
-        @endforeach
-
-
-
-        <div
-            class="flex items-center justify-center bg-white border border-gray-200 rounded-lg dark:bg-neutral-800 -800 dark:dark:border-neutral-700">
-
-            <div class="flex flex-col items-center pb-5 cursor-pointer" data-hs-overlay="#create-new-user-modal">
-
-                <div class="text-gray-700 hover:text-red-600 dark:hover:text-red-600">
-                    <div class="flex items-center justify-center my-2 dark:text-white">
-                        <svg class="text-center" xmlns="http://www.w3.org/2000/svg" width="100" height="100"
-                            fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">
-                            <path
-                                d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z" />
-                            <path
-                                d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708" />
-                        </svg>
-                    </div>
-                    <div class="text-center hover:text-red-600 dark:hover:text-red-600">
-
-                        <h5
-                            class="mb-1 text-xl font-medium text-gray-900 dark:text-white hover:text-red-600 dark:hover:text-red-600">
-                            New User</h5>
-                        <span
-                            class="text-sm text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-600">Click
-                            here to add new user</span>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
+
 
 
 

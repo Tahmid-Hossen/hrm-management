@@ -30,6 +30,7 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
@@ -102,14 +103,15 @@ class EmployeeController extends Controller
                 foreach ($institutionNames as $key => $item) {
                     $educationInfo[] = [
                         'emp_id' => $employeeId,
-                        'institution_name' => $item,
-                        'degree' => $degree[$key],
-                        'department' => $department[$key],
-                        'passing_year' => $passing_year[$key],
-                        'result' => $result[$key],
+                        'institution_name' => $item ?? '',
+                        'degree' => $degree[$key] ?? '',
+                        'department' => $department[$key] ?? '',
+                        'passing_year' => $passing_year[$key] ?? 0,
+                        'result' => $result[$key] ?? 0.00,
                     ];
                 }
             }
+            // return $educationInfo;
             if ($educationInfo) {
                 EmployeeEducation::insert($educationInfo);
             }
@@ -182,15 +184,60 @@ class EmployeeController extends Controller
         // return $employee->emp_id;
 
         // Save the updated employee
-        if ($employee->save()) {
+        // if ($employee->save()) {
+        //     $employeeId = $employee->id;
+        //     $institutionNames = $request->institution_name;
+        //     $degree = $request->degree;
+        //     $department = $request->department;
+        //     $passing_year = $request->passing_year;
+        //     $result = $request->result;
+        //     $educationInfo = [];
+        //     if ($institutionNames) {
+        //         foreach ($institutionNames as $key => $item) {
+        //             $educationInfo[] = [
+        //                 'emp_id' => $employeeId,
+        //                 'institution_name' => $item,
+        //                 'degree' => $degree[$key],
+        //                 'department' => $department[$key],
+        //                 'passing_year' => $passing_year[$key],
+        //                 'result' => $result[$key],
+        //             ];
+        //         }
+        //     }
+        //     if ($educationInfo) {
+        //         EmployeeEducation::where('emp_id', $employeeId)->delete();
+        //         EmployeeEducation::insert($educationInfo);
+        //     }
+        //     return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+        // }
+        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+    }
+
+    public function updateAdress(Request $request, $id){
+        $employee = Employee::find($id);
+        $employee->present_address = $request->present_address;
+        $employee->permanent_address = $request->permanent_address;
+        $employee->save();
+        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+    }
+
+    public function updateEducation(Request $request, $id){
+        $employee = Employee::find($id);
+
+        // Check if employee exists
+        if ($employee) {
             $employeeId = $employee->id;
-            $institutionNames = $request->institution_name;
-            $degree = $request->degree;
-            $department = $request->department;
-            $passing_year = $request->passing_year;
-            $result = $request->result;
-            $educationInfo = [];
-            if ($institutionNames) {
+            $institutionNames = $request->input('institution_name');
+            $degree = $request->input('degree');
+            $department = $request->input('department');
+            $passing_year = $request->input('passing_year');
+            $result = $request->input('result');
+
+            // Check if all variables are arrays
+            if (is_array($institutionNames) && is_array($degree) && is_array($department) && is_array($passing_year) && is_array($result)) {
+                $educationInfo = [];
+
+                // Loop through each item in the arrays
                 foreach ($institutionNames as $key => $item) {
                     $educationInfo[] = [
                         'emp_id' => $employeeId,
@@ -201,21 +248,22 @@ class EmployeeController extends Controller
                         'result' => $result[$key],
                     ];
                 }
-            }
-            if ($educationInfo) {
-                EmployeeEducation::where('emp_id', $employeeId)->delete();
-                EmployeeEducation::insert($educationInfo);
-            }
-            return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
-        }
-    }
 
-    public function updateAdress(Request $request, $id){
-        $employee = Employee::find($id);
-        $employee->present_address = $request->present_address;
-        $employee->permanent_address = $request->permanent_address;
-        $employee->save();
-        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+                // Delete existing education info for the employee
+                EmployeeEducation::where('emp_id', $employeeId)->delete();
+
+                // Insert updated education info
+                EmployeeEducation::insert($educationInfo);
+
+                return redirect()->route('employees.view', $id)->with('success', 'Employee education updated successfully.');
+            } else {
+                // Handle the case where one of the variables is not an array
+                return redirect()->back()->with('error', 'Invalid input data.');
+            }
+        } else {
+            // Handle case where employee is not found
+            return redirect()->back()->with('error', 'Employee not found.');
+        }
     }
 
     public function view($id)

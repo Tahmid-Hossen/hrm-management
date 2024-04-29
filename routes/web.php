@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/address/{id}', [EmployeeController::class, 'updateAdress'])->name('employees.address.update');
         Route::post('/update/education/{id}', [EmployeeController::class, 'updateEducation'])->name('employees.education.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
+        Route::delete('/force-delete/{id}', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
     });

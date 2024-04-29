@@ -223,39 +223,40 @@ class EmployeeController extends Controller
 
     public function updateEducation(Request $request, $id){
         $employee = Employee::find($id);
-
         // Check if employee exists
         if ($employee) {
-            $employeeId = $employee->id;
             $institutionNames = $request->input('institution_name');
             $degree = $request->input('degree');
             $department = $request->input('department');
             $passing_year = $request->input('passing_year');
             $result = $request->input('result');
 
+            $educationInfo = [];
+
+            // Loop through each item in the arrays
+            foreach ($institutionNames as $key => $item) {
+                $educationInfo[] = [
+                    'emp_id' => $id,
+                    'institution_name' => $item,
+                    'degree' => $degree[$key],
+                    'department' => $department[$key],
+                    'passing_year' => $passing_year[$key],
+                    'result' => $result[$key],
+                ];
+            }
+
+            // Delete existing education info for the employee
+            EmployeeEducation::where('emp_id', $id)->delete();
+
+            // Insert updated education info
+            EmployeeEducation::insert($educationInfo);
+
+            return redirect()->route('employees.view', $id)->with('success', 'Employee education updated successfully.');
+
+
             // Check if all variables are arrays
             if (is_array($institutionNames) && is_array($degree) && is_array($department) && is_array($passing_year) && is_array($result)) {
-                $educationInfo = [];
 
-                // Loop through each item in the arrays
-                foreach ($institutionNames as $key => $item) {
-                    $educationInfo[] = [
-                        'emp_id' => $employeeId,
-                        'institution_name' => $item,
-                        'degree' => $degree[$key],
-                        'department' => $department[$key],
-                        'passing_year' => $passing_year[$key],
-                        'result' => $result[$key],
-                    ];
-                }
-
-                // Delete existing education info for the employee
-                EmployeeEducation::where('emp_id', $employeeId)->delete();
-
-                // Insert updated education info
-                EmployeeEducation::insert($educationInfo);
-
-                return redirect()->route('employees.view', $id)->with('success', 'Employee education updated successfully.');
             } else {
                 // Handle the case where one of the variables is not an array
                 return redirect()->back()->with('error', 'Invalid input data.');

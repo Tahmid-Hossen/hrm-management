@@ -32,7 +32,7 @@
         <!-- export button -->
         <div class="inline-block hs-tooltip">
             <a type="button" href="/"
-                class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                class="btn-export">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
                     <path
@@ -50,7 +50,7 @@
         <!-- import button -->
         <div class="inline-block hs-tooltip">
             <a type="button" href="/"
-                class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                class="btn-import">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                     <path
@@ -68,7 +68,7 @@
         <!-- create button -->
         <div class="inline-block hs-tooltip">
             <button type="button" data-hs-overlay="#create-new-employee-modal"
-                class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                class="btn-create">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                     <path
@@ -192,7 +192,7 @@
                             <!-- export button -->
                             <div class="inline-block hs-tooltip">
                                 <a type="button" href="/"
-                                    class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                    class="btn-teal">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                         <path
@@ -208,7 +208,7 @@
                             <!-- import button -->
                             <div class="inline-block hs-tooltip">
                                 <a type="button" href="/"
-                                    class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                    class="btn-red">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                         fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">
                                         <path
@@ -221,24 +221,7 @@
                                     </span>
                                 </a>
                             </div>
-                            <!-- create button -->
-                            <div class="inline-block hs-tooltip">
-                                <button type="button" data-hs-overlay="#create-new-employee-modal"
-                                    class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                                        <path
-                                            d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z" />
-                                        <path
-                                            d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z" />
-                                    </svg>
-                                    <span
-                                        class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
-                                        role="tooltip">
-                                        Import
-                                    </span>
-                                </button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -302,7 +285,7 @@
                                             <div class="flex gap-3">
                                                 <div class="inline-block hs-tooltip">
                                                     <button onclick="editAttendance()" type="button"
-                                                        class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                                        class="btn-edit">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor"
                                                             class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -321,7 +304,7 @@
 
                                                 <div class="inline-block hs-tooltip">
                                                     <button data-hs-overlay="#delete-employee-attendance" type="button"
-                                                        class="inline-flex items-center px-2 py-2 text-sm font-semibold text-gray-500 border rounded-lg hs-tooltip-toggle border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-gray-400 dark:hover:text-red-500 dark:hover:border-red-600">
+                                                        class="btn-red">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-archive"
                                                             viewBox="0 0 16 16">

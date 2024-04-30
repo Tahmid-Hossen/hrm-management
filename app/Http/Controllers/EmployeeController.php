@@ -17,24 +17,24 @@ class EmployeeController extends Controller
 {
 
 
+    // public function index()
+    // {
+    //     $designations = Designations::all();
+    //     $departments = Departments::all();
+    //     $employees = Employee::with('empDesignation', 'user')->get();
+    //     return view('employee.index', compact('employees', 'designations', 'departments'));
+    // }
+
     public function index()
     {
         $designations = Designations::all();
         $departments = Departments::all();
         $employees = Employee::with('empDesignation', 'user')->get();
-        return view('employee.index', compact('employees', 'designations', 'departments'));
+        $trashedEmployees = Employee::onlyTrashed()->get();
+        return view('employee.index', compact('employees', 'designations', 'departments', 'trashedEmployees'));
     }
 
-    // public function index()
-    // {
-    //     $designations = Designations::all();
-    //     $departments = Departments::all();
 
-    //     // Retrieve both active and soft-deleted employees
-    //     $employees = Employee::withTrashed()->with(['empDesignation', 'user'])->get();
-
-    //     return view('employee.index', compact('employees', 'designations', 'departments'));
-    // }
 
     public function store(Request $request)
     {
@@ -294,10 +294,7 @@ class EmployeeController extends Controller
 
     public function forceDelete($id)
     {
-        // Find the soft-deleted employee
-        $employee = Employee::onlyTrashed()->findOrFail($id);
-
-        // Permanently delete the employee
+        $employee = Employee::withTrashed()->findOrFail($id);
         $employee->forceDelete();
 
         return redirect()->back()->with('success', 'Employee permanently deleted.');

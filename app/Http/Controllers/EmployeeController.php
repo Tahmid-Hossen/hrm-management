@@ -16,15 +16,6 @@ use Illuminate\Support\Facades\Hash;
 class EmployeeController extends Controller
 {
 
-
-    // public function index()
-    // {
-    //     $designations = Designations::all();
-    //     $departments = Departments::all();
-    //     $employees = Employee::with('empDesignation', 'user')->get();
-    //     return view('employee.index', compact('employees', 'designations', 'departments'));
-    // }
-
     public function index()
     {
         $designations = Designations::all();
@@ -62,7 +53,6 @@ class EmployeeController extends Controller
         $employee->gender = $request->gender;
         $employee->blood_group = $request->blood_group;
         $employee->emergency_contact = $request->emergency_contact;
-        // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
 
@@ -79,24 +69,6 @@ class EmployeeController extends Controller
         if (isset($profilePhotoName)) {
             $employee->profile_photo = $profilePhotoName;
         }
-
-        //  // Associate department
-        // if ($request->has('department')) {
-        //     $department = Departments::find($request->department);
-        //     if ($department) {
-        //         $employee->department()->associate($department);
-        //         $employee->save();
-        //     }
-        // }
-
-        // // Associate designation
-        // if ($request->has('designation')) {
-        //     $designation = Designations::find($request->designation);
-        //     if ($designation) {
-        //         $employee->designation()->associate($designation);
-        //         $employee->save();
-        //     }
-        // }
 
         // dd($request->all());
         if ($employee->save()) {
@@ -168,56 +140,12 @@ class EmployeeController extends Controller
         if ($request->designation != '') $employee->designation = $request->designation;
         if ($request->emp_department != '') $employee->department = $request->emp_department;
 
-        //  // Update designation if provided
-        // if ($request->has('designation')) {
-        //     $designation = Designations::find($request->designation);
-        //     if ($designation) {
-        //         $employee->designation()->associate($designation);
-        //     }
-        // }
-
-        // // Update department if provided
-        // if ($request->has('emp_department')) {
-        //     $department = Departments::find($request->emp_department);
-        //     if ($department) {
-        //         $employee->department()->associate($department);
-        //     }
-        // }
-
         $employee->joining_date = $request->joining_date;
         $employee->emergency_contact = $request->emergency_contact;
         // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
         // return $employee->emp_id;
-
-        // Save the updated employee
-        // if ($employee->save()) {
-        //     $employeeId = $employee->id;
-        //     $institutionNames = $request->institution_name;
-        //     $degree = $request->degree;
-        //     $department = $request->department;
-        //     $passing_year = $request->passing_year;
-        //     $result = $request->result;
-        //     $educationInfo = [];
-        //     if ($institutionNames) {
-        //         foreach ($institutionNames as $key => $item) {
-        //             $educationInfo[] = [
-        //                 'emp_id' => $employeeId,
-        //                 'institution_name' => $item,
-        //                 'degree' => $degree[$key],
-        //                 'department' => $department[$key],
-        //                 'passing_year' => $passing_year[$key],
-        //                 'result' => $result[$key],
-        //             ];
-        //         }
-        //     }
-        //     if ($educationInfo) {
-        //         EmployeeEducation::where('emp_id', $employeeId)->delete();
-        //         EmployeeEducation::insert($educationInfo);
-        //     }
-        //     return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
-        // }
         return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
     }
 

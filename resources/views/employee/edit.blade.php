@@ -91,7 +91,7 @@
                                  </label>
                                  <input id="employeePassword" name="password" type="password" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}">
                               </div>
-                           </div>                          
+                           </div>
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                               <div>
                                  <label for="employeeJoiningDate" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -121,7 +121,7 @@
                                                 <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
                                                 {{ $designation->name }}
                                              </option>
-                                             
+
                                      @endforeach
                                  </select>
                               </div>
@@ -173,7 +173,7 @@
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                               <div>
                                  <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                     Select Department  
+                                     Select Department
                                  </label>
                                  <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
                                      @foreach ($departments as $department)
@@ -181,7 +181,7 @@
                                                 <option value="{{ $department->id }}" {{ $employee->department == $department->id ? 'selected' : '' }}>
                                                 {{ $department->name }}
                                              </option>
-                                             
+
                                      @endforeach
                                  </select>
                              </div>

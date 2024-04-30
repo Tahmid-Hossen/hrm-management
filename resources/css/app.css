@@ -35,4 +35,31 @@ body{
 .btn-export{
     @apply inline-flex items-center px-2 py-2 text-sm font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:outline-none focus:ring-neutral-300 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800 gap-x-1
 }
+/* width */
+::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+/* height */
+::-webkit-scrollbar {
+    height: 7px !important;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #d8dadd00 !important;
+    border-radius: 0px !important;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #ff0e56 !important;
+    border-radius: 0px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background: #ca0000 !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
 

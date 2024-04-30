@@ -15,7 +15,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('/assets/css/datatable.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/extra-css.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
 </head>
 
 <body class="min-h-screen bg-white dark:bg-neutral-900">
@@ -51,13 +51,14 @@
     @include('layouts.modals')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="http://codeseven.github.io/toastr/build/toastr.min.js"></script>
-    <script src="{{ asset('assets/js/theme-switcher.js') }}"></script>
-    <script src="{{ asset('assets/js/script.js') }}"></script>
+    <script src="{{ asset('/assets/js/theme-switcher.js') }}"></script>
+    <script src="{{ asset('/assets/js/script.js') }}"></script>
 
-    <script src="{{ asset('assets/js/datatable.js') }}"></script>
+    <script src="{{ asset('/assets/js/datatable.js') }}"></script>
 
     <script>
         new DataTable('#example');
+        new DataTable('#example-trash')
 
         @if (Session::has('success'))
             toastr.success("{{ Session::get('success') }}");

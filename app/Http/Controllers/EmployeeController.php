@@ -17,16 +17,24 @@ class EmployeeController extends Controller
 {
 
 
+    // public function index()
+    // {
+    //     $designations = Designations::all();
+    //     $departments = Departments::all();
+    //     $employees = Employee::with('empDesignation', 'user')->get();
+    //     return view('employee.index', compact('employees', 'designations', 'departments'));
+    // }
+
     public function index()
     {
         $designations = Designations::all();
         $departments = Departments::all();
-        // return $departments;
         $employees = Employee::with('empDesignation', 'user')->get();
-
-        // dd($employees);
-        return view('employee.index', compact('employees', 'designations', 'departments'));
+        $trashedEmployees = Employee::onlyTrashed()->get();
+        return view('employee.index', compact('employees', 'designations', 'departments', 'trashedEmployees'));
     }
+
+
 
     public function store(Request $request)
     {
@@ -282,6 +290,14 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+    }
+
+    public function forceDelete($id)
+    {
+        $employee = Employee::withTrashed()->findOrFail($id);
+        $employee->forceDelete();
+
+        return redirect()->back()->with('success', 'Employee permanently deleted.');
     }
 
     public function employeePermission(Request $request, $id)

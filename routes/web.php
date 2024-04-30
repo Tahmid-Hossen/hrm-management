@@ -12,7 +12,9 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AttendenceController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DesignationController;
-use App\Models\Departments;
+use App\Http\Controllers\CompanyListController;
+use App\Http\Controllers\LeaveTypeController;
+use App\Http\Controllers\DocumentTypeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::get('/users-list', [UserController::class, 'usersList'])->name('users.users-list');
         Route::post('/store', [UserController::class, 'store'])->name('users.store');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
         Route::post('/update/{id}', [UserController::class, 'update'])->name('users.update');
@@ -44,7 +47,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit');
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
+        Route::post('/update/address/{id}', [EmployeeController::class, 'updateAdress'])->name('employees.address.update');
+        Route::post('/update/education/{id}', [EmployeeController::class, 'updateEducation'])->name('employees.education.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
+        Route::delete('/force-delete/{id}', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
     });
@@ -79,7 +85,19 @@ Route::middleware('auth')->group(function () {
 
 
     // Route start for settings menu
-    Route::prefix('departments')->group(function () {
+
+
+     Route::prefix('company-list')->group(function (){
+        Route::get('/', [CompanyListController::class, 'index'])->name('company-list.index');
+        Route::get('/create', [CompanyListController::class, 'create'])->name('company-list.create');
+        Route::post('/store', [CompanyListController::class, 'store'])->name('company-list.store');
+        Route::get('/edit/{id}', [CompanyListController::class, 'edit'])->name('company-list.edit');
+        Route::post('/update/{id}', [CompanyListController::class, 'update'])->name('company-list.update');
+        Route::get('/delete/{id}', [CompanyListController::class, 'delete'])->name('company-list.delete');
+    });
+
+
+    Route::prefix('departments')->group(function (){
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
         Route::post('/store', [DepartmentController::class, 'store'])->name('department.store');
@@ -98,6 +116,27 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [DesignationController::class, 'delete'])->name('designation.delete');
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
     });
+
+        Route::prefix('leave-type')->group(function (){
+        Route::get('/', [LeaveTypeController::class, 'index'])->name('leave-type.index');
+        Route::get('/create', [LeaveTypeController::class, 'create'])->name('leave-type.create');
+        Route::post('/store', [LeaveTypeController::class, 'store'])->name('leave-type.store');
+        Route::get('/edit/{id}', [LeaveTypeController::class, 'edit'])->name('leave-type.edit');
+        Route::post('/update/{id}', [LeaveTypeController::class, 'update'])->name('leave-type.update');
+        Route::get('/delete/{id}', [LeaveTypeController::class, 'delete'])->name('leave-type.delete');
+    });
+
+        Route::prefix('document-type')->group(function (){
+        Route::get('/', [DocumentTypeController::class, 'index'])->name('document-type.index');
+        Route::get('/create', [DocumentTypeController::class, 'create'])->name('document-type.create');
+        Route::post('/store', [DocumentTypeController::class, 'store'])->name('document-type.store');
+        Route::get('/edit/{id}', [DocumentTypeController::class, 'edit'])->name('document-type.edit');
+        Route::post('/update/{id}', [DocumentTypeController::class, 'update'])->name('document-type.update');
+        Route::get('/delete/{id}', [DocumentTypeController::class, 'delete'])->name('document-type.delete');
+    });
+
+
+
 });
 require __DIR__ . '/auth.php';
 

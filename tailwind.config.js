@@ -1,19 +1,23 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
-
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: 'class',
+    darkMode: "class",
     content: [
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
-        'node_modules/preline/dist/*.js',
+        "node_modules/preline/dist/*.js",
     ],
 
     theme: {
         extend: {},
     },
 
-    plugins: [require('@tailwindcss/forms'), require('preline/plugin'), require("daisyui")],
+    plugins: [
+        require("@tailwindcss/forms"),
+        require("preline/plugin"),
+        require("daisyui"),
+    ],
+    daisyui: {
+        themes: false,
+    },
 };

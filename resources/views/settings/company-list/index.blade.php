@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Designations')
-@section('pageTitle', 'Designations')
+@section('title', 'Company List')
+@section('pageTitle', 'Company List')
 @section('breadcumb')
     <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
@@ -35,7 +35,7 @@
 
         <li class="inline-flex items-center text-sm font-semibold text-red-600 truncate dark:hover:text-red-600 dark:text-red-600"
             aria-current="page">
-            Designation
+            Company Lists
         </li>
     </ol>
 @endsection
@@ -44,17 +44,17 @@
     <div class="flex flex-wrap justify-end gap-2">
         <!-- create button -->
         <div class="inline-block hs-tooltip">
-            <button onclick="createDesginationTypeModal()" class="btn-create">
+            <button onclick="createCompanyTypeModal()" class="btn-create">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                     <path
                         d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
                 </svg>
-                Designation
+                Company
                 <span
                     class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
                     role="tooltip">
-                    Create Designation
+                    Create Company
                 </span>
             </button>
         </div>
@@ -78,27 +78,25 @@
                                     </th>
                                     <th scope="col"
                                         class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">Action</th>
-
                                 </tr>
                             </thead>
                             <tbody class="w-full divide-neutral-200 dark:divide-neutral-700">
-                                @foreach ($designations as $designation)
+                                @foreach ($companies as $company)
                                     <tr class="cursor-pointer text-start dark:hover:bg-neutral-800">
                                         <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
-                                            {{ $designation->id }}</td>
+                                            {{ $company->id }}</td>
                                         <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
-                                            {{ $designation->name }}</td>
+                                            {{ $company->name }}</td>
                                         <td class="px-6 py-4 text-sm text-gray-800 whitespace-nowrap dark:text-gray-200">
-                                            {{ $designation->is_active }}</td>
+                                            {{ $company->is_active }}</td>
                                         {{-- {{ $department->empDepartment->name ?? '' }} --}}
                                         <td class="px-6 py-4 text-sm font-medium whitespace-nowrap text-end">
                                             <div class="flex gap-3">
                                                 <div class="inline-block hs-tooltip">
-                                                    <button onclick="updateDesignationTypeModal({{ $designation->id }})"
-                                                        class="hs-tooltip-toggle btn-edit">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-pencil-square"
-                                                            viewBox="0 0 16 16">
+                                                    <button onclick="updateCompanyTypeModal({{ $company->id }})"
+                                                        class="btn-edit"><svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                             <path
                                                                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                             <path fill-rule="evenodd"
@@ -107,14 +105,14 @@
                                                         <span
                                                             class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
                                                             role="tooltip">
-                                                            Edit Designation
+                                                            Edit Company
                                                         </span>
                                                     </button>
                                                 </div>
 
                                                 <div class="inline-block hs-tooltip">
-                                                    <a href="{{ route('designation.delete', $designation->id) }}"
-                                                        class="hs-tooltip-toggle btn-red">
+                                                    <a href="{{ route('company-list.delete', $company->id) }}"
+                                                        class="btn-red">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-archive"
                                                             viewBox="0 0 16 16">
@@ -124,7 +122,7 @@
                                                         <span
                                                             class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
                                                             role="tooltip">
-                                                            Delete Designation
+                                                            Delete Company
                                                         </span>
                                                     </a>
                                                 </div>
@@ -140,14 +138,14 @@
         </div>
     </div>
 
-    {{-- Create designation type Modal --}}
-    <div id="create-designation-type-modal-form" class="hidden">
-        <form action="{{ route('designation.store') }}" method="POST" enctype="multipart/form-data">
+    {{-- Create Company type Modal --}}
+    <div id="create-company-type-modal-form" class="hidden">
+        <form action="{{ route('company-list.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <!-- Body -->
             <div class="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
                 <h3 class="font-bold text-gray-800 dark:text-white">
-                    Create Designation Type
+                    Create Company
                 </h3>
             </div>
             <div class="">
@@ -155,12 +153,12 @@
                 <div class="p-4">
 
                     <div class="max-w-full mt-3">
-                        <label for="designation_name"
-                            class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Designation Name</label>
+                        <label for="company_name"
+                            class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Company Name</label>
                         <input
                             class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                            id="designation_name" name="name" type="text" autocomplete="off"
-                            placeholder="Designation Name">
+                            id="company_name" name="name" type="text" autocomplete="off"
+                            placeholder="Company Name">
                     </div>
 
                     <div class="max-w-full mt-3">
@@ -194,13 +192,13 @@
 
                     <button type="submit"
                         class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                        Create Desgination
+                        Create Company
                     </button>
                 </div>
                 <!-- End Footer -->
             </div>
         </form>
     </div>
-    {{-- Create designation type Modal --}}
+    {{-- Create Company type Modal --}}
 
 @endsection

@@ -41,7 +41,7 @@ class DepartmentController extends Controller
     {
         $department = Departments::findOrFail($id);
         $department->delete();
-    
+
         return redirect()->route('department.index')->with('success', 'department deleted successfully');
     }
 }

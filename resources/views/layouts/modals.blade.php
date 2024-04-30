@@ -313,27 +313,27 @@
 
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
 
-                                        <div>
-                                            <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                                Select Department
-                                            </label>
-                                            <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                @if(isset($departments))
-                                                @foreach ($departments as $department)
-                                                <option value="{{ $department->id }}">{{ $department->name }}</option>
-                                                @endforeach
-                                                @endif
-                                            </select>
-                                        </div>
-                                        <div>
-                                            <label for="employeeBirthday" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
-                                                Birthday
-                                            </label>
-                                            <div class="sm:flex">
-                                                <input id="employeeBirthday" name="birth_year" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="">
-                                            </div>
+                                    <div>
+                                        <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                            Select Designation
+                                        </label>
+                                        <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            @if(isset($designations))
+                                            @foreach ($designations as $designation)
+                                                    <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="employeeBirthday" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                            Birthday
+                                        </label>
+                                        <div class="sm:flex">
+                                            <input id="employeeBirthday" name="birth_year" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="">
                                         </div>
                                     </div>
+                                </div>
 
                                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
 

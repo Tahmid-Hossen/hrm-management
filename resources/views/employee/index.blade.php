@@ -336,7 +336,7 @@
 
         {{-- trash implementation section  --}}
 
-        <div class="mt-24">
+        <div class="mt-8">
             <div class="breadcum-heading mb-4">
                 <ol class="mr-2 mt-2 flex items-center whitespace-nowrap">
                     <li class="inline-flex items-center">
@@ -360,7 +360,7 @@
 
                     <li class="inline-flex items-center truncate text-sm font-semibold text-red-600 dark:text-red-600 dark:hover:text-red-600 dark:hover:text-red-600"
                         aria-current="page">
-                        Employee List
+                        Employee
                         <svg class="mx-2 size-4 flex-shrink-0 overflow-visible text-gray-400 dark:text-neutral-600 dark:hover:text-red-600"
                             xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

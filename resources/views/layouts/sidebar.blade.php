@@ -32,14 +32,14 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </a>
             </li> -->
 
-            @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
+            <!-- @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
             <li>
                 <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('leave.index')}}">
                     My Leave Status
                 </a>
-            </li>
+            </li> -->
 
-            @php $isActive = request()->is('manage-leave', 'manage-leave/*', 'leave-request', 'leave-request/*') ? 'true' : 'false'; @endphp
+            <!-- @php $isActive = request()->is('manage-leave', 'manage-leave/*', 'leave-request', 'leave-request/*') ? 'true' : 'false'; @endphp
             @if(userCan('leave.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
@@ -83,7 +83,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif
+            @endif -->
 
 
 
@@ -143,7 +143,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
             </li>
             @endif
 
-            @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
+            <!-- @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
             @if(userCan('payroll.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
@@ -180,9 +180,9 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif
+            @endif -->
 
-            @php $isActive = request()->is('timesheet', 'timesheet/*','manage-leave','manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
+            <!-- @php $isActive = request()->is('timesheet', 'timesheet/*','manage-leave','manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
             @if(userCan('attendence.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="timesheet-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
@@ -217,14 +217,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                             </a>
                         </li>
 
-                        @php $isSubActive = request()->is('markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
-                        <!-- <li>
-                            <a
-                                class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
-                                href="attendence.html">
-                                Attendence
-                            </a>
-                        </li> -->
+
                         <li class="hs-accordion {{$isSubActive=='true' ? 'active' : ''}}" id="attendance-accordion">
                             <button type="button" class="{{$isSubActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                                 Attendance
@@ -258,7 +251,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif
+            @endif -->
 
             {{-- Setting implementation  --}}
             @php $isActive = request()->is('company-list','company-list/*','departments','departments/*','designations','designations/*', 'leave-type','leave-type/*', 'document-type', 'document-type/*') ? 'true' : 'false'; @endphp

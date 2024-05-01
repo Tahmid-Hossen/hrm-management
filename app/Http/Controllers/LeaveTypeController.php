@@ -19,7 +19,9 @@ class LeaveTypeController extends Controller
         // return $request;
         $leave_type = new LeaveType;
         $leave_type->name = $request->name;
+        $leave_type->type = $request->type;
         $leave_type->is_active = $request->is_active;
+        // return $leave_type;
         $leave_type->save();
         return redirect()->route('leave-type.index')->with('success', 'Leave Type created successfully');
     }

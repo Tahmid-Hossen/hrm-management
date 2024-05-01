@@ -29,19 +29,27 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
+
+        // Validate the request
+        $request->validate([
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
+            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
+            'phone' => 'required|numeric|digits:11', // Validation for phone number
+        ]);
+        // Handle profile photo upload
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
             $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
         }
 
-
+        // Handle employee resume upload
         if ($request->hasFile('employee_resume')) {
             $resumeFile = $request->file('employee_resume');
             $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
-            $resumeFile->move(public_path('employee_resume'), $resumeFileName); // Store the resume file in public/employee_resume directory
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
         }
+
 
         // Create a new employee record
         $employee = new Employee();
@@ -63,14 +71,15 @@ class EmployeeController extends Controller
         $employee->department = $request->emp_department;
         $employee->joining_date = $request->joining_date;
         // $employee->password = bcrypt($request->password);
-        if (isset($resumeFileName)) {
-            $employee->employee_resume = $resumeFileName;
-        }
+        // Store profile photo and resume file names if they exist
         if (isset($profilePhotoName)) {
             $employee->profile_photo = $profilePhotoName;
         }
+        if (isset($resumeFileName)) {
+            $employee->employee_resume = $resumeFileName;
+        }
 
-        // dd($request->all());
+        // return $employee;
         if ($employee->save()) {
             $employeeId = $employee->id;
             $institutionNames = $request->institution_name;
@@ -110,24 +119,29 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id)
     {
-        $employee = Employee::find($id);
+        // Validate the request
+        $request->validate([
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
+            // 'phone' => 'required|numeric|digits:11', // Validation for phone number
 
-        // Handle profile photo upload if provided
+        ]);
+        $employee = Employee::find($id);
+        $previousProfilePhotoPath = public_path('profile_images') . '/' . $employee->profile_photo;
+        // Handle profile photo upload
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
             $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
             $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
+
             $employee->profile_photo = $profilePhotoName;
+             // Delete the previous profile photo if it exists
+             if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
+                unlink($previousProfilePhotoPath);
+            } 
+            // else {
+            //     $employee->profile_photo = $profilePhotoName;
+            // }
         }
-
-        // Handle CV file upload if provided
-        if ($request->hasFile('employee_resume')) {
-            $resumeFile = $request->file('employee_resume');
-            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
-            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
-            $employee->employee_resume = $resumeFileName;
-        }
-
         //return $request;
         // Update employee fields
         $employee->emp_id = $request->emp_id;
@@ -145,7 +159,10 @@ class EmployeeController extends Controller
         // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
-        // return $employee->emp_id;
+        if (isset($profilePhotoName)) {
+            $employee->profile_photo = $profilePhotoName;
+        }
+        $employee->save();
         return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
     }
 
@@ -155,6 +172,40 @@ class EmployeeController extends Controller
         $employee->permanent_address = $request->permanent_address;
         $employee->save();
         return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+    }
+
+    public function updateDocuments(Request $request, $id){
+        $request->validate([
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
+            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
+            // Add more validation rules for other fields if necessary
+        ]);
+        $employee = Employee::find($id);
+        $previousProfileDocumentsPath = public_path('employee_resume') . '/' . $employee->employee_resume;
+        // Handle employee resume upload
+        if ($request->hasFile('employee_resume')) {
+            $resumeFile = $request->file('employee_resume');
+            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
+            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
+
+            $employee->employee_resume = $resumeFileName;
+             // Delete the previous profile photo if it exists
+             if (file_exists($previousProfileDocumentsPath) && is_file($previousProfileDocumentsPath)) {
+                unlink($previousProfileDocumentsPath);
+            }
+            // else {
+            //     $employee->resumeFile = $resumeFileName;
+            // }
+        } else {
+            return "There was no existing documents for this employee";
+        }
+
+        if (isset($resumeFileName)) {
+            $employee->employee_resume = $resumeFileName;
+        }
+        // return $employee;
+        $employee->save();
+        return redirect()->route('employees.view', $id)->with('success', 'Employee documents updated successfully.');
     }
 
     public function updateEducation(Request $request, $id){

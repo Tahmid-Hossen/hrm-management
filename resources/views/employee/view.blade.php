@@ -1005,44 +1005,84 @@
 </div>
 <div id="segment-4" class="hidden" role="tabpanel" aria-labelledby="segment-item-4">
     <div class="py-3">
-        <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
-            {{-- Documents --}}
-            Coming Soon
-        </h3>
-        {{-- <div class="overflow-y-auto">
-                            <!-- Card Section -->
-                            <div class="mx-auto">
-                                <!-- Card -->
-                                <div class="bg-white dark:bg-neutral-800">
-                                    <form
-                                        action="{{ route("employees.store") }}"
-        method="POST"
-        enctype="multipart/form-data"
-        >
-        @csrf
+        <div class="flex justify-between">
+            <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
+                Documents Details
+            </h3>
+            <button type="button" id="update-info-button-segment-four"
+                class="btn-edit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                </svg>
+                <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                        Edit Documents
+                </span>
+            </button>
+        </div>
+        <div class="overflow-y-auto">
+            <!-- Card Section -->
+            <div class="mx-auto">
+                <!-- Card -->
+                <div class="bg-white dark:bg-neutral-800" id="disable-card-segment-four">
+                    <form
+                        action="{{ route("employees.documents.update", $employee->id) }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        >
+                        @csrf
 
-        <div class="mt-3">
-            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
-                <div>
-                    <label for="employeeResume" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                        Upload Resume
-                    </label>
-                    <input id="employeeResume" name="employee_resume" type="file" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" />
+                        <div class="mt-3">
+                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                <div>
+                                    <p><strong class="text-red-700">Previous Documents: </strong>{{$employee->employee_resume}}</p>
+                                    <label for="employeeResume" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Upload Resume
+                                    </label>
+                                    <input id="employeeResume" name="employee_resume" type="file" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled/>
+                                </div>
+                            </div>
+                            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="bg-white dark:bg-neutral-800" id="enable-card-segment-four">
+                    <form
+                        action="{{ route("employees.documents.update", $employee->id) }}"
+                        method="POST"
+                        enctype="multipart/form-data"
+                        >
+                        @csrf
+
+                        <div class="mt-3">
+                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                <div>
+                                    <p><strong class="text-red-700">Previous Documents: </strong>{{$employee->employee_resume}}</p>
+                                    <label for="employeeResume" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                        Upload Resume
+                                    </label>
+                                    <input id="employeeResume" name="employee_resume" type="file" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" />
+                                </div>
+                            </div>
+                            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                                <button type="button" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-documets-four">
+                                    Close
+                                </button>
+                                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
-                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    Update
-                </button>
-            </div>
         </div>
-        </form>
     </div>
-    <!-- End Card -->
-</div>
-<!-- End Card Section -->
-</div> --}}
-</div>
 </div>
 <div id="segment-5" class="hidden" role="tabpanel" aria-labelledby="segment-item-5">
     <h3 class="text-gray-500 dark:text-neutral-400">
@@ -1136,48 +1176,23 @@ closeBtnEducationInfo2.addEventListener('click', ()=> {
 })
 // End personal Details
 
+// For Documents
+const sectionIDDocuments1 = document.getElementById('disable-card-segment-four');
+const sectionIDDocuments2 = document.getElementById('enable-card-segment-four');
+const editBtnDocuments1 = document.getElementById('update-info-button-segment-four');
+const closeBtnDocuments2 = document.getElementById('close-form-btn-for-documets-four');
+sectionIDDocuments2.style.display = 'none';
 
-    $(document).ready(function() {
-        // $("#edit-card").hide();
-        // $("#enable-card-segment-two").hide();
-        //  // Hide div-two initially
-        // $("#update-info-button").click(function() {
-        //     // console.log("hi");
-        //     $("#edit-card").removeClass("hidden");
-        //     $("#edit-card").show();
-        //     $("#disable-card").hide();
-        //     $("input").prop("disabled", false);
-        //     $("select").prop("disabled", false);
-        //     $("option").prop("disabled", false);
-        // });
-        // $("#close-form-btn").click(function() {
-        //     $("#edit-card").addClass("hidden");
-        //     $("#edit-card").hide();
-        //     $("#disable-card").show();
-        //     $("input").prop("disabled", true);
-        //     $("select").prop("disabled", true);
-        //     $("option").prop("disabled", true);
-        // })
 
-        // update-info-button-segment-two
-        // $("#update-info-button-segment-two").click(function() {
-        //     // console.log("hi");
-        //     $("#enable-card-segment-two").removeClass("hidden");
-        //     $("#enable-card-segment-two").show();
-        //     $("#disable-card-segment-two").hide();
-        //     $("input").prop("disabled", false);
-        //     $("select").prop("disabled", false);
-        //     $("option").prop("disabled", false);
-        // });
-        // $("#close-form-btn").click(function() {
-        //     $("#enable-card-segment-two").addClass("hidden");
-        //     $("#enable-card-segment-two").hide();
-        //     $("#disable-card-segment-two").show();
-        //     $("input").prop("disabled", true);
-        //     $("select").prop("disabled", true);
-        //     $("option").prop("disabled", true);
-        // })
-    });
+editBtnDocuments1.addEventListener('click', () => {
+    sectionIDDocuments1.style.display = 'none'
+    sectionIDDocuments2.style.display = 'block'
+})
+closeBtnDocuments2.addEventListener('click', ()=> {
+    sectionIDDocuments2.style.display = 'none'
+    sectionIDDocuments1.style.display = 'block'
+})
+// End Documents
 </script>
 
 @endsection

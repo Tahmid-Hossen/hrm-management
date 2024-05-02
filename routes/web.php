@@ -55,6 +55,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
     });
 
+    Route::prefix('leaves')->group(function () {
+        Route::get('/request', [LeaveController::class, 'leaveRequest'])->name('leaves.request');
+        Route::get('/approve', [LeaveController::class, 'leaveApproved'])->name('leaves.approve');
+        Route::get('/reject', [LeaveController::class, 'leavereject'])->name('leaves.reject');
+    });
+
     Route::prefix('employee-profile')->group(function () {
         Route::get('/', [EmployeeProfileController::class, 'index'])->name('employee-profile.index');
     });
@@ -87,7 +93,7 @@ Route::middleware('auth')->group(function () {
     // Route start for settings menu
 
 
-     Route::prefix('company-list')->group(function (){
+    Route::prefix('company-list')->group(function () {
         Route::get('/', [CompanyListController::class, 'index'])->name('company-list.index');
         Route::get('/create', [CompanyListController::class, 'create'])->name('company-list.create');
         Route::post('/store', [CompanyListController::class, 'store'])->name('company-list.store');
@@ -97,7 +103,7 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::prefix('departments')->group(function (){
+    Route::prefix('departments')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('department.index');
         Route::get('/create', [DepartmentController::class, 'create'])->name('department.create');
         Route::post('/store', [DepartmentController::class, 'store'])->name('department.store');
@@ -117,7 +123,7 @@ Route::middleware('auth')->group(function () {
         // Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
     });
 
-        Route::prefix('leave-type')->group(function (){
+    Route::prefix('leave-type')->group(function () {
         Route::get('/', [LeaveTypeController::class, 'index'])->name('leave-type.index');
         Route::get('/create', [LeaveTypeController::class, 'create'])->name('leave-type.create');
         Route::post('/store', [LeaveTypeController::class, 'store'])->name('leave-type.store');
@@ -126,7 +132,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/delete/{id}', [LeaveTypeController::class, 'delete'])->name('leave-type.delete');
     });
 
-        Route::prefix('document-type')->group(function (){
+    Route::prefix('document-type')->group(function () {
         Route::get('/', [DocumentTypeController::class, 'index'])->name('document-type.index');
         Route::get('/create', [DocumentTypeController::class, 'create'])->name('document-type.create');
         Route::post('/store', [DocumentTypeController::class, 'store'])->name('document-type.store');
@@ -134,9 +140,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/{id}', [DocumentTypeController::class, 'update'])->name('document-type.update');
         Route::get('/delete/{id}', [DocumentTypeController::class, 'delete'])->name('document-type.delete');
     });
-
-
-
 });
 require __DIR__ . '/auth.php';
 

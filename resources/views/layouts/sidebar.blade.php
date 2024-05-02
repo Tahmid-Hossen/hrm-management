@@ -32,14 +32,14 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </a>
             </li> -->
 
-            <!-- @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
+            @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
             <li>
                 <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('leave.index')}}">
                     My Leave Status
                 </a>
-            </li> -->
+            </li>
 
-            <!-- @php $isActive = request()->is('manage-leave', 'manage-leave/*', 'leave-request', 'leave-request/*') ? 'true' : 'false'; @endphp
+            @php $isActive = request()->is('leaves', 'leaves/*', 'leaves/request', 'leaves/approve', 'leaves/reject', ) ? 'true' : 'false'; @endphp
             @if(userCan('leave.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
@@ -60,22 +60,22 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
 
                 <div id="payroll-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
                     <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
-                        @php $isSubActive = request()->is('leave-request') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/request') ? 'true' : 'false'; @endphp
                         <li>
-                            <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="set-salary.html">
+                            <a href="{{route('leaves.request')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Leave-request
                             </a>
                         </li>
-                        @php $isSubActive = request()->is('approved-request') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/approve') ? 'true' : 'false'; @endphp
                         <li>
-                            <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="payslip.html">
+                            <a href="{{route('leaves.approve')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Approved-request
                             </a>
                         </li>
 
-                        @php $isSubActive = request()->is('rejected-request') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/reject') ? 'true' : 'false'; @endphp
                         <li>
-                            <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="payslip.html">
+                            <a href="{{route('leaves.reject')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Rejected-request
                             </a>
                         </li>
@@ -83,7 +83,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif -->
+            @endif
 
 
 

@@ -66,6 +66,24 @@
 
                                 <div class="max-w-full mt-3">
                                     <label for="is_active"
+                                        class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Leave Types</label>
+                                    <div class="relative" id="is_active">
+                                        <div class="relative hs-select">
+                                            <select name="type"
+                                                class="block w-full px-4 py-3 text-sm text-gray-800 border border-gray-200 rounded-lg focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 -800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                <option value="paid">
+                                                    Paid
+                                                </option>
+                                                <option value="unpaid">
+                                                    Unpaid
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="max-w-full mt-3">
+                                    <label for="is_active"
                                         class="block mb-2 text-sm font-medium text-gray-800 dark:text-white">Is
                                         Active</label>
                                     <div class="relative" id="is_active">
@@ -82,7 +100,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="flex items-center justify-end py-4 border-t gap-x-2 dark:border-neutral-700">
 
                                     <button type="submit"

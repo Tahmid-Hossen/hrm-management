@@ -13,9 +13,11 @@
     <link rel="icon" type="image/x-icon" href="../../../assets/img/favicon.png">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <link href="{{ asset('/assets/css/datatable.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/extra-css.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/assets/css/apexcharts.css') }}">
 </head>
 
 <body class="min-h-screen bg-white dark:bg-neutral-900">
@@ -56,6 +58,13 @@
 
     <script src="{{ asset('/assets/js/datatable.js') }}"></script>
 
+    <script src="{{ asset('/assets/js/lodash.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/apex-charts.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/preline-helper.js') }}"></script>
+
+    <script src="{{ asset('/assets/js/core-full-calendar.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/daygrid-full-calendar.min.js') }}"></script>
+
     <script>
         new DataTable('#example');
         new DataTable('#example-trash')
@@ -77,8 +86,9 @@
         @endif
     </script>
 
-    @yield('scripts');
 
+
+    @yield('scripts');
 </body>
 
 </html>

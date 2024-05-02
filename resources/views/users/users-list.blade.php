@@ -79,7 +79,7 @@
 
 
     <div class="mt-4">
-        <div class="mt-4">
+        {{-- <div class="mt-4">
             <div class="flex flex-col p-2 border rounded-lg dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700">
                 <div class="p-2">
                     <div class="grid items-end justify-between grid-cols-1 gap-4 mt-2 sm:grid-cols-3 lg:gap-6">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="mt-4">
             <div

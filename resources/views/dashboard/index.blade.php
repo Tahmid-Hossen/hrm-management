@@ -43,13 +43,10 @@
     </div>
     <!-- End Card Section -->
 
-    @if (auth()->user()->roles[0]->name !== 'staff')
-        <!-- Card Section -->
+    {{-- @if (auth()->user()->roles[0]->name !== 'staff')
         <div class="pt-4 mx-auto">
             <h3 class="py-2 font-semibold text-gray-800 text-md dark:text-white">For HR</h3>
-            <!-- Grid -->
             <div class="grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 sm:gap-6">
-                <!-- Card -->
                 <a class="flex flex-col transition bg-white border shadow-sm group rounded-xl hover:shadow-md dark:bg-neutral-800 dark:border-gray-800"
                     href="#">
                     <div class="p-4 md:p-5">
@@ -73,9 +70,6 @@
                         </div>
                     </div>
                 </a>
-                <!-- End Card -->
-
-                <!-- Card -->
                 <a class="flex flex-col transition bg-white border shadow-sm group rounded-xl hover:shadow-md dark:bg-neutral-800 dark:border-gray-800"
                     href="#">
                     <div class="p-4 md:p-5">
@@ -99,9 +93,6 @@
                         </div>
                     </div>
                 </a>
-                <!-- End Card -->
-
-                <!-- Card -->
                 <a class="flex flex-col transition bg-white border shadow-sm group rounded-xl hover:shadow-md dark:bg-neutral-800 dark:border-gray-800"
                     href="#">
                     <div class="p-4 md:p-5">
@@ -157,12 +148,8 @@
             </div>
             <!-- End Grid -->
         </div>
-        <!-- End Card Section -->
-
-        <!-- Card Section -->
         <div class="pt-4 mx-auto">
             <h3 class="py-2 font-semibold text-gray-800 text-md dark:text-white">For Employee</h3>
-            <!-- Grid -->
             <div class="grid gap-3 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 sm:gap-6">
                 <a class="flex flex-col transition bg-white border shadow-sm group rounded-xl hover:shadow-md dark:bg-neutral-800 dark:border-gray-800"
                     href="#">
@@ -267,12 +254,8 @@
             </div>
             <!-- End Grid -->
         </div>
-        <!-- End Card Section -->
-
-        <!-- Card Section -->
         <div class="pt-4 mx-auto">
             <h3 class="py-2 font-semibold text-gray-800 text-md dark:text-white">For charts</h3>
-            <!-- Grid -->
             <div class="grid grid-cols-12 gap-6">
                 <div class="col-span-4">
                     <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70"
@@ -286,8 +269,6 @@
                         <div class="p-4 md:p-5">
                             <div class="flex flex-col items-center justify-center">
                                 <div id="hs-doughnut-chart"></div>
-
-                                <!-- Legend Indicator -->
                                 <div class="flex items-center justify-center mt-3 sm:justify-end gap-x-4 sm:mt-6">
                                     <div class="inline-flex items-center">
                                         <span class="size-2.5 inline-block bg-blue-600 rounded-sm mr-2"></span>
@@ -310,7 +291,6 @@
                                         </span>
                                     </div>
                                 </div>
-                                <!-- End Legend Indicator -->
                             </div>
                         </div>
                     </div>
@@ -323,7 +303,6 @@
                                 Total Not Checked IN
                             </h3>
                         </div>
-                        <!-- Legend Indicator -->
                         <div class="flex flex-col ">
                             <div class="inline-block min-w-full overflow-hidden overflow-y-auto align-middle h-80">
                                 <table class="min-w-full text-center divide-y divide-gray-200 dark:divide-neutral-700 ">
@@ -429,7 +408,6 @@
                                 </table>
                             </div>
                         </div>
-                        <!-- End Legend Indicator -->
                     </div>
                 </div>
 
@@ -453,27 +431,8 @@
 
 
             </div>
-
-
-            <!-- End Grid -->
         </div>
-        <!-- End Card Section -->
-        <!-- Card Section -->
-        {{-- <div class="pt-4 mx-auto">
-            <h3 class="py-2 font-semibold text-gray-800 text-md dark:text-white">Calendar</h3>
-            <!-- Grid -->
-            <div class="grid gap-3 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 sm:gap-6">
-                <div id='calendar'></div>
-
-
-
-            </div>
-
-
-            <!-- End Grid -->
-        </div> --}}
-        <!-- End Card Section -->
-    @endif
+    @endif --}}
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {

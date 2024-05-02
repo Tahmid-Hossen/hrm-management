@@ -54,7 +54,7 @@
             </div>
 
             <div class="hidden w-2/5 sm:block">
-                <label for="icon" class="sr-only">Search</label>
+                {{-- <label for="icon" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 z-20 flex items-center pointer-events-none start-0 ps-4">
                         <svg
@@ -77,11 +77,11 @@
                         name="icon"
                         class="block w-full px-4 py-2 text-sm border border-gray-200 rounded-lg ps-11 bg:gray-100 focus:border-pink-500 focus:ring-pink-500 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:bg-neutral-800"
                         placeholder="Search projects, files or people" />
-                </div>
+                </div> --}}
             </div>
 
             <div class="flex flex-row items-center justify-end gap-2">
-                <button
+                {{-- <button
                     type="button"
                     class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600 hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
                     <svg
@@ -116,7 +116,7 @@
                         stroke-linejoin="round">
                         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
                     </svg>
-                </button>
+                </button> --}}
                 <div class="hs-dropdown">
                     <button
                         type="button"
@@ -220,7 +220,7 @@
                                 </svg>
                                 Notifications
                             </a>
-                            
+
                            @if(auth()->user()->employee_id)
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 focus:ring-2 focus:ring-blue-500 dark:text-neutral-300 dark:hover:bg-red-600 hover:text-white dark:hover:text-gray-300"
@@ -272,7 +272,7 @@
                             </button>
                 </form>
 
-                           
+
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 // ---------- 01 For Education Dynamic Part Start ----------//
-var baseUrl="http://127.0.0.1:8000"
+// var baseUrl="http://127.0.0.1:8000"
+// var baseUrl="https://hrm.nexdecade.com"
 
 function createEducationField(index) {
     return `
@@ -197,7 +198,7 @@ function createLeaveTypeModal() {
     smallSizeModal.showModal();
 }
 function updateLeaveTpeModal(id) {
-    $.ajax(`${baseUrl}/leave-type/edit/${id}`).then(function (response) {
+    $.ajax(`/leave-type/edit/${id}`).then(function (response) {
         $("#smallSizeModalBody").html(response);
         smallSizeModal.showModal()
     })
@@ -209,7 +210,7 @@ function createDocumentTypeModal() {
     smallSizeModal.showModal();
 }
 function updateDocumentTypeModal(id) {
-    $.ajax(`${baseUrl}/document-type/edit/${id}`).then(function (response) {
+    $.ajax(`/document-type/edit/${id}`).then(function (response) {
         $("#smallSizeModalBody").html(response);
         smallSizeModal.showModal()
     })
@@ -222,7 +223,7 @@ function createDesginationTypeModal() {
     smallSizeModal.showModal();
 }
 function updateDesignationTypeModal(id) {
-    $.ajax(`${baseUrl}/designations/edit/${id}`).then(function (response) {
+    $.ajax(`/designations/edit/${id}`).then(function (response) {
         $("#smallSizeModalBody").html(response);
         smallSizeModal.showModal()
     })
@@ -235,7 +236,7 @@ function createDepartmentTypeModal() {
     smallSizeModal.showModal();
 }
 function updateDepartmentTypeModal(id) {
-    $.ajax(`${baseUrl}/departments/edit/${id}`).then(function (response) {
+    $.ajax(`/departments/edit/${id}`).then(function (response) {
         $("#smallSizeModalBody").html(response);
         smallSizeModal.showModal()
     })
@@ -246,7 +247,7 @@ function createCompanyTypeModal() {
     smallSizeModal.showModal();
 }
 function updateCompanyTypeModal(id) {
-    $.ajax(`${baseUrl}/company-list/edit/${id}`).then(function (response) {
+    $.ajax(`/company-list/edit/${id}`).then(function (response) {
         $("#smallSizeModalBody").html(response);
         smallSizeModal.showModal()
     })

@@ -2,10 +2,10 @@
 export default {
     darkMode: "class",
     content: [
+        "node_modules/preline/dist/*.js",
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
-        "node_modules/preline/dist/*.js",
     ],
 
     theme: {

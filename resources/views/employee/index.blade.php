@@ -5,7 +5,7 @@
     <ol class="flex items-center mt-2 mr-2 whitespace-nowrap">
         <li class="inline-flex items-center">
             <a class="flex items-center text-sm text-gray-500 hover:text-red-600 focus:text-neutral-600 focus:outline-none dark:hover:text-red-600 dark:focus:text-neutral-600"
-                href="#">
+                href="{{ route('dashboard') }}">
                 <svg class="flex-shrink-0 me-3 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                     viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
@@ -296,7 +296,7 @@
                                                                 <span
                                                                     class="hs-tooltip-content invisible absolute z-10 inline-block rounded-lg bg-red-600 px-2 py-1 text-white opacity-0 shadow-md transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                                                                     role="tooltip">
-                                                                    Assign Role
+                                                                    Set as user
                                                                 </span>
                                                             </button>
                                                         </div>
@@ -341,7 +341,7 @@
                 <ol class="mr-2 mt-2 flex items-center whitespace-nowrap">
                     <li class="inline-flex items-center">
                         <a class="flex items-center text-sm text-gray-500 hover:text-red-600 focus:text-neutral-600 focus:outline-none dark:hover:text-red-600 dark:hover:text-red-600 dark:hover:text-red-600 dark:focus:text-neutral-600"
-                            href="#">
+                            href="{{ route('dashboard') }}">
                             <svg class="me-3 size-4 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -462,7 +462,7 @@
                     <!-- Header -->
                     <div class="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
                         <h3 class="font-bold text-gray-800 dark:text-white">
-                            Update Permission
+                            Make it User
                         </h3>
                         <button type="button"
                             class="flex justify-center items-center size-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:text-white hover:bg-red-600 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-red-600"
@@ -508,7 +508,7 @@
                                         Are you sure?
                                     </h3>
                                     <p class="text-gray-500 dark:text-neutral-500 employeeDataText">
-                                        You want remove from user.
+                                        You want to sink this employee as user?
                                     </p>
                                 </div>
                             </div>

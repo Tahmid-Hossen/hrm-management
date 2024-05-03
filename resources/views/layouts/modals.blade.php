@@ -197,8 +197,8 @@
                                                 Select Company
                                             </label>
                                             <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                                <option selected="">Select Company</option>
-                                                <option>Nexdecade Technology</option>
+                                                {{-- <option selected="">Select Company</option> --}}
+                                                <option selected="">Nexdecade Technology</option>
                                                 <option>M2M Communication</option>
                                             </select>
                                         </div>
@@ -255,7 +255,7 @@
                                                 Phone
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                            <input id="employeePhone" name="phone" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="+x(xxx)xxx-xx-xx">
+                                            <input id="employeePhone" name="phone" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="+x(xxx)xxx-xx-xx" required>
                                         </div>
                                     </div>
 

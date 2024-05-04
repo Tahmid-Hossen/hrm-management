@@ -16,6 +16,10 @@ use Illuminate\Support\Facades\Hash;
 class EmployeeController extends Controller
 {
 
+    // public function create(){
+    //     return view('employee.create');
+    // }
+
     public function index()
     {
         $designations = Designations::all();
@@ -265,8 +269,9 @@ class EmployeeController extends Controller
     {
         $employee = Employee::findOrFail($id);
         $employee->delete();
+        return response("deleted");
 
-        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+        // return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
     }
 
     // public function forceDelete($id)

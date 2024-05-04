@@ -145,6 +145,19 @@
                                                 Create
                                             </span>
                                         </button>
+                                        {{-- <a href="{{ route('employees.create') }}" data-hs-overlay="#create-new-employee-modal"
+                                            class="btn-create">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                            </svg>
+                                            <span
+                                                class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
+                                                role="tooltip">
+                                                Create
+                                            </span>
+                                        </a> --}}
                                     </div>
                                 </div>
                             </div>
@@ -305,8 +318,9 @@
                                                     {{-- Assign role section end  --}}
 
                                                     <div class="inline-block hs-tooltip">
-                                                        <a href="{{ route('employees.delete', $employee->id) }}"
+                                                        <button 
                                                             type="button"
+                                                            onclick="deleteEmployee('{{ route('employees.delete', $employee->id) }}')"
                                                             class="btn-red">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                                 height="16" fill="currentColor" class="bi bi-archive"
@@ -319,7 +333,7 @@
                                                                 role="tooltip">
                                                                 Delete
                                                             </span>
-                                                        </a>
+                                                        </button>
                                                     </div>
 
                                                 </div>
@@ -537,6 +551,40 @@
             </div>
         </div>
 
+
+        <div id="deleteEmployeeData" class="hidden">
+            <div class="">
+                <!--body-->
+                <div class="text-center p-5 flex-auto justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 -m-1 flex items-center text-red-500 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 flex items-center text-red-500 mx-auto" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    <div class="text-sm text-gray-500 px-3 mb-2 inline-flex items-center justify-start gap-x-1">
+                        Deleted Text: <span class="text-red-600 !text-sm font-medium"><span class="font-bold">{{ $employee->full_name }}</span></span>
+                        <button onclick="copyToClipboard2('{{ $employee->full_name }}')" type="button" class="inline-flex items-center justify-between px-3 py-2 text-black text-xs md:text-sm rounded-md font-medium shadow-md hover:border-transparent hover:bg-[#092635] hover:text-white bg-slate-300">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="label-text text-gray-500 px-8 pb-2">Type deleted text here to proceed</p>
+                    <input type="text" placeholder="Type deleted text here" class="input input-bordered w-full max-w-xs h-[40px]" id="deletedTextInput">
+                </div>
+                <!--footer-->
+                <div class="flex justify-center gap-4">
+                    <form method="dialog" class="w-auto">
+                        <button class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">
+                            Cancel
+                        </button>
+                    </form>
+                    <button onclick="deleteEmployeelist()" id="deleteButton" class="mb-2 md:mb-0 border border-grey-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-black rounded-full bg-red-500 text-white">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
     @endsection
 
     @section('scripts')
@@ -550,6 +598,37 @@
             //     $('#employeeId').val(ID);
             //     console.log(ID);
             // }
+
+            function deleteEmployeelist(){
+                $.ajax({
+                url: $('#deleteButton').attr('data-url'),
+                type: 'GET',
+                success: function(response) {
+                    console.log("AJAX request successful:", response);
+                    $('#injectCode').html(response);
+                    // $('#myModal').modal('show')
+                    // $('#staticBackdrop').modal('show'); // Show the modal after content is loaded
+                },
+                error: function(xhr, status, error) {
+                    console.error("AJAX request failed:", error);
+                    // Handle error
+                }
+            });
+
+            }
+
+            function deleteEmployee(deleteUrl) {
+                $('#injectCodeModal').html($('#deleteEmployeeData').html());
+                $('#deleteButton').attr('data-url', deleteUrl);
+                staticBackdrop.showModal();
+            }
+
+            function copyToClipboard2(fullName) {
+                // console.log(fullName);
+                $('#deletedTextInput').val(fullName); // Populate input field with full name
+                $('#deleteButton').prop('disabled', false); // Enable delete button
+            }
+            
 
 
             $(document).ready(function() {

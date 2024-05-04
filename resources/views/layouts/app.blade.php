@@ -51,6 +51,7 @@
     </div>
     <!-- End Content -->
     @include('layouts.modals')
+    @include('layouts.small-modal')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="http://codeseven.github.io/toastr/build/toastr.min.js"></script>
     <script src="{{ asset('/assets/js/theme-switcher.js') }}"></script>

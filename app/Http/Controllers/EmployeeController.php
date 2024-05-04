@@ -32,7 +32,7 @@ class EmployeeController extends Controller
         // Validate the request
         $request->validate([
             'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
-            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
+            'employee_resume' => 'file|mimes:docx,pdf,xlsx|max:2048', // Validation for allowed file types for resume
             'phone' => 'required|numeric|digits:11', // Validation for phone number
         ]);
         // Handle profile photo upload
@@ -136,7 +136,7 @@ class EmployeeController extends Controller
              // Delete the previous profile photo if it exists
              if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
                 unlink($previousProfilePhotoPath);
-            } 
+            }
             // else {
             //     $employee->profile_photo = $profilePhotoName;
             // }
@@ -176,7 +176,7 @@ class EmployeeController extends Controller
     public function updateDocuments(Request $request, $id){
         $request->validate([
             'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
-            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
+            'employee_resume' => 'file|mimes:docx,pdf,xlsx|max:2048', // Validation for allowed file types for resume
             // Add more validation rules for other fields if necessary
         ]);
         $employee = Employee::find($id);

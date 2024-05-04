@@ -15,6 +15,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\CompanyListController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\TrashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,9 +52,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/update/education/{id}', [EmployeeController::class, 'updateEducation'])->name('employees.education.update');
         Route::post('/update/documents/{id}', [EmployeeController::class, 'updateDocuments'])->name('employees.documents.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
-        Route::delete('/force-delete/{id}', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
+
+        // trash routes
+        Route::get('/trash', [TrashController::class, 'trashlist'])->name('employees.trash');
+        Route::delete('/force-delete/{id}', [TrashController::class, 'forceDelete'])->name('employees.force-delete');
     });
 
     Route::prefix('leaves')->group(function () {

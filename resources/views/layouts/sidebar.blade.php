@@ -308,7 +308,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
             @php $isActive = request()->is('trash', 'trash/*') ? 'true' : 'false'; @endphp
             @if(userCan('trash.view'))
             <li>
-                <a class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#">
+                <a class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('employees.trash')}}">
                     <i class="fa-solid fa-trash"></i>
                     Trashed
 

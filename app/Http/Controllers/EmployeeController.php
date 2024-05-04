@@ -21,8 +21,7 @@ class EmployeeController extends Controller
         $designations = Designations::all();
         $departments = Departments::all();
         $employees = Employee::with('empDesignation', 'user')->get();
-        $trashedEmployees = Employee::onlyTrashed()->get();
-        return view('employee.index', compact('employees', 'designations', 'departments', 'trashedEmployees'));
+        return view('employee.index', compact('employees', 'designations', 'departments'));
     }
 
 
@@ -271,13 +270,13 @@ class EmployeeController extends Controller
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
     }
 
-    public function forceDelete($id)
-    {
-        $employee = Employee::withTrashed()->findOrFail($id);
-        $employee->forceDelete();
+    // public function forceDelete($id)
+    // {
+    //     $employee = Employee::withTrashed()->findOrFail($id);
+    //     $employee->forceDelete();
 
-        return redirect()->back()->with('success', 'Employee permanently deleted.');
-    }
+    //     return redirect()->back()->with('success', 'Employee permanently deleted.');
+    // }
 
     public function employeePermission(Request $request, $id)
     {

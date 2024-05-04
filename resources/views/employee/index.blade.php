@@ -336,7 +336,7 @@
 
         {{-- trash implementation section  --}}
 
-        <div class="mt-8">
+        {{-- <div class="mt-8">
             <div class="breadcum-heading mb-4">
                 <ol class="mr-2 mt-2 flex items-center whitespace-nowrap">
                     <li class="inline-flex items-center">
@@ -446,7 +446,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- End trans table --}}
 

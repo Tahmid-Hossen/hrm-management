@@ -31,9 +31,12 @@ class EmployeeController extends Controller
 
         // Validate the request
         $request->validate([
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
-            'employee_resume' => 'file|mimes:docx,pdf,xlsx|max:2048', // Validation for allowed file types for resume
-            'phone' => 'required|numeric|digits:11', // Validation for phone number
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'employee_resume' => 'file|mimes:docx,pdf,xlsx|max:2048',
+            'phone' => 'required|numeric|digits:11',
+            'emp_id' => 'required|unique:employees',
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:employees',
         ]);
         // Handle profile photo upload
         if ($request->hasFile('profile_photo')) {
@@ -69,8 +72,6 @@ class EmployeeController extends Controller
         $employee->designation = $request->designation;
         $employee->department = $request->emp_department;
         $employee->joining_date = $request->joining_date;
-        // $employee->password = bcrypt($request->password);
-        // Store profile photo and resume file names if they exist
         if (isset($profilePhotoName)) {
             $employee->profile_photo = $profilePhotoName;
         }
@@ -99,11 +100,9 @@ class EmployeeController extends Controller
                     ];
                 }
             }
-            // return $educationInfo;
             if ($educationInfo) {
                 EmployeeEducation::insert($educationInfo);
             }
-            // return 1;
             return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
         }
     }

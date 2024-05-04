@@ -142,7 +142,7 @@
                                             <span
                                                 class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                                                 role="tooltip">
-                                                Create Employee
+                                                Create
                                             </span>
                                         </button>
                                     </div>

@@ -1,7 +1,9 @@
+@php $assetVersion=getAssetVersion(); @endphp
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="http://codeseven.github.io/toastr/build/toastr.min.js"></script>
 <script src="{{ asset('/assets/js/theme-switcher.js') }}"></script>
-<script src="{{ asset('/assets/js/script.js') }}"></script>
+<script src="{{ asset("/assets/{$assetVersion}/js/scripts.js") }}"></script>
 
 {{--<script src="{{ asset('/assets/js/datatable.js') }}"></script>--}}
 <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
@@ -33,3 +35,4 @@
     toastr.error("{{ Session::get('error') }}");
     @endif
 </script>
+

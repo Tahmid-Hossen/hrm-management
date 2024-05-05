@@ -34,6 +34,11 @@
         <!-- ========== MAIN CONTENT END ========== -->
     </div>
     <!-- End Content -->
+    <div id="spinner-1" class="hidden">
+        <div class="animate-spin inline-block size-12 border-[3px] border-current border-t-transparent text-gray-400 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     @include('layouts.modals')
     @include('layouts.footerAssets')
     @yield('scripts');

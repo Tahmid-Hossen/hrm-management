@@ -13,6 +13,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\View;
 
 class EmployeeController extends Controller
 {
@@ -21,61 +22,127 @@ class EmployeeController extends Controller
     {
         $designations = Designations::all();
         $departments = Departments::all();
-        $companies=Company::get();
-        if($request->ajax()){
-            $searchKey=$request->key;
-            $company=$request->company;
-            $department=$request->department;
-            $designation=$request->designation;
-            $designation=$request->designation;
+        $companies = Company::get();
+        if ($request->ajax()) {
+            $searchKey = $request->search['value'] ?? '';
+            $company = $request->company;
+            $department = $request->department;
+            $designation = $request->designation;
+            $designation = $request->designation;
+            $limit = $request->length;
+            if ($limit < 0) $limit = 10;
+            $offset = $request->start;
+            // Orders
+            $orderByColumn = null;
+            $orderByDirection = null;
+
+            // Check if the order array exists in the request and has at least one item
+            if (isset($request->order) && count($request->order) > 0) {
+                $firstOrderItem = $request->order[0];
+
+                $orderByColumn = $firstOrderItem['name'] ?? null;
+                $orderByDirection = $firstOrderItem['dir'] ?? null;
+            }
+
+
             $query = Employee::query();
-            if($searchKey) {
-                $query->where(function ($query) use ($searchKey){
+            $recordsTotal = $query->count();
+            if ($searchKey) {
+                $query->where(function ($query) use ($searchKey) {
                     $query->where('email', 'like', "%{$searchKey}%");
                     $query->orWhere('full_name', 'like', "%{$searchKey}%");
-                    $query->orWhereIn('company', function ($subquery) use ($searchKey){
+                    $query->orWhereIn('company', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Company())->getTable())->where('name', 'like', "%$searchKey%");
                     });
-                    $query->orWhereIn('department', function ($subquery) use ($searchKey){
+                    $query->orWhereIn('department', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Departments())->getTable())->where('name', 'like', "%$searchKey%");
                     });
-                    $query->orWhereIn('designation', function ($subquery) use ($searchKey){
+                    $query->orWhereIn('designation', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Designations())->getTable())->where('name', 'like', "%$searchKey%");
                     });
 
                 });
             }
-            if($company) $query->where('company', $company);
-            if($department) $query->where('department', $department);
-            if($designation) $query->where('designation', $designation);
-            $employees=$query->get();
+            if ($company) $query->where('company', $company);
+            if ($department) $query->where('department', $department);
+            if ($designation) $query->where('designation', $designation);
 
-            $employeeData=[];
-            foreach ($employees as $item){
-                $employeeData[]=[
-                    'id'=>$item->id,
-                    'emp_id'=>$item->emp_id ?? '',
-                    'full_name'=>$item->full_name ?? '',
-                    'email'=>$item->email ?? '',
-                    'phone'=>$item->phone ?? '',
-                    'gender'=>$item->gender ?? '',
-                    'designation'=>$item->empDesignation->name ?? '',
-                    'department'=>$item->empDepartment->name ?? '',
-                    'company'=>$item->empCompany->name ?? '',
+            // ORDERS
+
+            switch ($orderByColumn) {
+                case 'employeeID':
+                    $query->orderBy('emp_id', $orderByDirection);
+                    break;
+                case 'name':
+                    $query->orderBy('full_name', $orderByDirection);
+                    break;
+                case 'company':
+                    $query->orderBy(Company::select('name')->whereColumn('id', 'employees.company'), $orderByDirection);
+                    break;
+                case 'department':
+                    $query->orderBy(Departments::select('name')->whereColumn('id', 'employees.department'), $orderByDirection);
+                    break;
+                case 'designation':
+                    $query->orderBy(Departments::select('name')->whereColumn('id', 'employees.designation'), $orderByDirection);
+                    break;
+                case 'phone':
+                    $query->orderBy('phone', $orderByDirection);
+                    break;
+                case 'gender':
+                    $query->orderBy('gender', $orderByDirection);
+                    break;
+                default:
+                    // Handle unknown column
+                    break;
+            }
+
+            $recordsFiltered = $query->get();  // Filtered Data to count
+            $query->limit($limit)->offset($offset);
+
+            $employees = $query->get();
+
+            $employeeData = [];
+            foreach ($employees as $item) {
+                $employeeData[] = [
+                    'id' => $item->id,
+                    'emp_id' => $item->emp_id ?? '',
+                    'full_name' => $item->full_name ?? '',
+                    'email' => $item->email ?? '',
+                    'phone' => $item->phone ?? '',
+                    'gender' => $item->gender ?? '',
+                    'designation' => $item->empDesignation->name ?? '',
+                    'department' => $item->empDepartment->name ?? '',
+                    'company' => $item->empCompany->name ?? '',
                 ];
             }
-            $request=[
-                'status'=>1,
-                'data'=>$employeeData
+            $request = [
+                'status' => 1,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered->count(),
+                'data' => $employeeData,
+                'orderableColumns' => $orderByColumn . $orderByDirection
             ];
             return response()->json($request);
         }
 
         $trashedEmployees = Employee::onlyTrashed()->get();
-        return view('employee.index', compact( 'companies', 'designations', 'departments', 'trashedEmployees'));
+        return view('employee.index', compact('companies', 'designations', 'departments', 'trashedEmployees'));
     }
 
-
+    public function create(Request $request)
+    {
+        if ($request->ajax()) {
+            $designations = Designations::all();
+            $departments = Departments::all();
+            $companies = Company::get();
+            $html = View::make('employee.create', compact('departments', 'designations', 'companies'))->render();
+            $request = [
+                'status' => 1,
+                'html' => $html,
+            ];
+            return response()->json($request);
+        }
+    }
 
     public function store(Request $request)
     {
@@ -184,8 +251,8 @@ class EmployeeController extends Controller
             $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
 
             $employee->profile_photo = $profilePhotoName;
-             // Delete the previous profile photo if it exists
-             if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
+            // Delete the previous profile photo if it exists
+            if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
                 unlink($previousProfilePhotoPath);
             }
             // else {
@@ -216,7 +283,8 @@ class EmployeeController extends Controller
         return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
     }
 
-    public function updateAdress(Request $request, $id){
+    public function updateAdress(Request $request, $id)
+    {
         $employee = Employee::find($id);
         $employee->present_address = $request->present_address;
         $employee->permanent_address = $request->permanent_address;
@@ -224,7 +292,8 @@ class EmployeeController extends Controller
         return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
     }
 
-    public function updateDocuments(Request $request, $id){
+    public function updateDocuments(Request $request, $id)
+    {
         $request->validate([
             'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
             'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
@@ -239,8 +308,8 @@ class EmployeeController extends Controller
             $resumeFile->move(public_path('employee_resume'), $resumeFileName);
 
             $employee->employee_resume = $resumeFileName;
-             // Delete the previous profile photo if it exists
-             if (file_exists($previousProfileDocumentsPath) && is_file($previousProfileDocumentsPath)) {
+            // Delete the previous profile photo if it exists
+            if (file_exists($previousProfileDocumentsPath) && is_file($previousProfileDocumentsPath)) {
                 unlink($previousProfileDocumentsPath);
             }
             // else {
@@ -258,7 +327,8 @@ class EmployeeController extends Controller
         return redirect()->route('employees.view', $id)->with('success', 'Employee documents updated successfully.');
     }
 
-    public function updateEducation(Request $request, $id){
+    public function updateEducation(Request $request, $id)
+    {
         $employee = Employee::find($id);
         // Check if employee exists
         if ($employee) {
@@ -380,5 +450,28 @@ class EmployeeController extends Controller
         }
 
         return response()->json(['message' => 'User permission added Failed', 'status' => true], 400);
+    }
+    public function validateSingleData(Request $request)
+    {
+        if($request->ajax()){
+            $dataContent=$request->a;
+            $dataValue=$request->val;
+            if($dataContent=='email'){
+                if(Employee::where('email', $dataValue)->count()==0){
+                    $request = [
+                        'status' => 1,
+                        'msg' => '',
+                    ];
+                }else{
+                    $request = [
+                        'status' => 0,
+                        'msg' => 'This email already exists',
+                    ];
+                }
+                return response()->json($request);
+            }
+
+        }
+        abort(403);
     }
 }

@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
         Route::delete('/force-delete/{id}', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
+        Route::get('/validate-single-data', [EmployeeController::class, 'validateSingleData']);
     });
 
     Route::prefix('leaves')->group(function () {

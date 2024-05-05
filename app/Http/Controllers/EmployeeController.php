@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\NewUserMail;
+use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Designations;
 use App\Models\EmployeeEducation;
@@ -16,13 +17,62 @@ use Illuminate\Support\Facades\Hash;
 class EmployeeController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $designations = Designations::all();
         $departments = Departments::all();
-        $employees = Employee::with('empDesignation', 'user')->get();
+        $companies=Company::get();
+        if($request->ajax()){
+            $searchKey=$request->key;
+            $company=$request->company;
+            $department=$request->department;
+            $designation=$request->designation;
+            $designation=$request->designation;
+            $query = Employee::query();
+            if($searchKey) {
+                $query->where(function ($query) use ($searchKey){
+                    $query->where('email', 'like', "%{$searchKey}%");
+                    $query->orWhere('full_name', 'like', "%{$searchKey}%");
+                    $query->orWhereIn('company', function ($subquery) use ($searchKey){
+                        $subquery->select('id')->from(with(new Company())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+                    $query->orWhereIn('department', function ($subquery) use ($searchKey){
+                        $subquery->select('id')->from(with(new Departments())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+                    $query->orWhereIn('designation', function ($subquery) use ($searchKey){
+                        $subquery->select('id')->from(with(new Designations())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+
+                });
+            }
+            if($company) $query->where('company', $company);
+            if($department) $query->where('department', $department);
+            if($designation) $query->where('designation', $designation);
+            $employees=$query->get();
+
+            $employeeData=[];
+            foreach ($employees as $item){
+                $employeeData[]=[
+                    'id'=>$item->id,
+                    'emp_id'=>$item->emp_id ?? '',
+                    'full_name'=>$item->full_name ?? '',
+                    'email'=>$item->email ?? '',
+                    'phone'=>$item->phone ?? '',
+                    'gender'=>$item->gender ?? '',
+                    'designation'=>$item->empDesignation->name ?? '',
+                    'department'=>$item->empDepartment->name ?? '',
+                    'company'=>$item->empCompany->name ?? '',
+                ];
+            }
+            $request=[
+                'status'=>1,
+                'data'=>$employeeData
+            ];
+            return response()->json($request);
+        }
+
         $trashedEmployees = Employee::onlyTrashed()->get();
-        return view('employee.index', compact('employees', 'designations', 'departments', 'trashedEmployees'));
+        return view('employee.index', compact( 'companies', 'designations', 'departments', 'trashedEmployees'));
     }
 
 
@@ -137,7 +187,7 @@ class EmployeeController extends Controller
              // Delete the previous profile photo if it exists
              if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
                 unlink($previousProfilePhotoPath);
-            } 
+            }
             // else {
             //     $employee->profile_photo = $profilePhotoName;
             // }

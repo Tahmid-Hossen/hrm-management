@@ -41,25 +41,21 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Employee::class);
     }
-
-
-
-
-    // public function role()
-    // {
-    //     return $this->belongsTo(Role::class, 'role_id');
-    // }
-    // public function permissions()
-    // {
-    //     return $this->hasManyThrough(
-    //         Permission::class,
-    //         RolePermission::class,
-    //         'role_id', // Foreign key on role_permissions table
-    //         'id', // Foreign key on permissions table
-    //         'role_id', // Local key on users table
-    //         'permission_id' // Local key on role_permissions table
-    //     );
-    // }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+    public function permissions()
+    {
+        return $this->hasManyThrough(
+            Permission::class,
+            RolePermission::class,
+            'role_id', // Foreign key on role_permissions table
+            'id', // Foreign key on permissions table
+            'role_id', // Local key on users table
+            'permission_id' // Local key on role_permissions table
+        );
+    }
     public function company()
     {
         return $this->hasOne(Company::class, 'id', 'company_id');

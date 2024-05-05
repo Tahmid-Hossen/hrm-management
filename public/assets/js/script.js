@@ -1,6 +1,16 @@
 // ---------- 01 For Education Dynamic Part Start ----------//
 var baseUrl= window.location.origin;
 
+
+function debounce(func, delay) {
+    let timerId;
+    return function(...args) {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
 function createEducationField(index) {
     return `
     <div class="education-field">
@@ -139,22 +149,22 @@ function removeEducationField(event) {
 }
 
 // Event listener to add a new education field
-document
+/*document
     .getElementById("add-education-field")
     .addEventListener("click", function (event) {
         event.preventDefault(); // Prevent the default form submission behavior
         addEducationField();
-    });
+    });*/
 
 // Event delegation to handle remove button clicks
-document.addEventListener("click", function (event) {
+/*document.addEventListener("click", function (event) {
     if (
         event.target &&
         event.target.classList.contains("remove-education-field")
     ) {
         removeEducationField(event);
     }
-});
+});*/
 // ---------- 01 For Education Dynamic Part Ends ----------//
 
 // ---------- 02 For Handle Attendance Type Change Function Start  ------------ //
@@ -170,14 +180,14 @@ function handleAttendanceTypeChange(event) {
     dateContainer.style.display = dailyRadio.checked ? "block" : "none";
 }
 
-document
+/*document
     .getElementById("attendance-monthly")
     .addEventListener("change", handleAttendanceTypeChange);
 document
     .getElementById("attendance-daily")
     .addEventListener("change", handleAttendanceTypeChange);
 
-handleAttendanceTypeChange();
+handleAttendanceTypeChange();*/
 
 // ---------- 02 For Handle Attendance Type Change Function Ends ------------ //
 

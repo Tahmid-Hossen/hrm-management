@@ -43,7 +43,7 @@
     </div>
     <!-- End Card Section -->
 
-    @if (auth()->user()->roles[0]->name !== 'staff')
+    @if (getUserRole() !== 'staff')
         <!-- Card Section -->
         <div class="pt-4 mx-auto">
             <h3 class="py-2 font-semibold text-gray-800 text-md dark:text-white">For HR</h3>

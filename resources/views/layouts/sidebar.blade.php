@@ -23,14 +23,14 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </a>
             </li>
 
-            <!-- @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
+            @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
             <li>
                 <a
                     class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
                     href="{{route('employee-profile.index')}}">
                     Employee Profile
                 </a>
-            </li> -->
+            </li>
 
             @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
             <li>
@@ -40,7 +40,6 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
             </li>
 
             @php $isActive = request()->is('leaves', 'leaves/*', 'leaves/request', 'leaves/approve', 'leaves/reject', ) ? 'true' : 'false'; @endphp
-            @if(userCan('leave.view'))
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pass" viewBox="0 0 16 16">
@@ -83,14 +82,8 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif
-
-
-
-
 
             @php $isActive = request()->is('users', 'users/*', 'roles', 'roles/*' ) ? 'true' : 'false'; @endphp
-            @if(userCan('user.view'))
             <li class="hs-accordion {{$isActive =='true' ? 'active' : ''}}" id="staff-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -128,9 +121,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif
             @php $isActive = request()->is('employees', 'employees/*') ? 'true' : 'false'; @endphp
-            @if(userCan('user.view'))
             <li>
                 <a class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('employees.index')}}">
                     <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -141,10 +132,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     Employee
                 </a>
             </li>
-            @endif
-
-            <!-- @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
-            @if(userCan('payroll.view'))
+             @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pass" viewBox="0 0 16 16">
@@ -180,10 +168,8 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif -->
 
-            <!-- @php $isActive = request()->is('timesheet', 'timesheet/*','manage-leave','manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
-            @if(userCan('attendence.view'))
+            @php $isActive = request()->is('timesheet', 'timesheet/*','manage-leave','manage-leave/*', 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="timesheet-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-alarm" viewBox="0 0 16 16">
@@ -251,7 +237,6 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @endif -->
 
             {{-- Setting implementation  --}}
             @php $isActive = request()->is('company-list','company-list/*','departments','departments/*','designations','designations/*', 'leave-type','leave-type/*', 'document-type', 'document-type/*') ? 'true' : 'false'; @endphp
@@ -306,7 +291,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
 
 
             @php $isActive = request()->is('inventory', 'inventory/*') ? 'true' : 'false'; @endphp
-            <!-- <li>
+            <li>
                 <a
                     class="{{ $isActive == 'true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
                     href="inventory.html">
@@ -414,9 +399,9 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                         </li>
                     </ul>
                 </div>
-            </li> -->
+            </li>
 
-            <!-- <li class="hs-accordion" id="projects-accordion">
+            <li class="hs-accordion" id="projects-accordion">
                 <button
                     type="button"
                     class="hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none">
@@ -543,7 +528,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </svg>
                     Documentation
                 </a>
-            </li> -->
+            </li>
 
             <!-- List of Sidebar items -->
         </ul>

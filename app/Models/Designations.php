@@ -11,7 +11,7 @@ class Designations extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'designations';
-
+    protected $fillable = ['name'];
 
     // public function designation()
     // {

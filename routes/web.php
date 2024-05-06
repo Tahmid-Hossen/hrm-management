@@ -27,6 +27,8 @@ use App\Http\Controllers\DocumentTypeController;
 |
 */
 
+Route::get('/test', [\App\Http\Controllers\TestCntroller::class, 'index']);
+
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

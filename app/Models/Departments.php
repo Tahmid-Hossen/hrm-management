@@ -11,6 +11,7 @@ class Departments extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'departments';
+    protected $fillable = ['name'];
 
 
     // public function department()

@@ -39,18 +39,17 @@ class EmployeeController extends Controller
             // Check if the order array exists in the request and has at least one item
             if (isset($request->order) && count($request->order) > 0) {
                 $firstOrderItem = $request->order[0];
-
                 $orderByColumn = $firstOrderItem['name'] ?? null;
                 $orderByDirection = $firstOrderItem['dir'] ?? null;
             }
-
-
             $query = Employee::query();
             $recordsTotal = $query->count();
             if ($searchKey) {
                 $query->where(function ($query) use ($searchKey) {
-                    $query->where('email', 'like', "%{$searchKey}%");
+                    $query->where('emp_id', 'like', "%{$searchKey}%");
                     $query->orWhere('full_name', 'like', "%{$searchKey}%");
+                    $query->where('email', 'like', "%{$searchKey}%");
+                    $query->orWhere('phone', 'like', "%{$searchKey}%");
                     $query->orWhereIn('company', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Company())->getTable())->where('name', 'like', "%$searchKey%");
                     });
@@ -60,6 +59,7 @@ class EmployeeController extends Controller
                     $query->orWhereIn('designation', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Designations())->getTable())->where('name', 'like', "%$searchKey%");
                     });
+                    $query->orWhere('gender', 'like', "%{$searchKey}%");
 
                 });
             }
@@ -146,29 +146,7 @@ class EmployeeController extends Controller
 
     public function store(Request $request)
     {
-
-        // Validate the request
-        $request->validate([
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
-            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
-            'phone' => 'required|numeric|digits:11', // Validation for phone number
-        ]);
-        // Handle profile photo upload
-        if ($request->hasFile('profile_photo')) {
-            $profilePhoto = $request->file('profile_photo');
-            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
-        }
-
-        // Handle employee resume upload
-        if ($request->hasFile('employee_resume')) {
-            $resumeFile = $request->file('employee_resume');
-            $resumeFileName = time() . '_' . $resumeFile->getClientOriginalName();
-            $resumeFile->move(public_path('employee_resume'), $resumeFileName);
-        }
-
-
-        // Create a new employee record
+        //return $request;
         $employee = new Employee();
         $employee->emp_id = $request->emp_id;
         $employee->full_name = $request->full_name;
@@ -180,13 +158,77 @@ class EmployeeController extends Controller
         $employee->emergency_contact = $request->emergency_contact;
         $employee->permanent_address = $request->permanent_address;
         $employee->is_user = $request->is_user;
-
-
         $employee->present_address = $request->present_address;
-        $employee->company_name = $request->company_name;
+        $employee->company = $request->company;
         $employee->designation = $request->designation;
         $employee->department = $request->emp_department;
         $employee->joining_date = $request->joining_date;
+
+        if ($employee->save()) {
+            $employeeId = $employee->id;
+            $isUpdateable=false;
+            if ($request->hasFile('profile_photo')) {
+                $profilePhoto = $request->file('profile_photo');
+                $profilePhotoName = $employeeId.'_'.time().'_' . $profilePhoto->getClientOriginalName();
+                $profilePhoto->move(public_path('uploads/employees/profile'), $profilePhotoName);
+                $employee->profile_photo = $profilePhotoName;
+                $isUpdateable=true;
+            }
+            if ($request->hasFile('employee_resume')) {
+                $resumeFile = $request->file('employee_resume');
+                $resumeFileName = $employeeId.'_'.time().'_'.$resumeFile->getClientOriginalName();
+                $resumeFile->move(public_path('uploads/employees/resume'), $resumeFileName);
+                $employee->employee_resume = $resumeFileName;
+                $isUpdateable=true;
+            }
+            if($isUpdateable){
+                $employee->save();
+            }
+
+
+            /*$institutionNames = $request->institution_name;
+            $degree = $request->degree;
+            $department = $request->department;
+            $passing_year = $request->passing_year;
+            $result = $request->result;
+            $educationInfo = [];
+            if ($degree) {
+                foreach ($degree as $key => $item) {
+                    $educationInfo[] = [
+                        'emp_id' => $employeeId,
+                        'institution_name' =>$institutionNames[$key]  ?? '',
+                        'degree' => $item ?? '',
+                        'department' => $department[$key] ?? '',
+                        'passing_year' => $passing_year[$key] ?? 0,
+                        'result' => $result[$key] ?? 0.00,
+                    ];
+                }
+            }
+            // return $educationInfo;
+            if ($educationInfo) {
+                EmployeeEducation::insert($educationInfo);
+            }*/
+
+            return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+        }
+        abort(403);
+
+
+        // Validate the request
+        /*$request->validate([
+            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
+            'employee_resume' => 'file|mimes:doc,pdf,xlsx|max:2048', // Validation for allowed file types for resume
+            'phone' => 'required|numeric|digits:11', // Validation for phone number
+        ]);*/
+        // Handle profile photo upload
+
+
+        // Handle employee resume upload
+
+
+
+        // Create a new employee record
+
         // $employee->password = bcrypt($request->password);
         // Store profile photo and resume file names if they exist
         if (isset($profilePhotoName)) {
@@ -457,18 +499,19 @@ class EmployeeController extends Controller
             $dataContent=$request->a;
             $dataValue=$request->val;
             if($dataContent=='email'){
-                if(Employee::where('email', $dataValue)->count()==0){
-                    $request = [
-                        'status' => 1,
-                        'msg' => '',
-                    ];
-                }else{
-                    $request = [
-                        'status' => 0,
-                        'msg' => 'This email already exists',
-                    ];
-                }
-                return response()->json($request);
+                if(Employee::where('email', $dataValue)->count()==0) $response = ['status' => 1,'msg' => 'Usable'];
+                else $response = ['status' => 0,'msg' => 'This email is already exists'];
+                return response()->json($response);
+            }
+            if($dataContent=='phone'){
+                if(Employee::where('phone', $dataValue)->count()==0) $response = ['status' => 1,'msg' => 'Usable'];
+                else $response = ['status' => 0,'msg' => 'This Phone is already exists'];
+                return response()->json($response);
+            }
+            if($dataContent=='emp_id'){
+                if(Employee::where('emp_id', '#'.$dataValue)->count()==0) $response = ['status' => 1,'msg' => 'Usable'];
+                else $response = ['status' => 0,'msg' => 'This Employee ID is already exists'];
+                return response()->json($response);
             }
 
         }

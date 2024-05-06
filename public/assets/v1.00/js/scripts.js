@@ -1,47 +1,108 @@
 var baseUrl= window.location.origin;
 function createEployeeModal() {
-    $('#largeModalTitle').html('Add a new employee');
-    let spinner=$('#spinner-1').html();
-    let html=`
+
+    if($('#createEmployee').val()===1){
+        console.log($('#createEmployee').val())
+        largeModal.showModal();
+    }else{
+        $('#largeModalTitle').html('Add a new employee');
+        let spinner=$('#spinner-1').html();
+        let html=`
         <div class="py-12 flex items-center justify-center">${spinner}</div>
     `
-    $('#largeModalBody').html(html)
-    largeModal.showModal()
-    $.ajax(`${baseUrl}/employees/create`).then(function (res) {
-        if(res.status===1){
-            $('#largeModalBody').html(res.html)
-        }
-    })
+        $('#largeModalBody').html(html)
+        largeModal.showModal()
+        $.ajax(`${baseUrl}/employees/create`).then(function (res) {
+            if(res.status===1){
+                $('#largeModalBody').html(res.html)
+            }
+        })
+    }
+
 
 }
 
-function validateEmail(inputId, dataContent, destinationId) {
+function validateEmployeeSingleData(dataContent, inputId, destinationId) {
+
     let inputValue=$(`#${inputId}`).val();
-    $.ajax(`${baseUrl}/employees/validate-single-data?a=${dataContent}&val=${inputValue}`).then(function (res) {
-        if(res.status===0){
-            $(`#error_${inputId}`).html(res.msg);
-        }else{
-            $(`#error_${inputId}`).html('');
+    let isAjax=false;
+    $(`#${destinationId}`).html('');
+    $(`#isValidate_${inputId}`).val(0)
+    if(dataContent==='email' && inputValue.length!==0){
+        var regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if(regex.test(inputValue)) {
+            isAjax=true;
+        } else {
+            $(`#${destinationId}`).html(`<i class="fa-regular fa-circle-xmark"></i> Invalid email format`);
         }
-    })
+    }
+    if(dataContent==='phone' && inputValue.length>10){
+        isAjax=true;
+    }
+    if(dataContent==='emp_id' && inputValue.length>3){
+        isAjax=true;
+    }
+    if(isAjax) {
+        $(`#${destinationId}`).html($('#spinner-small').html());
+        $.ajax(`${baseUrl}/employees/validate-single-data?a=${dataContent}&val=${inputValue}`).then(function (res) {
+            if (res.status === 1) {
+                $(`#isValidate_${inputId}`).val(1)
+                $(`#${destinationId}`).html(`<span class="text-green-600"><i class="fa-regular fa-circle-check"></i> ${res.msg}</span>`);
+            } else {
+                $(`#${destinationId}`).html(`<i class="fa-regular fa-circle-xmark"></i> ${res.msg}`);
+            }
+        })
+    }
 }
 function validateEmployeeData() {
     console.log('24242')
     let submitPermission=true;
     let errorText='This field is required!';
     let employeeFullName=$('#employeeFullName');
+    let employeeId=$('#employeeId');
+    let isValidate_employeeId=$('#isValidate_employeeId');
+    let employee_email=$('#employee_email');
+    let isValidate_employee_email=$('#isValidate_employee_email');
+    let employeePhone=$('#employeePhone');
+    let isValidate_employeePhone=$('#isValidate_employeePhone');
     let firstError=null;
+    $('#error_employeeFullName').html('')
+    $('#error_employeeId').html('')
+    $('#error_employee_email').html('')
+    $('#error_employeePhone').html('')
     if(employeeFullName.val()===''){
         submitPermission=false;
         $('#error_employeeFullName').html(errorText)
         if(firstError===null){
             firstError=employeeFullName
         }
-
     }
+    console.log(isValidate_employeeId.val())
+    if(isValidate_employeeId.val()!=='1'){
+        submitPermission=false;
+        $('#error_employeeId').html(errorText)
+        if(firstError===null){
+            firstError=employeeId
+        }
+    }
+    if(isValidate_employee_email.val()!=='1'){
+        submitPermission=false;
+        $('#error_employee_email').html(errorText)
+        if(firstError===null){
+            firstError=employee_email
+        }
+    }
+    if(isValidate_employeePhone.val()!=='1'){
+        submitPermission=false;
+        $('#error_employeePhone').html(errorText)
+        if(firstError===null){
+            firstError=employeePhone
+        }
+    }
+
     if(!submitPermission){
         firstError.focus();
     }
-    return false;
+    return submitPermission;
 }
 

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Employee Profile')
-@section('pageTitle', 'Employee Profile')
+@section('pageTitle', 'Employee List')
 @section('breadcumb')
-    <x-breadcumbs.breadcumb :data="[['title'=>'Employees', 'url'=>'']]" class=""></x-breadcumbs.breadcumb>
+    <x-breadcumbs.breadcumb :data="[['title'=>'Employee List', 'url'=>'']]" class=""></x-breadcumbs.breadcumb>
 @endsection
 @section('additionalButton')
 
@@ -103,7 +103,7 @@
                         </div>
                         <!-- create button -->
                         <div class="inline-block hs-tooltip">
-                            <button type="button" onclick="createEployeeModal()"
+                            <button type="button" onclick="createEmployeeModal.showModal()"
                                     class="btn-create">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                      fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
@@ -153,10 +153,10 @@
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
                                 DESIGNATION
                             </th>
-                            <th scope="col"
+                            {{--<th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
                                 Phone
-                            </th>
+                            </th>--}}
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
                                 Gender
@@ -178,10 +178,9 @@
     </x-containers.container-box>
 
 @endsection
-
+@include('employee.create')
 @section('scripts')
     <script>
-
         let dataTable = new DataTable('#dataTable', {
             serverSide: true,
             ajax:{
@@ -190,7 +189,7 @@
             },
             columns: [
                 { name: 'employeeID',  data: 'emp_id', render: function(data, type, row) {
-                        let html=`<a href="" class="button-red">${data}</a>`;
+                        let html=`<a href="${baseUrl}/employees/view/${row.id}" class="button-red">${data}</a>`;
                         return html;
                     }
                 },
@@ -211,13 +210,12 @@
                 { name: 'company',  data: 'company' },
                 { name: 'department',  data: 'department' },
                 { name: 'designation',  data: 'designation' },
-                { name: 'phone',  data: 'phone' },
                 { name: 'gender',  data: 'gender' },
                 { name: 'action',  data: 'id', sortable:false,
                     render: function(id, type, row) {
                         let viewProfileBtn=`
                                         <div class="hs-tooltip inline-block">
-                                            <a href="${id}"
+                                            <a href="${baseUrl}/employees/view/${row.id}"
                                                 class="hs-tooltip-toggle btn-view">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                     height="16" fill="currentColor"
@@ -297,7 +295,8 @@
             }, 300)
 
         });
-
-
     </script>
 @endsection
+
+
+

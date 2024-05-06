@@ -20,6 +20,7 @@
     "dependencies": {
         "@preline/overlay": "^2.1.0",
         "apexcharts": "^3.49.0",
+        "bootstrap-icons": "^1.11.3",
         "daisyui": "^4.10.2",
         "lodash": "^4.17.21",
         "preline": "^2.1.0"

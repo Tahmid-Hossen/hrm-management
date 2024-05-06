@@ -41,7 +41,7 @@ body{
 }
 
 .inputField{
-    @apply block w-full  px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600
+    @apply block w-full  px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 placeholder-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600
 }
 .error_msg{
     @apply text-red-600 text-xs

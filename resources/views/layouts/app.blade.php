@@ -44,7 +44,7 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
-
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     @include('layouts.modals')
     @include('layouts.footerAssets')
     @yield('moadals');

@@ -255,9 +255,10 @@
                                             </button>
                                         </div>
                                     `;
-                        let deleteButton=`
+                                    let deletePermission=true;
+                                    let deleteButton=`
                                         <div class="inline-block hs-tooltip">
-                                            <a href="${id}"
+                                            <button onclick="deletePopup('Delete Emplyee', '${row.full_name}', '${baseUrl}/employees/delete/${row.id}')"
                                                 type="button"
                                                 class="btn-red">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -271,9 +272,10 @@
                                                     role="tooltip">
                                                     Delete
                                                 </span>
-                                            </a>
+                                            </button>
                                         </div>
                                     `
+                        if(!deletePermission) deleteButton='';
                         let html=`${viewProfileBtn}${assignRoleButton}${deleteButton}`;
                         return html;
                     }

@@ -1,6 +1,6 @@
 @php $assetVersion=getAssetVersion(); @endphp
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
 <script src="http://codeseven.github.io/toastr/build/toastr.min.js"></script>
 <script src="{{ asset('/assets/js/theme-switcher.js') }}"></script>
 <script src="{{ asset("/assets/{$assetVersion}/js/scripts.js") }}"></script>

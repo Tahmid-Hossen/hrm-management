@@ -238,7 +238,7 @@
                         <button type="button" onclick="createEmployeeModal.close()" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#create-new-employee-modal">
                             Cancel
                         </button>
-                        <button type="submit" {{--onclick="return validateEmployeeData()"--}} class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        <button type="submit" {{--onclick="return validateEmployeeData()"--}} class="inline-flex items-center px-4 py-2 font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                             Save
                         </button>
                     </div>
@@ -249,17 +249,19 @@
 </dialog>
 
 <script>
-    $('#employee-tab-item-1').click(function (){
-        $('#employee-tab-item-1').addClass('active');
-        $('#employee-tab-item-2').removeClass('active');
-        $('#employee-tab-1').removeClass('hidden');
-        $('#employee-tab-2').addClass('hidden');
-    });
 
-    $('#employee-tab-item-2').click(function (){
-        $('#employee-tab-item-2').addClass('active');
-        $('#employee-tab-item-1').removeClass('active');
-        $('#employee-tab-2').removeClass('hidden');
-        $('#employee-tab-1').addClass('hidden');
-    });
+        /*$('#employee-tab-item-1').click(function () {
+            $('#employee-tab-item-1').addClass('active');
+            $('#employee-tab-item-2').removeClass('active');
+            $('#employee-tab-1').removeClass('hidden');
+            $('#employee-tab-2').addClass('hidden');
+        });
+
+        $('#employee-tab-item-2').click(function () {
+            $('#employee-tab-item-2').addClass('active');
+            $('#employee-tab-item-1').removeClass('active');
+            $('#employee-tab-2').removeClass('hidden');
+            $('#employee-tab-1').addClass('hidden');
+        });*/
+
 </script>

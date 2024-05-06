@@ -106,3 +106,25 @@ function validateEmployeeData() {
     return submitPermission;
 }
 
+function deletePopup(title, deletedText, url) {
+    $('#deleteModalTitle').html(title)
+    $('#deletedText').html(deletedText)
+    $('#deleteForm').attr('action', url)
+    deleteModal.showModal()
+}
+
+function copyToClipboardForDeletePopup() {
+    let text = $('#deletedText').html();
+    try {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                $("#deletedTextInput").val(text)
+                $("#deleteButton").prop("disabled", false);
+            })
+            .catch((error) => {
+                showAlert('Unable to copy text to clipboard:', error);
+            });
+    } catch (error) {
+        console.error('Clipboard API not supported:', error);
+    }
+}

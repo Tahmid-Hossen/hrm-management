@@ -13,6 +13,6 @@ class EmployeeProfileController extends Controller
         // return view('employee-profile.index');
         $employees = Employee::all();
         // return $employees;
-        return view('employee-profile.index', compact('employees')); 
+        return view('employee-profile.index', compact('employees'));
     }
 }

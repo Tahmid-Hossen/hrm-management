@@ -421,6 +421,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $designations = Designations::all();
         $departments = Departments::all();
+        // return $designations;
         return view('employee.view', compact('employee', 'designations', 'departments'));
     }
 

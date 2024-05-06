@@ -18,7 +18,7 @@
                     @php
                         $defaultProfileImage=$employee->gender=='Female' ? asset('uploads/employees/profile/default-emp-female.jpg') : asset('uploads/employees/profile/default-emp-male.jpg');
                     @endphp
-                    <img class="rounded-full border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg cursor-pointer w-48 h-48 object-cover duration-300 ease-in-out" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="profile-images"/>
+                    <img src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="profile-images"/>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">
@@ -111,10 +111,11 @@
         <div class="mt-3">
             <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
                 <div class="py-3">
-                    {{-- <div class="flex justify-between">
+                    <div class="flex justify-between">
                         <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
                             Personal Details
                         </h3>
+                        {{-- <span class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-red-600  rounded-lg hover:bg-red-700 dark:bg-red-600 dark:hover:text-red-white dark:hover:bg-red-700 hover:text-white dark:text-white"></span> --}}
                         <div class="inline-block hs-tooltip">
                             <button type="button" id="update-info-button"
                                     class="btn-edit">
@@ -127,157 +128,231 @@
                                 </span>
                             </button>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="overflow-y-auto">
                         <!-- Card Section -->
                         <div class="mx-auto">
                             <!-- Card -->
-                            <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow rounded-lg border dark:border-neutral-500">
-                                <div class="px-4 py-5 sm:px-6 flex justify-between">
-                                    {{-- <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                        Personal Details
-                                    </h3> --}}
-                                    <h3 class="text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
-                                        Personal Details
-                                    </h3>
-                                    <div class="inline-block hs-tooltip">
-                                        <button type="button" id="update-info-button"
-                                                class="btn-edit">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                            </svg>
-                                            <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
-                                                 Edit Personal Details
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="px-4 py-5 sm:p-0">
-                                    <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-2">
-                                        <div class="border-t dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-200">
-                                                Employee Name
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->full_name ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold dark:text-neutral-300 text-gray-500">
-                                                Employee Id
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->emp_id ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Email
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->email ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Blood Group
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->blood_group ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Joining Date
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->joining_date ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Company Name
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->company_name ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Designation
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-800 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->designation ?  $designations->firstWhere('id', $employee->designation)->name ?? 'N/A' : 'N/A' }}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Contact No
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->phone ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Emergency Contact Number
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->emergency_contact ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        <div class="border-b dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Birthday
-                                            </dt>
-                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                                {{ $employee->birth_year ?? 'N/A'}}
-                                            </dd>
-                                        </div>
-                                        {{-- <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <div>
-                                                <label for="af-account-gender-checkbox" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                    Gender
-                                                </label>
-                                                <ul class="flex flex-col sm:flex-row">
-                                                    <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                        <div class="relative flex w-full items-start">
-                                                            <div class="flex h-5 items-center">
-                                                                <input id="hs-horizontal-list-group-item-radio-1" value="Male" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" checked="" disabled />
-                                                            </div>
-                                                            <label for="hs-horizontal-list-group-item-radio-1" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                                Male
-                                                            </label>
-                                                        </div>
-                                                    </li>
+                            <div class="bg-white dark:bg-neutral-800 active" id="disable-card">
+                                <form action="{{ route("employees.store") }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
 
-                                                    <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                        <div class="relative flex w-full items-start">
-                                                            <div class="flex h-5 items-center">
-                                                                <input id="hs-horizontal-list-group-item-radio-2" value="Female" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
-                                                            </div>
-                                                            <label for="hs-horizontal-list-group-item-radio-2" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                                Female
-                                                            </label>
-                                                        </div>
-                                                    </li>
-
-                                                    <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                        <div class="relative flex w-full items-start">
-                                                            <div class="flex h-5 items-center">
-                                                                <input id="hs-horizontal-list-group-item-radio-3" value="Other" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
-                                                            </div>
-                                                            <label for="hs-horizontal-list-group-item-radio-3" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                                Other
-                                                            </label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                    <div class="mt-3">
+                                        <div>
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="employeeFullName" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Employee Name
+                                                    </label>
+                                                    <input id="employeeFullName" name="full_name" type="text" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}" disabled />
+                                                </div>
+                                                <div>
+                                                    <label for="employeeId" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Employee Id
+                                                    </label>
+                                                    <input disabled id="employeeId" name="employee_id" type="text" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emp_id }}" disabled />
+                                                </div>
                                             </div>
-                                        </div> --}}
-                                    </dl>
-                                </div>
+
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="employeeEmail" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Email
+                                                    </label>
+                                                    <input id="employee_email" type="email" name="email" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->email }}" disabled />
+                                                </div>
+
+                                                <div>
+                                                    <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                        Blood Group
+                                                    </label>
+                                                    <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                        <option value="" selected disabled>Select Blood Group</option>
+                                                        <option value="A+" {{ $employee->blood_group == 'A+' ? 'selected' : '' }}> A+ </option>
+                                                        <option value="A-" {{ $employee->blood_group == 'A-' ? 'selected' : '' }}> A- </option>
+                                                        <option value="B+" {{ $employee->blood_group == 'B+' ? 'selected' : '' }}>B+</option>
+                                                        <option value="B-" {{ $employee->blood_group == 'B-' ? 'selected' : '' }}>B-</option>
+                                                        <option value="O+" {{ $employee->blood_group == 'O+' ? 'selected' : '' }}>O+</option>
+                                                        <option value="O-" {{ $employee->blood_group == 'O-' ? 'selected' : '' }}>O-</option>
+                                                        <option value="AB+" {{ $employee->blood_group == 'AB+' ? 'selected' : '' }}>AB+</option>
+                                                        <option value="AB-" {{ $employee->blood_group == 'AB-' ? 'selected' : '' }}>AB-</option>
+                                                    </select>
+                                                </div>
+                                                {{-- <div>
+                                                        <label
+                                                            for="employeePassword"
+                                                            class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200"
+                                                        >
+                                                            Password
+                                                        </label>
+                                                        <input
+                                                            id="employeePassword"
+                                                            name="password"
+                                                            type="password"
+                                                            class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                            value="{{ $employee->password }}"
+                                                />
+                                            </div> --}}
+                                            </div>
+
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="employeeJoiningDate" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Joining Date
+                                                    </label>
+                                                    <input id="employeeJoiningDate" name="joining_date" type="date" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->joining_date }}" disabled />
+                                                </div>
+                                                <div>
+                                                    <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                        Select Company
+                                                    </label>
+                                                    <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                        <option value="" selected disabled>Select Company</option>
+                                                        <option value="Nexdecade Technology" {{ $employee->company_name == 'Nexdecade Technology' ? 'selected' : '' }}>Nexdecade Technology</option>
+                                                        <option value="M2M Communication" {{ $employee->company_name == 'M2M Communication' ? 'selected' : '' }}>M2M Communication</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                        Select Designation
+                                                    </label>
+                                                    <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                        @foreach ($designations as $designation)
+                                                            {{-- <option value="{{ $department->id }}"> --}}
+                                                            <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
+                                                                {{ $designation->name }}
+                                                            </option>
+
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                {{-- <div> --}}
+                                                {{-- <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200"> --}}
+                                                {{-- Upload Photo --}}
+                                                {{-- </label> --}}
+                                                {{-- <input type="file" name="profile_photo" id="employee_photo" class="block w-full px-4 py-3 text-sm border border-gray-200 rounded-lg bg-neutral-100 dark:bg-neutral-700 focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"/> --}}
+                                                {{-- </div> --}}
+
+                                                <div>
+                                                    <label for="employeePhone" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Phone
+                                                    </label>
+                                                    <span class="text-sm text-gray-400 dark:text-neutral-600">
+                                                    (Optional)
+                                                </span>
+                                                    <input id="employeePhone" name="phone" type="text" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->phone }}" disabled />
+                                                </div>
+                                            </div>
+
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="employeeEmmergencyPhone" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Emergency Contact
+                                                        Number
+                                                    </label>
+                                                    <span class="text-sm text-gray-400 dark:text-neutral-600">
+                                                    (Optional)
+                                                </span>
+                                                    <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact }}" disabled />
+                                                </div>
+                                                {{-- <div>
+                                                            <label
+                                                                for="emergencyContactRelation"
+                                                                class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200"
+                                                            >
+                                                                Emergency Contact
+                                                                Relation
+                                                            </label>
+                                                            <span
+                                                                class="text-sm text-gray-400 dark:text-neutral-600"
+                                                            >
+                                                                (Optional)
+                                                            </span>
+                                                            <input
+                                                                id="emergencyContactRelation"
+                                                                name="emergency_contact_relation"
+                                                                type="text"
+                                                                class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                                                                value="{{ $employee->emergency_contact_relation }}"
+                                                />
+                                            </div> --}}
+
+                                                <div>
+                                                    <label for="employeeBirthday" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Birthday
+                                                    </label>
+                                                    <div class="sm:flex">
+                                                        <input id="employeeBirthday" name="birth_year" type="date" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->birth_year }}" disabled />
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                                <div>
+                                                    <label for="af-account-gender-checkbox" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                        Gender
+                                                    </label>
+                                                    <ul class="flex flex-col sm:flex-row">
+                                                        <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
+                                                            <div class="relative flex w-full items-start">
+                                                                <div class="flex h-5 items-center">
+                                                                    <input id="hs-horizontal-list-group-item-radio-1" value="Male" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" checked="" disabled />
+                                                                </div>
+                                                                <label for="hs-horizontal-list-group-item-radio-1" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
+                                                                    Male
+                                                                </label>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
+                                                            <div class="relative flex w-full items-start">
+                                                                <div class="flex h-5 items-center">
+                                                                    <input id="hs-horizontal-list-group-item-radio-2" value="Female" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
+                                                                </div>
+                                                                <label for="hs-horizontal-list-group-item-radio-2" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
+                                                                    Female
+                                                                </label>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
+                                                            <div class="relative flex w-full items-start">
+                                                                <div class="flex h-5 items-center">
+                                                                    <input id="hs-horizontal-list-group-item-radio-3" value="Other" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
+                                                                </div>
+                                                                <label for="hs-horizontal-list-group-item-radio-3" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
+                                                                    Other
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                                <div>
+                                                    <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
+                                                        Employee Profile Photo
+                                                    </label>
+                                                    <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <div
+                                                            class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700"
+                                                        >
+                                                            <button
+                                                                type="submit"
+                                                                class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+                                                            >
+                                                                Update
+                                                            </button>
+                                                        </div> --}}
+                                    </div>
+                                </form>
                             </div>
                             <!-- End Card -->
 

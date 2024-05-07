@@ -6,5 +6,6 @@
 <link href="{{ asset('/assets/css/datatable.css') }}" rel="stylesheet">
 <link href="{{ asset('/assets/css/extra-css.css') }}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('/assets/css/apexcharts.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/profileImage.css') }}">
 <link href="{{ asset("/assets/{$assetVersion}/css/style.css") }}" rel="stylesheet">
 

@@ -18,7 +18,34 @@
                     @php
                         $defaultProfileImage=$employee->gender=='Female' ? asset('uploads/employees/profile/default-emp-female.jpg') : asset('uploads/employees/profile/default-emp-male.jpg');
                     @endphp
-                    <img class="rounded-full border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg cursor-pointer w-48 h-48 object-cover duration-300 ease-in-out" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="profile-images"/>
+                    <div class="flex flex-col gap-3 hidden" id="profilePicEdit">
+                        <form action="{{ route('employees.update',['id'=>$employee->id, 'a' => 'profile-image']) }}" method="post">
+                            <div class="profile-pic border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg duration-300 ease-in-out rounded-full">
+                                <label class="-label " for="file">
+                                    <span class="fa-solid fa-camera flex items-center"></span>
+                                    <span>Change Image</span>
+                                </label>
+                                <input id="file" type="file" accept="image/*" onchange="loadFile(event)" />
+                                <img class="" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="{{$employee->name ??''}}" id="output"/>
+                            </div>
+                            <div class="flex items-center justify-center gap-x-2 border-t px-2 py-1 dark:border-neutral-700">
+                                <button onclick="cancelEmployeeProfilePicEdit('profilePic')" type="button" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-documets-four">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                                    Update
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="relative flex flex-col gap-3" id="profilePic">
+                        <img class="rounded-full border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg w-48 h-48 object-cover duration-300 ease-in-out" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="profile-images"/>
+                        <div id="editProfileBtn" onclick="editEmployeeProfilePic()" class="absolute bottom-3 right-3 z-50 cursor-pointer flex items-center justify-center p-3 bg-neutral-300 hover:bg-red-700 hover:text-white active:bg-red-800 dark:bg-neutral-300 dark:hover:text-white dark:hover:bg-red-600 dark:active:bg-red-700 w-10 h-10 rounded-full cursor-pointer">
+                            <i class="fa-solid fa-pen"></i>
+                        </div>
+
+                    </div>
+                    {{-- <img class="rounded-full border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg cursor-pointer w-48 h-48 object-cover duration-300 ease-in-out" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="profile-images"/> --}}
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold text-gray-800 dark:text-white">
@@ -506,6 +533,20 @@
 
 @section('scripts')
 <script>
+
+function editEmployeeProfilePic() {
+    $("#profilePic").hide();
+    $("#profilePicEdit").show();
+}
+function cancelEmployeeProfilePicEdit(event) {
+    $("#profilePicEdit").hide();
+    $("#profilePic").show();
+}
+/* Script For Profile phpto change */
+var loadFile = function(event) {
+    const image = document.getElementById("output");
+    image.src = URL.createObjectURL(event.target.files[0]);
+};
 
 
 // For personal details

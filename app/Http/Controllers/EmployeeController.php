@@ -6,6 +6,8 @@ use App\Mail\NewUserMail;
 use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Designations;
+use App\Models\DocumentType;
+use App\Models\EmployeeDocument;
 use App\Models\EmployeeEducation;
 use App\Models\ImportLog;
 use Illuminate\Http\Request;
@@ -323,6 +325,7 @@ class EmployeeController extends Controller
                     $employee->department = $request->emp_department;
                     $employee->joining_date = $request->joining_date;
                     $employee->emergency_contact = $request->emergency_contact;
+                    $employee->personal_email = $request->personal_email;
                     break;
                 case 'address':
                     $employee->present_address = $request->present_address;
@@ -338,6 +341,21 @@ class EmployeeController extends Controller
                     $education->result = $request->input('result') ?? '';
                     if($education->save()){
                         return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
+                    }
+                    break;
+                case 'documents':
+                    $doc=new EmployeeDocument();
+                    $doc->emp_id = $id;
+                    $doc->title = $request->input('title') ?? '';
+                    $doc->document_type = $request->input('document_type') ?? '';
+                    if ($request->hasFile('documentFile')) {
+                        $file = $request->file('documentFile');
+                        $fileName = $id.'_'.time().'_' . $file->getClientOriginalName();
+                        $file->move(public_path('uploads/employees/document'), $fileName);
+                        $doc->file_name = $fileName;
+                    }
+                    if($doc->save()){
+                        return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee added documents successfully.');
                     }
                     break;
                 default:
@@ -485,8 +503,9 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         $designations = Designations::all();
         $departments = Departments::all();
+        $documentType = DocumentType::all();
         // return $designations;
-        return view('employee.view', compact('employee', 'designations', 'departments'));
+        return view('employee.view', compact('employee', 'designations', 'departments', 'documentType'));
     }
 
 
@@ -496,6 +515,12 @@ class EmployeeController extends Controller
         $employee->delete();
 
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+    }
+    public function deleteEducation($id)
+    {
+        $employee = EmployeeEducation::findOrFail($id);
+        $employee->delete();
+        return redirect()->route('employees.view', ['id'=>$id, 'active'=>'education'])->with('success', 'Employee dducation deleted successfully.');
     }
 
     public function forceDelete($id)
@@ -588,6 +613,7 @@ class EmployeeController extends Controller
     }
     public function importEmployeesSubmit(Request $request)
     {
+
         if($request->has('file')){
             $file=$request->file('file');
             $data = Excel::toCollection([], $file);
@@ -595,9 +621,7 @@ class EmployeeController extends Controller
             $columnNames = $data->first()->first();
             $colDefs='["Sl No.","ID Number","Name","NID Number","Company","Department","Designation","Joining Date","Cell Number","Emergency Cell Number","Blood Group","Personal Mail Address","Official Mail Address","Gender","Resign Date"]';
             if($colDefs!=(string)$columnNames){
-
-                return 'invalid format of data';
-                //return View::make('import-export.showProblems')->with('invalidTemplate', '1');
+                return view('employee.import.invalid');
             }
             $company=[];
             $departments=[];
@@ -687,11 +711,8 @@ class EmployeeController extends Controller
             $importLog->error_count=$errorCount;
             $importLog->save();
             return view('employee.import.summary', compact('errorRow'));
-            echo '<pre>';
-            print_r($errorRow);
-            echo '</pre>';
         }else{
-
+            return view('employee.import.invalid');
         }
     }
 

@@ -13,13 +13,13 @@
 @endsection
 
 @section('content')
-    <section class="flex items-center justify-center h-full p-16 dark:bg-gray-50 dark:text-gray-800">
-        <div class="container flex flex-col justify-center items-center mx-auto my-8 max-w-md w-1/2 py-8 pb-12" style="height: 300px; background-color: white; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+    <section class="flex items-center justify-center mt-16 dark:bg-gray-50 dark:text-gray-800">
+        <div class="container flex flex-col justify-center items-center mx-auto  max-w-md">
             <div class="text-center">
-                <img src="" alt="Nexdecade Logo" style="width: 50px; height: 50px;" class="mx-auto mb-4">
-                <p class="text-2xl font-semibold md:text-3xl">Sorry, This file is invalid.</p>
-                <p class="mt-4 mb-8 dark:text-gray-600">Unfortunately the file you are looking for is not valid. But don't worry, you can find plenty of other things on our homepage.</p>
-                <a href="/" class="active text-white font-semibold bg-red-600 dark:text-white active:text-white active:font-semibold active:bg-red-600 dark:active:text-white w-full py-2 px-2 text-md text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 text-center">Go Back To Home Page</a>
+                <p class="text-5xl p-4"><i class="fa-solid fa-file-circle-exclamation"></i></p>
+                <p class="text-2xl font-semibold md:text-3xl">Sorry, This file format is invalid.</p>
+                <p class="mt-4 mb-8 dark:text-gray-600">Unfortunately the file you are looking for is not valid. Please provide valid template.</p>
+                <a href="{{route('employees.import')}}" class="active text-white font-semibold bg-red-600 dark:text-white active:text-white active:font-semibold active:bg-red-600 dark:active:text-white w-full py-2 px-2 text-md text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600 text-center">Back To Import</a>
             </div>
         </div>
     </section>

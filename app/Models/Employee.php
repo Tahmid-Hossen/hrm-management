@@ -29,7 +29,10 @@ class Employee extends Model
     {
         return $this->hasOne(Company::class, 'id', 'company');
     }
-
+    public function empDocuments()
+    {
+        return $this->hasMany(EmployeeDocument::class, 'emp_id', );
+    }
     public function user()
     {
         return $this->hasOne(User::class);

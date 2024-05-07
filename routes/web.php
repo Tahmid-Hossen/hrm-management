@@ -15,6 +15,7 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\CompanyListController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\TestCntroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,10 @@ use App\Http\Controllers\DocumentTypeController;
 */
 
 Route::get('/test', [\App\Http\Controllers\TestCntroller::class, 'index']);
-
+Route::prefix('test')->group(function () {
+        Route::get('/', [\App\Http\Controllers\TestCntroller::class, 'index']);
+        Route::get('/import', [TestCntroller::class, 'import'])->name('test.import-component');
+    });
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');

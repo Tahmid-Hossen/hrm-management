@@ -224,4 +224,10 @@ function cancelEmployeeEdit(section) {
 
 function addEducationForm(id) {
     $('#educationFormsWrap').html($('#educationForm').html())
+    $('.institution_name').focus();
+}
+
+function addDocumentForm(id) {
+    $('#documentFormsWrap').html($('#addDocumentForm').html())
+    $('.documentTitle').focus();
 }

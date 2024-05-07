@@ -10,7 +10,10 @@
 @endsection
 
 @section("content")
-
+    @php
+        $active='personal';
+        if(request()->has('active')) $active=request('active');
+    @endphp
     <x-containers.container-box>
         <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
             <div class="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 lg:gap-6">
@@ -97,10 +100,7 @@
         </div>
     </x-containers.container-box>
     <x-containers.container-box>
-        @php
-            $active='personal';
-            if(request()->has('active')) $active=request('active');
-        @endphp
+
         <div class="flex">
             <div class="flex rounded-lg bg-gray-100 p-1 transition hover:bg-gray-200 dark:bg-neutral-700 dark:hover:bg-neutral-600">
                 <nav class="flex flex-wrap space-x-1" aria-label="Tabs" role="tablist">
@@ -312,33 +312,56 @@
                             <div class="px-4 py-5 sm:p-0" id="education-details-view">
                                 <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-1">
                                     <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
-                                        @php $tableHeader=["S/N", "Degree", "Institute", "Department", "Passing Year", "Result", "Action"]; @endphp
+                                        @php $tableHeader=["S/N", "Degree", "Institute", "Department", "Passing Year", "Result"] @endphp
                                         <thead>
                                         <tr>
                                             @foreach($tableHeader as $item)
-                                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{$item}}</th>
+                                                <th scope="col" class="px-6 py-3 text-start text-sm font-medium text-neutral-700 uppercase dark:text-neutral-500">{{$item}}</th>
                                             @endforeach
+                                                <th scope="col" class="px-6 py-3 text-right text-sm font-medium text-neutral-700 uppercase dark:text-neutral-500">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
 
                                         @if(isset($employee->empEducation))
-                                            @foreach($employee->empEducation as $key=>$item)
-                                                <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{$key+1}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->degree ?? ''}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->institution_name ?? ''}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->department ?? ''}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->passing_year ?? ''}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->result ?? ''}}</td>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
-                                                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400">Delete</button>
+                                            @if($employee->empEducation->count()>0)
+                                                @foreach($employee->empEducation as $key=>$item)
+                                                    <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{$key+1}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->degree ?? ''}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->institution_name ?? ''}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->department ?? ''}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->passing_year ?? ''}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->result ?? ''}}</td>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                                            <div class="inline-block hs-tooltip">
+                                                                <button onclick="deletePopup('Delete Education', '{{$item->degree ?? ''}}', '{{route('employee.delete.education', ['id'=>$item->id, 'active'=>'education'])}}')"
+                                                                        type="button"
+                                                                        class="btn-red">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                         height="16" fill="currentColor" class="bi bi-archive"
+                                                                         viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                                                                    </svg>
+                                                                    <span
+                                                                        class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
+                                                                        role="tooltip">
+                                                                        Delete
+                                                                    </span>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="7">
+                                                        <p class="pt-6 text-gray-400 text-center">Not Found!</p>
                                                     </td>
                                                 </tr>
-
-                                            @endforeach
-                                        @else
-
+                                            @endif
                                         @endif
                                         </tbody>
                                     </table>
@@ -360,10 +383,10 @@
                         <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow rounded-lg border dark:border-neutral-500" id="disable-card-segment-four">
                             <div class="px-4 py-5 sm:px-6 flex justify-between">
                                 <h3 class="text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
-                                    Documents Details
+                                    Documents
                                 </h3>
                                 <div class="inline-block hs-tooltip">
-                                    <button type="button" id="update-info-button" class="btn-edit">
+                                    <button type="button" onclick="addDocumentForm({{$employee->id}})" id="update-info-button" class="btn-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -374,37 +397,27 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                            <div id="documentFormsWrap"></div>
+                            <hr>
+                            <div class="px-4 bg-white dark:bg-neutral-800" id="enable-card-segment-four">
+                                @if(isset($employee->empDocuments))
+                                    @if($employee->empDocuments->count()>0)
+                                        <div class="grid grid-cols-4 gap-6 py-4">
+                                            @foreach($employee->empDocuments as $key=>$item)
+                                                <x-cards.document-card :data="$item">
 
-                        <div class="bg-white dark:bg-neutral-800" id="enable-card-segment-four">
-                            <form
-                                action="{{ route("employees.documents.update", $employee->id) }}"
-                                method="POST"
-                                enctype="multipart/form-data"
-                            >
-                                @csrf
-
-                                <div class="mt-3">
-                                    <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
-                                        <div>
-                                            <p><strong class="text-red-700">Previous Documents: </strong>{{$employee->employee_resume}}</p>
-                                            <label for="employeeResume" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Upload Resume
-                                            </label>
-                                            <input id="employeeResume" name="employee_resume" type="file" class="block w-full rounded-lg border border-gray-200 bg-neutral-100 px-4 py-3 text-sm focus:border-red-500 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:bg-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" />
+                                                </x-cards.document-card>
+                                            @endforeach
                                         </div>
-                                    </div>
-                                    <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
-                                        <button type="button" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-documets-four">
-                                            Close
-                                        </button>
-                                        <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                                            Update
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
+
+                                    @else
+                                        <p class="pt-6 text-gray-400 text-center">Not Found!</p>
+                                    @endif
+                                @endif
+                            </div>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -454,7 +467,7 @@
                         <label for="institution_name_one" class="inputLabel">
                             Institution Name
                         </label>
-                        <input id="institution_name_one" name="institution_name" type="text" class="inputField" placeholder="Institution name">
+                        <input id="institution_name_one" name="institution_name" type="text" class="institution_name inputField" placeholder="Institution name">
                     </div>
                     <div>
                         <label for="degree_one" class="inputLabel">
@@ -501,6 +514,61 @@
 
         </div>
 
+    </div>
+
+    <div id="addDocumentForm" class="hidden ">
+        <div class="p-4">
+            <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>'documents'])}}" onsubmit="return validateEmployeeEditData('personal')" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 lg:gap-6 mt-2">
+                    <div>
+                        <label for="title" class="inputLabel">
+                            Document Title
+                        </label>
+                        <input id="" name="title" type="text" class="inputField documentTitle" placeholder="Document Title">
+                    </div>
+                    <div>
+                        <label for="" class="inputLabel">
+                            Document Type
+                        </label>
+                        <select id="" name="document_type" class="inputField">
+                            <option value="" disabled>Select Degree</option>
+                            @foreach($documentType as $item)
+                                <option value="{{$item->id}}">{{$item->name??''}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="" class="inputLabel">
+                            Document Type
+                        </label>
+                        <label class="block">
+                            <span class="sr-only">Choose File</span>
+                            <input type="file" name="documentFile" class="block w-full text-sm text-gray-500
+                                file:me-4 file:py-3 file:px-6
+                                file:rounded-lg file:border-0
+                                file:text-sm file:font-semibold
+                                file:bg-blue-600 file:text-white
+                                hover:file:bg-blue-700
+                                file:disabled:opacity-50 file:disabled:pointer-events-none
+                                dark:text-neutral-500
+                                dark:file:bg-blue-500
+                                dark:hover:file:bg-blue-400
+                              ">
+                        </label>
+                    </div>
+
+                </div>
+                <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                    <button type="button" onclick="removeInnerHtml('documentFormsWrap')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
+                        Cancel
+                    </button>
+                    <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 @endsection
 

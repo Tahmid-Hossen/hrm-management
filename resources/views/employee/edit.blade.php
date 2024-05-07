@@ -5,7 +5,7 @@
             @csrf
             <div class="mt-3">
                 <div class="flex flex-col gap-y-2">
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                    <div class=" grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                         <div>
                             <label for="employeeFullName" class="inputLabel">
                                 Employee Name
@@ -21,9 +21,6 @@
                             <span class="error_msg" id="error_employeeId"></span>
                             <input type="hidden" id="isValidate_employeeId" value="1">
                         </div>
-                    </div>
-
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
                         <div>
                             <label for="employeeEmail" class="inputLabel">
                                 Email
@@ -31,6 +28,12 @@
                             <input id="employee_email" type="email" name="email" class="inputField" value="{{ $employee->email ?? '' }}"  />
                             <span class="error_msg" id="error_employee_email"></span>
                             <input type="hidden" id="isValidate_employee_email" value="1">
+                        </div>
+                        <div>
+                            <label for="employeeEmail" class="inputLabel">
+                                Personal Email
+                            </label>
+                            <input id="personal_email" type="email" name="personal_email" class="inputField" value="{{ $employee->personal_email ?? '' }}"  />
                         </div>
 
                         <div>
@@ -45,9 +48,6 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
-
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
                         <div>
                             <label for="employeeJoiningDate" class="inputLabel">
                                 Joining Date
@@ -67,9 +67,20 @@
                                 @endif
                             </select>
                         </div>
-                    </div>
+                        <div>
+                            <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
+                                Select Designation
+                            </label>
+                            <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                @foreach ($designations as $designation)
+                                    {{-- <option value="{{ $department->id }}"> --}}
+                                    <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
+                                        {{ $designation->name }}
+                                    </option>
 
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                                @endforeach
+                            </select>
+                        </div>
                         <div>
                             <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
                                 Select Designation
@@ -86,14 +97,10 @@
                         </div>
                         <div>
                             <label for="employeePhone" class="inputLabel"> Phone </label>
-                            <span class="text-sm text-gray-400 dark:text-neutral-600"> (Optional)</span>
                             <input id="employeePhone" name="phone" type="text" class="inputField" value="{{ $employee->phone }}"  />
                             <span class="error_msg" id="error_employeePhone"></span>
                             <input type="hidden" id="isValidate_employeePhone" value="1">
                         </div>
-                    </div>
-
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
                         <div>
                             <label for="employeeEmmergencyPhone" class="inputLabel">Emergency Contact </label>
                             <span class="text-sm text-gray-400 dark:text-neutral-600"> (Optional) </span>
@@ -107,11 +114,6 @@
                                 <input id="employeeBirthday" name="birth_year" type="date" class="inputField" value="{{ $employee->birth_year }}"  />
                             </div>
                         </div>
-
-
-                    </div>
-
-                    <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
                         <div>
                             <label for="af-account-gender-checkbox" class="inputLabel">
                                 Gender
@@ -151,7 +153,9 @@
                                 </li>
                             </ul>
                         </div>
+
                     </div>
+
                 </div>
                 <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
                     <button type="button" onclick="cancelEmployeeEdit('personal')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn">

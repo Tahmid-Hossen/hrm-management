@@ -68,7 +68,7 @@
                         <div>
                             <h5 class="text-sm text-gray-800 dark:text-white">Action: </h5>
                         </div>
-                        <div class="inline-block hs-tooltip">
+                        {{--<div class="inline-block hs-tooltip">
                             <button type="button" class="btn-import">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                      fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
@@ -83,9 +83,9 @@
                                                 Import
                                             </span>
                             </button>
-                        </div>
+                        </div>--}}
                         <div class="inline-block hs-tooltip">
-                            <a type="button" href="/" class="btn-export">
+                            <a href="{{route('employees.import')}}" type="button" class="btn-export">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                      fill="currentColor" class="bi bi-file-earmark-arrow-down"
                                      viewBox="0 0 16 16">
@@ -97,7 +97,7 @@
                                 <span
                                     class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
                                     role="tooltip">
-                                                Export
+                                                Import
                                             </span>
                             </a>
                         </div>

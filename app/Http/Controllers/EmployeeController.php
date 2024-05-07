@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Designations;
 use App\Models\EmployeeEducation;
+use App\Models\ImportLog;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\Role;
@@ -14,12 +15,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class EmployeeController extends Controller
 {
 
     public function index(Request $request)
     {
+        //return $request;
         $designations = Designations::all();
         $departments = Departments::all();
         $companies = Company::get();
@@ -46,9 +50,9 @@ class EmployeeController extends Controller
             $recordsTotal = $query->count();
             if ($searchKey) {
                 $query->where(function ($query) use ($searchKey) {
-                    $query->where('emp_id', 'like', "%{$searchKey}%");
+                    $query->orWhere('emp_id', 'like', "%{$searchKey}%");
                     $query->orWhere('full_name', 'like', "%{$searchKey}%");
-                    $query->where('email', 'like', "%{$searchKey}%");
+                    $query->orWhere('email', 'like', "%{$searchKey}%");
                     $query->orWhere('phone', 'like', "%{$searchKey}%");
                     $query->orWhereIn('company', function ($subquery) use ($searchKey) {
                         $subquery->select('id')->from(with(new Company())->getTable())->where('name', 'like', "%$searchKey%");
@@ -157,7 +161,6 @@ class EmployeeController extends Controller
         $employee->blood_group = $request->blood_group;
         $employee->emergency_contact = $request->emergency_contact;
         $employee->permanent_address = $request->permanent_address;
-        $employee->is_user = $request->is_user;
         $employee->present_address = $request->present_address;
         $employee->company = $request->company;
         $employee->designation = $request->designation;
@@ -317,7 +320,6 @@ class EmployeeController extends Controller
         $employee->emergency_contact = $request->emergency_contact;
         // $employee->emergency_contact_relation = $request->emergency_contact_relation;
         $employee->permanent_address = $request->permanent_address;
-        $employee->is_user = $request->is_user;
         if (isset($profilePhotoName)) {
             $employee->profile_photo = $profilePhotoName;
         }
@@ -510,7 +512,7 @@ class EmployeeController extends Controller
                 return response()->json($response);
             }
             if($dataContent=='emp_id'){
-                if(Employee::where('emp_id', '#'.$dataValue)->count()==0) $response = ['status' => 1,'msg' => 'Usable'];
+                if(Employee::where('emp_id', $dataValue)->count()==0) $response = ['status' => 1,'msg' => 'Usable'];
                 else $response = ['status' => 0,'msg' => 'This Employee ID is already exists'];
                 return response()->json($response);
             }
@@ -518,4 +520,118 @@ class EmployeeController extends Controller
         }
         abort(403);
     }
+    public function importEmployees(Request $request)
+    {
+        return view('employee.import.index');
+    }
+    public function importEmployeesSubmit(Request $request)
+    {
+        if($request->has('file')){
+            $file=$request->file('file');
+            $data = Excel::toCollection([], $file);
+            $rows = $data[0]->toArray();
+            $columnNames = $data->first()->first();
+            $colDefs='["Sl No.","ID Number","Name","NID Number","Company","Department","Designation","Joining Date","Cell Number","Emergency Cell Number","Blood Group","Personal Mail Address","Official Mail Address","Gender","Resign Date"]';
+            if($colDefs!=(string)$columnNames){
+
+                return 'invalid format of data';
+                //return View::make('import-export.showProblems')->with('invalidTemplate', '1');
+            }
+            $company=[];
+            $departments=[];
+            $designation=[];
+            foreach (array_slice($rows, 1) as $row) {
+                if(!in_array($row['4'], $company)) $company[]=$row['4'];
+                if(!in_array($row['5'], $departments)) $departments[]=$row['5'];
+                if(!in_array($row['6'], $designation)) $designation[]=$row['6'];
+            }
+            foreach ($company as $name) {
+                if($name) Company::firstOrCreate(['name' => $name]);
+            }
+            foreach ($departments as $name) {
+                if($name) Departments::firstOrCreate(['name' => $name]);
+            }
+            foreach ($designation as $name) {
+                if($name) Designations::firstOrCreate(['name' => $name]);
+            }
+            $errorRow=[];
+            $rowCount=0;
+            $successCount=0;
+            $errorCount=0;
+            foreach (array_slice($rows, 1) as $row) {
+                $rowCount++;
+                $emp_id=$row['1'];
+                $name=$row['2'];
+                $nid=$row['3'];
+                $comp=$row['4'];
+                $dept=$row['5'];
+                $desig=$row['6'];
+                $joiningDate=null; if($row['7']!='') $joiningDate = date('Y-m-d', Date::excelToTimestamp($row['7']));
+                $phone=$row['8'];
+                $emergencyPhone=$row['9'];
+                $bloodGroup=$row['10'];
+                $personal_email=$row['11'];
+                $email=$row['12'];
+                $gender=$row['13'];
+                $resignData=null; if($row['14']!='') $resignData = date('Y-m-d', Date::excelToTimestamp($row['14']));
+
+                if(!$emp_id) {
+                    $errorRow[]=[
+                        'data'=>$row,
+                        'status'=>0,
+                        'msg'=>'Missing: Employee Id'
+                    ];
+                    $errorCount++;
+                    continue;
+                }
+                if(Employee::where('emp_id', $emp_id)->count()==0){
+                    $employee=new Employee();
+                    $employee->emp_id = $emp_id ?? '';
+                    $employee->full_name = $name;
+                    $employee->email = $email;
+                    $employee->phone = $phone;
+                    $employee->blood_group = $bloodGroup;
+                    $employee->emergency_contact = $emergencyPhone;
+                    $employee->company = Company::select('id')->where('name', $comp)->pluck('id')->first();
+                    $employee->designation = Designations::select('id')->where('name', $desig)->pluck('id')->first();
+                    $employee->department = Departments::select('id')->where('name', $dept)->pluck('id')->first();
+                    $employee->joining_date = $joiningDate;
+                    $employee->resign_date = $resignData;
+                    $employee->personal_email = $personal_email;
+                    $employee->gender = $gender;
+                    $employee->nid = $nid;
+                    if($employee->save()){
+                        $errorRow[]=[
+                            'data'=>$row,
+                            'status'=>1,
+                            'msg'=>'Success'
+                        ];
+                        $successCount++;
+                    }
+                }else{
+                    $errorRow[]=[
+                        'data'=>$row,
+                        'status'=>0,
+                        'msg'=>'Exists'
+                    ];
+                    $errorCount++;
+                }
+            }
+            $importLog=new ImportLog();
+            $importLog->name="Employee Import";
+            $importLog->description=json_encode($errorRow);
+            $importLog->row_count=$rowCount;
+            $importLog->success_count=$successCount;
+            $importLog->error_count=$errorCount;
+            $importLog->save();
+            return view('employee.import.summary', compact('errorRow'));
+            echo '<pre>';
+            print_r($errorRow);
+            echo '</pre>';
+        }else{
+
+        }
+    }
+
+
 }

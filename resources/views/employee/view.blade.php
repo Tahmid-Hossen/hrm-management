@@ -221,7 +221,7 @@
                                         </div>
                                         <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                             <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                                Emergency Contact Number
+                                                Emergency Contact
                                             </dt>
                                             <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
                                                 {{ $employee->emergency_contact ?? 'N/A'}}

@@ -195,10 +195,11 @@
                     <div
                         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white  rounded-lg p-2  shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)]"
                         aria-labelledby="hs-dropdown-with-header">
-                        <div class="px-5 py-3 -m-2 rounded-t-lg bg-red-600 text-white dark:bg-neutral-800">
-                            <p class="text-sm text-white dark:text-neutral-300">Signed in as</p>
-                            <p class="text-sm font-medium text-white dark:text-gray-300">{{auth()->user()->email ?? ''}}</p>
-                            <p class="text-sm font-medium text-white dark:text-gray-300">{{getUserRole() ? ucfirst(getUserRole()) : ''}}</p>
+                        <div class="px-5 py-3 -m-2 rounded-t-lg bg-red-700 text-white dark:bg-red-600">
+                            <p class="text-sm text-white dark:text-neutral-100 font-medium">Signed in as</p>
+                            <p class="text-sm font-bold text-white dark:text-neutral-100 flex items-center justify-start gap-x-2"><span class=""><i class="fa-regular fa-envelope"></i> </span><span class="">{{auth()->user()->email ?? ''}}</span></p>
+                            <p class="text-sm font-bold text-white dark:text-neutral-100 flex items-center justify-start gap-x-2"><span class=""><i class="fa-solid fa-user-tie"></i></span><span class="">{{getUserRole() ? ucfirst(getUserRole()) : ''}}</span></p>
+                            {{-- <p class="text-sm font-medium text-white dark:text-neutral-100">{{getUserRole() ? ucfirst(getUserRole()) : ''}}</p> --}}
                         </div>
 
                         <div class="py-2 mt-2 first:pt-0 last:pb-0">

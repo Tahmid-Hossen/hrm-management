@@ -12,7 +12,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Date;
 use Maatwebsite\Excel\Facades\Excel;
 class TestCntroller extends Controller
 {
-    public function index()
+    /* public function index()
     {
         $file=public_path('excel\EmployeeAll.xlsx');
         $data = Excel::toCollection([], $file);
@@ -88,5 +88,8 @@ class TestCntroller extends Controller
             print_r($errorRow);
         echo '</pre>';
 
+    } */
+    public function import(){
+        return view('test.import-component');
     }
 }

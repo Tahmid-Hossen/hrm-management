@@ -15,11 +15,11 @@
                 @csrf
                 <input type="hidden" id="createEmployee" value="1" autocomplete="off">
                 <div class="p-4 overflow-y-scroll">
-                    <nav class="relative z-0 flex border rounded-xl overflow-hidden dark:border-neutral-700" aria-label="Tabs" role="tablist">
-                        <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white relative dark:hs-tab-active:border-b-red-600 min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-none focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-l-neutral-700 dark:border-b-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 active" id="employee-tab-item-1" data-hs-tab="#employee-tab-1" aria-controls="employee-tab-1" role="tab">
+                    <nav class="relative z-0 flex border rounded-xl overflow-hidden dark:border-neutral-700 cst-tab" aria-label="Tabs" role="tablist">
+                            <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white relative dark:hs-tab-active:border-b-red-600 min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-none focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-l-neutral-700 dark:border-b-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 border-b-red-600 text-red-600 active" id="employee-tab-item-1" onclick="activeTab('employee-tab-item-1')" {{--data-hs-tab="#employee-tab-1" aria-controls="employee-tab-1"--}} role="tab">
                             Basic Information
                         </button>
-                        <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white relative dark:hs-tab-active:border-b-red-600 min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-none focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-l-neutral-700 dark:border-b-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 " id="employee-tab-item-2" data-hs-tab="#employee-tab-2" aria-controls="employee-tab-2" role="tab">
+                        <button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white relative dark:hs-tab-active:border-b-red-600 min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-none focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-l-neutral-700 dark:border-b-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-400 " id="employee-tab-item-2" onclick="activeTab('employee-tab-item-2')" {{--data-hs-tab="#employee-tab-2" aria-controls="employee-tab-2"--}} role="tab">
                             Additional Information
                         </button>
                         {{--<button type="button" class="hs-tab-active:border-b-red-600 hs-tab-active:text-gray-900 dark:hs-tab-active:text-white relative dark:hs-tab-active:border-b-red-600 min-w-0 flex-1 bg-white first:border-s-0 border-s border-b-2 py-4 px-4 text-gray-500 hover:text-gray-700 text-sm font-medium text-center overflow-hidden hover:bg-gray-50 focus:z-10 focus:outline-none focus:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-l-neutral-700 dark:border-b-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:hover:text-neutral-400" id="employee-tab-item-3" data-hs-tab="#employee-tab-3" aria-controls="employee-tab-3" role="tab">
@@ -235,10 +235,10 @@
                 </div>
                 <div class="">
                     <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
-                        <button type="button" onclick="createEmployeeModal.close()" class="inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700" data-hs-overlay="#create-new-employee-modal">
+                        <button type="button" onclick="createEmployeeModal.close()" class="cancel-button" data-hs-overlay="#create-new-employee-modal">
                             Cancel
                         </button>
-                        <button type="submit" {{--onclick="return validateEmployeeData()"--}} class="inline-flex items-center px-4 py-2 font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        <button type="submit" {{--onclick="return validateEmployeeData()"--}} class="submit-button">
                             Save
                         </button>
                     </div>
@@ -249,12 +249,22 @@
 </dialog>
 
 <script>
-
+        function activeTab(tabId) {
+            if(tabId==='employee-tab-item-1'){
+                $('#employee-tab-item-1').addClass('active border-b-red-600 text-red-600');
+                $('#employee-tab-item-2').removeClass('active border-b-red-600 text-red-600');
+                $('#employee-tab-1').removeClass('hidden');
+                $('#employee-tab-2').addClass('hidden');
+            }
+            if(tabId==='employee-tab-item-2'){
+                $('#employee-tab-item-2').addClass('active border-b-red-600 text-red-600');
+                $('#employee-tab-item-1').removeClass('active border-b-red-600 text-red-600');
+                $('#employee-tab-2').removeClass('hidden');
+                $('#employee-tab-1').addClass('hidden');
+            }
+        }
         /*$('#employee-tab-item-1').click(function () {
-            $('#employee-tab-item-1').addClass('active');
-            $('#employee-tab-item-2').removeClass('active');
-            $('#employee-tab-1').removeClass('hidden');
-            $('#employee-tab-2').addClass('hidden');
+
         });
 
         $('#employee-tab-item-2').click(function () {

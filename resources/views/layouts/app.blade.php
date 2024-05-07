@@ -44,6 +44,13 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    <div id="spinner-large" class="hidden">
+        <div class="py-10 flex items-center justify-center">
+            <div class="animate-spin inline-block size-12 border-[5px] border-current border-t-transparent text-gray-400 rounded-full dark:text-blue-500" role="status" aria-label="loading">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.js"></script>
     @include('layouts.modals')
     @include('layouts.footerAssets')

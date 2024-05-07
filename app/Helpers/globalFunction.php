@@ -47,14 +47,7 @@ function getAssetVersion(){
 function generateRandomString($length = 10) {
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }
-function getRole($req='name'){
-    if(isset(\Illuminate\Support\Facades\Auth::user()->roles[0]->$req)){
-        $role=\Illuminate\Support\Facades\Auth::user()->roles[0]->$req;
-    }else{
-        $role='N/A';
-    }
-    return strtolower($role);
-}
+
 function inputClass($section="common"){
     $class="";
     if($section=="change-password"){

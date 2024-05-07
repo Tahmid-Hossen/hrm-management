@@ -31,7 +31,7 @@
                 <img src="https://ajw.hbq.mybluehost.me/en/wp-content/uploads/2020/10/nexLogo_inWeb.png" alt="Nexdecade Logo"></a>
         </div>
 
-        <div class="flex items-center justify-end w-full ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
+        <div class="flex items-center justify-end w-full ms-auto sm:justify-end sm:gap-x-3 sm:order-3">
             <div class="sm:hidden">
                 <button
                     type="button"
@@ -53,7 +53,7 @@
                 </button>
             </div>
 
-            <div class="hidden w-2/5 sm:block">
+            {{--<div class="hidden w-2/5 sm:block">
                 <label for="icon" class="sr-only">Search</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 z-20 flex items-center pointer-events-none start-0 ps-4">
@@ -78,7 +78,7 @@
                         class="block w-full px-4 py-2 text-sm border border-gray-200 rounded-lg ps-11 bg:gray-100 focus:border-pink-500 focus:ring-pink-500 dark:border-transparent dark:text-neutral-400 dark:placeholder:text-neutral-400 dark:bg-neutral-800"
                         placeholder="Search projects, files or people" />
                 </div>
-            </div>
+            </div>--}}
 
             <div class="flex flex-row items-center justify-end gap-2">
                 <button
@@ -195,9 +195,11 @@
                     <div
                         class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 bg-white  rounded-lg p-2  shadow-[0_10px_40px_10px_rgba(0,0,0,0.08)] dark:bg-neutral-900 dark:shadow-[0_10px_40px_10px_rgba(0,0,0,0.2)]"
                         aria-labelledby="hs-dropdown-with-header">
-                        <div class="px-5 py-3 -m-2 rounded-t-lg bg-neutral-100 dark:bg-neutral-800">
-                            <p class="text-sm text-gray-500 dark:text-neutral-300">Signed in as</p>
-                            <p class="text-sm font-medium text-gray-800 dark:text-gray-300">{{auth()->user()->email ?? ''}}</p>
+                        <div class="px-5 py-3 -m-2 rounded-t-lg bg-red-700 text-white dark:bg-red-600">
+                            <p class="text-sm text-white dark:text-neutral-100 font-medium">Signed in as</p>
+                            <p class="text-sm font-bold text-white dark:text-neutral-100 flex items-center justify-start gap-x-2"><span class=""><i class="fa-regular fa-envelope"></i> </span><span class="">{{auth()->user()->email ?? ''}}</span></p>
+                            <p class="text-sm font-bold text-white dark:text-neutral-100 flex items-center justify-start gap-x-2"><span class=""><i class="fa-solid fa-user-tie"></i></span><span class="">{{getUserRole() ? ucfirst(getUserRole()) : ''}}</span></p>
+                            {{-- <p class="text-sm font-medium text-white dark:text-neutral-100">{{getUserRole() ? ucfirst(getUserRole()) : ''}}</p> --}}
                         </div>
 
                         <div class="py-2 mt-2 first:pt-0 last:pb-0">
@@ -220,7 +222,7 @@
                                 </svg>
                                 Notifications
                             </a>
-                            
+
                            @if(auth()->user()->employee_id)
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-red-600 focus:ring-2 focus:ring-blue-500 dark:text-neutral-300 dark:hover:bg-red-600 hover:text-white dark:hover:text-gray-300"
@@ -272,7 +274,7 @@
                             </button>
                 </form>
 
-                           
+
                         </div>
                     </div>
                 </div>

@@ -129,7 +129,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="overflow-y-auto">
+                    <div class="overflow-y-auto" >
                         <!-- Card Section -->
                         <div class="mx-auto">
                             <!-- Card -->
@@ -251,7 +251,6 @@
                                                 <div>
                                                     <label for="employeeEmmergencyPhone" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                         Emergency Contact
-                                                        Number
                                                     </label>
                                                     <span class="text-sm text-gray-400 dark:text-neutral-600">
                                                     (Optional)
@@ -694,9 +693,9 @@
                 </div>
             </div>
             <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
-                <div class="py-3">
-                    <div class="flex justify-between">
-                        <h3 class="border-b pb-3 text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
+                <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow rounded-lg border dark:border-neutral-500">
+                    <div class="px-4 py-5 sm:px-6 flex justify-between">
+                        <h3 class="text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
                             Education Details
                         </h3>
                         <button type="button" id="update-info-button-segment-three"
@@ -710,7 +709,7 @@
                 </span>
                         </button>
                     </div>
-                    <div class="overflow-y-auto">
+                    <div class="overflow-y-auto px-4 py-5 sm:px-6 ">
                         <!-- Card Section -->
                         <div class="mx-auto">
                             <!-- Card -->
@@ -921,14 +920,15 @@
                                                 </div>
                                             </div>
 
-                                            <div id="education-fields">
-                                                <!-- Dynamic education fields will be added here -->
-                                            </div>
 
 
 
                                         </div>
-                                        <hr class="mt-4 mb-1">
+                                        <div id="education-fields">
+                                            <!-- Dynamic education fields will be added here -->
+                                        </div>
+
+                                        <hr class="my-1">
                                     @endforeach
                                     <div class="mt-4">
                                         <button id="add-education-field" type="button" class="inline-flex items-center gap-x-2 rounded-lg border border-neutral-300 px-2 py-2 text-sm font-semibold text-gray-500 hover:border-red-600 hover:text-red-600 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-700 dark:text-gray-400 dark:hover:border-red-600 dark:hover:text-red-500">

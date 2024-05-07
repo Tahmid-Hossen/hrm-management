@@ -61,6 +61,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');
         Route::get('/validate-single-data', [EmployeeController::class, 'validateSingleData']);
+        Route::get('/import-employees', [EmployeeController::class, 'importEmployees'])->name('employees.import');
+        Route::post('/import-employees/submit', [EmployeeController::class, 'importEmployeesSubmit'])->name('employees.import.submit');
     });
 
     Route::prefix('leaves')->group(function () {

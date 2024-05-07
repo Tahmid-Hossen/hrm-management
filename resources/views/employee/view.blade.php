@@ -110,13 +110,13 @@
                     <button type="button" class="{{$active=='address' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-2" data-hs-tab="#segment-2" aria-controls="segment-2" role="tab">
                         Address Details
                     </button>
-                    <button type="button" class="inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-3" data-hs-tab="#segment-3" aria-controls="segment-3" role="tab">
+                    <button type="button" class="{{$active=='education' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-3" data-hs-tab="#segment-3" aria-controls="segment-3" role="tab">
                         Education
                     </button>
-                    <button type="button" class="inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-4" data-hs-tab="#segment-4" aria-controls="segment-4" role="tab">
+                    <button type="button" class="{{$active=='documents' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-4" data-hs-tab="#segment-4" aria-controls="segment-4" role="tab">
                         Documents
                     </button>
-                    <button type="button" class="inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-5" data-hs-tab="#segment-5" aria-controls="segment-5" role="tab">
+                    <button type="button" class="{{$active=='skills' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-5" data-hs-tab="#segment-5" aria-controls="segment-5" role="tab">
                         Skills
                     </button>
                 </nav>
@@ -231,7 +231,7 @@
                                         </div>
                                     </dl>
                                 </div>
-                                <div id="personal-details-edit-wrap" class="px-4 py-5 sm:p-0 hidden">form</div>
+                                <div id="personal-details-edit-wrap" class="px-4 py-5 sm:p-0 hidden"></div>
                             </div>
 
                         </div>
@@ -251,7 +251,7 @@
                                     Address Details
                                 </h3>
                                 <div class="inline-block hs-tooltip">
-                                    <button type="button" id="update-info-button" class="btn-edit">
+                                    <button type="button"  onclick="editEmployeeForm('{{$employee->id}}', 'address')" id="update-info-button" class="btn-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -262,8 +262,8 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="px-4 py-5 sm:p-0" id="address-details-view">
-                                <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-2">
+                            <div class="px-4 py-5 sm:p-0" id="personal-details-wrap">
+                                <div id="address-details-view-wrap" class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-2">
                                     <div class="border-t dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-200">
                                             Present Address
@@ -281,7 +281,8 @@
                                         </dd>
                                     </div>
 
-                                </dl>
+                                </div>
+                                <div id="address-details-edit-wrap" class="px-4 py-5 sm:p-0 hidden"></div>
                             </div>
                         </div>
                         <!-- End Card -->
@@ -289,7 +290,7 @@
                     <!-- End Card Section -->
                 </div>
             </div>
-            <div id="segment-3" class="hidden" role="tabpanel" aria-labelledby="segment-item-3">
+            <div id="segment-3" class="{{$active=='education' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-3">
                 <div class="overflow-y-auto">
                     <!-- Card Section -->
                     <div class="mx-auto">
@@ -301,39 +302,49 @@
                                     Education Details
                                 </h3>
                                 <div class="inline-block hs-tooltip">
-                                    <button type="button" id="update-info-button" class="btn-edit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                        </svg>
-                                        <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
-                                            Edit Education Details
-                                        </span>
+                                    <button type="button" onclick="addEducationForm({{$employee->id}})" id="update-info-button" class="btn-edit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                                            <path d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                        </svg>Add Education
                                     </button>
                                 </div>
                             </div>
-                            <div class="px-4 py-5 sm:p-0" id="address-details-view">
+                            <div class="px-4 py-5 sm:p-0" id="education-details-view">
                                 <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-1">
-                                    <div class="border-t dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-200">
-                                            B.Sc
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->present_address ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold dark:text-neutral-300 text-gray-500">
-                                            H.Sc
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->permanent_address ?? 'N/A'}}
-                                        </dd>
-                                    </div>
+                                    <table class="min-w-full divide-y divide-gray-200 dark:divide-neutral-700">
+                                        @php $tableHeader=["S/N", "Degree", "Institute", "Department", "Passing Year", "Result", "Action"]; @endphp
+                                        <thead>
+                                        <tr>
+                                            @foreach($tableHeader as $item)
+                                                <th scope="col" class="px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{$item}}</th>
+                                            @endforeach
+                                        </tr>
+                                        </thead>
+                                        <tbody>
 
+                                        @if(isset($employee->empEducation))
+                                            @foreach($employee->empEducation as $key=>$item)
+                                                <tr class="odd:bg-white even:bg-gray-100 hover:bg-gray-100 dark:odd:bg-neutral-800 dark:even:bg-neutral-700 dark:hover:bg-neutral-700">
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800 dark:text-neutral-200">{{$key+1}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->degree ?? ''}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->institution_name ?? ''}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->department ?? ''}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->passing_year ?? ''}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-neutral-200">{{$item->result ?? ''}}</td>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-end text-sm font-medium">
+                                                        <button type="button" class="inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-blue-600 hover:text-blue-800 disabled:opacity-50 disabled:pointer-events-none dark:text-blue-500 dark:hover:text-blue-400">Delete</button>
+                                                    </td>
+                                                </tr>
+
+                                            @endforeach
+                                        @else
+
+                                        @endif
+                                        </tbody>
+                                    </table>
                                 </dl>
                             </div>
-
+                            <div id="educationFormsWrap" class="p-4"></div>
                         </div>
 
                         <!-- End Card -->
@@ -341,7 +352,7 @@
                     <!-- End Card Section -->
                 </div>
             </div>
-            <div id="segment-4" class="hidden" role="tabpanel" aria-labelledby="segment-item-4">
+            <div id="segment-4" class="{{$active=='documents' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-4">
                 <div class="overflow-y-auto">
                     <!-- Card Section -->
                     <div class="mx-auto">
@@ -397,7 +408,7 @@
                     </div>
                 </div>
             </div>
-            <div id="segment-5" class="hidden" role="tabpanel" aria-labelledby="segment-item-5">
+            <div id="segment-5" class="{{$active=='skills' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-5">
                 <div class="overflow-y-auto">
                     <!-- Card Section -->
                     <div class="mx-auto">
@@ -433,6 +444,64 @@
             </div>
         </div>
     </x-containers.container-box>
+
+    <div id="educationForm" class="hidden">
+        <div class="border p-4 rounded-md">
+            <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>'education'])}}" onsubmit="return validateEmployeeEditData('personal')" method="post">
+                @csrf
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 lg:gap-6 mt-2">
+                    <div>
+                        <label for="institution_name_one" class="inputLabel">
+                            Institution Name
+                        </label>
+                        <input id="institution_name_one" name="institution_name" type="text" class="inputField" placeholder="Institution name">
+                    </div>
+                    <div>
+                        <label for="degree_one" class="inputLabel">
+                            Select Degree Type
+                        </label>
+                        @php $degrees=["SSC","HSC","BSC","MSC"]; @endphp
+                        <select id="degree_one" name="degree" class="inputField">
+                            <option value="" disabled>Select Degree</option>
+                            @foreach($degrees as $item)
+                                <option value="{{$item}}">{{$item}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label for="department_one" class="inputLabel">
+                            Department Name
+                        </label>
+                        <input id="department_one" name="department" type="text" class="inputField" placeholder="enter department">
+                    </div>
+                    <div>
+                        <label for="passing_year_one" class="inputLabel">
+                            Passing Year
+                        </label>
+                        <input id="passing_year_one" name="passing_year" type="number" class="inputField" placeholder="enter passing year">
+                    </div>
+                    <div>
+                        <div>
+                            <label for="result_one" class="inputLabel">
+                                Result
+                            </label>
+                            <input id="result_one" name="result" type="text" class="inputField" placeholder="enter passing year">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                    <button type="button" onclick="removeInnerHtml('educationFormsWrap')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
+                        Cancel
+                    </button>
+                    <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Add
+                    </button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
 @endsection
 
 @section('scripts')

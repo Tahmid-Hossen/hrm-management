@@ -22,6 +22,10 @@ function createEployeeModal() {
 
 }
 
+function removeInnerHtml(id) {
+    $(`#${id}`).html('')
+}
+
 function validateEmployeeSingleData(dataContent, inputId, destinationId) {
 
     let inputValue=$(`#${inputId}`).val();
@@ -203,20 +207,21 @@ function copyToClipboardForDeletePopup() {
 
 
 function editEmployeeForm(id, section) {
-    if(section==='personal'){
-        $("#personal-details-view-wrap").addClass('hidden')
-        $("#personal-details-edit-wrap").html($("#spinner-large").html())
-        $("#personal-details-edit-wrap").removeClass('hidden')
-        $.ajax(`${baseUrl}/employees/edit/${id}?a=${section}`).then(function (res) {
-            if(res.status===1){
-                $("#personal-details-edit-wrap").html(res.html)
-            }
-        })
-    }
+    $(`#${section}-details-view-wrap`).addClass('hidden')
+    $(`#${section}-details-edit-wrap`).html($("#spinner-large").html())
+    $(`#${section}-details-edit-wrap`).removeClass('hidden')
+    $.ajax(`${baseUrl}/employees/edit/${id}?a=${section}`).then(function (res) {
+        if(res.status===1){
+            $(`#${section}-details-edit-wrap`).html(res.html)
+        }
+    })
 }
 function cancelEmployeeEdit(section) {
-    if(section==='personal'){
-        $("#personal-details-view-wrap").removeClass('hidden')
-        $("#personal-details-edit-wrap").addClass('hidden')
-    }
+    $(`#${section}-details-view-wrap`).removeClass('hidden')
+    $(`#${section}-details-edit-wrap`).addClass('hidden')
+}
+
+
+function addEducationForm(id) {
+    $('#educationFormsWrap').html($('#educationForm').html())
 }

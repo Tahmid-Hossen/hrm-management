@@ -288,6 +288,15 @@ class EmployeeController extends Controller
                 ];
                 return $response;
             }
+            if($a=='address'){
+                $employee = Employee::find($id);
+                $html=View::make('employee.edit', compact('a', 'employee'))->render();
+                $response=[
+                    'status'=>1,
+                    'html'=>$html,
+                ];
+                return $response;
+            }
         }
 
         /*$employee = Employee::find($id); // Assuming you have an Employee model
@@ -301,18 +310,39 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         if($employee){
             $a=$request->a;
-            if($a=='personal'){
-                $employee->full_name = $request->full_name;
-                $employee->email = $request->email;
-                $employee->phone = $request->phone;
-                $employee->birth_year = $request->birth_year;
-                $employee->gender = $request->gender;
-                $employee->blood_group = $request->blood_group;
-                $employee->company = $request->company_name;
-                $employee->designation = $request->designation;
-                $employee->department = $request->emp_department;
-                $employee->joining_date = $request->joining_date;
-                $employee->emergency_contact = $request->emergency_contact;
+            switch ($a) {
+                case 'personal':
+                    $employee->full_name = $request->full_name;
+                    $employee->email = $request->email;
+                    $employee->phone = $request->phone;
+                    $employee->birth_year = $request->birth_year;
+                    $employee->gender = $request->gender;
+                    $employee->blood_group = $request->blood_group;
+                    $employee->company = $request->company_name;
+                    $employee->designation = $request->designation;
+                    $employee->department = $request->emp_department;
+                    $employee->joining_date = $request->joining_date;
+                    $employee->emergency_contact = $request->emergency_contact;
+                    break;
+                case 'address':
+                    $employee->present_address = $request->present_address;
+                    $employee->permanent_address = $request->permanent_address;
+                    break;
+                case 'education':
+                    $education=new EmployeeEducation();
+                    $education->emp_id = $id;
+                    $education->institution_name = $request->input('institution_name') ?? '';
+                    $education->degree = $request->input('degree') ?? '';
+                    $education->department = $request->input('department') ?? '';
+                    $education->passing_year = $request->input('passing_year') ?? '';
+                    $education->result = $request->input('result') ?? '';
+                    if($education->save()){
+                        return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
+                    }
+                    break;
+                default:
+                    // Default case if $a doesn't match any of the above cases
+                    break;
             }
             if($employee->save()){
                 return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');

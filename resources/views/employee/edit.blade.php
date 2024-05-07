@@ -1,7 +1,7 @@
 @if($a=='personal')
     {{-- Personal Information --}}
     <div class="px-5 bg-white dark:bg-neutral-800 " id="personal-details-edit">
-        <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>'personal'])}}" onsubmit="return validateEmployeeEditData('personal')" method="post">
+        <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>$a])}}" onsubmit="return validateEmployeeEditData('personal')" method="post">
             @csrf
             <div class="mt-3">
                 <div class="flex flex-col gap-y-2">
@@ -167,6 +167,40 @@
     </div>
     {{-- End Personal Information --}}
 @endif
+@if($a=='address')
+    {{-- Personal Information --}}
+    <div class="px-5 bg-white dark:bg-neutral-800 " id="personal-details-edit">
+        <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>$a])}}" onsubmit="return validateEmployeeEditData('personal')" method="post">
+            @csrf
+            <div class="mt-3">
+                <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
+                    <div>
+                        <label for="employeePresentAddress" class="inputLabel">
+                            Present Address
+                        </label>
+                        <textarea id="employeePresentAddress" name="present_address" class="inputField" rows="4">{{ $employee->present_address ?? '' }}</textarea>
+                    </div>
+                    <div>
+                        <label for="employeePermanentAddress" class="inputLabel">
+                            Permanent Address
+                        </label>
+                        <textarea id="employeePermanentAddress" name="permanent_address" class="inputField" rows="4">{{ $employee->permanent_address ?? '' }}</textarea>
+                    </div>
+                </div>
+
+                <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                    <button type="button" onclick="cancelEmployeeEdit('address')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
+                        Close
+                    </button>
+                    <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {{-- End Personal Information --}}
+@endif
 
 @if($a=='education')
     {{-- Address Information --}}
@@ -178,35 +212,7 @@
         >
             @csrf
 
-            <div class="mt-3">
-                <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
-                    <div>
-                        <label for="employeePresentAddress" class="inputLabel">
-                            Present Address
-                        </label>
-                        <textarea id="employeePresentAddress" name="present_address" class="inputField" rows="4" value="{{ $employee->present_address ?? '' }}">
-                        {{ $employee->present_address ?? '' }}
-                    </textarea>
-                    </div>
-                    <div>
-                        <label for="employeePermanentAddress" class="inputLabel">
-                            Permanent Address
-                        </label>
-                        <textarea id="employeePermanentAddress" name="permanent_address" class="inputField" rows="4" value="{{ $employee->permanent_address ?? '' }}">
-                        {{ $employee->permanent_address ?? '' }}
-                    </textarea>
-                    </div>
-                </div>
 
-                <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
-                    <button type="button" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
-                        Close
-                    </button>
-                    <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                        Update
-                    </button>
-                </div>
-            </div>
         </form>
     </div>
     {{-- End Address Information --}}

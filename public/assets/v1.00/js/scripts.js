@@ -49,6 +49,7 @@ function validateEmployeeSingleData(dataContent, inputId, destinationId) {
                 $(`#isValidate_${inputId}`).val(1)
                 $(`#${destinationId}`).html(`<span class="text-green-600"><i class="fa-regular fa-circle-check"></i> ${res.msg}</span>`);
             } else {
+                $(`#isValidate_${inputId}`).val(0)
                 $(`#${destinationId}`).html(`<i class="fa-regular fa-circle-xmark"></i> ${res.msg}`);
             }
         })
@@ -66,41 +67,51 @@ function validateEmployeeData() {
     let employeePhone=$('#employeePhone');
     let isValidate_employeePhone=$('#isValidate_employeePhone');
     let firstError=null;
-    $('#error_employeeFullName').html('')
-    $('#error_employeeId').html('')
-    $('#error_employee_email').html('')
-    $('#error_employeePhone').html('')
+    let firstErrorMsg=null;
+
     if(employeeFullName.val()===''){
         submitPermission=false;
         $('#error_employeeFullName').html(errorText)
         if(firstError===null){
             firstError=employeeFullName
+            firstErrorMsg='Full Name required!';
         }
+    }else{
+        $('#error_employeeFullName').html('')
     }
-    console.log(isValidate_employeeId.val())
     if(isValidate_employeeId.val()!=='1'){
         submitPermission=false;
         $('#error_employeeId').html(errorText)
         if(firstError===null){
-            firstError=employeeId
+            firstError=employeeId;
+            firstErrorMsg='Employee ID required!';
         }
+    }else{
+        if(employeeId.val()==='') $('#error_employeeId').html('')
     }
     if(isValidate_employee_email.val()!=='1'){
         submitPermission=false;
         $('#error_employee_email').html(errorText)
         if(firstError===null){
             firstError=employee_email
+            firstErrorMsg='Email required!';
         }
+    }else{
+        if(employee_email.val()==='') $('#error_employee_email').html('')
     }
     if(isValidate_employeePhone.val()!=='1'){
         submitPermission=false;
         $('#error_employeePhone').html(errorText)
         if(firstError===null){
             firstError=employeePhone
+            firstErrorMsg='Phone required!';
         }
+    }else{
+        if(employeePhone.val()==='') $('#error_employeePhone').html('')
     }
 
     if(!submitPermission){
+        activeTab('employee-tab-item-1')
         firstError.focus();
     }
     return submitPermission;

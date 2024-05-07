@@ -116,6 +116,67 @@ function validateEmployeeData() {
     }
     return submitPermission;
 }
+function validateEmployeeEditData(section) {
+    let submitPermission=true;
+    let errorText='This field is required!';
+    let employeeFullName=$('#employeeFullName');
+    let employeeId=$('#employeeId');
+    let isValidate_employeeId=$('#isValidate_employeeId');
+    let employee_email=$('#employee_email');
+    let isValidate_employee_email=$('#isValidate_employee_email');
+    let employeePhone=$('#employeePhone');
+    let isValidate_employeePhone=$('#isValidate_employeePhone');
+    let firstError=null;
+    let firstErrorMsg=null;
+    if(employeeFullName.val().length===0){
+        submitPermission=false;
+        $('#error_employeeFullName').html(errorText)
+        if(firstError===null){
+            firstError=employeeFullName
+            firstErrorMsg='Full Name required!';
+        }
+    }else{
+        $('#error_employeeFullName').html('')
+    }
+    /*if(isValidate_employeeId.val()!=='1'){
+        submitPermission=false;
+        $('#error_employeeId').html(errorText)
+        if(firstError===null){
+            firstError=employeeId;
+            firstErrorMsg='Employee ID required!';
+        }
+    }else{
+        if(employeeId.val()==='') $('#error_employeeId').html('')
+    }*/
+    if(isValidate_employee_email.val()!=='1'){
+        submitPermission=false;
+        $('#error_employee_email').html(errorText)
+        if(firstError===null){
+            firstError=employee_email
+            firstErrorMsg='Email required!';
+        }
+    }else{
+        if(employee_email.val()==='') $('#error_employee_email').html('')
+    }
+    if(isValidate_employeePhone.val()!=='1'){
+        submitPermission=false;
+        $('#error_employeePhone').html(errorText)
+        if(firstError===null){
+            firstError=employeePhone
+            firstErrorMsg='Phone required!';
+        }
+    }else{
+        if(employeePhone.val()==='') $('#error_employeePhone').html('')
+    }
+
+    if(!submitPermission){
+        //  activeTab('employee-tab-item-1')
+        firstError.focus();
+    }
+    return submitPermission;
+}
+
+
 
 function deletePopup(title, deletedText, url) {
     $('#deleteModalTitle').html(title)
@@ -137,5 +198,25 @@ function copyToClipboardForDeletePopup() {
             });
     } catch (error) {
         console.error('Clipboard API not supported:', error);
+    }
+}
+
+
+function editEmployeeForm(id, section) {
+    if(section==='personal'){
+        $("#personal-details-view-wrap").addClass('hidden')
+        $("#personal-details-edit-wrap").html($("#spinner-large").html())
+        $("#personal-details-edit-wrap").removeClass('hidden')
+        $.ajax(`${baseUrl}/employees/edit/${id}?a=${section}`).then(function (res) {
+            if(res.status===1){
+                $("#personal-details-edit-wrap").html(res.html)
+            }
+        })
+    }
+}
+function cancelEmployeeEdit(section) {
+    if(section==='personal'){
+        $("#personal-details-view-wrap").removeClass('hidden')
+        $("#personal-details-edit-wrap").addClass('hidden')
     }
 }

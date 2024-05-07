@@ -97,13 +97,17 @@
         </div>
     </x-containers.container-box>
     <x-containers.container-box>
+        @php
+            $active='personal';
+            if(request()->has('active')) $active=request('active');
+        @endphp
         <div class="flex">
             <div class="flex rounded-lg bg-gray-100 p-1 transition hover:bg-gray-200 dark:bg-neutral-700 dark:hover:bg-neutral-600">
                 <nav class="flex flex-wrap space-x-1" aria-label="Tabs" role="tablist">
-                    <button type="button" class="active inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-1" data-hs-tab="#segment-1" aria-controls="segment-1" role="tab">
+                    <button type="button" class="{{$active=='personal' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-1" data-hs-tab="#segment-1" aria-controls="segment-1" role="tab">
                         Personal Details
                     </button>
-                    <button type="button" class="inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-2" data-hs-tab="#segment-2" aria-controls="segment-2" role="tab">
+                    <button type="button" class="{{$active=='address' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-2" data-hs-tab="#segment-2" aria-controls="segment-2" role="tab">
                         Address Details
                     </button>
                     <button type="button" class="inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-3" data-hs-tab="#segment-3" aria-controls="segment-3" role="tab">
@@ -120,7 +124,7 @@
         </div>
 
         <div class="mt-3">
-            <div id="segment-1" role="tabpanel" aria-labelledby="segment-item-1">
+            <div id="segment-1" class="{{$active=='personal' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-1">
                 <div class="overflow-y-auto">
                     <!-- Card Section -->
                     <div class="mx-auto">
@@ -131,7 +135,7 @@
                                     Personal Details
                                 </h3>
                                 <div class="inline-block hs-tooltip">
-                                    <button type="button" id="update-info-button" class="btn-edit">
+                                    <button type="button" onclick="editEmployeeForm('{{$employee->id}}', 'personal')" id="update-personal-details-button" class="btn-edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
@@ -142,138 +146,101 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="px-4 py-5 sm:p-0" id="personal-details-view">
-                                <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-2">
-                                    <div class="border-t dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-200">
-                                            Employee Name
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->full_name ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold dark:text-neutral-300 text-gray-500">
-                                            Employee Id
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->emp_id ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Email
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->email ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Blood Group
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->blood_group ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Joining Date
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->joining_date ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Company Name
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->empCompany->name ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Designation
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-800 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->designation ?  $designations->firstWhere('id', $employee->designation)->name ?? 'N/A' : 'N/A' }}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Contact No
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->phone ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Emergency Contact
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->emergency_contact ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    <div class="border-b dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
-                                            Birthday
-                                        </dt>
-                                        <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
-                                            {{ $employee->birth_year ?? 'N/A'}}
-                                        </dd>
-                                    </div>
-                                    {{-- <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <div>
-                                            <label for="af-account-gender-checkbox" class="mt-2.5 inline-block text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                Gender
-                                            </label>
-                                            <ul class="flex flex-col sm:flex-row">
-                                                <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                    <div class="relative flex w-full items-start">
-                                                        <div class="flex h-5 items-center">
-                                                            <input id="hs-horizontal-list-group-item-radio-1" value="Male" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" checked="" disabled />
-                                                        </div>
-                                                        <label for="hs-horizontal-list-group-item-radio-1" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                            Male
-                                                        </label>
-                                                    </div>
-                                                </li>
-
-                                                <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                    <div class="relative flex w-full items-start">
-                                                        <div class="flex h-5 items-center">
-                                                            <input id="hs-horizontal-list-group-item-radio-2" value="Female" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
-                                                        </div>
-                                                        <label for="hs-horizontal-list-group-item-radio-2" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                            Female
-                                                        </label>
-                                                    </div>
-                                                </li>
-
-                                                <li class="-mt-px inline-flex items-center gap-x-2.5 border bg-neutral-100 px-4 py-3 text-sm font-medium text-gray-800 first:mt-0 first:rounded-t-lg last:rounded-b-lg dark:border-neutral-700 dark:bg-neutral-700 dark:text-white sm:-ms-px sm:mt-0 sm:first:rounded-es-lg sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-se-lg">
-                                                    <div class="relative flex w-full items-start">
-                                                        <div class="flex h-5 items-center">
-                                                            <input id="hs-horizontal-list-group-item-radio-3" value="Other" name="gender" type="radio" class="rounded-full border-gray-300 text-red-600 focus:ring-red-500 disabled:pointer-events-none disabled:opacity-50 dark:border-neutral-500 dark:bg-neutral-800 dark:checked:border-red-500 dark:checked:bg-red-500 dark:focus:ring-offset-gray-800" disabled />
-                                                        </div>
-                                                        <label for="hs-horizontal-list-group-item-radio-3" class="ms-3 block w-full text-sm text-gray-600 dark:text-neutral-300">
-                                                            Other
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
+                            <div id="personal-details-wrap">
+                                <div class="px-4 py-5 sm:p-0" id="personal-details-view-wrap">
+                                    <dl class="sm:divide-y dark:sm:divide-neutral-500 grid grid-cols-1 sm:grid-cols-2">
+                                        <div class="border-t dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-200">
+                                                Employee Name
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->full_name ?? 'N/A'}}
+                                            </dd>
                                         </div>
-                                    </div> --}}
-                                </dl>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold dark:text-neutral-300 text-gray-500">
+                                                Employee Id
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->emp_id ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Email
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->email ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Blood Group
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->blood_group ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Joining Date
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->joining_date ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Company Name
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->empCompany->name ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Designation
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-800 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->designation ?  $designations->firstWhere('id', $employee->designation)->name ?? 'N/A' : 'N/A' }}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Contact No
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->phone ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Emergency Contact
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->emergency_contact ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                        <div class="border-b dark:border-neutral-500 py-3 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt class="text-sm font-semibold text-gray-500 dark:text-neutral-300">
+                                                Birthday
+                                            </dt>
+                                            <dd class="mt-1 text-sm font-medium  text-gray-900 dark:text-neutral-200 sm:mt-0 sm:col-span-2">
+                                                {{ $employee->birth_year ?? 'N/A'}}
+                                            </dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                                <div id="personal-details-edit-wrap" class="px-4 py-5 sm:p-0 hidden">form</div>
                             </div>
+
                         </div>
                         <!-- End Card -->
                     </div>
                     <!-- End Card Section -->
                 </div>
             </div>
-            <div id="segment-2" class="hidden" role="tabpanel" aria-labelledby="segment-item-2">
+            <div id="segment-2" class="{{$active=='address' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-2">
                 <div class="overflow-y-auto">
                     <!-- Card Section -->
                     <div class="mx-auto">

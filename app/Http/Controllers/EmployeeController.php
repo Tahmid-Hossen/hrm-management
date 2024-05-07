@@ -271,24 +271,56 @@ class EmployeeController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        $employee = Employee::find($id); // Assuming you have an Employee model
+
+        if($request->ajax()){
+            $a=$request->a;
+            if($a=='personal'){
+                $employee = Employee::find($id);
+                $designations = Designations::all();
+                $departments = Departments::all();
+                $companies = Company::get();
+                $html=View::make('employee.edit', compact('a', 'employee', 'companies', 'designations', 'departments'))->render();
+                $response=[
+                    'status'=>1,
+                    'html'=>$html,
+                ];
+                return $response;
+            }
+        }
+
+        /*$employee = Employee::find($id); // Assuming you have an Employee model
         $designations = Designations::all();
         $departments = Departments::all();
-        return view('employee.edit', compact('employee', 'designations', 'departments'));
+        return view('employee.edit', compact('employee', 'designations', 'departments'));*/
     }
 
     public function update(Request $request, $id)
     {
-        // Validate the request
-        $request->validate([
-            'profile_photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Example validation for profile photo
-            // 'phone' => 'required|numeric|digits:11', // Validation for phone number
-
-        ]);
         $employee = Employee::find($id);
-        $previousProfilePhotoPath = public_path('profile_images') . '/' . $employee->profile_photo;
+        if($employee){
+            $a=$request->a;
+            if($a=='personal'){
+                $employee->full_name = $request->full_name;
+                $employee->email = $request->email;
+                $employee->phone = $request->phone;
+                $employee->birth_year = $request->birth_year;
+                $employee->gender = $request->gender;
+                $employee->blood_group = $request->blood_group;
+                $employee->company = $request->company_name;
+                $employee->designation = $request->designation;
+                $employee->department = $request->emp_department;
+                $employee->joining_date = $request->joining_date;
+                $employee->emergency_contact = $request->emergency_contact;
+            }
+            if($employee->save()){
+                return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
+            }
+
+
+        }
+        /*$previousProfilePhotoPath = public_path('profile_images') . '/' . $employee->profile_photo;
         // Handle profile photo upload
         if ($request->hasFile('profile_photo')) {
             $profilePhoto = $request->file('profile_photo');
@@ -324,7 +356,7 @@ class EmployeeController extends Controller
             $employee->profile_photo = $profilePhotoName;
         }
         $employee->save();
-        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');
+        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');*/
     }
 
     public function updateAdress(Request $request, $id)

@@ -313,6 +313,17 @@ class EmployeeController extends Controller
         if($employee){
             $a=$request->a;
             switch ($a) {
+                case 'profile-image':
+                    if ($request->hasFile('profile_photo')) {
+                        $profilePhoto = $request->file('profile_photo');
+                        $profilePhotoName = $id.'_'.time().'_' . $profilePhoto->getClientOriginalName();
+                        $profilePhoto->move(public_path('uploads/employees/profile'), $profilePhotoName);
+                        $employee->profile_photo = $profilePhotoName;
+                    }
+                    if($employee->save()){
+                        return redirect()->route('employees.view', ['id'=>$id])->with('success', 'Employee Profile Image updated successfully.');
+                    }
+                    break;
                 case 'personal':
                     $employee->full_name = $request->full_name;
                     $employee->email = $request->email;

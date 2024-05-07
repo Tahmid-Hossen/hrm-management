@@ -22,13 +22,14 @@
                         $defaultProfileImage=$employee->gender=='Female' ? asset('uploads/employees/profile/default-emp-female.jpg') : asset('uploads/employees/profile/default-emp-male.jpg');
                     @endphp
                     <div class="flex flex-col gap-3 hidden" id="profilePicEdit">
-                        <form action="{{ route('employees.update',['id'=>$employee->id, 'a' => 'profile-image']) }}" method="post">
+                        <form action="{{ route('employees.update',['id'=>$employee->id, 'a' => 'profile-image']) }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="profile-pic border-8 border-gray-800 dark:border-neutral-500 dark:hover:border-red-700 hover:border-red-700 dark:hover:shadow-lg hover:shadow-lg duration-300 ease-in-out rounded-full">
                                 <label class="-label " for="file">
                                     <span class="fa-solid fa-camera flex items-center"></span>
                                     <span>Change Image</span>
                                 </label>
-                                <input id="file" type="file" accept="image/*" onchange="loadFile(event)" />
+                                <input id="file" name="profile_photo" type="file" accept="image/*" onchange="loadFile(event)" />
                                 <img class="" src="{{ asset('uploads/employees/profile/' . $employee->profile_photo) }}" onerror="this.onerror=null;this.src='{{$defaultProfileImage}}';" alt="{{$employee->name ??''}}" id="output"/>
                             </div>
                             <div class="flex items-center justify-center gap-x-2 border-t px-2 py-1 dark:border-neutral-700">

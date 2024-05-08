@@ -1,0 +1,13 @@
+/* Hide the number input's default arrows, spinner, and increment/decrement controls */
+
+/* For Chrome, Safari, Edge, and other modern browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; /* Optional: Hide the margin for WebKit browsers */
+}
+
+/* Hide spin buttons on Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

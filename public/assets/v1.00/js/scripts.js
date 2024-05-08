@@ -23,7 +23,8 @@ function createEployeeModal() {
 }
 
 function removeInnerHtml(id) {
-    $(`#${id}`).html('')
+    $(`#${id}`).addClass('hidden');
+    $(`#${id}`).html('');
 }
 
 function validateEmployeeSingleData(dataContent, inputId, destinationId) {
@@ -121,7 +122,8 @@ function validateEmployeeData() {
     return submitPermission;
 }
 function validateEmployeeEditData(section) {
-    let submitPermission=true;
+    console.log("section===>",section);
+    let submitPermission=false;
     let errorText='This field is required!';
     let employeeFullName=$('#employeeFullName');
     let employeeId=$('#employeeId');
@@ -130,52 +132,105 @@ function validateEmployeeEditData(section) {
     let isValidate_employee_email=$('#isValidate_employee_email');
     let employeePhone=$('#employeePhone');
     let isValidate_employeePhone=$('#isValidate_employeePhone');
+    let institution_name=$('#institution_name_one');
+    let department_name=$('#department_one');
+    let passing_year=$('#passing_year_one');
+    let education_result=$('#result_one');
     let firstError=null;
     let firstErrorMsg=null;
-    if(employeeFullName.val().length===0){
-        submitPermission=false;
-        $('#error_employeeFullName').html(errorText)
-        if(firstError===null){
-            firstError=employeeFullName
-            firstErrorMsg='Full Name required!';
-        }
-    }else{
-        $('#error_employeeFullName').html('')
+    switch (section) {
+        case 'personal':
+            if(employeeFullName.val().length===0){
+                submitPermission=false;
+                $('#error_employeeFullName').html(errorText)
+                if(firstError===null){
+                    firstError=employeeFullName
+                    firstErrorMsg='Full Name required!';
+                }
+            }else{
+                $('#error_employeeFullName').html('')
+            }
+            /*if(isValidate_employeeId.val()!=='1'){
+                submitPermission=false;
+                $('#error_employeeId').html(errorText)
+                if(firstError===null){
+                    firstError=employeeId;
+                    firstErrorMsg='Employee ID required!';
+                }
+            }else{
+                if(employeeId.val()==='') $('#error_employeeId').html('')
+            }*/
+            if(isValidate_employee_email.val()!=='1'){
+                submitPermission=false;
+                $('#error_employee_email').html(errorText)
+                if(firstError===null){
+                    firstError=employee_email
+                    firstErrorMsg='Email required!';
+                }
+            }else{
+                if(employee_email.val()==='') $('#error_employee_email').html('')
+            }
+            if(isValidate_employeePhone.val()!=='1'){
+                submitPermission=false;
+                $('#error_employeePhone').html(errorText)
+                if(firstError===null){
+                    firstError=employeePhone
+                    firstErrorMsg='Phone required!';
+                }
+            }else{
+                if(employeePhone.val()==='') $('#error_employeePhone').html('')
+            }
+            break;
+        case 'education':
+            if(institution_name.val()=='' ){
+                submitPermission=false;
+                $('#error_institution_name_one').html(errorText)
+                if(firstError===null){
+                    firstError=institution_name
+                    firstErrorMsg='Institution name is required!';
+                }
+            }else if(institution_name.val()!=='' && department_name.val()==''){
+                submitPermission=false;
+                $('#error_institution_name_one').html('')
+                $('#error_department_one').html(errorText)
+                if(firstError===null){
+                    firstError=department_name;
+                    firstErrorMsg='Department name is required!';
+                }
+            }else if((institution_name.val()!=='' && department_name.val()!=='') && passing_year.val()=='') {
+                submitPermission=false;
+                $('#error_institution_name_one').html('')
+                $('#error_department_one').html('')
+                $('#error_passing_year_one').html(errorText)
+                if(firstError===null){
+                    firstError=passing_year
+                    firstErrorMsg='Passing year is required!';
+                }
+            }else if((institution_name.val()!=='' && department_name.val()!=='' && passing_year.val()!=='') && education_result.val()=='') {
+                submitPermission=false;
+                $('#error_institution_name_one').html('')
+                $('#error_department_one').html('')
+                $('#error_passing_year_one').html('')
+                $('#error_result_one').html(errorText)
+                if(firstError===null){
+                    firstError=education_result;
+                    firstErrorMsg='Result is required!';
+                }
+            }else{
+                if(institution_name.val()!=='') $('#error_institution_name_one').html('');
+                if(department_name.val()!=='') $('#error_department_one').html('');
+                if(passing_year.val()!=='') $('#error_passing_year_one').html('');
+                if(education_result.val()!=='') $('#error_result_one').html('');
+                submitPermission=true;
+            }
+            break;
+        default:
+            submitPermission=false;
+            break;
     }
-    /*if(isValidate_employeeId.val()!=='1'){
-        submitPermission=false;
-        $('#error_employeeId').html(errorText)
-        if(firstError===null){
-            firstError=employeeId;
-            firstErrorMsg='Employee ID required!';
-        }
-    }else{
-        if(employeeId.val()==='') $('#error_employeeId').html('')
-    }*/
-    if(isValidate_employee_email.val()!=='1'){
-        submitPermission=false;
-        $('#error_employee_email').html(errorText)
-        if(firstError===null){
-            firstError=employee_email
-            firstErrorMsg='Email required!';
-        }
-    }else{
-        if(employee_email.val()==='') $('#error_employee_email').html('')
-    }
-    if(isValidate_employeePhone.val()!=='1'){
-        submitPermission=false;
-        $('#error_employeePhone').html(errorText)
-        if(firstError===null){
-            firstError=employeePhone
-            firstErrorMsg='Phone required!';
-        }
-    }else{
-        if(employeePhone.val()==='') $('#error_employeePhone').html('')
-    }
-
-    if(!submitPermission){
-        //  activeTab('employee-tab-item-1')
+    if(submitPermission === false){
         firstError.focus();
+        //  activeTab('employee-tab-item-1')
     }
     return submitPermission;
 }
@@ -223,6 +278,7 @@ function cancelEmployeeEdit(section) {
 
 
 function addEducationForm(id) {
+    $('#educationFormsWrap').removeClass('hidden');
     $('#educationFormsWrap').html($('#educationForm').html())
     $('.institution_name').focus();
 }

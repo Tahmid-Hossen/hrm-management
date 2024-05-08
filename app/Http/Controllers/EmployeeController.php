@@ -309,6 +309,7 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id)
     {
+        // return $request;
         $employee = Employee::find($id);
         if($employee){
             $a=$request->a;
@@ -328,12 +329,13 @@ class EmployeeController extends Controller
                     $employee->full_name = $request->full_name;
                     $employee->email = $request->email;
                     $employee->phone = $request->phone;
+                    $employee->alternative_phone = $request->alternative_phone;
                     $employee->birth_year = $request->birth_year;
                     $employee->gender = $request->gender;
                     $employee->blood_group = $request->blood_group;
                     $employee->company = $request->company_name;
                     $employee->designation = $request->designation;
-                    $employee->department = $request->emp_department;
+                    $employee->department = $request->department;
                     $employee->joining_date = $request->joining_date;
                     $employee->emergency_contact = $request->emergency_contact;
                     $employee->personal_email = $request->personal_email;
@@ -348,8 +350,8 @@ class EmployeeController extends Controller
                     $education->institution_name = $request->input('institution_name') ?? '';
                     $education->degree = $request->input('degree') ?? '';
                     $education->department = $request->input('department') ?? '';
-                    $education->passing_year = $request->input('passing_year') ?? '';
-                    $education->result = $request->input('result') ?? '';
+                    $education->passing_year = $request->input('passing_year') ?? '0';
+                    $education->result = $request->input('result') ?? '0.00';
                     if($education->save()){
                         return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
                     }
@@ -478,7 +480,7 @@ class EmployeeController extends Controller
         $designations = Designations::all();
         $departments = Departments::all();
         $documentType = DocumentType::all();
-        // return $designations;
+        // return $employee;
         return view('employee.view', compact('employee', 'designations', 'departments', 'documentType'));
     }
 

@@ -233,5 +233,15 @@ function addDocumentForm(id) {
 }
 
 function setActiveTab(active) {
+    var currentUrl = new URL(window.location.href);
+    var params = new URLSearchParams(currentUrl.search);
 
+    if (params.has('active')) {
+        params.set('active', active);
+    } else {
+        params.append('active', active);
+    }
+    currentUrl.search = params.toString();
+    window.history.pushState({ path: currentUrl.href }, '', currentUrl.href);
 }
+

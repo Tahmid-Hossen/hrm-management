@@ -379,43 +379,6 @@ class EmployeeController extends Controller
 
 
         }
-        /*$previousProfilePhotoPath = public_path('profile_images') . '/' . $employee->profile_photo;
-        // Handle profile photo upload
-        if ($request->hasFile('profile_photo')) {
-            $profilePhoto = $request->file('profile_photo');
-            $profilePhotoName = time() . '_' . $profilePhoto->getClientOriginalName();
-            $profilePhoto->move(public_path('profile_images'), $profilePhotoName);
-
-            $employee->profile_photo = $profilePhotoName;
-            // Delete the previous profile photo if it exists
-            if (file_exists($previousProfilePhotoPath) && is_file($previousProfilePhotoPath)) {
-                unlink($previousProfilePhotoPath);
-            }
-            // else {
-            //     $employee->profile_photo = $profilePhotoName;
-            // }
-        }
-        //return $request;
-        // Update employee fields
-        $employee->emp_id = $request->emp_id;
-        $employee->full_name = $request->full_name;
-        $employee->email = $request->email;
-        $employee->phone = $request->phone;
-        $employee->birth_year = $request->birth_year;
-        $employee->gender = $request->gender;
-        $employee->blood_group = $request->blood_group;
-        if ($request->designation != '') $employee->designation = $request->designation;
-        if ($request->emp_department != '') $employee->department = $request->emp_department;
-
-        $employee->joining_date = $request->joining_date;
-        $employee->emergency_contact = $request->emergency_contact;
-        // $employee->emergency_contact_relation = $request->emergency_contact_relation;
-        $employee->permanent_address = $request->permanent_address;
-        if (isset($profilePhotoName)) {
-            $employee->profile_photo = $profilePhotoName;
-        }
-        $employee->save();
-        return redirect()->route('employees.view', $id)->with('success', 'Employee updated successfully.');*/
     }
 
     public function updateAdress(Request $request, $id)
@@ -627,6 +590,9 @@ class EmployeeController extends Controller
 
         if($request->has('file')){
             $file=$request->file('file');
+            if (!($file->getClientOriginalExtension() === 'xls' || $file->getClientOriginalExtension() === 'xlsx')) {
+                return view('employee.import.invalid');
+            }
             $data = Excel::toCollection([], $file);
             $rows = $data[0]->toArray();
             $columnNames = $data->first()->first();
@@ -637,6 +603,7 @@ class EmployeeController extends Controller
             $company=[];
             $departments=[];
             $designation=[];
+            $phone=[];
             foreach (array_slice($rows, 1) as $row) {
                 if(!in_array($row['4'], $company)) $company[]=$row['4'];
                 if(!in_array($row['5'], $departments)) $departments[]=$row['5'];
@@ -664,7 +631,18 @@ class EmployeeController extends Controller
                 $dept=$row['5'];
                 $desig=$row['6'];
                 $joiningDate=null; if($row['7']!='') $joiningDate = date('Y-m-d', Date::excelToTimestamp($row['7']));
-                $phone=$row['8'];
+
+                $phoneString=$row['8'];
+                $numericString = preg_replace("/[^0-9,]/", "", $phoneString);
+                $numericArray=explode(',', $numericString);
+                $phone='';
+                $alternative_phone='';
+                if(count($numericArray)==0){
+                    $phone=$this->makeElevenDigitNumber($numericString);
+                }else{
+                    $phone=$this->makeElevenDigitNumber($numericArray[0]);
+                    $alternative_phone=isset($numericArray[1]) ? $this->makeElevenDigitNumber($numericArray[1]) : '';
+                }
                 $emergencyPhone=$row['9'];
                 $bloodGroup=$row['10'];
                 $personal_email=$row['11'];
@@ -687,6 +665,7 @@ class EmployeeController extends Controller
                     $employee->full_name = $name;
                     $employee->email = $email;
                     $employee->phone = $phone;
+                    $employee->alternative_phone = $alternative_phone;
                     $employee->blood_group = $bloodGroup;
                     $employee->emergency_contact = $emergencyPhone;
                     $employee->company = Company::select('id')->where('name', $comp)->pluck('id')->first();
@@ -727,5 +706,14 @@ class EmployeeController extends Controller
         }
     }
 
-
+    public function makeElevenDigitNumber($string)
+    {
+        if (strlen($string) < 11) {
+            $string = '0' . $string;
+        }
+        if (strlen($string) > 11) {
+            $string = substr($string, -11);
+        }
+        return $string;
+    }
 }

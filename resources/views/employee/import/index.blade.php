@@ -23,7 +23,7 @@
                 </div>
                 <div class="p-4">
                     <label class="block mb-2 text-sm text-gray-800 dark:text-neutral-400">
-                        <a class="text-sm text-red-600 dark:text-red-500 dark:hover:text-red-600 hover:underline dark:hover:underline font-medium dark:font-medium" href="#">Download a
+                        <a href="{{asset('excel/EmployeeTemplate.xlsx')}}" download="EmployeeTemplate_{{date('d-m-Y')}}_{{time()}}.xlsx" class="text-sm text-red-600 dark:text-red-500 dark:hover:text-red-600 hover:underline dark:hover:underline font-medium dark:font-medium">Download a
                             sample XLSX
                             template</a> to see an example of the format required.
                     </label>
@@ -38,11 +38,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                             </svg>
-                            <span class="text-sm text-gray-800 dark:text-white">Drop CSV or XLS files here or <span
+                            <span class="text-sm text-gray-800 dark:text-white">Drop XLS or XLSX file here or <span
                                     class="text-red-600 underline">browse</span></span>
                             <input type="file" name="file" class="hidden w-full" id="file-input"
-                                   accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                                   multiple>
+                                   accept=".xlsx, .xls" required>
                         </label>
                     </div>
                     <div class="grid items-center grid-cols-1 mt-4">
@@ -93,7 +92,7 @@
                 ul.classList.add('list-disc', 'pl-4');
 
                 for (const file of files) {
-                    if (file.type === 'text/csv' || file.type === 'application/vnd.ms-excel' || file.type ===
+                    if (file.type === 'application/vnd.ms-excel' || file.type ===
                         'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
                         const fileName = file.name;
                         const fileSize = formatBytes(file.size);
@@ -102,7 +101,8 @@
                         $('#submitButton').attr('disabled', false);
                     } else {
                         $('#submitButton').attr('disabled', true);
-                        alert('Please upload only CSV or XLS files.');
+                        toastr.error("Please upload only XLS or XLSX files.");
+                        //alert('Please upload only CSV or XLS files.');
                     }
                 }
 
@@ -146,6 +146,8 @@
                     'dark:hover:text-red-700');
                 deleteButton.addEventListener('click', function() {
                     listItem.remove();
+                    fileInput.value = "";
+                    $('#submitButton').attr('disabled', true);
                 });
                 listItem.appendChild(deleteButton);
 

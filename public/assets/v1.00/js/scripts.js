@@ -198,7 +198,7 @@ function copyToClipboardForDeletePopup() {
                 $("#deleteButton").prop("disabled", false);
             })
             .catch((error) => {
-                showAlert('Unable to copy text to clipboard:', error);
+                //showAlert('Unable to copy text to clipboard:', error);
             });
     } catch (error) {
         console.error('Clipboard API not supported:', error);

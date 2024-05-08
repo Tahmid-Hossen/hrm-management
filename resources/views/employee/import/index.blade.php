@@ -9,131 +9,158 @@
 @endsection
 
 @section('content')
-    <div class="mt-16 flex justify-center">
-        <div class="p-4 w-2/3">
-            <form action="{{route('employees.import.submit')}}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="flex flex-col items-center">
-                    <h3 class="font-bold text-xl flex items-center">Import file only <span class="text-sm text-gray-700"> &nbsp; (xlsx, xls) </span> </h3>
-                    <div class="w-full max-w-lg bg-white rounded-lg py-6">
-                        <div class="bg-gray-100 p-2 pt-0 text-center rounded-lg border-dashed border-2 border-gray-300 hover:border-blue-500 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md" id="dropzone">
-                            <label for="exelFile" class="cursor-pointer flex flex-col items-center space-y-2">
-                                <svg class="w-16 h-16 text-gray-400 pt-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                <span class="flex flex-col w-full mt-0">
-                                            <span class="text-gray-600">Drag and drop your exel file here</span>
-                                            <span class="text-gray-500 text-sm">(or click to select)</span>
-                                        </span>
-                            </label>
-                            <input type="file" name="file" id="exelFile" accept=".xlsx, .xls" class="hidden" >
-                            <!-- <input type="file" name="file" id="file" class="form-control"> -->
-                        </div>
-                        <div class="mt-3 text-center w-full rounded-md text-red-600 font-medium" id="fileList">
 
-                        </div>
-                        <div id="errorMessage" class="text-red-500 text-center font-medium text-sm"></div>
-                    </div>
-                    <button id="importButton" type="submit" onclick="" class="inline-flex items-center px-4 py-2 font-medium text-center  text-white bg-red-600 hover:bg-red-800 disabled:text-neutral-600 disabled:bg-neutral-200 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" disabled>
-                        <i class="fa fa-plus"></i>
-                        Import
-                    </button>
+    <form action="{{route('employees.import.submit')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div class="mt-16 sm:max-w-4xl sm:w-full m-3 h-[calc(100%_-_16rem)] sm:mx-auto">
+            <div
+                class="flex flex-col max-h-full overflow-hidden bg-white border shadow-sm pointer-events-auto rounded-xl dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+                <div class="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
+                    <h3 class="text-gray-800 dark:text-neutral-200">
+                        Upload Files
+                    </h3>
                 </div>
-            </form>
+                <div class="p-4">
+                    <label class="block mb-2 text-sm text-gray-800 dark:text-neutral-400">
+                        <a class="text-sm text-red-600 dark:text-red-500 dark:hover:text-red-600 hover:underline dark:hover:underline font-medium dark:font-medium" href="#">Download a
+                            sample XLSX
+                            template</a> to see an example of the format required.
+                    </label>
+
+
+                    <div class="flex justify-center my-4 border border-neutral-600 border-dashed rounded-md dark:border-neutral-400 dark:bg-neutral-800"
+                         id="drop-zone">
+                        <label class="flex flex-col items-center w-full transition cursor-pointer hover:border-red-600"
+                               style="padding: 3rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-2 text-gray-400" fill="none"
+                                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                            </svg>
+                            <span class="text-sm text-gray-800 dark:text-white">Drop CSV or XLS files here or <span
+                                    class="text-red-600 underline">browse</span></span>
+                            <input type="file" name="file" class="hidden w-full" id="file-input"
+                                   accept=".csv, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                                   multiple>
+                        </label>
+                    </div>
+                    <div class="grid items-center grid-cols-1 mt-4">
+                        <div id="preview-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end mt-4">
+                <button class="submit-button" id="submitButton" disabled>Submit</button>
+            </div>
         </div>
-    </div>
+
+    </form>
+
 @endsection
 @include('employee.create')
 @section('scripts')
     <script>
-        ////////UPLOAD IMAGE
-        var dropzone = document.getElementById('dropzone');
-        var exelFile = document.getElementById('exelFile');
-        var fileList = document.getElementById('fileList');
-        var errorMessageElement = document.getElementById('errorMessage');
-        errorMessageElement.textContent='';
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.getElementById('drop-zone');
+            const fileInput = document.getElementById('file-input');
+            const previewContainer = document.getElementById('preview-container');
 
-        dropzone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropzone.classList.add('border-blue-500', 'border-2');
-        });
+            dropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                dropZone.classList.add('border-red-700','dark:border-red-600','border-2','animate-pulse' );
+            });
 
-        dropzone.addEventListener('dragleave', () => {
-            dropzone.classList.remove('border-blue-500', 'border-2');
-        });
+            dropZone.addEventListener('dragleave', function() {
+                dropZone.classList.remove('border-red-700','dark:border-red-600','border-2','animate-pulse');
+            });
 
-        dropzone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropzone.classList.remove('border-blue-500', 'border-2');
+            dropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dropZone.classList.remove('border-red-700','dark:border-red-600','border-2','animate-pulse');
 
-            const files = e.dataTransfer.files;
-            handleFiles(files);
-        });
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
 
-        exelFile.addEventListener('change', (e) => {
-            const files = e.target.files;
-            handleFiles(files);
-        });
+            fileInput.addEventListener('change', function() {
+                const files = fileInput.files;
+                handleFiles(files);
+            });
 
-        function handleFiles(files) {
-            fileList.innerHTML = '';
-            errorMessageElement.textContent = ''; // Clear previous error message
+            function handleFiles(files) {
+                const ul = document.createElement('ul');
+                ul.classList.add('list-disc', 'pl-4');
 
-            for (const file of files) {
-                if (file.size <= 2 * 1024 * 1024) {
-                    const fileName = file.name;
-                    const fileExtension = fileName.split('.').pop();
-
-                    if (fileExtension === 'xlsx' || fileExtension === 'xls') {
-                        let maxLength = 30;
-                        let truncatedString = file.name.length > maxLength ? file.name.substring(0, maxLength) + "..." : file.name;
-                        $('#fileList').html(`${truncatedString} (${formatBytes(file.size)})`);
-                        // Make the button visible
-                        $('#importButton').attr('disabled', false);
-
+                for (const file of files) {
+                    if (file.type === 'text/csv' || file.type === 'application/vnd.ms-excel' || file.type ===
+                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                        const fileName = file.name;
+                        const fileSize = formatBytes(file.size);
+                        const listItem = createPreviewItem(fileName, fileSize);
+                        ul.appendChild(listItem);
+                        $('#submitButton').attr('disabled', false);
                     } else {
-                        // If the condition is not true, you may want to hide the button
-                        $('#importButton').attr('disabled', true);
-                        // Invalid file type, show error message
-                        errorMessageElement.textContent = 'Invalid file type. Allowed types: .xlsx, .xls.';
-                        exelFile.value = ''; // Clear the file input
+                        $('#submitButton').attr('disabled', true);
+                        alert('Please upload only CSV or XLS files.');
                     }
-                    /*if (file.type === 'image/png' || file.type === 'image/svg+xml') {
-                        let reader = new FileReader();
-                        reader.onload = function (e) {
-                            let maxLength = 30;
-                            let truncatedString = file.name.length > maxLength ? file.name.substring(0, maxLength) + "..." : file.name;
-                            let op = `
-                            <div class="w-full bg-gradient-to-r from-teal-700 to-teal-500 rounded-md text-white px-1">
-                                <p class="text-left">${truncatedString} (${formatBytes(file.size)})</p>
-                            </div>
-                        `;
-                            $('#fileList').html(op);
-
-                            $('#qrCodeImagePreview').html(`<img class="w-full h-full object-cover" src="${e.target.result}" alt="Uploaded Image">`);
-                        };
-                        reader.readAsDataURL(file);
-                    } else {
-                        // Invalid file type, show error message
-                        errorMessageElement.textContent = 'Invalid file type. Allowed types: .png, .svg.';
-                        exelFile.value = ''; // Clear the file input
-                    }*/
-                } else {
-                    // File exceeds size limit, show error message
-                    errorMessageElement.textContent = 'Maximum size limit exceeds 2MB.';
-                    exelFile.value = ''; // Clear the file input
                 }
+
+                // Clear previous contents of preview container and append the new list
+                previewContainer.innerHTML = '';
+                previewContainer.appendChild(ul);
             }
-        }
 
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            function createPreviewItem(fileName, fileSize) {
+                const listItem = document.createElement('div');
+                listItem.classList.add('flex', 'justify-between', 'items-center', 'gap-x-2');
 
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
+                const fileInfo = document.createElement('div');
+                fileInfo.classList.add('flex', 'items-center', 'gap-x-2');
+
+                // Add Excel icon
+                const excelIcon = document.createElement('img');
+                excelIcon.src =
+                    'https://img.icons8.com/color/48/microsoft-excel-2019--v1.png'; // Replace with your Excel icon URL
+                excelIcon.classList.add('w-8', 'h-8'); // Adjust the width and height as needed
+                fileInfo.appendChild(excelIcon);
+
+                const fileNameElement = document.createElement('p');
+                fileNameElement.textContent = fileName;
+                fileNameElement.classList.add('text-gray-500', 'dark:text-neutral-300', 'hover:text-gray-800', 'dark:hover:text-neutral-200');
+                fileInfo.appendChild(fileNameElement);
+
+                const fileSizeElement = document.createElement('p');
+                fileSizeElement.textContent = '('+fileSize+')';
+                fileSizeElement.classList.add('text-xs', 'text-gray-500', 'dark:text-neutral-300', 'pt-1');
+                fileInfo.appendChild(fileSizeElement);
+
+                listItem.appendChild(fileInfo);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML =
+                    `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+        </svg>`;
+                deleteButton.classList.add('text-red-500', 'hover:text-red-700', 'dark:text-red-500',
+                    'dark:hover:text-red-700');
+                deleteButton.addEventListener('click', function() {
+                    listItem.remove();
+                });
+                listItem.appendChild(deleteButton);
+
+                return listItem;
+            }
+
+            function formatBytes(bytes, decimals = 2) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const dm = decimals < 0 ? 0 : decimals;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+            }
+        });
     </script>
 @endsection
 

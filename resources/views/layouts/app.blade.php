@@ -44,6 +44,11 @@
             <span class="sr-only">Loading...</span>
         </div>
     </div>
+    <div id="spinner-small-white" class="hidden">
+        <div class="animate-spin inline-block size-4 border-[3px] border-current border-t-transparent text-white rounded-full dark:text-blue-500" role="status" aria-label="loading">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     <div id="spinner-large" class="hidden">
         <div class="py-10 flex items-center justify-center">
             <div class="animate-spin inline-block size-12 border-[5px] border-current border-t-transparent text-gray-400 rounded-full dark:text-blue-500" role="status" aria-label="loading">

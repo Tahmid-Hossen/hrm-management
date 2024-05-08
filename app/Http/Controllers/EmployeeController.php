@@ -16,7 +16,9 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 
@@ -119,6 +121,7 @@ class EmployeeController extends Controller
                     'designation' => $item->empDesignation->name ?? '',
                     'department' => $item->empDepartment->name ?? '',
                     'company' => $item->empCompany->name ?? '',
+                    'is_user' => $item->user ? 1 : 0,
                 ];
             }
             $request = [
@@ -307,6 +310,63 @@ class EmployeeController extends Controller
         return view('employee.edit', compact('employee', 'designations', 'departments'));*/
     }
 
+    public function assignUserForm(Request $request, $empId)
+    {
+        if($request->ajax()){
+            $employee = Employee::find($empId);
+            if($employee){
+                if(!$employee->user){
+                    $roles=Role::get();
+                    $html=View::make('employee.partials.assignUser', compact('employee', 'roles'))->render();
+                    return response()->json(['status'=>1, 'html'=>$html]);
+                }else{
+                    return response()->json(['status'=>0, 'msg'=>'Already User']);
+                }
+
+            }else{
+                return response()->json(['status'=>0, 'msg'=>'Employee not found!']);
+            }
+        }
+        abort(403);
+
+    }
+    public function assignUser(Request $request, $empId)
+    {
+        if($request->ajax()){
+            if(!($request->role!='' && $request->email!='')) return response()->json(['status'=>0, 'msg'=>'There is no email provided']);
+            $employee = Employee::find($empId);
+            if($employee){
+                if($employee->user) return response()->json(['status'=>0, 'msg'=>'Already Assigned as  User']);
+                if(User::where('emp_id', $empId)->count()!=0) return response()->json(['status'=>0, 'msg'=>'Already Assigned as  User']);
+                $user=new User();
+                $user->emp_id=$empId;
+                $user->name=$employee->full_name;
+                $user->role_id=$request->role;
+                $user->email=$request->email;
+                $generatedPassword=strongPasswordGenerator();
+                $user->password=Hash::make($generatedPassword);
+                if($user->save()){
+                    $data = [
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'password' => $generatedPassword,
+                    ];
+
+                    $email = new NewUserMail($data);
+                    $email->userData = $data;
+                    Mail::to($user->email)->send($email);
+                    return response()->json(['status'=>1, 'msg'=>'Successfully Assigned as  User', 'psw'=>$generatedPassword]);
+                }
+                return response()->json(['status'=>0, 'msg'=>'Error Occurred!']);
+
+            }else{
+                return response()->json(['status'=>0, 'msg'=>'Employee not found!']);
+            }
+        }
+        abort(403);
+
+    }
+
     public function update(Request $request, $id)
     {
         $employee = Employee::find($id);
@@ -348,7 +408,7 @@ class EmployeeController extends Controller
                     $education->institution_name = $request->input('institution_name') ?? '';
                     $education->degree = $request->input('degree') ?? '';
                     $education->department = $request->input('department') ?? '';
-                    $education->passing_year = $request->input('passing_year') ?? '';
+                    $education->passing_year = $request->input('passing_year') ?? 0;
                     $education->result = $request->input('result') ?? '';
                     if($education->save()){
                         return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
@@ -361,12 +421,32 @@ class EmployeeController extends Controller
                     $doc->document_type = $request->input('document_type') ?? '';
                     if ($request->hasFile('documentFile')) {
                         $file = $request->file('documentFile');
-                        $fileName = $id.'_'.time().'_' . $file->getClientOriginalName();
-                        $file->move(public_path('uploads/employees/document'), $fileName);
+                        $fileExtension = $file->getClientOriginalExtension();
+                        $fileName = $id.'_'.time().'_' . Str::slug($request->title).'.'.$fileExtension;
+                        $file->move(public_path("uploads/employees/{$employee->emp_id}/documents"), $fileName);
+                        $fileExtension = strtolower($fileExtension);
+                        $fileTypes = [
+                            'jpg' => 'image',
+                            'jpeg' => 'image',
+                            'png' => 'image',
+                            'gif' => 'image',
+                            'pdf' => 'pdf',
+                            'doc' => 'document',
+                            'docx' => 'document',
+                            'xls' => 'document',
+                            'xlsx' => 'document',
+                            'ppt' => 'document',
+                            'pptx' => 'document',
+                            'txt' => 'text',
+                            'zip' => 'compressed',
+                            'rar' => 'compressed',
+                        ];
+                        $fileType = isset($fileTypes[$fileExtension]) ? $fileTypes[$fileExtension] : 'others';
                         $doc->file_name = $fileName;
-                    }
-                    if($doc->save()){
-                        return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee added documents successfully.');
+                        $doc->file_type = $fileType;
+                        if($doc->save()){
+                            return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee added documents successfully.');
+                        }
                     }
                     break;
                 default:
@@ -485,16 +565,31 @@ class EmployeeController extends Controller
 
     public function delete($id)
     {
-        $employee = Employee::findOrFail($id);
-        $employee->delete();
 
-        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
+        $employee = Employee::find($id);
+        if($employee){
+            if(isset($employee->user)){
+                if($employee->user->id==auth()->id()) return back()->with('error', 'You cant delete yourself.');
+            }
+            $employee->delete();
+            if(isset($employee->user)){
+                $employee->user->delete();
+            }
+            return back()->with('success', 'Employee deleted successfully.');
+        }
+        return back()->with('error', 'You cant delete yourself.');
     }
     public function deleteEducation($id)
     {
         $employee = EmployeeEducation::findOrFail($id);
         $employee->delete();
-        return redirect()->route('employees.view', ['id'=>$id, 'active'=>'education'])->with('success', 'Employee dducation deleted successfully.');
+        return redirect()->route('employees.view', ['id'=>$id, 'active'=>'education'])->with('success', 'Employee education deleted successfully.');
+    }
+    public function deleteDocument($id)
+    {
+        $doc = EmployeeDocument::findOrFail($id);
+        $doc->delete();
+        return back()->with('success', 'Employee Document deleted successfully.');
     }
 
     public function forceDelete($id)

@@ -433,9 +433,7 @@
                                     @if($employee->empDocuments->count()>0)
                                         <div class="grid grid-cols-4 gap-6 py-4">
                                             @foreach($employee->empDocuments as $key=>$item)
-                                                <x-cards.document-card :data="$item">
-
-                                                </x-cards.document-card>
+                                                <x-cards.document-card :data="$item" :employee="$employee"></x-cards.document-card>
                                             @endforeach
                                         </div>
 

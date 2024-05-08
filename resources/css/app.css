@@ -37,7 +37,7 @@ body{
 }
 
 .inputLabel{
-    @apply inline-block text-sm  font-medium text-gray-800 dark:text-neutral-200
+    @apply inline-block text-sm  font-medium text-gray-800 dark:text-neutral-200 mb-1
 }
 
 .inputField{
@@ -53,6 +53,18 @@ body{
     @apply inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-500 border rounded-lg border-neutral-300 gap-x-2 hover:border-red-600 hover:text-red-600 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700
 }
 
+.actionBtn{
+    @apply w-8 aspect-square overflow-hidden flex items-center justify-center rounded-md text-white pt-1
+}
+.actionBtn.red{
+    @apply bg-red-600
+}
+.actionBtn.teal{
+    @apply bg-teal-600 disabled:bg-neutral-400
+}
+.actionBtn.neutral{
+    @apply bg-neutral-600
+}
 
 
 

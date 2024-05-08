@@ -65,7 +65,7 @@ function inputClass($section="common"){
 }
 
 function strongPasswordGenerator( $length = 12 ) {
-    return "N3x@".generateRandomString($length-4);
+    return "N3xHRM@".generateRandomString($length-6);
 }
 
 

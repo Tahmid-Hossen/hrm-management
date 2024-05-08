@@ -245,3 +245,44 @@ function setActiveTab(active) {
     window.history.pushState({ path: currentUrl.href }, '', currentUrl.href);
 }
 
+function assignAsUserPopup(empId) {
+
+    $.ajax(`${baseUrl}/employees/assign-user-form/${empId}`).then(function (res) {
+        if(res.status===1){
+            $(`#smallModalBody`).html(res.html)
+            smallModal.showModal();
+            $('#smallModalTitle').html('Assign As User');
+        }else{
+            toastr.error(res.msg)
+        }
+    })
+}
+function assignEmployeeAsUser(empId) {
+    let submitPermission=true;
+    let role=$('#role').val();
+    let email=$('#assignUserEmployeeEmail').val();
+    if(!email){
+        submitPermission=false;
+        toastr.error("There is no email found!")
+    }
+    if(submitPermission){
+        $('#assignEmployeeAsUserBtn').html($('#spinner-small-white').html()+'creating...')
+        $.ajax({
+            url:`${baseUrl}/employees/assign-user/${empId}`,
+            data:{
+                role:role,
+                email:email,
+            }
+        }).then(function (res) {
+            if(res.status===1){
+                toastr.success(res.msg)
+                dataTable.ajax.reload();
+                //window.location.reload();
+            }else{
+                toastr.error(res.msg)
+            }
+            smallModal.close()
+        })
+    }
+
+}

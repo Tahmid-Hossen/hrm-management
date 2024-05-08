@@ -125,7 +125,7 @@
                         <tr class="dark:hover:bg-neutral-800">
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                EMPLOYEE ID
+                                EMP ID
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
@@ -208,69 +208,25 @@
                 { name: 'action',  data: 'id', sortable:false,
                     render: function(id, type, row) {
                         let viewProfileBtn=`
-                                        <div class="hs-tooltip inline-block">
-                                            <a href="${baseUrl}/employees/view/${row.id}"
-                                                class="hs-tooltip-toggle btn-view">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
-                                                </svg>
-                                                <span
-                                                    class="hs-tooltip-content invisible absolute z-10 inline-block rounded-lg bg-red-600 px-2 py-1 text-white opacity-0 shadow-md transition-opacity hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
-                                                    role="tooltip">
-                                                    View Profile
-                                                </span>
-                                            </a>
-                                        </div>
+                                        <a href="${baseUrl}/employees/view/${row.id}" class="actionBtn neutral">
+                                            <i class="fa-regular fa-address-card"></i>
+                                        </a>
                                     `
-                        let assignRoleButton=`
-                                        <div class="hs-tooltip inline-block">
-                                            <button type="button"
-                                                class="assignRoleBtn hs-tooltip-toggle btn-green"
-                                                data-user-id="${id}"
-                                                data-user-data="${id}"
-                                                data-hs-overlay="#update-user-modal">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-arrow-repeat" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
-                                                </svg>
 
-                                                <span
-                                                    class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:visible hs-tooltip-shown:opacity-100"
-                                                    role="tooltip">
-                                                    Assign Role
-                                                </span>
-                                            </button>
-                                        </div>
+                        let assignUserButton=`
+                                        <button type="button" ${row.is_user===1 ? 'disabled' : ''} onclick="assignAsUserPopup(${id})" class="actionBtn teal">
+                                            <i class="fa-solid ${row.is_user===1 ? 'fa-user-check' : 'fa-user-gear'} "></i>
+                                        </button>
                                     `;
                                     let deletePermission=true;
                                     let deleteButton=`
-                                        <div class="inline-block hs-tooltip">
-                                            <button onclick="deletePopup('Delete Emplyee', '${row.full_name}', '${baseUrl}/employees/delete/${row.id}')"
-                                                type="button"
-                                                class="btn-red">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor" class="bi bi-archive"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5zm13-3H1v2h14zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
-                                                </svg>
-                                                <span
-                                                    class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
-                                                    role="tooltip">
-                                                    Delete
-                                                </span>
-                                            </button>
-                                        </div>
+                                        <button class="actionBtn red" onclick="deletePopup('Delete Emplyee', '${row.full_name}', '${baseUrl}/employees/delete/${row.id}')">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </button>
                                     `
                         if(!deletePermission) deleteButton='';
-                        let html=`${viewProfileBtn}${assignRoleButton}${deleteButton}`;
+                        //if(row.is_user===1) assignUserButton=''
+                        let html=`<div class="flex items-center justify-center gap-1">${viewProfileBtn}${assignUserButton}${deleteButton}</div>`;
                         return html;
                     }
                 },

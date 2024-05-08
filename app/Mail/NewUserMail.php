@@ -39,7 +39,7 @@ class NewUserMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.change-password',
+            view: 'emails.new-user',
         );
     }
 

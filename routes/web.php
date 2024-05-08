@@ -53,11 +53,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [EmployeeController::class, 'store'])->name('employees.store');
         Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('employees.edit');
         Route::post('/update/{id}', [EmployeeController::class, 'update'])->name('employees.update');
-        Route::post('/update/address/{id}', [EmployeeController::class, 'updateAdress'])->name('employees.address.update');
-        Route::post('/update/education/{id}', [EmployeeController::class, 'updateEducation'])->name('employees.education.update');
-        Route::post('/update/documents/{id}', [EmployeeController::class, 'updateDocuments'])->name('employees.documents.update');
+        Route::get('/assign-user-form/{empId}', [EmployeeController::class, 'assignUserForm']);
+        Route::get('/assign-user/{empId}', [EmployeeController::class, 'assignUser']);
+        //Route::post('/update/address/{id}', [EmployeeController::class, 'updateAdress'])->name('employees.address.update');
+        //Route::post('/update/education/{id}', [EmployeeController::class, 'updateEducation'])->name('employees.education.update');
+        //Route::post('/update/documents/{id}', [EmployeeController::class, 'updateDocuments'])->name('employees.documents.update');
         Route::get('/delete/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
         Route::get('/delete-education/{id}', [EmployeeController::class, 'deleteEducation'])->name('employee.delete.education');
+        Route::get('/delete-document/{id}', [EmployeeController::class, 'deleteDocument'])->name('employee.delete.document');
         Route::delete('/force-delete/{id}', [EmployeeController::class, 'forceDelete'])->name('employees.force-delete');
         Route::get('/view/{id}', [EmployeeController::class, 'view'])->name('employees.view');
         Route::post('/employee-permission/{id}', [EmployeeController::class, 'employeePermission'])->name('employees.permission');

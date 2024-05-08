@@ -59,7 +59,7 @@
                                 Select Company
                             </label>
                             <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" >
-                                <option value="" disabled>Select Company</option>
+                                <option value="" disabled {{$employee->company_name == '' ? 'selected' : ''}}>Select Company</option>
                                 @if(isset($companies))
                                     @foreach ($companies as $item)
                                         <option value="{{ $item->id }}" {{$employee->company==$item->id ? 'selected' : ''}}>{{ $item->name }}</option>
@@ -68,17 +68,19 @@
                             </select>
                         </div>
                         <div>
-                            <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
-                                Select Designation
+                            <label for="employeeDepartment" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
+                                Select Department
                             </label>
-                            <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                @foreach ($designations as $designation)
-                                    {{-- <option value="{{ $department->id }}"> --}}
-                                    <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
-                                        {{ $designation->name }}
-                                    </option>
+                            <select id="employeeDepartment" name="department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                <option value="" disabled {{$employee->department == '' ? 'selected' : ''}}>Select Department</option>
+                                @if(isset($departments))
+                                    @foreach ($departments as $department)
+                                        <option value="{{ $department->id }}" {{ $department->id == $employee->department ? 'selected' : '' }}>
+                                            {{ $department->name }}
+                                        </option>
 
-                                @endforeach
+                                    @endforeach
+                                @endif
                             </select>
                         </div>
                         <div>
@@ -100,6 +102,13 @@
                             <input id="employeePhone" name="phone" type="text" class="inputField" value="{{ $employee->phone }}"  />
                             <span class="error_msg" id="error_employeePhone"></span>
                             <input type="hidden" id="isValidate_employeePhone" value="1">
+                        </div>
+                        <div>
+                            <label for="employeeAlternatePhone" class="inputLabel"> Alternate Phone </label>
+                            <span class="text-sm text-gray-400 dark:text-neutral-600"> (Optional) </span>
+                            <input id="employeeAlternatePhone" name="alternative_phone" type="text" class="inputField" value="{{ $employee->alternative_phone }}"  />
+                            <span class="error_msg" id="error_employeeAlternatePhone"></span>
+                            <input type="hidden" id="isValidate_employeeAlternatePhone" value="1">
                         </div>
                         <div>
                             <label for="employeeEmmergencyPhone" class="inputLabel">Emergency Contact </label>
@@ -174,7 +183,7 @@
 @if($a=='address')
     {{-- Personal Information --}}
     <div class="px-5 bg-white dark:bg-neutral-800 " id="personal-details-edit">
-        <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>$a])}}" onsubmit="return validateEmployeeEditData('personal')" method="post">
+        <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>$a])}}" onsubmit="return validateEmployeeEditData('address')" method="post">
             @csrf
             <div class="mt-3">
                 <div class=" grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">

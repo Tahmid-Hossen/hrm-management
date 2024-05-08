@@ -121,20 +121,18 @@
 
                 // Add Excel icon
                 const excelIcon = document.createElement('img');
-                excelIcon.src =
-                    'https://img.icons8.com/color/48/microsoft-excel-2019--v1.png'; // Replace with your Excel icon URL
+                excelIcon.src ='https://img.icons8.com/color/48/microsoft-excel-2019--v1.png'; // Replace with your Excel icon URL
                 excelIcon.classList.add('w-8', 'h-8'); // Adjust the width and height as needed
                 fileInfo.appendChild(excelIcon);
 
                 const fileNameElement = document.createElement('p');
                 fileNameElement.textContent = fileName;
-                fileNameElement.classList.add('text-gray-500', 'dark:text-neutral-300', 'hover:text-gray-800',
-                    'dark:hover:text-neutral-200');
+                fileNameElement.classList.add('text-gray-500', 'dark:text-neutral-300', 'hover:text-gray-800', 'dark:hover:text-neutral-200');
                 fileInfo.appendChild(fileNameElement);
 
                 const fileSizeElement = document.createElement('p');
                 fileSizeElement.textContent = fileSize;
-                fileSizeElement.classList.add('text-xs', 'text-gray-500', 'dark:text-neutral-300');
+                fileSizeElement.classList.add('text-xs','pt-1', 'text-gray-500', 'dark:text-neutral-300');
                 fileInfo.appendChild(fileSizeElement);
 
                 listItem.appendChild(fileInfo);

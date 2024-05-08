@@ -603,7 +603,7 @@
 
 @section('scripts')
 <script>
-
+/* Profile phpto change */
 function editEmployeeProfilePic() {
     $("#profilePic").hide();
     $("#profilePicEdit").show();
@@ -612,12 +612,12 @@ function cancelEmployeeProfilePicEdit(event) {
     $("#profilePicEdit").hide();
     $("#profilePic").show();
 }
-/* Script For Profile phpto change */
+
 var loadFile = function(event) {
     const image = document.getElementById("output");
     image.src = URL.createObjectURL(event.target.files[0]);
 };
-
+/* End of Profile phpto change */
 
 // For personal details
 const sectionIDBasicInfo1 = document.getElementById('disable-card');

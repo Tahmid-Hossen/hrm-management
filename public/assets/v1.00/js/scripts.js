@@ -231,3 +231,7 @@ function addDocumentForm(id) {
     $('#documentFormsWrap').html($('#addDocumentForm').html())
     $('.documentTitle').focus();
 }
+
+function setActiveTab(active) {
+
+}

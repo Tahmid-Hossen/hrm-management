@@ -11,7 +11,7 @@
 
             <div class="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
                 <h3 class="text-gray-800 dark:text-neutral-200">
-                    Import products
+                    Upload Files
                 </h3>
                 <button type="button"
                     class="flex items-center justify-center text-sm font-semibold text-gray-800 border border-transparent rounded-lg size-7 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-transparent dark:hover:bg-neutral-700">
@@ -26,15 +26,15 @@
             </div>
             <div class="p-4">
                 <label class="block mb-2 text-sm text-gray-800 dark:text-neutral-400">
-                    <a class="text-sm text-red-600 dark:text-red-600 dark:hover:text-red-600" href="#">Download a
+                    <a class="text-sm text-red-600 dark:text-red-500 dark:hover:text-red-600 hover:underline dark:hover:underline hover:font-medium dark:hover:font-medium" href="#">Download a
                         sample CSV
                         template</a> to see an example of the format required.
                 </label>
 
 
-                <div class="flex justify-center my-4 border border-dashed rounded-md dark:border-neutral-700 dark:bg-neutral-800"
+                <div class="flex justify-center my-4 border border-neutral-600 border-dashed rounded-md dark:border-neutral-400 dark:bg-neutral-800"
                     id="drop-zone">
-                    <label class="flex flex-col items-center w-full transition cursor-pointer hover:border-gray-400"
+                    <label class="flex flex-col items-center w-full transition cursor-pointer hover:border-red-600"
                         style="padding: 3rem;">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-2 text-gray-400" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -71,16 +71,16 @@
 
             dropZone.addEventListener('dragover', function(e) {
                 e.preventDefault();
-                dropZone.classList.add('border-gray-400');
+                dropZone.classList.add('border-red-700','dark:border-red-600','border-2','animate-pulse' );
             });
 
             dropZone.addEventListener('dragleave', function() {
-                dropZone.classList.remove('border-gray-400');
+                dropZone.classList.remove('border-red-700','dark:border-red-600','border-2','animate-pulse');
             });
 
             dropZone.addEventListener('drop', function(e) {
                 e.preventDefault();
-                dropZone.classList.remove('border-gray-400');
+                dropZone.classList.remove('border-red-700','dark:border-red-600','border-2','animate-pulse');
 
                 const files = e.dataTransfer.files;
                 handleFiles(files);
@@ -128,13 +128,13 @@
 
                 const fileNameElement = document.createElement('p');
                 fileNameElement.textContent = fileName;
-                fileNameElement.classList.add('text-gray-500', 'dark:text-neutral-500', 'hover:text-gray-800',
+                fileNameElement.classList.add('text-gray-500', 'dark:text-neutral-300', 'hover:text-gray-800',
                     'dark:hover:text-neutral-200');
                 fileInfo.appendChild(fileNameElement);
 
                 const fileSizeElement = document.createElement('p');
                 fileSizeElement.textContent = fileSize;
-                fileSizeElement.classList.add('text-xs', 'text-gray-500', 'dark:text-neutral-500');
+                fileSizeElement.classList.add('text-xs', 'text-gray-500', 'dark:text-neutral-300');
                 fileInfo.appendChild(fileSizeElement);
 
                 listItem.appendChild(fileInfo);

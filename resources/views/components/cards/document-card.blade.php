@@ -4,26 +4,58 @@
     $fileType=$data->file_type;
     $fileName=$data->file_name;
     $display='';
-    $fileURL='';
+    $fileURL=asset("uploads/employees/{$employee->emp_id}/documents/{$data->file_name}");
+    $downloadedFileName="{$employee->emp_id}_{$employee->full_name}_{$fileName}";
     $downloadedFileName='';
     $icon='';
+    $color='';
     switch ($fileType){
         case 'pdf':
-            $fileURL=asset("uploads/employees/{$employee->emp_id}/documents/{$data->file_name}");
             $display='<iframe src="'.$fileURL.'" width="100%" height="100%"></iframe>';
-            $downloadedFileName="{$employee->emp_id}_{$employee->full_name}_{$fileName}";
             $icon='<img src="https://img.icons8.com/fluency/48/pdf.png" width="24px">';
+            $color='#dc2626';
             break;
         case 'document':
             $extension = pathinfo($fileName, PATHINFO_EXTENSION);
-            if($extension=='xlsx' || $extension=='xls') $display='<img src="https://img.icons8.com/fluency/48/pdf.png" width="160px">';
+            if($extension=='xlsx' || $extension=='xls'){
+                $icon='<img src="https://img.icons8.com/color/48/microsoft-excel-2019--v1.png" width="24px">';
+                $display='<img src="https://img.icons8.com/clouds/500/microsoft-excel-2019.png" width="120px">';
+                $color='#27663F';
+            }
+            if($extension=='docx' || $extension=='doc') {
+                $icon='<img src="https://img.icons8.com/color/48/microsoft-word-2019--v2.png" width="24px">';
+                $display='<img src="https://img.icons8.com/bubbles/500/ms-word.png" width="120px">';
+                $color='#1d4ed8';
+            }
+            if($extension=='pptx' || $extension=='ppt') {
+                $icon='<img src="https://img.icons8.com/color/48/microsoft-powerpoint-2019--v1.png" width="24px">';
+                $display='<img src="https://img.icons8.com/bubbles/500/ms-powerpoint.png" width="120px">';
+                $color='#DC4C2C';
+            }
+            break;
+        case 'text':
+            $icon='<img src="https://img.icons8.com/papercut/60/txt.png" width="24px">';
+            $display='<img src="https://img.icons8.com/bubbles/500/document.png" width="120px">';
+            $color='#282C34';
+            break;
+        case 'image':
+            $icon='<img src="https://img.icons8.com/stencil/96/image.png" width="24px">';
+            $display='<img src="'.$fileURL.'" style="max-width:100%; max-height:100%">';
+            $color='#ED0049';
+            break;
+        case 'compressed':
+            $icon='<img src="https://img.icons8.com/dusk/64/zip.png" width="24px">';
+            $display='<img src="https://img.icons8.com/bubbles/100/zip.png" width="100px">';
+            $color='#72a4a7';
             break;
         default:
-
+            $icon='<img src="https://img.icons8.com/emoji/48/question-mark-emoji.png" width="24px">';
+            $display='<img src="https://img.icons8.com/bubbles/100/question-mark.png" width="100px">';
+            $color='#282C34';
             break;
     }
 @endphp
-<div class="w-full aspect-square bg-neutral-100 border shadow-lg rounded-xl p-4 pt-2">
+<div class="w-full  bg-neutral-100 border shadow-lg rounded-xl p-3 pt-2">
     <div class="flex items-center justify-between gap-2">
         <div class="flex items-center gap-2">
             <div class="">{!! $icon !!}</div>
@@ -51,11 +83,11 @@
             </div>
         </div>
     </div>
-    <figure class="mt-1 w-full aspect-square bg-neutral-200 border rounded-md overflow-hidden relative group">
-        <div class="w-full h-full flex items-center justify-center bg-white">
+    <figure class="mt-1 w-full aspect-video bg-neutral-200 border rounded-md overflow-hidden relative group">
+        <div class="w-full h-full flex items-center justify-center bg-white pb-8">
             {!! $display !!}
         </div>
-        <div class="opacity-0 group-hover:opacity-100 duration-200 absolute z-0 w-full bottom-0 bg-neutral-800 flex items-end justify-center">
+        <div class="duration-200 absolute z-0 w-full bottom-0 flex items-end justify-center" style="background:{{$color}}">
             <p class="truncate text-white p-2">{{$data->documentType->name ?? ''}}</p>
         </div>
     </figure>

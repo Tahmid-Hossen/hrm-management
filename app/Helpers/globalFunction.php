@@ -6,6 +6,10 @@ if (!function_exists('userCan')) {
         return auth()->check() && auth()->user()->permissions->pluck('name')->contains($permission);
     }
 }
+function userPermissions()
+{
+    return auth()->check() ? auth()->user()->permissions->pluck('name')->toArray() : [];
+}
 function getUserRole($option = 'name') {
     // Check if user is authenticated
     if (Auth::check()) {

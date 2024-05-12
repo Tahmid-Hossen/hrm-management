@@ -68,11 +68,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/import-employees', [EmployeeController::class, 'importEmployees'])->name('employees.import');
         Route::post('/import-employees/submit', [EmployeeController::class, 'importEmployeesSubmit'])->name('employees.import.submit');
     });
+    Route::prefix('attendance')->group(function () {
+        Route::get('/', [AttendenceController::class, 'index'])->name('attendance.index');
+        Route::get('/get-attendance-data', [AttendenceController::class, 'attendanceData'])->name('attendance.attendanceData');
+        Route::post('/bulk-tag', [AttendenceController::class, 'bulkTag'])->name('attendance.bulk-tag');
+
+    });
+
 
     Route::prefix('leaves')->group(function () {
-        Route::get('/request', [LeaveController::class, 'leaveRequest'])->name('leaves.request');
-        Route::get('/approve', [LeaveController::class, 'leaveApproved'])->name('leaves.approve');
-        Route::get('/reject', [LeaveController::class, 'leavereject'])->name('leaves.reject');
+        Route::get('/requests', [LeaveController::class, 'leaveRequest'])->name('leaves.requests');
+        Route::get('/approved', [LeaveController::class, 'leaveApproved'])->name('leaves.approved');
+        Route::get('/rejected', [LeaveController::class, 'leaveRejected'])->name('leaves.rejected');
     });
 
     Route::prefix('employee-profile')->group(function () {

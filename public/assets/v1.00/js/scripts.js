@@ -281,7 +281,10 @@ function addDocumentForm(id) {
     $('#documentFormsWrap').html($('#addDocumentForm').html())
     $('.documentTitle').focus();
 }
-
+function editBiometricForm() {
+    $('#biometricFormsWrap').html($('#biometricForm').html())
+    $('.biometric_id').focus();
+}
 function setActiveTab(active) {
     var currentUrl = new URL(window.location.href);
     var params = new URLSearchParams(currentUrl.search);

@@ -1,4 +1,6 @@
 @php
+$userPermissions=userPermissions();
+$userRole=getUserRole('slug');
 $ativeClass='active text-white font-semibold bg-red-600 dark:text-white active:text-white active:font-semibold active:bg-red-600 dark:active:text-white';
 $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text-white active:font-semibold active:bg-red-600 dark:active:text-white hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600 dark:hs-accordion-active:text-white';
 @endphp
@@ -22,24 +24,45 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     Dashboard
                 </a>
             </li>
+            @if(in_array('employee.view', $userPermissions))
+                @php $isActive = request()->is('employees', 'employees/*') ? 'true' : 'false'; @endphp
+                <li>
+                    <a class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('employees.index')}}">
+                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="10" r="3"></circle>
+                            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                        </svg>
+                        Employee
+                    </a>
+                </li>
+            @endif
 
-            @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
-            <li>
-                <a
-                    class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
-                    href="{{route('employee-profile.index')}}">
-                    Employee Profile
-                </a>
-            </li>
 
-            @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
-            <li>
-                <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('leave.index')}}">
-                    My Leave Status
-                </a>
-            </li>
+            @if(in_array($userRole, ['hr', 'staff']))
+                @php $isSubActive = request()->is('employee-profile') ? 'true' : 'false'; @endphp
+                {{--<li>
+                    <a
+                        class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
+                        href="{{route('employee-profile.index')}}">
+                        <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <circle cx="12" cy="10" r="3"></circle>
+                            <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
+                        </svg>
+                        Employee Profile
+                    </a>
+                </li>--}}
+                @php $isSubActive = request()->is('my-leave','my-leave/*') ? 'true' : 'false'; @endphp
+                <li>
+                    <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('leave.index')}}">
+                        My Leave Status
+                    </a>
+                </li>
+            @endif
 
-            @php $isActive = request()->is('leaves', 'leaves/*', 'leaves/request', 'leaves/approve', 'leaves/reject', ) ? 'true' : 'false'; @endphp
+
+            @php $isActive = request()->is('leaves', 'leaves/*') ? 'true' : 'false'; @endphp
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pass" viewBox="0 0 16 16">
@@ -59,22 +82,22 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
 
                 <div id="payroll-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
                     <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
-                        @php $isSubActive = request()->is('leaves/request') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/requests') ? 'true' : 'false'; @endphp
                         <li>
-                            <a href="{{route('leaves.request')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
+                            <a href="{{route('leaves.requests')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Leave-request
                             </a>
                         </li>
-                        @php $isSubActive = request()->is('leaves/approve') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/approved') ? 'true' : 'false'; @endphp
                         <li>
-                            <a href="{{route('leaves.approve')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
+                            <a href="{{route('leaves.approved')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Approved-request
                             </a>
                         </li>
 
-                        @php $isSubActive = request()->is('leaves/reject') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('leaves/rejected') ? 'true' : 'false'; @endphp
                         <li>
-                            <a href="{{route('leaves.reject')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
+                            <a href="{{route('leaves.rejected')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
                                 Rejected-request
                             </a>
                         </li>
@@ -121,17 +144,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                     </ul>
                 </div>
             </li>
-            @php $isActive = request()->is('employees', 'employees/*') ? 'true' : 'false'; @endphp
-            <li>
-                <a class="{{$isActive=='true' ? $ativeClass : ''}} w-full flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="{{route('employees.index')}}">
-                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <circle cx="12" cy="10" r="3"></circle>
-                        <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662"></path>
-                    </svg>
-                    Employee
-                </a>
-            </li>
+
              @php $isActive = request()->is('set-salary', 'set-salary/*', 'payslip', 'payslip/*') ? 'true' : 'false'; @endphp
             <li class="hs-accordion {{$isActive=='true' ? 'active' : ''}}" id="payroll-accordion">
                 <button type="button" class="{{$isActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
@@ -189,10 +202,10 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
 
                 <div id="timesheet-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
                     <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
-                        @php $isSubActive = request()->is('timesheet', 'timesheet/*') ? 'true' : 'false'; @endphp
+                        @php $isSubActive = request()->is('attendance', 'attendance/*') ? 'true' : 'false'; @endphp
                         <li>
-                            <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="timesheet.html">
-                                Timesheet
+                            <a href="{{route('attendance.index')}}" class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
+                                Attendance
                             </a>
                         </li>
 

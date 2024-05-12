@@ -137,7 +137,7 @@
                             </th>--}}
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                Company Name
+                                Company
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
@@ -177,6 +177,10 @@
     <script>
         let dataTable = new DataTable('#dataTable', {
             serverSide: true,
+            processing:true,
+            /*language: {
+                processing: $("#spinner-large").html(),
+            },*/
             ajax:{
                 url: '{{ route('employees.index') }}',
 
@@ -190,18 +194,28 @@
                 { name: 'name',  data: 'full_name', searchable:false,
                     render: function(data, type, row) {
                         let html=`
+                                    <div class="flex items-center gap-2">
+                                        <div class="">
+                                            <figure class="w-12 aspect-square rounded-md overflow-hidden">
+                                                <img class="" src="${row.profile_img}" onerror="this.onerror=null;this.src='${row.profile_img_default}';" alt="{{$employee->name ??''}}"/>
+                                            </figure>
+                                        </div>
                                         <div class="flex flex-col">
                                             <span class="font-bold">${data}</span>
                                             <span>${row.email}</span>
                                             <span>${row.phone}</span>
                                         </div>
-
-                                    `
+                                    </div>
+                               `
                         return html;
                     }
                 },
                 /*{ data: 'email' },*/
-                { name: 'company',  data: 'company' },
+                { name: 'company',  data: 'company', width: '100px',
+                    render: function(data, type, row) {
+                        return html=`<div class="truncate w-24">${data}</div>`
+                    }
+                },
                 { name: 'department',  data: 'department' },
                 { name: 'designation',  data: 'designation' },
                 { name: 'gender',  data: 'gender' },

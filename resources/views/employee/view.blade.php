@@ -10,11 +10,7 @@
 @endsection
 
 @section("content")
-    @php
-        $active='personal';
-        if(request()->has('active')) $active=request('active');
-        if(!in_array($active, ["personal","address","education","documents","skills"])) $active='personal';
-    @endphp
+
     <x-containers.container-box>
         <div class="mt-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-6">
             <div class="grid grid-cols-1 items-center gap-4 sm:grid-cols-2 lg:gap-6">
@@ -127,8 +123,12 @@
             </div>
         </div>
     </x-containers.container-box>
+    @php
+        $active='personal';
+        if(request()->has('active')) $active=request('active');
+        if(!in_array($active, ["personal","address","education","documents","skills","biometric"])) $active='personal';
+    @endphp
     <x-containers.container-box>
-
         <div class="flex">
             <div class="flex rounded-lg bg-gray-100 p-1 transition hover:bg-gray-200 dark:bg-neutral-700 dark:hover:bg-neutral-600">
                 <nav class="flex flex-wrap space-x-1" aria-label="Tabs" role="tablist">
@@ -146,6 +146,9 @@
                     </button>
                     <button type="button" onclick="setActiveTab('skills')" class="{{$active=='skills' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-5" data-hs-tab="#segment-5" aria-controls="segment-5" role="tab">
                         Skills
+                    </button>
+                    <button type="button" onclick="setActiveTab('biometric')" class="{{$active=='attendance' ? 'active' : ''}} inline-flex items-center gap-x-2 rounded-lg bg-transparent px-4 py-3 text-sm font-medium text-gray-500 hover:hover:text-red-600 hover:text-gray-700 disabled:pointer-events-none disabled:opacity-50 hs-tab-active:bg-white hs-tab-active:text-gray-700 dark:text-neutral-400 dark:hover:text-white dark:hs-tab-active:bg-gray-800 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400" id="segment-item-6" data-hs-tab="#segment-6" aria-controls="segment-6" role="tab">
+                        Biometric
                     </button>
                 </nav>
             </div>
@@ -429,16 +432,14 @@
                                 <h3 class="text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
                                     Documents
                                 </h3>
+
                                 <div class="inline-block hs-tooltip">
                                     <button type="button" onclick="addDocumentForm({{$employee->id}})" id="update-info-button" class="btn-edit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                                        </svg>
-                                        <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
-                                            Edit Documents Details
-                                        </span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
+                                            <path d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918l.998.064A8 8 0 0 0 16 8M.152 9.56q.104.52.27 1.012l.948-.321a7 7 0 0 1-.237-.884l-.98.194zm15.425 1.012q.168-.493.27-1.011l-.98-.194q-.09.453-.237.884zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a7 7 0 0 1-.458-.793zm13.828.905q.292-.434.524-.906l-.896-.443q-.205.413-.459.793zm-12.667.83q.346.394.74.74l.66-.752a7 7 0 0 1-.648-.648zm11.29.74q.394-.346.74-.74l-.752-.66q-.302.346-.648.648zm-1.735 1.161q.471-.233.905-.524l-.556-.83a7 7 0 0 1-.793.458zm-7.985-.524q.434.292.906.524l.443-.896a7 7 0 0 1-.793-.459zm1.873.925q.493.168 1.011.27l.194-.98a7 7 0 0 1-.884-.237zm4.132.271a8 8 0 0 0 1.012-.27l-.321-.948a7 7 0 0 1-.884.237l.194.98zm-2.083.135a8 8 0 0 0 1.046 0l-.064-.998a7 7 0 0 1-.918 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                                        </svg>Add Document
                                     </button>
+
                                 </div>
                             </div>
                             <div id="documentFormsWrap"></div>
@@ -490,6 +491,37 @@
 
                             </div>
 
+                        </div>
+
+                        <!-- End Card -->
+                    </div>
+                    <!-- End Card Section -->
+                </div>
+            </div>
+            <div id="segment-6" class="{{$active=='biometric' ? 'active' : 'hidden'}}" role="tabpanel" aria-labelledby="segment-item-6">
+                <div class="overflow-y-auto">
+                    <!-- Card Section -->
+                    <div class="mx-auto">
+                        <!-- Card -->
+
+                        <div class="bg-white dark:bg-neutral-800 overflow-hidden shadow rounded-lg border dark:border-neutral-500" id="disable-card-segment-three">
+                            <div class="px-4 py-5 sm:px-6 flex justify-between">
+                                <h3 class="text-xl font-semibold text-gray-800 dark:border-neutral-700 dark:text-white">
+                                    Biometric Machine ID: {{$employee->biometric_id ?? 'N/A'}}
+                                </h3>
+                                <div class="inline-block hs-tooltip">
+                                    <button type="button" onclick="editBiometricForm()" id="update-info-button" class="btn-edit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
+                                        </svg>
+                                        <span class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible" role="tooltip">
+                                            Edit Machine ID
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="biometricFormsWrap"></div>
                         </div>
 
                         <!-- End Card -->
@@ -612,6 +644,29 @@
                 </div>
                 <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
                     <button type="button" onclick="removeInnerHtml('documentFormsWrap')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
+                        Cancel
+                    </button>
+                    <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="biometricForm" class="hidden ">
+        <div class="p-4">
+            <form action="{{route('employees.update', ['id'=>$employee->id, 'a'=>'biometric'])}}" onsubmit="return validateEmployeeEditData('document')" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="grid grid-cols-1 sm:grid-cols-5 gap-4 lg:gap-6 mt-2">
+                    <div>
+                        <label for="title" class="inputLabel">
+                            Biometric ID
+                        </label>
+                        <input id="" name="biometric_id" type="text" class="inputField biometric_id" placeholder="1234">
+                    </div>
+                </div>
+                <div class="mt-5 flex items-center justify-end gap-x-2 border-t px-4 py-3 dark:border-neutral-700">
+                    <button type="button" onclick="removeInnerHtml('biometricFormsWrap')" class="inline-flex items-center rounded-lg bg-black px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800" id="close-form-btn-for-address">
                         Cancel
                     </button>
                     <button type="submit" class="inline-flex items-center rounded-lg bg-red-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">

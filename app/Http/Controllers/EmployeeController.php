@@ -111,10 +111,14 @@ class EmployeeController extends Controller
 
             $employeeData = [];
             foreach ($employees as $item) {
+                $defaultProfileImage=$item->gender=='Female' ? asset('uploads/employees/profile/default-emp-female.jpg') : asset('uploads/employees/profile/default-emp-male.jpg');
+                $profile_img=asset('uploads/employees/profile/' . $item->profile_photo);
                 $employeeData[] = [
                     'id' => $item->id,
                     'emp_id' => $item->emp_id ?? '',
                     'full_name' => $item->full_name ?? '',
+                    'profile_img' => $profile_img,
+                    'profile_img_default' => $defaultProfileImage,
                     'email' => $item->email ?? '',
                     'phone' => $item->phone ?? '',
                     'gender' => $item->gender ?? '',
@@ -381,7 +385,7 @@ class EmployeeController extends Controller
                         $employee->profile_photo = $profilePhotoName;
                     }
                     if($employee->save()){
-                        return redirect()->route('employees.view', ['id'=>$id])->with('success', 'Employee Profile Image updated successfully.');
+                        return back()->with('success', 'Employee Profile Image updated successfully.');
                     }
                     break;
                 case 'personal':
@@ -412,7 +416,7 @@ class EmployeeController extends Controller
                     $education->passing_year = $request->input('passing_year') ?? '0';
                     $education->result = $request->input('result') ?? '0.00';
                     if($education->save()){
-                        return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
+                        return back()->with('success', 'Employee updated successfully.');
                     }
                     break;
                 case 'documents':
@@ -446,16 +450,19 @@ class EmployeeController extends Controller
                         $doc->file_name = $fileName;
                         $doc->file_type = $fileType;
                         if($doc->save()){
-                            return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee added documents successfully.');
+                            return back()->with('success', 'Employee added documents successfully.');
                         }
                     }
+                    break;
+                case 'biometric':
+                    $employee->biometric_id = $request->biometric_id;
                     break;
                 default:
                     // Default case if $a doesn't match any of the above cases
                     break;
             }
             if($employee->save()){
-                return redirect()->route('employees.view', ['id'=>$id, 'active'=>$a])->with('success', 'Employee updated successfully.');
+                return back()->with('success', 'Employee updated successfully.');
             }
 
 

@@ -1,7 +1,7 @@
 <dialog id="bulkTagModal" class="modal">
     <div class="modal-box w-11/12 max-w-5xl p-0 relative border border-neutral-200">
         <div class="flex justify-between items-center border-b p-2 pl-4">
-            <div id="createEmployeeModalTitle" class="font-bold text-lg">Bulk Tag Employee</div>
+            <div id="bulkTagModalTitle" class="font-bold text-lg">Bulk Tag Employee</div>
             <div class="">
                 <div class="modal-action mt-0">
                     <form method="dialog">
@@ -10,7 +10,7 @@
                 </div>
             </div>
         </div>
-        <div id="createEmployeeModalBody">
+        <div id="bulkTagModalBody">
             <form action="{{ route('attendance.bulk-tag') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEmployeeData()">
                 @csrf
                 <div class="mt-16 sm:max-w-4xl sm:w-full m-3 sm:mx-auto">
@@ -169,3 +169,76 @@
         }
     });
 </script>
+
+
+
+
+{{--
+<dialog id="bulkTagModal" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl p-0 relative border border-neutral-200">
+        <div class="flex justify-between items-center border-b p-2 pl-4">
+            <div id="createEmployeeModalTitle" class="font-bold text-lg">Bulk Tag Employee</div>
+            <div class="">
+                <div class="modal-action mt-0">
+                    <form method="dialog">
+                        <button class="w-9 aspect-square rounded-full bg-neutral-50 hover:bg-red-600 hover:text-white duration-200"><i class="fa-solid fa-xmark"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="bulkTagModalBody">
+            <form action="{{ route('attendance.bulk-tag') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEmployeeData()">
+                @csrf
+                <div class="mt-16 sm:max-w-4xl sm:w-full m-3 sm:mx-auto">
+                    <div
+                        class="flex flex-col max-h-full overflow-hidden bg-white border shadow-sm pointer-events-auto rounded-xl dark:bg-neutral-800 dark:border-neutral-700 dark:shadow-neutral-700/70">
+
+                        <div class="flex items-center justify-between px-4 py-3 border-b dark:border-neutral-700">
+                            <h3 class="text-gray-800 dark:text-neutral-200">
+                                Upload Files
+                            </h3>
+                        </div>
+                        <div class="p-4">
+                            <label class="block mb-2 text-sm text-gray-800 dark:text-neutral-400">
+                                <a href="{{asset('excel/EmployeeTemplate.xlsx')}}" download="EmployeeTemplate_{{date('d-m-Y')}}_{{time()}}.xlsx" class="text-sm text-red-600 dark:text-red-500 dark:hover:text-red-600 hover:underline dark:hover:underline font-medium dark:font-medium">Download a
+                                    sample XLSX
+                                    template</a> to see an example of the format required.
+                            </label>
+
+
+                            <div class="flex justify-center my-4 border border-neutral-600 border-dashed rounded-md dark:border-neutral-400 dark:bg-neutral-800"
+                                 id="drop-zone">
+                                <label class="flex flex-col items-center w-full transition cursor-pointer hover:border-red-600"
+                                       style="padding: 3rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 mb-2 text-gray-400" fill="none"
+                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                    <span class="text-sm text-gray-800 dark:text-white">Drop XLS or XLSX file here or <span
+                                            class="text-red-600 underline">browse</span></span>
+                                    <input type="file" name="file" class="hidden w-full" id="file-input"
+                                           accept=".xlsx, .xls" required>
+                                </label>
+                            </div>
+                            <div class="grid items-center grid-cols-1 mt-4">
+                                <div id="preview-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                        <button type="button" onclick="bulkTagModal.close()" class="cancel-button" data-hs-overlay="#create-new-employee-modal">
+                            Cancel
+                        </button>
+                        <button class="submit-button" id="submitButton" disabled>Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+
+--}}

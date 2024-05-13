@@ -339,3 +339,60 @@ function assignEmployeeAsUser(empId) {
     }
 
 }
+
+
+function validateutySlotSingleData(inputId, destinationId) {
+    let inputValue=$(`#${inputId}`).val();
+    let isAjax=false;
+    if(inputValue.length>1) isAjax=true;
+    $(`#${destinationId}`).html('');
+    $(`#isValidate_${inputId}`).val(0)
+    if(isAjax){
+        $(`#${destinationId}`).html($('#spinner-small').html());
+        $.ajax(`${baseUrl}/duty-slots/validate-single-data?a=${inputId}&val=${inputValue}`).then(function (res) {
+            if (res.status === 1) {
+                $(`#isValidate_${inputId}`).val(1)
+                $(`#${destinationId}`).html(`<span class="text-green-600"><i class="fa-regular fa-circle-check"></i> ${res.msg}</span>`);
+            } else {
+                $(`#isValidate_${inputId}`).val(0)
+                $(`#${destinationId}`).html(`<i class="fa-regular fa-circle-xmark"></i> ${res.msg}`);
+            }
+        })
+    }
+
+}
+
+function validateDutySlot() {
+    let submitPermission = true;
+    let slot_name=$('#slot_name');
+    let start_time=$('#start_time');
+    let end_time=$('#end_time');
+    let isValidate_slot_name=$('#isValidate_slot_name');
+    let firstError=null;
+    if(isValidate_slot_name.val()!=='1'){
+        submitPermission = false;
+        $('#error_slot_name').html('This field is required!')
+        if(firstError===null){
+            firstError=slot_name;
+        }
+    }else $('#error_slot_name').html('')
+
+    if(start_time.val()===''){
+        submitPermission = false;
+        $('#error_start_time').html('This field is required!')
+        if(firstError===null){
+            firstError=start_time;
+        }
+    }else $('#error_start_time').html('')
+    if(end_time.val()===''){
+        submitPermission = false;
+        $('#error_end_time').html('This field is required!')
+        if(firstError===null){
+            firstError=end_time;
+        }
+    }else $('#error_end_time').html('')
+    if(firstError!==null){
+        firstError.focus();
+    }
+    return submitPermission;
+}

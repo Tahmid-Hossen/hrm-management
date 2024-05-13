@@ -54,7 +54,7 @@ body{
 }
 
 .actionBtn{
-    @apply w-8 aspect-square overflow-hidden flex items-center justify-center rounded-md text-white pt-1
+    @apply w-8 aspect-square flex items-center justify-center rounded-md text-white pt-1
 }
 .actionBtn.red{
     @apply bg-red-600

@@ -100,7 +100,7 @@ class EmployeeController extends Controller
                     $query->orderBy('gender', $orderByDirection);
                     break;
                 default:
-                    // Handle unknown column
+                    $query->orderBy('id', 'asc');
                     break;
             }
 

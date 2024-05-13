@@ -37,4 +37,21 @@ class Employee extends Model
     {
         return $this->hasOne(User::class, 'emp_id', 'id');
     }
+
+    public function dutySlot()
+    {
+        return $this->hasOne(DutySlot::class, 'id', 'duty_slot');
+    }
+    public function attendanceData($startDate='', $endDate='')
+    {
+        $startDate = date('Y-m-d 00:00:00', strtotime($startDate));
+        $endDate = date('Y-m-d 23:59:59', strtotime($endDate));
+        return $this->hasMany(Attendance::class, 'PIN', 'biometric_id')->whereBetween('DateTime', [$startDate, $endDate])->get();
+    }
+
+    public function attendanceBetweenDate($startDate='', $endDate='')
+    {
+
+    }
+
 }

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Company;
+use App\Models\Departments;
+use App\Models\Designations;
 use App\Models\Employee;
 use App\Models\ImportLog;
 use Illuminate\Http\Request;
@@ -11,6 +14,230 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AttendenceController extends Controller
 {
+
+
+    public function index(Request $request)
+    {
+        //return $request;
+        $designations = Designations::all();
+        $departments = Departments::all();
+        $companies = Company::get();
+        if ($request->ajax()) {
+            $searchKey = $request->search['value'] ?? '';
+            $company = $request->company;
+            $department = $request->department;
+            $designation = $request->designation;
+            $date = $request->date ?? date('Y-m-d');
+            $start_date=$date;
+            $end_date=$date;
+            $limit = $request->length;
+            if ($limit < 0) $limit = 10;
+            $offset = $request->start;
+            // Orders
+            $orderByColumn = null;
+            $orderByDirection = null;
+
+
+            /*$sync=$request->sync;
+            if($sync=='sync'){
+                $this->syncAttendanceData($date, $date);
+            }*/
+
+            // Check if the order array exists in the request and has at least one item
+            if (isset($request->order) && count($request->order) > 0) {
+                $firstOrderItem = $request->order[0];
+                $orderByColumn = $firstOrderItem['name'] ?? null;
+                $orderByDirection = $firstOrderItem['dir'] ?? null;
+            }
+            $query = Employee::query();
+            $recordsTotal = $query->count();
+            if ($searchKey) {
+                $query->where(function ($query) use ($searchKey) {
+                    $query->orWhere('emp_id', 'like', "%{$searchKey}%");
+                    $query->orWhere('full_name', 'like', "%{$searchKey}%");
+                    $query->orWhere('email', 'like', "%{$searchKey}%");
+                    $query->orWhere('phone', 'like', "%{$searchKey}%");
+                    $query->orWhereIn('company', function ($subquery) use ($searchKey) {
+                        $subquery->select('id')->from(with(new Company())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+                    $query->orWhereIn('department', function ($subquery) use ($searchKey) {
+                        $subquery->select('id')->from(with(new Departments())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+                    $query->orWhereIn('designation', function ($subquery) use ($searchKey) {
+                        $subquery->select('id')->from(with(new Designations())->getTable())->where('name', 'like', "%$searchKey%");
+                    });
+                    $query->orWhere('gender', 'like', "%{$searchKey}%");
+
+                });
+            }
+            if ($company) $query->where('company', $company);
+            if ($department) $query->where('department', $department);
+            if ($designation) $query->where('designation', $designation);
+
+            // ORDERS
+
+            switch ($orderByColumn) {
+                case 'employeeID':
+                    $query->orderBy('emp_id', $orderByDirection);
+                    break;
+                case 'name':
+                    $query->orderBy('full_name', $orderByDirection);
+                    break;
+                case 'company':
+                    $query->orderBy(Company::select('name')->whereColumn('id', 'employees.company'), $orderByDirection);
+                    break;
+                case 'department':
+                    $query->orderBy(Departments::select('name')->whereColumn('id', 'employees.department'), $orderByDirection);
+                    break;
+                case 'designation':
+                    $query->orderBy(Departments::select('name')->whereColumn('id', 'employees.designation'), $orderByDirection);
+                    break;
+                case 'phone':
+                    $query->orderBy('phone', $orderByDirection);
+                    break;
+                case 'gender':
+                    $query->orderBy('gender', $orderByDirection);
+                    break;
+                default:
+                    $query->orderBy('id', 'asc');
+                    break;
+            }
+
+            $recordsFiltered = $query->get();  // Filtered Data to count
+            $query->limit($limit)->offset($offset);
+
+            $employees = $query->get();
+
+            $employeeData = [];
+            foreach ($employees as $item) {
+                $defaultProfileImage=$item->gender=='Female' ? asset('uploads/employees/profile/default-emp-female.jpg') : asset('uploads/employees/profile/default-emp-male.jpg');
+                $profile_img=asset('uploads/employees/profile/' . $item->profile_photo);
+                $attendance=$item->attendanceData($start_date, $end_date);
+                $attendanceCount = $attendance->count();
+                $clockIn=null;
+                $clockOut=null;
+                $late='';
+                $overtime='';
+                $earlyLeaving='';
+                if($attendanceCount>0){
+                    $sortedAttendances = $attendance->sortBy('DateTime');
+                    $att=$sortedAttendances->first();
+                    $clockOut = $attendanceCount == 1 ? null : $sortedAttendances->last()['DateTime'];
+                    $clockIn = $att['DateTime'];
+                    // Late Count
+                    $clockInTime = strtotime($clockIn);
+
+                    $startTime=$item->dutySlot->threshold_time ?? '10:15:00';
+                    $dutySlotStartTime = strtotime("$date $startTime");
+                    if($clockInTime>$dutySlotStartTime) {
+                        $lateCount = round(($clockInTime - $dutySlotStartTime) / 60);
+                        $hours = floor($lateCount / 60); // Calculate hours
+                        $minutes = $lateCount % 60;
+                        if($hours>0) $late = $hours . 'h ' .$minutes.'m';
+                        else $late = $minutes.'m';
+                    }
+                    else{
+                        //$late = "Not Late";
+                    }
+                    // Over Time
+                    $clockOutTime = strtotime($clockOut);
+                    $endTime=$item->dutySlot->end_time ?? '18:00:00';
+                    $dutySlotEndTime = strtotime("$date $endTime");
+                    if($clockOut){
+                        if($clockOutTime>$dutySlotEndTime) {
+                            $lateCount = round(($clockOutTime - $dutySlotEndTime) / 60);
+                            $hours = floor($lateCount / 60); // Calculate hours
+                            $minutes = $lateCount % 60;
+                            if($hours>0) $overtime = $hours . 'h ' .$minutes.'m';
+                            else $overtime = $minutes.'m';
+                        }
+                    }
+
+                    // Early Leaving
+                    if(time()>$dutySlotEndTime && $clockOut){
+                        if($clockOutTime<$dutySlotEndTime) {
+                            $lateCount = round(($dutySlotEndTime - $clockOutTime) / 60);
+                            $hours = floor($lateCount / 60); // Calculate hours
+                            $minutes = $lateCount % 60;
+                            if($hours>0) $earlyLeaving = $hours . 'h ' .$minutes.'m';
+                            else $earlyLeaving = $minutes.'m';
+                        }
+                    }
+                }
+                $employeeData[] = [
+                    'id' => $item->id,
+                    'emp_id' => $item->emp_id ?? '',
+                    'full_name' => $item->full_name ?? '',
+                    'profile_img' => $profile_img,
+                    'profile_img_default' => $defaultProfileImage,
+                    'email' => $item->email ?? '',
+                    'phone' => $item->phone ?? '',
+                    'designation' => $item->empDesignation->name ?? '',
+                    'department' => $item->empDepartment->name ?? '',
+                    'company' => $item->empCompany->name ?? '',
+                    'biometric_id' => $item->biometric_id ?? '',
+                    'attendance' => $attendance,
+                    'dutySlot' => $item->dutySlot,
+                    'attendanceCount' => $attendanceCount,
+                    'clockIn' => $clockIn,
+                    'clockOut' => $clockOut,
+                    'late' => $late,
+                    'earlyLeaving' => $earlyLeaving,
+                    'overtime' => $overtime,
+                ];
+            }
+            $lastSync=Attendance::orderBy('sync_dtime', 'desc')->first()->sync_dtime ?? '';
+            $request = [
+                'status' => 1,
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered->count(),
+                'data' => $employeeData,
+                'lastSyncDate' => $lastSync!='' ? date('d M Y', strtotime($lastSync)) : '',
+                'lastSyncTime' => $lastSync!='' ? date('H:i:s a', strtotime($lastSync)) : '',
+                'orderableColumns' => $orderByColumn . $orderByDirection
+            ];
+            return response()->json($request);
+        }
+
+        $trashedEmployees = Employee::onlyTrashed()->get();
+        return view('attendance.index', compact('companies', 'designations', 'departments', 'trashedEmployees'));
+    }
+
+    public function syncAttendanceData(Request $request)
+    {
+        $startDate=$request->start_date;
+        $endDate=$request->end_date;
+        if($startDate && $endDate){
+            $tad_factory = new TADFactory(['ip' => '192.168.1.33']);
+            $tad = $tad_factory->get_instance();
+            $all_attendance= $tad->get_att_log();
+            $filtered_att_logs = $all_attendance->filter_by_date([
+                'start' => $startDate,
+                'end' => $endDate
+            ]);
+            $machineAttendance=$this->makeJson($filtered_att_logs);
+            // Fetch existing data for the date range
+            $existingAttendance = Attendance::whereBetween('DateTime', ["$startDate 00:00:00", "$endDate 23:59:59"])
+                ->where('is_manual', 0)
+                ->get();
+
+            // Delete existing data
+            $deleted = Attendance::whereBetween('DateTime', ["$startDate 00:00:00", "$endDate 23:59:59"])
+                ->where('is_manual', 0)
+                ->delete();
+
+            // Insert new data
+            if (Attendance::insert($machineAttendance)) {
+                return back()->with('success', "Successfully Synced");
+            } else {
+                // If deletion fails, revert by re-inserting existing data
+                Attendance::insert($existingAttendance->toArray());
+                return back()->with('error', "And Error Occurred!");
+            }
+        }
+
+    }
+
     public function makeJson($data)
     {
         $xmlString = <<<XML
@@ -20,7 +247,7 @@ class AttendenceController extends Controller
         $xmlArray = json_decode(json_encode($xml), true);
         return $xmlArray['Row'];
     }
-    public function index(Request $request)
+    public function index2(Request $request)
     {
        /* $tad_factory = new TADFactory(['ip' => '192.168.1.33']);
         $tad = $tad_factory->get_instance();
@@ -286,7 +513,7 @@ class AttendenceController extends Controller
             $errorCount=0;
             foreach (array_slice($rows, 1) as $row) {
                 $rowCount++;
-                $emp_id=$row['0'];
+                $emp_id=$row['2'];
                 $biometric_id=$row['1'];
                 if(!$emp_id) {
                     $errorRow[]=[

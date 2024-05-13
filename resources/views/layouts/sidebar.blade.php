@@ -209,13 +209,19 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                             </a>
                         </li>
 
+                        @php $isSubActive = request()->is('manage-duty-slots','manage-duty-slots/*') ? 'true' : 'false'; @endphp
+                        <li>
+                            <a href="{{route('dutySlots.index')}}" class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
+                                Manage Duty Slots
+                            </a>
+                        </li>
+
                         @php $isSubActive = request()->is('manage-leave','manage-leave/*') ? 'true' : 'false'; @endphp
                         <li>
                             <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('leave.index')}}">
                                 Manage Leave
                             </a>
                         </li>
-
 
                         <li class="hs-accordion {{$isSubActive=='true' ? 'active' : ''}}" id="attendance-accordion">
                             <button type="button" class="{{$isSubActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">

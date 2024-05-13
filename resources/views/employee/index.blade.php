@@ -51,7 +51,7 @@
                 </div>
                 <div class="mb-2">
                     <div class="inline-block hs-tooltip">
-                        <button type="reset" class="btn-red" id="reset">
+                        <button type="button" class="btn-red" id="reset">
                             <i class="fas fa-undo text-base p-1.5 text-center"></i>
                             <span
                                 class="absolute z-10 invisible inline-block px-2 py-1 text-white transition-opacity bg-red-600 rounded-lg shadow-md opacity-0 hs-tooltip-content hs-tooltip-shown:opacity-100 hs-tooltip-shown:visible"
@@ -211,9 +211,9 @@
                     }
                 },
                 /*{ data: 'email' },*/
-                { name: 'company',  data: 'company', width: '100px',
+                { name: 'company',  data: 'company',
                     render: function(data, type, row) {
-                        return html=`<div class="truncate w-24">${data}</div>`
+                        return html=`<div class="">${data}</div>`
                     }
                 },
                 { name: 'department',  data: 'department' },
@@ -253,13 +253,13 @@
             dataTable.ajax.url(`{{ route('employees.index') }}?department=${department}&company=${company}&designation=${designation}`).load();
         });
         $('#reset').click(function (){
-            setTimeout(()=>{
-                let department = $('#department').val();
-                let company = $('#company').val();
-                let designation = $('#designation').val();
-                dataTable.ajax.url(`{{ route('employees.index') }}?department=${department}&company=${company}&designation=${designation}`).load();
-            }, 300)
-
+            $('#department').val('')
+            $('#company').val('');
+            $('#designation').val('');
+            let department = '';
+            let company = '';
+            let designation = '';
+            dataTable.ajax.url(`{{ route('employees.index') }}?department=${department}&company=${company}&designation=${designation}`).load();
         });
     </script>
 @endsection

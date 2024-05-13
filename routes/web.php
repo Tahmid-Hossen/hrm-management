@@ -15,18 +15,9 @@ use App\Http\Controllers\DesignationController;
 use App\Http\Controllers\CompanyListController;
 use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\DutySlotsController;
 use App\Http\Controllers\TestCntroller;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/test', [\App\Http\Controllers\TestCntroller::class, 'index']);
 Route::prefix('test')->group(function () {
@@ -71,10 +62,15 @@ Route::middleware('auth')->group(function () {
     Route::prefix('attendance')->group(function () {
         Route::get('/', [AttendenceController::class, 'index'])->name('attendance.index');
         Route::get('/get-attendance-data', [AttendenceController::class, 'attendanceData'])->name('attendance.attendanceData');
+        Route::post('/sync', [AttendenceController::class, 'syncAttendanceData'])->name('attendance.sync');
         Route::post('/bulk-tag', [AttendenceController::class, 'bulkTag'])->name('attendance.bulk-tag');
 
     });
-
+    Route::prefix('duty-slots')->group(function () {
+        Route::get('/', [DutySlotsController::class, 'index'])->name('dutySlots.index');
+        Route::get('/validate-single-data', [DutySlotsController::class, 'validateSingleData']);
+        Route::post('/store', [DutySlotsController::class, 'store'])->name('dutySlots.store');
+    });
 
     Route::prefix('leaves')->group(function () {
         Route::get('/requests', [LeaveController::class, 'leaveRequest'])->name('leaves.requests');

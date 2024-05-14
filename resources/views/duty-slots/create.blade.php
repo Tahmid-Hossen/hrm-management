@@ -24,13 +24,20 @@
                             <input type="hidden" id="isValidate_slot_name" value="0">
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mt-2">
                         <div>
                             <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                 Start Time
                             </label>
                             <input type="time" id="start_time" name="start_time" class="inputField">
                             <span class="error_msg" id="error_start_time"></span>
+                        </div>
+                        <div>
+                            <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                End Time
+                            </label>
+                            <input type="time" id="threshold_time" name="threshold_time" class="inputField">
+                            <span class="error_msg" id="error_threshold_time"></span>
                         </div>
                         <div>
                             <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">

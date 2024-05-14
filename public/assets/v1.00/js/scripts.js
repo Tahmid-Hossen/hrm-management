@@ -366,6 +366,7 @@ function validateDutySlot() {
     let submitPermission = true;
     let slot_name=$('#slot_name');
     let start_time=$('#start_time');
+    let threshold_time=$('#threshold_time');
     let end_time=$('#end_time');
     let isValidate_slot_name=$('#isValidate_slot_name');
     let firstError=null;
@@ -384,6 +385,13 @@ function validateDutySlot() {
             firstError=start_time;
         }
     }else $('#error_start_time').html('')
+    if(end_time.val()===''){
+        submitPermission = false;
+        $('#error_threshold_time').html('This field is required!')
+        if(firstError===null){
+            firstError=threshold_time;
+        }
+    }else $('#error_end_time').html('')
     if(end_time.val()===''){
         submitPermission = false;
         $('#error_end_time').html('This field is required!')

@@ -119,19 +119,35 @@ class AttendenceController extends Controller
                 $late='';
                 $overtime='';
                 $earlyLeaving='';
+                $dutySlot=[];
+                $dutyStartTime='';
+                $dutyThresholdTime='';
+                $dutyEndTime='';
                 if($attendanceCount>0){
                     $sortedAttendances = $attendance->sortBy('DateTime');
                     $att=$sortedAttendances->first();
                     $clockOut = $attendanceCount == 1 ? null : $sortedAttendances->last()['DateTime'];
                     $clockIn = $att['DateTime'];
+
+                    $startTime=$dutyStartTime='10:00:00';
+                    $thresholdTime=$dutyThresholdTime='10:15:00';
+                    $endTime=$dutyEndTime='18:00:00';
+                    if($item->dutySlot){
+                        $dutySlot=$item->dutySlot;
+                        if($dutySlot->dutySlotRule($date)){
+                            $dutySlot=$dutySlot->dutySlotRule($date);
+                        }
+                        $startTime=$dutyStartTime=$dutySlot->start_time;
+                        $thresholdTime=$dutyThresholdTime=$dutySlot->threshold_time;
+                        $endTime=$dutyEndTime=$dutySlot->end_time;
+                    }
+
                     // Late Count
                     $clockInTime = strtotime($clockIn);
-
-                    $startTime=$item->dutySlot->threshold_time ?? '10:15:00';
-                    $dutySlotStartTime = strtotime("$date $startTime");
+                    $dutySlotStartTime = strtotime("$date $thresholdTime");
                     if($clockInTime>$dutySlotStartTime) {
                         $lateCount = round(($clockInTime - $dutySlotStartTime) / 60);
-                        $hours = floor($lateCount / 60); // Calculate hours
+                        $hours = round($lateCount / 60); // Calculate hours
                         $minutes = $lateCount % 60;
                         if($hours>0) $late = $hours . 'h ' .$minutes.'m';
                         else $late = $minutes.'m';
@@ -141,7 +157,6 @@ class AttendenceController extends Controller
                     }
                     // Over Time
                     $clockOutTime = strtotime($clockOut);
-                    $endTime=$item->dutySlot->end_time ?? '18:00:00';
                     $dutySlotEndTime = strtotime("$date $endTime");
                     if($clockOut){
                         if($clockOutTime>$dutySlotEndTime) {
@@ -177,7 +192,11 @@ class AttendenceController extends Controller
                     'company' => $item->empCompany->name ?? '',
                     'biometric_id' => $item->biometric_id ?? '',
                     'attendance' => $attendance,
-                    'dutySlot' => $item->dutySlot,
+                    'dutySlotName' => $item->dutySlot->slot_name ?? '',
+                    'dutySlot' => $dutySlot,
+                    'dutyStartTime' => date('H:ia', strtotime($dutyStartTime)),
+                    'dutyThresholdTime' => date('H:ia', strtotime($dutyThresholdTime)),
+                    'dutyEndTime' => date('h:ia', strtotime($dutyEndTime)),
                     'attendanceCount' => $attendanceCount,
                     'clockIn' => $clockIn,
                     'clockOut' => $clockOut,

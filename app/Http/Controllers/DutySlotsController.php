@@ -43,8 +43,6 @@ class DutySlotsController extends Controller
             if ($searchKey) {
                 $query->where(function ($query) use ($searchKey) {
                     $query->orWhere('slot_name', 'like', "%{$searchKey}%");
-                    $query->orWhere('start_time', 'like', "%{$searchKey}%");
-                    $query->orWhere('end_time', 'like', "%{$searchKey}%");
                 });
             }
             // ORDERS
@@ -55,6 +53,9 @@ class DutySlotsController extends Controller
                     break;
                 case 'start_time':
                     $query->orderBy('start_time', $orderByDirection);
+                    break;
+                case 'threshold_time':
+                    $query->orderBy('threshold_time', $orderByDirection);
                     break;
                 case 'end_time':
                     $query->orderBy('end_time', $orderByDirection);
@@ -107,6 +108,7 @@ class DutySlotsController extends Controller
     public function store(Request $request){
         $slotName=$request->slot_name;
         $startTime=$request->start_time;
+        $thesholdTime=$request->threshold_time;
         $endTime=$request->end_time;
 
         if(!$slotName){
@@ -116,6 +118,7 @@ class DutySlotsController extends Controller
         $query=New DutySlot();
         $query->slot_name=$slotName;
         $query->start_time=$startTime;
+        $query->threshold_time=$thesholdTime;
         $query->end_time=$endTime;
         if($query->save()){
             return back()->with('success', 'Successfully Created!');

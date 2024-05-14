@@ -43,13 +43,13 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                                     <div>
                                         <label for="employeeFullName" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">Employee Name</label>
-                                        <input id="employeeFullName" name="full_name" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Maria">
+                                        <input id="employeeFullName" name="full_name" type="text" class="inputField" placeholder="Maria">
                                     </div>
                                     <div>
                                         <label for="employeeId" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Employee Id
                                         </label>
-                                        <input id="employeeId" name="employee_id" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="#EMP0000001">
+                                        <input id="employeeId" name="employee_id" type="text" class="inputField" placeholder="#EMP0000001">
                                     </div>
                                 </div>
 
@@ -59,13 +59,13 @@
                                         <label for="employeeEmail" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Email
                                         </label>
-                                        <input id="employee_email" type="email" name="email" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="maria@site.com">
+                                        <input id="employee_email" type="email" name="email" class="inputField" placeholder="maria@site.com">
                                     </div>
                                     <div>
                                         <label for="employeePassword" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Password
                                         </label>
-                                        <input id="employeePassword" name="password" type="password" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter password">
+                                        <input id="employeePassword" name="password" type="password" class="inputField" placeholder="Enter password">
                                     </div>
                                 </div>
 
@@ -75,13 +75,13 @@
                                         <label for="employeeJoiningDate" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Joining Date
                                         </label>
-                                        <input id="employeeJoiningDate" name="joining_date" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="">
+                                        <input id="employeeJoiningDate" name="joining_date" type="date" class="inputField" placeholder="">
                                     </div>
                                     <div>
                                         <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Select Company
                                         </label>
-                                        <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <select id="employeeCompany" name="company_name" class="inputField">
                                             <option selected="">Select Company</option>
                                             <option>Nexdecade Technology</option>
                                             <option>M2M Communication</option>
@@ -95,7 +95,7 @@
                                         <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Select Designation
                                         </label>
-                                        <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <select id="employeeDesignation" name="designation" class="inputField">
                                             <option selected="">Open this select menu</option>
                                             <option>Web Developer</option>
                                             <option>Software Developer</option>
@@ -106,7 +106,7 @@
                                         <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Select Company
                                         </label>
-                                        <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"/>
+                                        <input type="file" name="profile_photo" id="employee_photo" class="inputField"/>
                                     </div>
                                 </div>
 
@@ -119,7 +119,7 @@
                                             Phone
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="employeePhone" name="phone" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="+x(xxx)xxx-xx-xx">
+                                        <input id="employeePhone" name="phone" type="text" class="inputField" placeholder="+x(xxx)xxx-xx-xx">
                                     </div>
                                     <div>
                                         <div>
@@ -127,7 +127,7 @@
                                                 Emergency Contact Number
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                            <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="+x(xxx)xxx-xx-xx">
+                                            <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="inputField" placeholder="+x(xxx)xxx-xx-xx">
                                         </div>
                                     </div>
                                 </div>
@@ -139,14 +139,14 @@
                                             Emergency Contact Relation
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="Enter Name">
+                                        <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="inputField" placeholder="Enter Name">
                                     </div>
                                     <div>
                                         <label for="employeeBirthday" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Birthday
                                         </label>
                                         <div class="sm:flex">
-                                            <input id="employeeBirthday" name="birth_year" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="">
+                                            <input id="employeeBirthday" name="birth_year" type="date" class="inputField" placeholder="">
                                         </div>
                                     </div>
                                 </div>
@@ -196,7 +196,7 @@
                                         <label for="employeeResume" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200 font-medium">
                                             Upload Resume
                                         </label>
-                                        <input id="employeeResume" name="employee_resume" type="file" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" >
+                                        <input id="employeeResume" name="employee_resume" type="file" class="inputField" >
                                     </div>
                                 </div>
 
@@ -206,13 +206,13 @@
                                         <label for="employeePresentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Present Address
                                         </label>
-                                        <textarea id="employeePresentAddress" name="present_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" placeholder="Type your address..."></textarea>
+                                        <textarea id="employeePresentAddress" name="present_address" class="inputField" rows="4" placeholder="Type your address..."></textarea>
                                     </div>
                                     <div>
                                         <label for="employeePermanentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Permanent Address
                                         </label>
-                                        <textarea id="employeePermanentAddress" name="permanent_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" placeholder="Type your address..."></textarea>
+                                        <textarea id="employeePermanentAddress" name="permanent_address" class="inputField" rows="4" placeholder="Type your address..."></textarea>
                                     </div>
                                 </div>
 
@@ -226,7 +226,7 @@
                                             Instituation Name
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+                                        <input id="institution_name_one" name="institution_name_one" type="text" class="inputField" placeholder="enter institution name">
                                     </div>
                                     <div>
                                         <div>
@@ -235,7 +235,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <select id="degree_one" name="degree_one" class="inputField">
                                                 <option selected="">Select Degree</option>
                                                 <option value="SSC">SSC</option>
                                                 <option value="HSC">HSC</option>
@@ -251,7 +251,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+                                            <input id="department_one" name="department_one" type="text" class="inputField" placeholder="enter department">
                                         </div>
                                     </div>
                                 </div>
@@ -261,7 +261,7 @@
                                             Passing Year
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="passing_year_one" name="passing_year_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+                                        <input id="passing_year_one" name="passing_year_one" type="text" class="inputField" placeholder="enter passing year">
                                     </div>
                                     <div>
                                         <div>
@@ -270,7 +270,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+                                            <input id="result_one" name="result_one" type="text" class="inputField" placeholder="enter passing year">
                                         </div>
                                     </div>
 
@@ -322,7 +322,7 @@
             Instituation Name
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+        <input id="institution_name_one" name="institution_name_one" type="text" class="inputField" placeholder="enter institution name">
     </div>
     <div>
         <div>
@@ -331,7 +331,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+            <select id="degree_one" name="degree_one" class="inputField">
                 <option selected="">Select Degree</option>
                 <option value="SSC">SSC</option>
                 <option value="HSC">HSC</option>
@@ -347,7 +347,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+            <input id="department_one" name="department_one" type="text" class="inputField" placeholder="enter department">
         </div>
     </div>
 </div>
@@ -357,7 +357,7 @@
             Passing Year
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="passing_year_one" name="passing_year_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+        <input id="passing_year_one" name="passing_year_one" type="text" class="inputField" placeholder="enter passing year">
     </div>
     <div>
         <div>
@@ -366,7 +366,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+            <input id="result_one" name="result_one" type="text" class="inputField" placeholder="enter passing year">
         </div>
     </div>
 
@@ -380,7 +380,7 @@
             Instituation Name
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="instituationTwo" name="institution_name_two" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+        <input id="instituationTwo" name="institution_name_two" type="text" class="inputField" placeholder="enter institution name">
     </div>
     <div>
         <div>
@@ -389,7 +389,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <select id="degreeType2" name="degree_two" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+            <select id="degreeType2" name="degree_two" class="inputField">
                 <option selected="">Select Degree</option>
                 <option value="SSC">SSC</option>
                 <option value="HSC">HSC</option>
@@ -405,7 +405,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="department_two" name="department_two" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+            <input id="department_two" name="department_two" type="text" class="inputField" placeholder="enter department">
         </div>
     </div>
 </div>
@@ -415,7 +415,7 @@
             Passing Year
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="passing_year_two" name="passing_year_two" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+        <input id="passing_year_two" name="passing_year_two" type="text" class="inputField" placeholder="enter passing year">
     </div>
     <div>
         <div>
@@ -424,7 +424,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="result_two" name="result_two" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+            <input id="result_two" name="result_two" type="text" class="inputField" placeholder="enter passing year">
         </div>
     </div>
 
@@ -439,7 +439,7 @@
             Instituation Name
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="instituationthree" name="instituationthree" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+        <input id="instituationthree" name="instituationthree" type="text" class="inputField" placeholder="enter institution name">
     </div>
     <div>
         <div>
@@ -448,7 +448,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <select id="degree_three" name="degree_three" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+            <select id="degree_three" name="degree_three" class="inputField">
                 <option selected="">Select Degree</option>
                 <option value="SSC">SSC</option>
                 <option value="HSC">HSC</option>
@@ -464,7 +464,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="department_three" name="department_three" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+            <input id="department_three" name="department_three" type="text" class="inputField" placeholder="enter department">
         </div>
     </div>
 </div>
@@ -474,7 +474,7 @@
             Passing Year
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="passing_year_three" name="passing_year_three" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+        <input id="passing_year_three" name="passing_year_three" type="text" class="inputField" placeholder="enter passing year">
     </div>
     <div>
         <div>
@@ -483,7 +483,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="result_three" name="result_three" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+            <input id="result_three" name="result_three" type="text" class="inputField" placeholder="enter passing year">
         </div>
     </div>
 
@@ -497,7 +497,7 @@
             Instituation Name
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="institution_name-four" name="institution_name_four" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter institution name">
+        <input id="institution_name-four" name="institution_name_four" type="text" class="inputField" placeholder="enter institution name">
     </div>
     <div>
         <div>
@@ -506,7 +506,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <select id="degree_four" name="degree_four" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+            <select id="degree_four" name="degree_four" class="inputField">
                 <option selected="">Select Degree</option>
                 <option value="SSC">SSC</option>
                 <option value="HSC">HSC</option>
@@ -522,7 +522,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="department_four" name="department_four" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter department">
+            <input id="department_four" name="department_four" type="text" class="inputField" placeholder="enter department">
         </div>
     </div>
 </div>
@@ -532,7 +532,7 @@
             Passing Year
         </label>
         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-        <input id="passing_year_four" name="passing_year_four" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+        <input id="passing_year_four" name="passing_year_four" type="text" class="inputField" placeholder="enter passing year">
     </div>
     <div>
         <div>
@@ -541,7 +541,7 @@
             </label>
             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-            <input id="result_four" name="result_four" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" placeholder="enter passing year">
+            <input id="result_four" name="result_four" type="text" class="inputField" placeholder="enter passing year">
         </div>
     </div>
 
@@ -1198,13 +1198,13 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                                     <div>
                                         <label for="employeeFullName" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">Employee Name</label>
-                                        <input id="employeeFullName" name="full_name" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}">
+                                        <input id="employeeFullName" name="full_name" type="text" class="inputField" value="{{ $employee->full_name }}">
                                     </div>
                                     <div>
                                         <label for="employeeId" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Employee Id
                                         </label>
-                                        <input id="employeeId" name="employee_id" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->employee_id }}">
+                                        <input id="employeeId" name="employee_id" type="text" class="inputField" value="{{ $employee->employee_id }}">
                                     </div>
                                 </div>
 
@@ -1214,13 +1214,13 @@
                                         <label for="employeeEmail" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Email
                                         </label>
-                                        <input id="employee_email" type="email" name="email" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->email }}">
+                                        <input id="employee_email" type="email" name="email" class="inputField" value="{{ $employee->email }}">
                                     </div>
                                     <div>
                                         <label for="employeePassword" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Password
                                         </label>
-                                        <input id="employeePassword" name="password" type="password" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->password }}">
+                                        <input id="employeePassword" name="password" type="password" class="inputField" value="{{ $employee->password }}">
                                     </div>
                                 </div>
 
@@ -1230,13 +1230,13 @@
                                         <label for="employeeJoiningDate" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Joining Date
                                         </label>
-                                        <input id="employeeJoiningDate" name="joining_date" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->joining_date }}">
+                                        <input id="employeeJoiningDate" name="joining_date" type="date" class="inputField" value="{{ $employee->joining_date }}">
                                     </div>
                                     <div>
                                         <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Select Company
                                         </label>
-                                        <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <select id="employeeCompany" name="company_name" class="inputField">
                                             <option value="" disabled>Select Company</option>
                                             <option value="Nexdecade Technology" @if($employee->company_name == "Nexdecade Technology") selected @endif>Nexdecade Technology</option>
                                             <option value="M2M Communication" @if($employee->company_name == "M2M Communication") selected @endif>M2M Communication</option>
@@ -1250,7 +1250,7 @@
                                         <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Select Designation
                                         </label>
-                                        <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                        <select id="employeeDesignation" name="designation" class="inputField">
                                             <option selected="">Open this select menu</option>
                                             <option value="Web Developer" @if($employee->designation == "Web Developer") selected @endif>Web Developer</option>
                                             <option value="Software Developer" @if($employee->designation == "Software Developer") selected @endif>Software Developer</option>
@@ -1261,7 +1261,7 @@
                                         <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Upload Photo
                                         </label>
-                                        <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}"/>
+                                        <input type="file" name="profile_photo" id="employee_photo" class="inputField" value="{{ $employee->profile_photo }}"/>
                                     </div>
                                 </div>
 
@@ -1274,7 +1274,7 @@
                                             Phone
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="employeePhone" name="phone" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->phone }}">
+                                        <input id="employeePhone" name="phone" type="text" class="inputField" value="{{ $employee->phone }}">
                                     </div>
                                     <div>
                                         <div>
@@ -1282,7 +1282,7 @@
                                                 Emergency Contact Number
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                            <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact }}">
+                                            <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="inputField" value="{{ $employee->emergency_contact }}">
                                         </div>
                                     </div>
                                 </div>
@@ -1294,14 +1294,14 @@
                                             Emergency Contact Relation
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact_relation }}">
+                                        <input id="emergencyContactRelation" name="emergency_contact_relation" type="text" class="inputField" value="{{ $employee->emergency_contact_relation }}">
                                     </div>
                                     <div>
                                         <label for="employeeBirthday" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Birthday
                                         </label>
                                         <div class="sm:flex">
-                                            <input id="employeeBirthday" name="birth_year" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->birth_year }}">
+                                            <input id="employeeBirthday" name="birth_year" type="date" class="inputField" value="{{ $employee->birth_year }}">
                                         </div>
                                     </div>
                                 </div>
@@ -1351,7 +1351,7 @@
                                         <label for="employeeResume" class="inline-block text-sm text-gray-800 mt-2.5 dark:text-neutral-200 font-medium">
                                             Upload Resume
                                         </label>
-                                        <input id="employeeResume" name="employee_resume" type="file" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" >
+                                        <input id="employeeResume" name="employee_resume" type="file" class="inputField" >
                                     </div>
                                 </div>
 
@@ -1361,13 +1361,13 @@
                                         <label for="employeePresentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Present Address
                                         </label>
-                                        <textarea id="employeePresentAddress" name="present_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" placeholder="Type your address...">{{ $employee->present_address }}</textarea>
+                                        <textarea id="employeePresentAddress" name="present_address" class="inputField" rows="4" placeholder="Type your address...">{{ $employee->present_address }}</textarea>
                                     </div>
                                     <div>
                                         <label for="employeePermanentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                             Permanent Address
                                         </label>
-                                        <textarea id="employeePermanentAddress" name="permanent_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" placeholder="Type your address...">{{ $employee->permanent_address }}</textarea>
+                                        <textarea id="employeePermanentAddress" name="permanent_address" class="inputField" rows="4" placeholder="Type your address...">{{ $employee->permanent_address }}</textarea>
                                     </div>
                                 </div>
 
@@ -1381,7 +1381,7 @@
                                             Instituation Name
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_one }}">
+                                        <input id="institution_name_one" name="institution_name_one" type="text" class="inputField" value="{{ $employee->institution_name_one }}">
                                     </div>
                                     <div>
                                         <div>
@@ -1390,7 +1390,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                            <select id="degree_one" name="degree_one" class="inputField">
                                                 <option selected="">Select Degree</option>
                                                 <option value="SSC" @if($employee->degree_one == "SSC") selected @endif>SSC</option>
                                                 <option value="HSC" @if($employee->degree_one == "HSC") selected @endif>HSC</option>
@@ -1406,7 +1406,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_one }}">
+                                            <input id="department_one" name="department_one" type="text" class="inputField" value="{{ $employee->department_one }}">
                                         </div>
                                     </div>
                                 </div>
@@ -1416,7 +1416,7 @@
                                             Passing Year
                                         </label>
                                         <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                        <input id="passing_year_one" name="passing_year_one" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_one }}">
+                                        <input id="passing_year_one" name="passing_year_one" type="date" class="inputField" value="{{ $employee->passing_year_one }}">
                                     </div>
                                     <div>
                                         <div>
@@ -1425,7 +1425,7 @@
                                             </label>
                                             <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
 
-                                            <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_one }}">
+                                            <input id="result_one" name="result_one" type="text" class="inputField" value="{{ $employee->result_one }}">
                                         </div>
                                     </div>
 

@@ -7,6 +7,8 @@ use App\Models\Attendance;
 use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Designations;
+use App\Models\DutySlot;
+use App\Models\DutySlotRule;
 use App\Models\Employee;
 use App\Models\EmployeeDutySlot;
 use App\Models\ImportLog;
@@ -17,8 +19,14 @@ class TestCntroller extends Controller
 {
      public function index()
     {
+        $date='2024-05-05';
+        $dutySlot=DutySlot::first();
+        return $dutySlot->dutySlotRule($date);
 
-        $empDutySlots = EmployeeDutySlot::orderBy('start_date', 'desc')->get();
+
+        $empDutySlots = DutySlotRule::where('duty_slot_id', 1)->where('rule_for', 'duty_slot')->where('start_date', '<=', $date)->where('end_date', '>=', $date)->orderBy('start_date', 'desc')->get();
+        return $empDutySlots;
+        /*$empDutySlots = EmployeeDutySlot::orderBy('start_date', 'desc')->get();
         $empDutySlot = collect($empDutySlots);
         $date = '2024-05-03';
 
@@ -26,7 +34,7 @@ class TestCntroller extends Controller
             return $item->rule_for === 'employee' && $item->start_date >= $date;
         });
 
-        return $filteredEmpDutySlot;
+        return $filteredEmpDutySlot;*/
 
 
         /*$tad_factory = new TADFactory(['ip' => '192.168.1.33']);

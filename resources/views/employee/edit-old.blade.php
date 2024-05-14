@@ -69,13 +69,13 @@
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                               <div>
                                  <label for="employeeFullName" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">Employee Name</label>
-                                 <input id="employeeFullName" name="full_name" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}" required>
+                                 <input id="employeeFullName" name="full_name" type="text" class="inputField" value="{{ $employee->full_name }}" required>
                               </div>
                               <div>
                                  <label for="employeeId" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Employee Id
                                  </label>
-                                 <input id="employeeId" name="emp_id" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emp_id }}" required>
+                                 <input id="employeeId" name="emp_id" type="text" class="inputField" value="{{ $employee->emp_id }}" required>
                               </div>
                            </div>
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
@@ -83,13 +83,13 @@
                                  <label for="employeeEmail" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Email
                                  </label>
-                                 <input id="employee_email" type="email" name="email" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->email }}" required>
+                                 <input id="employee_email" type="email" name="email" class="inputField" value="{{ $employee->email }}" required>
                               </div>
                               <div>
                                  <label for="employeePassword" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Password
                                  </label>
-                                 <input id="employeePassword" name="password" type="password" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->full_name }}">
+                                 <input id="employeePassword" name="password" type="password" class="inputField" value="{{ $employee->full_name }}">
                               </div>
                            </div>
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
@@ -97,13 +97,13 @@
                                  <label for="employeeJoiningDate" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Joining Date
                                  </label>
-                                 <input id="employeeJoiningDate" name="joining_date" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->joining_date }}">
+                                 <input id="employeeJoiningDate" name="joining_date" type="date" class="inputField" value="{{ $employee->joining_date }}">
                               </div>
                               <div>
                                  <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Select Company
                                  </label>
-                                 <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                 <select id="employeeCompany" name="company_name" class="inputField">
                                     <option value="" selected disabled>Select Company</option>
                                     <option value="Nexdecade Technology" {{ $employee->company_name == 'Nexdecade Technology' ? 'selected' : '' }}>Nexdecade Technology</option>
                                     <option value="M2M Communication" {{ $employee->company_name == 'M2M Communication' ? 'selected' : '' }}>M2M Communication</option>
@@ -115,7 +115,7 @@
                                  <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Select Designation
                                  </label>
-                                 <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                 <select id="employeeDesignation" name="designation" class="inputField">
                                     @foreach ($designations as $designation)
                                              {{-- <option value="{{ $department->id }}"> --}}
                                                 <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
@@ -129,7 +129,7 @@
                                  <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Employee Profile Photo
                                  </label>
-                                 <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}"/>
+                                 <input type="file" name="profile_photo" id="employee_photo" class="inputField" value="{{ $employee->profile_photo }}"/>
                               </div>
                            </div>
                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
@@ -137,7 +137,7 @@
                                  <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Blood Group
                                  </label>
-                                 <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                 <select id="employeeBloodGroup" name="blood_group" class="inputField">
                                     <option value="" selected disabled>Select Blood Group</option>
                                     <option value="A+" {{ $employee->blood_group == 'A+' ? 'selected' : '' }}> A+ </option>
                                     <option value="A-" {{ $employee->blood_group == 'A-' ? 'selected' : '' }}> A- </option>
@@ -158,7 +158,7 @@
                                  Phone
                                  </label>
                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                 <input id="employeePhone" name="phone" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->phone }}">
+                                 <input id="employeePhone" name="phone" type="text" class="inputField" value="{{ $employee->phone }}">
                               </div>
                               <div>
                                  <div>
@@ -166,7 +166,7 @@
                                     Emergency Contact Number
                                     </label>
                                     <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                    <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->emergency_contact }}">
+                                    <input id="employeeEmmergencyPhone" name="emergency_contact" type="text" class="inputField" value="{{ $employee->emergency_contact }}">
                                  </div>
                               </div>
                            </div>
@@ -175,7 +175,7 @@
                                  <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                      Select Department
                                  </label>
-                                 <select id="employeeDesignation" name="emp_department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                 <select id="employeeDesignation" name="emp_department" class="inputField">
                                      @foreach ($departments as $department)
                                              {{-- <option value="{{ $department->id }}"> --}}
                                                 <option value="{{ $department->id }}" {{ $employee->department == $department->id ? 'selected' : '' }}>
@@ -190,7 +190,7 @@
                                  Birthday
                                  </label>
                                  <div class="sm:flex">
-                                    <input id="employeeBirthday" name="birth_year" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->birth_year }}">
+                                    <input id="employeeBirthday" name="birth_year" type="date" class="inputField" value="{{ $employee->birth_year }}">
                                  </div>
                               </div>
                            </div>
@@ -247,13 +247,13 @@
                                  <label for="employeePresentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Present Address
                                  </label>
-                                 <textarea id="employeePresentAddress" name="present_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->present_address }}"> {{ $employee->present_address }} </textarea>
+                                 <textarea id="employeePresentAddress" name="present_address" class="inputField" rows="4" value="{{ $employee->present_address }}"> {{ $employee->present_address }} </textarea>
                               </div>
                               <div>
                                  <label for="employeePermanentAddress" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                  Permanent Address
                                  </label>
-                                 <textarea id="employeePermanentAddress" name="permanent_address" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" rows="4" value="{{ $employee->permanent_address }}"> {{ $employee->permanent_address }} </textarea>
+                                 <textarea id="employeePermanentAddress" name="permanent_address" class="inputField" rows="4" value="{{ $employee->permanent_address }}"> {{ $employee->permanent_address }} </textarea>
                               </div>
                            </div>
                         </div>
@@ -267,7 +267,7 @@
                                                  Instituation Name
                                              </label>
                                              <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                             <input id="institution_name_one" name="institution_name[]" value="{{$item->institution_name}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_one }}">
+                                             <input id="institution_name_one" name="institution_name[]" value="{{$item->institution_name}}" type="text" class="inputField" value="{{ $employee->institution_name_one }}">
                                          </div>
                                          <div>
                                              <div>
@@ -275,7 +275,7 @@
                                                      Select Degree Type
                                                  </label>
                                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                                 <select id="degree_one" name="degree[]" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                 <select id="degree_one" name="degree[]" class="inputField">
                                                      <option selected="" disabled>Select Degree</option>
                                                      <option value="SSC"  {{ $item->degree == 'SSC' ? 'selected' : '' }}>SSC</option>
                                                      <option value="HSC"  {{ $item->degree == 'HSC' ? 'selected' : '' }}>HSC</option>
@@ -290,7 +290,7 @@
                                                      Department Name
                                                  </label>
                                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                                 <input id="department_one" name="department[]" value="{{$item->department}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_one }}">
+                                                 <input id="department_one" name="department[]" value="{{$item->department}}" type="text" class="inputField" value="{{ $employee->department_one }}">
                                              </div>
                                          </div>
                                      </div>
@@ -300,7 +300,7 @@
                                                  Passing Year
                                              </label>
                                              <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                             <input id="passing_year_one" name="passing_year[]" value="{{$item->passing_year}}" type="number" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_one }}">
+                                             <input id="passing_year_one" name="passing_year[]" value="{{$item->passing_year}}" type="number" class="inputField" value="{{ $employee->passing_year_one }}">
                                          </div>
                                          <div>
                                              <div>
@@ -308,7 +308,7 @@
                                                      Result
                                                  </label>
                                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                                 <input id="result_one" name="result[]" value="{{$item->result}}" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_one }}">
+                                                 <input id="result_one" name="result[]" value="{{$item->result}}" type="text" class="inputField" value="{{ $employee->result_one }}">
                                              </div>
                                          </div>
                                      </div>
@@ -336,7 +336,7 @@
                                  Instituation Name
                                  </label>
                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                 <input id="institution_name_one" name="institution_name_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->institution_name_one }}">
+                                 <input id="institution_name_one" name="institution_name_one" type="text" class="inputField" value="{{ $employee->institution_name_one }}">
                               </div>
                               <div>
                                  <div>
@@ -344,7 +344,7 @@
                                     Select Degree Type
                                     </label>
                                     <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                    <select id="degree_one" name="degree_one" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                    <select id="degree_one" name="degree_one" class="inputField">
                                        <option selected="" disabled>Select Degree</option>
                                        <option value="SSC"  {{ $employee->degree_one == 'SSC' ? 'selected' : '' }}>SSC</option>
                                        <option value="HSC"  {{ $employee->degree_one == 'HSC' ? 'selected' : '' }}>HSC</option>
@@ -359,7 +359,7 @@
                                     Department Name
                                     </label>
                                     <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                    <input id="department_one" name="department_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->department_one }}">
+                                    <input id="department_one" name="department_one" type="text" class="inputField" value="{{ $employee->department_one }}">
                                  </div>
                               </div>
                            </div>
@@ -369,7 +369,7 @@
                                  Passing Year
                                  </label>
                                  <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                 <input id="passing_year_one" name="passing_year_one" type="date" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->passing_year_one }}">
+                                 <input id="passing_year_one" name="passing_year_one" type="date" class="inputField" value="{{ $employee->passing_year_one }}">
                               </div>
                               <div>
                                  <div>
@@ -377,7 +377,7 @@
                                     Result
                                     </label>
                                     <span class="text-sm text-gray-400 dark:text-neutral-600">(Optional)</span>
-                                    <input id="result_one" name="result_one" type="text" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->result_one }}">
+                                    <input id="result_one" name="result_one" type="text" class="inputField" value="{{ $employee->result_one }}">
                                  </div>
                               </div>
                            </div>

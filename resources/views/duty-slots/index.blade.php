@@ -144,7 +144,12 @@
                 { name: 'end_time',  data: 'end_time'},
                 { name: 'action',  data: 'id',
                     render:function(data, type, row) {
-                        return '';
+                        let editBtn=`
+                            <a href="${baseUrl}/duty-slots/edit/${row.id}" class="actionBtn neutral">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                        `
+                        return `<div class="flex justify-center">${editBtn}</div>`;
                     }
                 },
             ]

@@ -4,14 +4,14 @@
             <div id="createEmployeeModalTitle" class="font-bold text-lg">Create a new employee</div>
             <div class="">
                 <div class="modal-action mt-0">
-                    <form method="dialog">
+                    <form method="dialog" class="mb-0">
                         <button class="w-9 aspect-square rounded-full bg-neutral-50 hover:bg-red-600 hover:text-white duration-200"><i class="fa-solid fa-xmark"></i></button>
                     </form>
                 </div>
             </div>
         </div>
         <div id="createEmployeeModalBody">
-            <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" onsubmit="return validateEmployeeData()">
+            <form action="{{ route('employees.store') }}" method="POST" enctype="multipart/form-data" class="mb-0" onsubmit="return validateEmployeeData()">
                 @csrf
                 <input type="hidden" id="createEmployee" value="1" autocomplete="off">
                 <div class="p-4 overflow-y-scroll">
@@ -27,9 +27,9 @@
                         </button>--}}
                     </nav>
 
-                    <div class="mt-3">
+                    <div class="mt-1">
                         <div id="employee-tab-1" role="tabpanel" aria-labelledby="employee-tab-item-1">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4  gap-y-0 lg:gap-x-6 lg:gap-y-0">
                                 <div>
                                     <label for="employeeFullName" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">Full Name *</label>
                                     <input id="employeeFullName" name="full_name" autocomplete="off" type="text" class="inputField" placeholder="Mr./Mrs.">
@@ -43,9 +43,6 @@
                                     <span class="error_msg" id="error_employeeId"></span>
                                     <input type="hidden" id="isValidate_employeeId" value="0">
                                 </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                                 <div>
                                     <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                         Select Company
@@ -71,10 +68,6 @@
                                         @endif
                                     </select>
                                 </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
-
                                 <div>
                                     <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                         Select Department
@@ -94,11 +87,6 @@
                                     </label>
                                     <input id="employeeJoiningDate" name="joining_date" type="date" class="inputField" placeholder="">
                                 </div>
-                            </div>
-
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
-
                                 <div>
                                     <label for="employeeEmail" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                         Email *
@@ -117,9 +105,6 @@
                                     <span class="error_msg" id="error_employeePhone"></span>
                                     <input type="hidden" id="isValidate_employeePhone" value="0">
                                 </div>
-                            </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                                 <div>
                                     <label for="af-account-gender-checkbox" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                         Gender
@@ -159,27 +144,12 @@
                                         </li>
                                     </ul>
                                 </div>
-
-                                <div>
-                                    <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
-                                        Enter Blood Group
-                                    </label>
-                                    <select id="employeeBloodGroup" name="blood_group" class="inputField">
-                                        <option value="A+" selected >A+</option>
-                                        <option value="A-">A-</option>
-                                        <option value="B+">B+</option>
-                                        <option value="B-">B-</option>
-                                        <option value="O+">O+</option>
-                                        <option value="O-">O-</option>
-                                        <option value="AB+">AB+</option>
-                                        <option value="AB-">AB-</option>
-                                    </select>
-                                </div>
                             </div>
+
 
                         </div>
                         <div id="employee-tab-2" class="hidden" role="tabpanel" aria-labelledby="employee-tab-item-2">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-x-6 lg:gap-y-0 mt-2">
                                 <div>
                                     <div>
                                         <label for="employeeEmmergencyPhone" class="inline-block text-sm  font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -196,6 +166,18 @@
                                     <div class="sm:flex">
                                         <input id="employeeBirthday" name="birth_year" type="date" class="inputField" placeholder="">
                                     </div>
+                                </div>
+                                <div>
+                                    <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                        Enter Blood Group
+                                    </label>
+                                    @php $bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']; @endphp
+                                    <select id="employeeBloodGroup" name="blood_group" class="inputField" >
+                                        <option value="" disabled>Select Blood Group</option>
+                                        @foreach($bloodGroups as $item)
+                                            <option value="{{$item}}"> {{$item}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
 
@@ -234,7 +216,7 @@
 
                 </div>
                 <div class="">
-                    <div class="mt-5 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
+                    <div class="mt-2 flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-neutral-700">
                         <button type="button" onclick="createEmployeeModal.close()" class="cancel-button" data-hs-overlay="#create-new-employee-modal">
                             Cancel
                         </button>

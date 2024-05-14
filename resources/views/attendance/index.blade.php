@@ -112,6 +112,10 @@
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                Slot
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
                                 Clock In
                             </th>
                             <th scope="col"
@@ -198,6 +202,19 @@
                                     <span class="font-medium">${data}</span>
                                     <span>${row.department}</span>
                                     <span>${row.designation}</span>
+                                </div>
+                               `
+                        return html;
+                    }
+                },
+                { name: 'slot',  data: 'dutySlotName',
+                    render: function(data, type, row) {
+                        let html=`
+                                <div class="flex flex-col text-sm">
+                                    <span class="font-medium">Slot: ${row.dutySlotName}</span>
+                                    <span>ST: ${row.dutyStartTime}</span>
+                                    <span>TT: ${row.dutyThresholdTime}</span>
+                                    <span>ET: ${row.dutyEndTime}</span>
                                 </div>
                                `
                         return html;

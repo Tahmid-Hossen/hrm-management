@@ -41,7 +41,7 @@
                                 Blood Group
                             </label>
                             @php $bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']; @endphp
-                            <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" >
+                            <select id="employeeBloodGroup" name="blood_group" class="inputField" >
                                 <option value="" disabled>Select Blood Group</option>
                                 @foreach($bloodGroups as $item)
                                     <option value="{{$item}}" {{ $employee->blood_group == $item ? 'selected' : '' }}> {{$item}}</option>
@@ -58,7 +58,7 @@
                             <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
                                 Select Company
                             </label>
-                            <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" >
+                            <select id="employeeCompany" name="company_name" class="inputField" >
                                 <option value="" disabled {{$employee->company_name == '' ? 'selected' : ''}}>Select Company</option>
                                 @if(isset($companies))
                                     @foreach ($companies as $item)
@@ -71,7 +71,7 @@
                             <label for="employeeDepartment" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
                                 Select Department
                             </label>
-                            <select id="employeeDepartment" name="department" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                            <select id="employeeDepartment" name="department" class="inputField">
                                 <option value="" disabled {{$employee->department == '' ? 'selected' : ''}}>Select Department</option>
                                 @if(isset($departments))
                                     @foreach ($departments as $department)
@@ -87,7 +87,7 @@
                             <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 dark:text-neutral-200">
                                 Select Designation
                             </label>
-                            <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                            <select id="employeeDesignation" name="designation" class="inputField">
                                 @foreach ($designations as $designation)
                                     {{-- <option value="{{ $department->id }}"> --}}
                                     <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>

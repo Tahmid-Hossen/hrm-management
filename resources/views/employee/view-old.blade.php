@@ -166,7 +166,7 @@
                                                     <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Blood Group
                                                     </label>
-                                                    <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                    <select id="employeeBloodGroup" name="blood_group" class="inputField" disabled>
                                                         <option value="" selected disabled>Select Blood Group</option>
                                                         <option value="A+" {{ $employee->blood_group == 'A+' ? 'selected' : '' }}> A+ </option>
                                                         <option value="A-" {{ $employee->blood_group == 'A-' ? 'selected' : '' }}> A- </option>
@@ -206,7 +206,7 @@
                                                     <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Select Company
                                                     </label>
-                                                    <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                    <select id="employeeCompany" name="company_name" class="inputField" disabled>
                                                         <option value="" selected disabled>Select Company</option>
                                                         <option value="Nexdecade Technology" {{ $employee->company_name == 'Nexdecade Technology' ? 'selected' : '' }}>Nexdecade Technology</option>
                                                         <option value="M2M Communication" {{ $employee->company_name == 'M2M Communication' ? 'selected' : '' }}>M2M Communication</option>
@@ -219,7 +219,7 @@
                                                     <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Select Designation
                                                     </label>
-                                                    <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                    <select id="employeeDesignation" name="designation" class="inputField" disabled>
                                                         @foreach ($designations as $designation)
                                                             {{-- <option value="{{ $department->id }}"> --}}
                                                             <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
@@ -336,7 +336,7 @@
                                                     <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Employee Profile Photo
                                                     </label>
-                                                    <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}" disabled />
+                                                    <input type="file" name="profile_photo" id="employee_photo" class="inputField" value="{{ $employee->profile_photo }}" disabled />
                                                 </div>
                                             </div>
                                         </div>
@@ -390,7 +390,7 @@
                                                     <label for="employeeBloodGroup" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Blood Group
                                                     </label>
-                                                    <select id="employeeBloodGroup" name="blood_group" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                    <select id="employeeBloodGroup" name="blood_group" class="inputField" disabled>
                                                         <option value="" selected disabled>Select Blood Group</option>
                                                         <option value="A+" {{ $employee->blood_group == 'A+' ? 'selected' : '' }}> A+ </option>
                                                         <option value="A-" {{ $employee->blood_group == 'A-' ? 'selected' : '' }}> A- </option>
@@ -430,7 +430,7 @@
                                                     <label for="employeeCompany" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Select Company
                                                     </label>
-                                                    <select id="employeeCompany" name="company_name" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" disabled>
+                                                    <select id="employeeCompany" name="company_name" class="inputField" disabled>
                                                         <option value="" selected disabled>Select Company</option>
                                                         <option value="Nexdecade Technology" {{ $employee->company_name == 'Nexdecade Technology' ? 'selected' : '' }}>Nexdecade Technology</option>
                                                         <option value="M2M Communication" {{ $employee->company_name == 'M2M Communication' ? 'selected' : '' }}>M2M Communication</option>
@@ -443,7 +443,7 @@
                                                     <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Select Designation
                                                     </label>
-                                                    <select id="employeeDesignation" name="designation" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+                                                    <select id="employeeDesignation" name="designation" class="inputField">
                                                         @foreach ($designations as $designation)
                                                             {{-- <option value="{{ $department->id }}"> --}}
                                                             <option value="{{ $designation->id }}" {{ $designation->id == $employee->designation ? 'selected' : '' }}>
@@ -561,7 +561,7 @@
                                                     <label for="employeePhoto" class="inline-block text-sm font-medium text-gray-800 mt-2.5 dark:text-neutral-200">
                                                         Employee Profile Photo
                                                     </label>
-                                                    <input type="file" name="profile_photo" id="employee_photo" class="py-3 px-4 block w-full bg-neutral-100 dark:bg-neutral-700 border border-gray-200 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 disabled:opacity-50 disabled:pointer-events-none  dark:border-neutral-700 dark:text-neutral-300 dark:placeholder-neutral-500 dark:focus:ring-neutral-600" value="{{ $employee->profile_photo }}" disabled />
+                                                    <input type="file" name="profile_photo" id="employee_photo" class="inputField" value="{{ $employee->profile_photo }}" disabled />
                                                 </div>
                                             </div>
                                         </div>

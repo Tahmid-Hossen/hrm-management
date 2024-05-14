@@ -7,6 +7,7 @@ use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Designations;
 use App\Models\DocumentType;
+use App\Models\DutySlot;
 use App\Models\EmployeeDocument;
 use App\Models\EmployeeEducation;
 use App\Models\ImportLog;
@@ -31,6 +32,7 @@ class EmployeeController extends Controller
         $designations = Designations::all();
         $departments = Departments::all();
         $companies = Company::get();
+        $dutySlots = DutySlot::get();
         if ($request->ajax()) {
             $searchKey = $request->search['value'] ?? '';
             $company = $request->company;
@@ -139,7 +141,7 @@ class EmployeeController extends Controller
         }
 
         $trashedEmployees = Employee::onlyTrashed()->get();
-        return view('employee.index', compact('companies', 'designations', 'departments', 'trashedEmployees'));
+        return view('employee.index', compact('companies', 'designations', 'departments', 'trashedEmployees', 'dutySlots'));
     }
 
     public function create(Request $request)
@@ -175,6 +177,7 @@ class EmployeeController extends Controller
         $employee->designation = $request->designation;
         $employee->department = $request->emp_department;
         $employee->joining_date = $request->joining_date;
+        $employee->duty_slot = $request->duty_slot;
 
         if ($employee->save()) {
             $employeeId = $employee->id;
@@ -290,7 +293,8 @@ class EmployeeController extends Controller
                 $designations = Designations::all();
                 $departments = Departments::all();
                 $companies = Company::get();
-                $html=View::make('employee.edit', compact('a', 'employee', 'companies', 'designations', 'departments'))->render();
+                $dutySlots = DutySlot::get();
+                $html=View::make('employee.edit', compact('a', 'employee', 'companies', 'designations', 'departments', 'dutySlots'))->render();
                 $response=[
                     'status'=>1,
                     'html'=>$html,
@@ -402,6 +406,7 @@ class EmployeeController extends Controller
                     $employee->joining_date = $request->joining_date;
                     $employee->emergency_contact = $request->emergency_contact;
                     $employee->personal_email = $request->personal_email;
+                    $employee->duty_slot = $request->duty_slot;
                     break;
                 case 'address':
                     $employee->present_address = $request->present_address;

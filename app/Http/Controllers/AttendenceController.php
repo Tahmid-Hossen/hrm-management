@@ -123,31 +123,33 @@ class AttendenceController extends Controller
                 $dutyStartTime='';
                 $dutyThresholdTime='';
                 $dutyEndTime='';
+
+                $startTime='10:00:00';
+                $thresholdTime='10:15:00';
+                $endTime='18:00:00';
+                if($item->dutySlot){
+                    $dutySlot=$item->dutySlot;
+                    if($dutySlot->dutySlotRule($date)){
+                        $dutySlot=$dutySlot->dutySlotRule($date);
+                    }
+                    $startTime=$dutySlot->start_time;
+                    $thresholdTime=$dutySlot->threshold_time;
+                    $endTime=$dutySlot->end_time;
+                }
                 if($attendanceCount>0){
                     $sortedAttendances = $attendance->sortBy('DateTime');
                     $att=$sortedAttendances->first();
                     $clockOut = $attendanceCount == 1 ? null : $sortedAttendances->last()['DateTime'];
                     $clockIn = $att['DateTime'];
 
-                    $startTime=$dutyStartTime='10:00:00';
-                    $thresholdTime=$dutyThresholdTime='10:15:00';
-                    $endTime=$dutyEndTime='18:00:00';
-                    if($item->dutySlot){
-                        $dutySlot=$item->dutySlot;
-                        if($dutySlot->dutySlotRule($date)){
-                            $dutySlot=$dutySlot->dutySlotRule($date);
-                        }
-                        $startTime=$dutyStartTime=$dutySlot->start_time;
-                        $thresholdTime=$dutyThresholdTime=$dutySlot->threshold_time;
-                        $endTime=$dutyEndTime=$dutySlot->end_time;
-                    }
 
                     // Late Count
                     $clockInTime = strtotime($clockIn);
-                    $dutySlotStartTime = strtotime("$date $thresholdTime");
-                    if($clockInTime>$dutySlotStartTime) {
-                        $lateCount = round(($clockInTime - $dutySlotStartTime) / 60);
-                        $hours = round($lateCount / 60); // Calculate hours
+                    $dutySlotStartTime = strtotime("$date $startTime");
+                    $dutySlotThresholdTime = strtotime("$date $thresholdTime");
+                    if($clockInTime>$dutySlotThresholdTime) {
+                        $lateCount = floor(($clockInTime - $dutySlotStartTime) / 60);
+                        $hours = floor($lateCount / 60); // Calculate hours
                         $minutes = $lateCount % 60;
                         if($hours>0) $late = $hours . 'h ' .$minutes.'m';
                         else $late = $minutes.'m';
@@ -194,9 +196,9 @@ class AttendenceController extends Controller
                     'attendance' => $attendance,
                     'dutySlotName' => $item->dutySlot->slot_name ?? '',
                     'dutySlot' => $dutySlot,
-                    'dutyStartTime' => date('H:ia', strtotime($dutyStartTime)),
-                    'dutyThresholdTime' => date('H:ia', strtotime($dutyThresholdTime)),
-                    'dutyEndTime' => date('h:ia', strtotime($dutyEndTime)),
+                    'dutyStartTime' => date('H:ia', strtotime($startTime)),
+                    'dutyThresholdTime' => date('H:ia', strtotime($thresholdTime)),
+                    'dutyEndTime' => date('h:ia', strtotime($endTime)),
                     'attendanceCount' => $attendanceCount,
                     'clockIn' => $clockIn,
                     'clockOut' => $clockOut,

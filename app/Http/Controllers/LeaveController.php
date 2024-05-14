@@ -10,8 +10,8 @@ class LeaveController extends Controller
 
     public function index()
     {
-        $leaves = Leave::where('assigned_by', auth()->id())->get();
-        return view("manage-leave.index", compact('leaves'));
+        $leaves = Leave::get();
+        return view("leave.index", compact('leaves'));
     }
 
 

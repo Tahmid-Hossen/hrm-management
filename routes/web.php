@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('leaves')->group(function () {
+        Route::get('/', [LeaveController::class, 'index'])->name('leaves.index');
         Route::get('/requests', [LeaveController::class, 'leaveRequest'])->name('leaves.requests');
         Route::get('/approved', [LeaveController::class, 'leaveApproved'])->name('leaves.approved');
         Route::get('/rejected', [LeaveController::class, 'leaveRejected'])->name('leaves.rejected');

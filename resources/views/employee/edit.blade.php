@@ -5,7 +5,7 @@
             @csrf
             <div class="mt-3">
                 <div class="flex flex-col gap-y-2">
-                    <div class=" grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
+                    <div class=" grid grid-cols-1 gap-x-6 gap-y-3 sm:grid-cols-3">
                         <div>
                             <label for="employeeFullName" class="inputLabel">
                                 Employee Name
@@ -122,6 +122,18 @@
                             <div class="sm:flex">
                                 <input id="employeeBirthday" name="birth_year" type="date" class="inputField" value="{{ $employee->birth_year }}"  />
                             </div>
+                        </div>
+                        <div>
+                            <label for="employeeDesignation" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
+                                Duty Slot
+                            </label>
+                            <select id="" name="duty_slot" class="inputField">
+                                @if(isset($dutySlots))
+                                    @foreach ($dutySlots as $item)
+                                        <option value="{{ $item->id }}" {{ $item->id==$employee->duty_slot ? 'selected' : '' }}>{{ $item->slot_name }} ({{ date('h:ia', strtotime($item->start_time)) }}-{{ date('h:ia', strtotime($item->end_time)) }})</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                         <div>
                             <label for="af-account-gender-checkbox" class="inputLabel">

@@ -170,7 +170,12 @@
             </div>
         </div>
     </x-containers.container-box>
-
+    {{--<x-modals.large-modal id="modal2" title="Create">
+        content
+        <x-slot name="footer">
+            footer
+        </x-slot>
+    </x-modals.large-modal>--}}
 @endsection
 @include('employee.create')
 @section('scripts')

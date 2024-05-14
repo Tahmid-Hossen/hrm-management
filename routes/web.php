@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DutySlotRulesController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DutySlotsController::class, 'index'])->name('dutySlots.index');
         Route::get('/validate-single-data', [DutySlotsController::class, 'validateSingleData']);
         Route::post('/store', [DutySlotsController::class, 'store'])->name('dutySlots.store');
+    });
+    Route::prefix('duty-slot-rules')->group(function () {
+        Route::get('/', [DutySlotRulesController::class, 'index'])->name('dutySlotRules.index');
+        Route::post('/store', [DutySlotRulesController::class, 'store'])->name('dutySlotRules.store');
+        Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('dutySlotRules.edit');
+        Route::post('/update', [DutySlotRulesController::class, 'update'])->name('dutySlotRules.update');
     });
 
     Route::prefix('leaves')->group(function () {

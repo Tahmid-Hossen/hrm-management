@@ -385,7 +385,7 @@ function validateDutySlot() {
             firstError=start_time;
         }
     }else $('#error_start_time').html('')
-    if(end_time.val()===''){
+    if(threshold_time.val()===''){
         submitPermission = false;
         $('#error_threshold_time').html('This field is required!')
         if(firstError===null){
@@ -404,3 +404,73 @@ function validateDutySlot() {
     }
     return submitPermission;
 }
+function validateDutySlotRules() {
+    let submitPermission = true;
+    let slot_name=$('#duty_slot_rules');
+    console.log("🚀 ~ validateDutySlotRules ~ slot_name:", slot_name.val());
+    let start_date=$('#start_date');
+    let end_date=$('#end_date');
+    let start_time=$('#start_time');
+    let threshold_time=$('#threshold_time');
+    let end_time=$('#end_time');
+    let firstError=null;
+    if(slot_name.val()=== null){
+        submitPermission = false;
+        $('#error_slot_name').html('This field is required!')
+        if(firstError===null){
+            firstError=slot_name;
+        }
+    }else $('#error_slot_name').html('')
+
+    if(start_date.val()===''){
+        submitPermission = false;
+        $('#error_start_date').html('This field is required!')
+        if(firstError===null){
+            firstError=start_date;
+        }
+    }else $('#error_start_date').html('')
+    if(end_date.val()===''){
+        submitPermission = false;
+        $('#error_end_date').html('This field is required!')
+        if(firstError===null){
+            firstError=end_date;
+        }
+    }else $('#error_end_date').html('')
+    if(end_date.val() && start_date.val()){
+        if(end_date.val()<start_date.val()){
+            submitPermission = false;
+            $('#error_end_date').html('End Date must be greater than start date!')
+            if(firstError===null){
+                firstError=end_date;
+            }
+        }else $('#error_end_date').html('')
+    }
+    if(start_time.val()===''){
+        submitPermission = false;
+        $('#error_start_time').html('This field is required!')
+        if(firstError===null){
+            firstError=start_time;
+        }
+    }else $('#error_start_time').html('')
+    if(threshold_time.val()===''){
+        submitPermission = false;
+        $('#error_threshold_time').html('This field is required!')
+        if(firstError===null){
+            firstError=threshold_time;
+        }
+    }else $('#error_end_time').html('')
+    if(end_time.val()===''){
+        submitPermission = false;
+        $('#error_end_time').html('This field is required!')
+        if(firstError===null){
+            firstError=end_time;
+        }
+    }else $('#error_end_time').html('')
+    if(firstError!==null){
+        firstError.focus();
+    }
+    console.log(submitPermission);
+    // return false;
+    return submitPermission;
+}
+

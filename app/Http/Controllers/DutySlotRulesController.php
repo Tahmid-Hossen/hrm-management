@@ -118,4 +118,39 @@ class DutySlotRulesController extends Controller
             return back()->with('success', 'Successfully Created!');
         }
     }
+    public function edit(Request $request, $id)
+    {
+        $dutySlotRule=DutySlotRule::find($id);
+        return $dutySlotRule;
+        if($request->ajax()){
+            ///
+        }
+
+        return view('dutySlotRules.edit', compact('dutySlots'));
+    }
+    public function update(Request $request, $id){
+        $dutySlotRule=DutySlotRule::find($id);
+        return $dutySlotRule;
+        $dutySlotId=$request->duty_slot_id;
+        $startDate=$request->start_date;
+        $endDate=$request->end_date;
+        $startTime=$request->start_time;
+        $thresholdTime=$request->threshold_time;
+        $endTime=$request->end_time;
+
+        if(!$dutySlotId){
+            return back()->with('error', 'Duty Slot Name is required!');
+        }
+
+        $query=New DutySlotRule();
+        $query->duty_slot_id=$dutySlotId;
+        $query->start_date=$startDate;
+        $query->end_date=$endDate;
+        $query->start_time=$startTime;
+        $query->threshold_time=$thresholdTime;
+        $query->end_time=$endTime;
+        if($query->save()){
+            return back()->with('success', 'Successfully Created!');
+        }
+    }
 }

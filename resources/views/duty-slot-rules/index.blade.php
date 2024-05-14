@@ -155,12 +155,9 @@
                 { name: 'action',  data: 'id',
                     render:function(data, type, row) {
                         let editBtn=`
-                            <button type="button" href="${baseUrl}/duty-slot-rules/edit/${row.id}" onclick="createDutySlotRuleModal.showModal()" class="tooltip actionBtn neutral" data-tip="Edit Time Slot">
+                            <button type="button" onclick="editDutySlotRuleModal('Edit Duty Slot Rules', '${baseUrl}/duty-slot-rules/edit/${row.id}')" class="tooltip actionBtn neutral" data-tip="Edit Time Slot">
                                 <i class="fa-regular fa-pen-to-square"></i>
                             </button>
-                            <a href="${baseUrl}/duty-slot-rules/edit/${row.id}" class="tooltip actionBtn neutral" data-tip="Edit Time Slot">
-                                <i class="fa-regular fa-pen-to-square"></i>
-                            </a>
                         `
                         return `<div class="flex justify-center">${editBtn}</div>`;
                     }

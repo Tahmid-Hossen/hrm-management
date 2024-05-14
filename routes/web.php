@@ -75,8 +75,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('duty-slot-rules')->group(function () {
         Route::get('/', [DutySlotRulesController::class, 'index'])->name('dutySlotRules.index');
         Route::post('/store', [DutySlotRulesController::class, 'store'])->name('dutySlotRules.store');
-        Route::get('/edit/{id}', [EmployeeController::class, 'edit'])->name('dutySlotRules.edit');
-        Route::post('/update', [DutySlotRulesController::class, 'update'])->name('dutySlotRules.update');
+        Route::get('/edit/{id}', [DutySlotRulesController::class, 'edit'])->name('dutySlotRules.edit');
+        Route::post('/update/{id}', [DutySlotRulesController::class, 'update'])->name('dutySlotRules.update');
     });
 
     Route::prefix('leaves')->group(function () {

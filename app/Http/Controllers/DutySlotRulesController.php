@@ -9,6 +9,7 @@ use App\Models\DutySlot;
 use App\Models\DutySlotRule;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class DutySlotRulesController extends Controller
 {
@@ -73,9 +74,9 @@ class DutySlotRulesController extends Controller
                 $queryDataJson[] = [
                     'id' => $item->id,
                     'slot_name' => $item->dutySlot->slot_name ?? '',
-                    'threshold_time' => $item->threshold_time ?? '',
-                    'start_time' => $item->start_time ?? '',
-                    'end_time' => $item->end_time ?? '',
+                    'start_time' => date('h:i a', strtotime($item->start_time)) ?? '',
+                    'threshold_time' => date('h:i a', strtotime($item->threshold_time)) ?? '',
+                    'end_time' => date('h:i a', strtotime($item->end_time)) ?? '',
                     'start_date' => date('d M Y', strtotime($item->start_date)) ?? '',
                     'end_date' => date('d M Y', strtotime($item->end_date)) ?? '',
                 ];
@@ -120,37 +121,43 @@ class DutySlotRulesController extends Controller
     }
     public function edit(Request $request, $id)
     {
-        $dutySlotRule=DutySlotRule::find($id);
-        return $dutySlotRule;
         if($request->ajax()){
-            ///
-        }
+            $dutySlotRule=DutySlotRule::find($id);
+            $dutySlots=DutySlot::get();
+            if($dutySlotRule){
+                $html=View::make('duty-slot-rules.edit', compact('dutySlotRule', 'dutySlots'))->render();
+                $response=[
+                    'status'=>1,
+                    'html'=>$html,
+                ];
+                return response()->json($response);
+            }
+            return response()->json(['status'=>0,'html'=>'Not Found!']);
 
+        }
+        abort(403);
         return view('dutySlotRules.edit', compact('dutySlots'));
     }
     public function update(Request $request, $id){
         $dutySlotRule=DutySlotRule::find($id);
-        return $dutySlotRule;
-        $dutySlotId=$request->duty_slot_id;
-        $startDate=$request->start_date;
-        $endDate=$request->end_date;
-        $startTime=$request->start_time;
-        $thresholdTime=$request->threshold_time;
-        $endTime=$request->end_time;
+        if($dutySlotRule){
+            $dutySlotId=$request->duty_slot_id;
+            $startDate=$request->start_date;
+            $endDate=$request->end_date;
+            $startTime=$request->start_time;
+            $thresholdTime=$request->threshold_time;
+            $endTime=$request->end_time;
 
-        if(!$dutySlotId){
-            return back()->with('error', 'Duty Slot Name is required!');
+            $dutySlotRule->duty_slot_id=$dutySlotId;
+            $dutySlotRule->start_date=$startDate;
+            $dutySlotRule->end_date=$endDate;
+            $dutySlotRule->start_time=$startTime;
+            $dutySlotRule->threshold_time=$thresholdTime;
+            $dutySlotRule->end_time=$endTime;
+            if($dutySlotRule->save()){
+                return back()->with('success', 'Successfully Updated!');
+            }
         }
-
-        $query=New DutySlotRule();
-        $query->duty_slot_id=$dutySlotId;
-        $query->start_date=$startDate;
-        $query->end_date=$endDate;
-        $query->start_time=$startTime;
-        $query->threshold_time=$thresholdTime;
-        $query->end_time=$endTime;
-        if($query->save()){
-            return back()->with('success', 'Successfully Created!');
-        }
+        return back()->with('error', 'Not Found');
     }
 }

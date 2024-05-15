@@ -81,7 +81,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </button>
 
                 <div id="payroll-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         @php $isSubActive = request()->is('leaves/requests') ? 'true' : 'false'; @endphp
                         <li>
                             <a href="{{route('leaves.requests')}}" class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
@@ -127,7 +127,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </button>
 
                 <div id="staff-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         @php $isSubActive = request()->is('users') ? 'true' : 'false'; @endphp
                         <li>
                             <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('users.index')}}">
@@ -164,7 +164,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </button>
 
                 <div id="payroll-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         @php $isSubActive = request()->is('set-salary') ? 'true' : 'false'; @endphp
                         <li>
                             <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="set-salary.html">
@@ -201,7 +201,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </button>
 
                 <div id="timesheet-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         @php $isSubActive = request()->is('attendance', 'attendance/*') ? 'true' : 'false'; @endphp
                         <li>
                             <a href="{{route('attendance.index')}}" class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none ">
@@ -227,7 +227,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                                 Manage Leave
                             </a>
                         </li>
-
+                        @php $isSubActive = request()->is( 'markattendance','markattendance/*','bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
                         <li class="hs-accordion {{$isSubActive=='true' ? 'active' : ''}}" id="attendance-accordion">
                             <button type="button" class="{{$isSubActive=='true' ? $ativeClass : ''}} hs-accordion-toggle w-full text-start flex items-center gap-x-3.5 py-2 px-2.5 hs-accordion-active:text-white hs-accordion-active:font-semibold hs-accordion-active:bg-red-600  text-sm text-black rounded-lg hover:bg-red-600  dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:hs-accordion-active:text-white dark:focus:outline-none ">
                                 Attendance
@@ -241,17 +241,17 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                                 </svg>
                             </button>
 
-                            <div id="attendance-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                                <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
-                                    @php $isSubActive = request()->is('markattendance', 'markattendance/*') ? 'true' : 'false'; @endphp
+                            <div id="attendance-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isSubActive =='true' ? 'style=display:block;' : ''}}>
+                                <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
+                                    @php $isSubActive2 = request()->is('markattendance', 'markattendance/*') ? 'true' : 'false'; @endphp
                                     <li>
-                                        <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('attendance.mark-attendance.index')}}">
+                                        <a class="{{ $isSubActive2 == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('attendance.mark-attendance.index')}}">
                                             Mark Attendance
                                         </a>
                                     </li>
-                                    @php $isSubActive = request()->is('bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
+                                    @php $isSubActive2 = request()->is('bulkattendance','bulkattendance/*') ? 'true' : 'false'; @endphp
                                     <li>
-                                        <a class="{{ $isSubActive == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('attendance.bulk-attendance.index')}}">
+                                        <a class="{{ $isSubActive2 == 'true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{route('attendance.bulk-attendance.index')}}">
                                             Bulk Attendance
                                         </a>
                                     </li>
@@ -278,7 +278,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 </button>
 
                 <div id="setting-accordion-child" class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden" {{$isActive =='true' ? 'style=display:block;' : ''}}>
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         @php $isSubActive = request()->is('company-list') ? 'true' : 'false'; @endphp
                         <li>
                             <a class="{{$isSubActive=='true' ? $ativeSubClass : ''}} flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none " href="{{ route('company-list.index') }}">
@@ -399,7 +399,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 <div
                     id="account-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         <li>
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "
@@ -477,7 +477,7 @@ $ativeSubClass=' text-white font-semibold bg-red-600 dark:text-white active:text
                 <div
                     id="projects-accordion-child"
                     class="hs-accordion-content w-full overflow-hidden transition-[height] duration-300 hidden">
-                    <ul class="flex flex-col gap-1 pt-2 ml-6 ps-2">
+                    <ul class="flex flex-col gap-1 pt-2 ml-4 ps-2">
                         <li>
                             <a
                                 class="flex items-center gap-x-3.5 py-2 px-2.5 text-sm text-black rounded-lg hover:bg-red-600 dark:hover:bg-red-600 hover:text-white dark:text-white dark:hover:text-white dark:focus:outline-none "

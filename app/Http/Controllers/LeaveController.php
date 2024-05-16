@@ -13,7 +13,9 @@ class LeaveController extends Controller
         $leaves = Leave::get();
         return view("leave.index", compact('leaves'));
     }
-
+    public function store(){
+        return 1;
+    }
 
     public function leaveRequest()
     {

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title', 'Employee Profile')
-@section('pageTitle', 'Employee List')
+@section('pageTitle', 'Leave List')
 @section('breadcumb')
-    <x-breadcumbs.breadcumb :data="[['title'=>'Employee List', 'url'=>'']]" class=""></x-breadcumbs.breadcumb>
+    <x-breadcumbs.breadcumb :data="[['title'=>'Leave', 'url'=>'']]" class=""></x-breadcumbs.breadcumb>
 @endsection
 @section('additionalButton')
 
@@ -66,8 +66,22 @@
                     </div>
                     <div class="inline-block hs-tooltip">
                         <div class="inline-block hs-tooltip">
-                            <button type="button" onclick="createDutySlotModal.showModal()" class="tooltip actionBtn bg-red-600" data-tip="Create Time Slot">
-                                <i class="fa-solid fa-plus"></i>
+                            <button type="button" class="tooltip tooltip-inner actionBtn bg-teal-400" data-tip="Export">
+                                <i class="ti ti-file-export"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="inline-block hs-tooltip">
+                        <div class="inline-block hs-tooltip">
+                            <button type="button" onclick="createLateRequestModal.showModal()"  class="tooltip tooltip-inner actionBtn bg-teal-600" data-tip="Late form">
+                                <i class="ti ti-clock-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="inline-block hs-tooltip">
+                        <div class="inline-block hs-tooltip">
+                            <button type="button" onclick="createLeaveRequestModal.showModal()" class="tooltip tooltip-inner actionBtn bg-red-600" data-tip="Create">
+                                <i class="ti ti-plus"></i>
                             </button>
                         </div>
                     </div>
@@ -84,23 +98,31 @@
                         <tr class="dark:hover:bg-neutral-800">
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                ID
+                                Emp ID
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                SLOT NAME
+                                Leave Type
+                            </th>
+                            {{-- <th scope="col"
+                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                Applied On
+                            </th> --}}
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                Start Date
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                Start Time
+                                End Date
                             </th>
+                            {{-- <th scope="col"
+                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
+                                Leave Reason
+                            </th> --}}
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                Threshold Time
-                            </th>
-                            <th scope="col"
-                                class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
-                                End Time
+                                Status
                             </th>
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium text-gray-500 uppercase text-start">
@@ -118,7 +140,8 @@
     </x-containers.container-box>
 
 @endsection
-
+@include('leave.create-late-request')
+@include('leave.create-leave-request')
 @section('scripts')
     <script>
         let dataTable = new DataTable('#dataTable', {
@@ -146,7 +169,7 @@
                     render:function(data, type, row) {
                         let editBtn=`
                             <a href="${baseUrl}/duty-slots/edit/${row.id}" class="actionBtn neutral">
-                                <i class="fa-regular fa-pen-to-square"></i>
+                                <i class="ti ti-edit"></i>
                             </a>
                         `
                         return `<div class="flex justify-center">${editBtn}</div>`;
@@ -172,6 +195,49 @@
             let date = '';
             dataTable.ajax.url(`{{ route('dutySlots.index') }}?department=${department}&company=${company}&designation=${designation}&date=${date}`).load();
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#form_type').on('change', function() {
+                handleChangeFormType(this);
+            });
+        });
+        $('#c_select_employee').selectize({
+        options: [
+        { company: 'nintendo', value: "nes", name: "Nintendo Entertainment System" },
+        { company: 'nintendo', value: "snes", name: "Super Nintendo Entertainment System" },
+        { company: 'nintendo', value: "n64", name: "Nintendo 64" },
+        { company: 'nintendo', value: "gamecube", name: "GameCube" },
+        { company: 'nintendo', value: "wii", name: "Wii" },
+        { company: 'microsoft', value: 'xss', name: 'Xbox Series S' },
+        { company: 'nintendo', value: "wiiu", name: "Wii U" },
+        { company: 'nintendo', value: "switch", name: "Switch" },
+        { company: 'sony', value: 'ps1', name: 'PlayStation' },
+        { company: 'sony', value: 'ps2', name: 'PlayStation 2' },
+        { company: 'sony', value: 'ps3', name: 'PlayStation 3' },
+        { company: 'sony', value: 'ps4', name: 'PlayStation 4' },
+        { company: 'sony', value: 'ps5', name: 'PlayStation 5' },
+        { company: 'microsoft', value: 'xbox', name: 'Xbox' },
+        { company: 'microsoft', value: '360', name: 'Xbox 360' },
+        { company: 'microsoft', value: 'xbone', name: 'Xbox One' },
+        { company: 'microsoft', value: 'xsx', name: 'Xbox Series X' }
+        ],
+        optionGroupRegister: function (optgroup) {
+        var capitalised = optgroup.charAt(0).toUpperCase() + optgroup.substring(1);
+        var group = {
+            label: 'Company: ' + capitalised
+        };
+
+        group[this.settings.optgroupValueField] = optgroup;
+
+        return group;
+        },
+        optgroupField: 'company',
+        labelField: 'name',
+        searchField: ['name','company'],
+        sortField: 'name'
+        });
+
     </script>
 @endsection
 

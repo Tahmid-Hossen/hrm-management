@@ -473,6 +473,132 @@ function validateDutySlotRules(edit='') {
     // return false;
     return submitPermission;
 }
+function validateLeaveRequest(edit='') {
+    let submitPermission = true;
+    let select_employee=$(`#${edit}select_employee`)[0].selectize.items;
+    let leave_type_others=$(`#${edit}leave_type #hs-horizontal-list-group-item-radio-4`)[0].checked;
+    let leave_reason = document.getElementById(`${edit}leave_reason`)
+    let start_date=$(`#${edit}start_date`);
+    let end_date=$(`#${edit}end_date`);
+    let firstError=null;
+    if(select_employee.length=== 0){
+        submitPermission = false;
+        $(`#${edit}error_select_employee`).html(`This field is required!`)
+    }else $(`#${edit}error_select_employee`).html(``)
+    if(leave_type_others && leave_reason.value ===''){
+        console.log("found other");
+        submitPermission = false;
+        $(`#${edit}error_leave_reason`).html(`Please tell us your leave reason first!`)
+        if(firstError===null){
+            firstError=leave_reason;
+        }
+    }else $(`#${edit}error_leave_reason`).html(``)
+    if(start_date.val()===``){
+        submitPermission = false;
+        $(`#${edit}error_start_date`).html(`This field is required!`)
+        if(firstError===null){
+            firstError=start_date;
+        }
+    }else $(`#${edit}error_start_date`).html(``)
+    if(end_date.val()===``){
+        submitPermission = false;
+        $(`#${edit}error_end_date`).html(`This field is required!`)
+        if(firstError===null){
+            firstError=end_date;
+        }
+    }else $(`#${edit}error_end_date`).html(``)
+    if(end_date.val() && start_date.val()){
+        if(end_date.val()<start_date.val()){
+            submitPermission = false;
+            $(`#${edit}error_end_date`).html(`End Date must be greater than start date!`)
+            if(firstError===null){
+                firstError=end_date;
+            }
+        }else $(`#${edit}error_end_date`).html(``)
+    }
+    if(firstError!==null){
+        firstError.focus();
+    }
+    console.log(submitPermission);
+    return submitPermission;
+}
+function validateLateRequest(edit='',formType='late_arrival') {
+    let submitPermission = true;
+    let select_employee=$(`#${edit}select_employee`)[0].selectize.items;
+    let late_type_others=$(`#${edit}late_type #hs-horizontal-list-group-item-radio-4`)[0].checked;
+    let justification = document.getElementById(`${edit}justification`)
+    let late_arrival_date=$(`#${edit}late_arrival_date`);
+    let late_arrival_time=$(`#${edit}late_arrival_time`);
+    let early_exit_date=$(`#${edit}early_exit_date`);
+    let early_exit_time=$(`#${edit}early_exit_time`);
+    let firstError=null;
+    if(select_employee.length=== 0){
+        submitPermission = false;
+        $(`#${edit}error_select_employee`).html(`This field is required!`)
+    }else $(`#${edit}error_select_employee`).html(``)
+    if(justification.value ===''){
+        submitPermission = false;
+        $(`#${edit}error_justification`).html(`Please tell us your reason first!`)
+        if(firstError===null){
+            firstError=justification;
+        }
+    }else $(`#${edit}error_justification`).html(``)
+    switch(formType){
+        case 'late_arrival':
+            if(late_arrival_date.val()===``){
+                submitPermission = false;
+                $(`#${edit}error_late_arrival_date`).html(`This field is required!`)
+                if(firstError===null){
+                    firstError=late_arrival_date;
+                }
+            }else $(`#${edit}error_late_arrival_time`).html(``)
+            if(late_arrival_time.val()===``){
+                submitPermission = false;
+                $(`#${edit}error_late_arrival_time`).html(`This field is required!`)
+                if(firstError===null){
+                    firstError=late_arrival_time;
+                }
+            }else $(`#${edit}error_late_arrival_time`).html(``)
+            break;
+        case 'early_exit':
+            if(early_exit_date.val()===``){
+                submitPermission = false;
+                $(`#${edit}error_early_exit_date`).html(`This field is required!`)
+                if(firstError===null){
+                    firstError=early_exit_date;
+                }
+            }else $(`#${edit}error_early_exit_time`).html(``)
+            if(early_exit_time.val()===``){
+                submitPermission = false;
+                $(`#${edit}error_early_exit_time`).html(`This field is required!`)
+                if(firstError===null){
+                    firstError=early_exit_time;
+                }
+            }else $(`#${edit}error_early_exit_time`).html(``)
+            break;
+        default:
+            break;
+    }
+
+    if(firstError!==null){
+        firstError.focus();
+    }
+    console.log(submitPermission);
+    return false;
+    return submitPermission;
+}
+function handleChangeFormType(e) {
+    if (e.value === 'late_arrival') {
+        console.log("founded");
+        $('#early_exit_type').addClass('hidden');
+        $('#late_arrival_type').removeClass('hidden');
+    } else {
+        console.log("late_arrival_type");
+        $('#late_arrival_type').addClass('hidden');
+        $('#early_exit_type').removeClass('hidden');
+    }
+}
+
 
 function editDutySlotRuleModal(title, url) {
     largeModal.showModal();
@@ -486,3 +612,16 @@ function editDutySlotRuleModal(title, url) {
         }
     })
 }
+/* function createLeaveRequestModal(title, url) {
+    largeModal.showModal();
+    $('#largeModalTitle').html(title);
+    $(`#largeModalBody`).html($('#spinner-large').html())
+    $.ajax(`${url}`).then(function (res) {
+        if(res.status===1){
+            $(`#largeModalBody`).html(res.html)
+        }else{
+            toastr.error(res.msg)
+        }
+    })
+} */
+

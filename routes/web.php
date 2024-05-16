@@ -92,6 +92,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('manage-leave')->group(function () {
         Route::get('/', [LeaveController::class, 'index'])->name('leave.index');
+        Route::post('/store', [LeaveController::class, 'store'])->name('leaveRequest.store');
     });
     Route::prefix('markattendance')->group(function () {
         Route::get('/', [AttendenceController::class, 'markattendance'])->name('attendance.mark-attendance.index');

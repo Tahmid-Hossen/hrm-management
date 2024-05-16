@@ -156,7 +156,7 @@
                     render:function(data, type, row) {
                         let editBtn=`
                             <button type="button" onclick="editDutySlotRuleModal('Edit Duty Slot Rules', '${baseUrl}/duty-slot-rules/edit/${row.id}')" class="tooltip actionBtn neutral" data-tip="Edit Time Slot">
-                                <i class="fa-regular fa-pen-to-square"></i>
+                                <i class="ti ti-edit"></i>
                             </button>
                         `
                         return `<div class="flex justify-center">${editBtn}</div>`;

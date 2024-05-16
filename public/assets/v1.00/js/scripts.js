@@ -475,7 +475,7 @@ function validateDutySlotRules(edit='') {
 }
 function validateLeaveRequest(edit='') {
     let submitPermission = true;
-    let select_employee=$(`#${edit}select_employee`)[0].selectize.items;
+    let select_employee=$(`#${edit}leave_select_employee`)[0].selectize.items;
     let leave_type_others=$(`#${edit}leave_type #hs-horizontal-list-group-item-radio-4`)[0].checked;
     let leave_reason = document.getElementById(`${edit}leave_reason`)
     let start_date=$(`#${edit}start_date`);
@@ -483,8 +483,8 @@ function validateLeaveRequest(edit='') {
     let firstError=null;
     if(select_employee.length=== 0){
         submitPermission = false;
-        $(`#${edit}error_select_employee`).html(`This field is required!`)
-    }else $(`#${edit}error_select_employee`).html(``)
+        $(`#${edit}error_leave_select_employee`).html(`This field is required!`)
+    }else $(`#${edit}error_leave_select_employee`).html(``)
     if(leave_type_others && leave_reason.value ===''){
         console.log("found other");
         submitPermission = false;
@@ -524,7 +524,7 @@ function validateLeaveRequest(edit='') {
 }
 function validateLateRequest(edit='',formType='late_arrival') {
     let submitPermission = true;
-    let select_employee=$(`#${edit}select_employee`)[0].selectize.items;
+    let select_employee=$(`#${edit}late_select_employee`)[0].selectize.items;
     let late_type_others=$(`#${edit}late_type #hs-horizontal-list-group-item-radio-4`)[0].checked;
     let justification = document.getElementById(`${edit}justification`)
     let late_arrival_date=$(`#${edit}late_arrival_date`);
@@ -534,8 +534,8 @@ function validateLateRequest(edit='',formType='late_arrival') {
     let firstError=null;
     if(select_employee.length=== 0){
         submitPermission = false;
-        $(`#${edit}error_select_employee`).html(`This field is required!`)
-    }else $(`#${edit}error_select_employee`).html(``)
+        $(`#${edit}error_late_select_employee`).html(`This field is required!`)
+    }else $(`#${edit}error_late_select_employee`).html(``)
     if(justification.value ===''){
         submitPermission = false;
         $(`#${edit}error_justification`).html(`Please tell us your reason first!`)

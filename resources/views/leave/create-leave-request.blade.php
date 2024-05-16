@@ -28,8 +28,8 @@
                                 Select An Employee <span class="text-red-600">*</span>
                             </label>
 
-                            <select id="c_select_employee" class="" placeholder="Select an employee..."></select>
-                            <span class="error_msg" id="c_error_select_employee"></span>
+                            <select id="c_leave_select_employee" class="" placeholder="Select an employee..."></select>
+                            <span class="error_msg" id="c_error_leave_select_employee"></span>
                         </div>
                         <div class="col-span-1">
                             <label for="leave_typeX" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -121,7 +121,7 @@
                             Cancel
                         </button>
                         <button type="submit" class="submit-button">
-                            request
+                            Request
                         </button>
                     </div>
                 </div>

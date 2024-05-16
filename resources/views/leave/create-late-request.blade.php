@@ -10,10 +10,6 @@
     <div class="modal-box w-11/12 max-w-5xl p-0 relative border border-neutral-200">
         <div class="flex justify-between items-center border-b p-2 pl-4">
             <div id="createEmployeeModalTitle" class="font-bold text-lg flex items-center gap-3"><span>Create a Late Request</span>
-                <select id="form_type" name="form_type" class="w-40 px-2 py-1 rounded-[4px] focus:ring-offset-0 focus:ring-0 focus:outline-none focus:border-gray-400 ">
-                    <option value="late_arrival" selected>Late Arrival</option>
-                    <option value="early_exit">Early Exit</option>
-                </select>
             </div>
             <div class="">
                 <div class="modal-action mt-0">
@@ -27,14 +23,19 @@
             <form action="#" method="POST" enctype="multipart/form-data" onsubmit="return validateLateRequest('c_',document.getElementById('form_type').value)">
                 @csrf
                 <div class="p-4">
+                    <label for="form_type" class="inputLabel"> Form Type</label>
+                    <select id="form_type" name="form_type" class="!w-64 inputField">
+                        <option value="late_arrival" selected>Late Arrival</option>
+                        <option value="early_exit">Early Exit</option>
+                    </select>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 mt-2">
                         <div class="col-span-1">
                             <label for="select_employeeX" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
                                 Select An Employee <span class="text-red-600">*</span>
                             </label>
 
-                            <select id="c_select_employee" class="" placeholder="Select an employee..."></select>
-                            <span class="error_msg" id="c_error_select_employee"></span>
+                            <select id="c_late_select_employee" class="" placeholder="Select an employee..."></select>
+                            <span class="error_msg" id="c_error_late_select_employee"></span>
                         </div>
                         <div class="col-span-1">
                             <label for="late_typeX" class="inline-block font-medium text-sm text-gray-800 mt-2.5 dark:text-neutral-200">
@@ -143,7 +144,7 @@
                             Cancel
                         </button>
                         <button type="submit" class="submit-button">
-                            request
+                            Request
                         </button>
                     </div>
                 </div>

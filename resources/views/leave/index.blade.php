@@ -10,7 +10,7 @@
 
 @section('content')
     <x-containers.container-box>
-        <div class="flex justify-between items-end gap-4">
+        <div class="flex justify-between items-center gap-4">
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 items-end ">
                 {{--<div>
                     <label for="select-filter" class="inputLabel">Company</label>
@@ -59,7 +59,7 @@
                     </div>
                 </div>--}}
             </div>
-            <div class="pb-2 h-full flex flex-col items-end justify-end">
+            <div class="h-full flex flex-col items-center justify-end mr-2">
                 <div class="flex items-center align-middle gap-x-2">
                     <div>
                         <h5 class="text-sm text-gray-800 dark:text-white">Action: </h5>
@@ -73,14 +73,14 @@
                     </div>
                     <div class="inline-block hs-tooltip">
                         <div class="inline-block hs-tooltip">
-                            <button type="button" onclick="createLateRequestModal.showModal()"  class="tooltip tooltip-inner actionBtn bg-teal-600" data-tip="Late form">
+                            <button type="button" onclick="createLateRequestModal.showModal()"  class="tooltip tooltip-inner actionBtn bg-teal-600" data-tip="Create Late form">
                                 <i class="ti ti-clock-plus"></i>
                             </button>
                         </div>
                     </div>
                     <div class="inline-block hs-tooltip">
                         <div class="inline-block hs-tooltip">
-                            <button type="button" onclick="createLeaveRequestModal.showModal()" class="tooltip tooltip-inner actionBtn bg-red-600" data-tip="Create">
+                            <button type="button" onclick="createLeaveRequestModal.showModal()" class="tooltip tooltip-inner actionBtn bg-red-600" data-tip="Create Leave Form">
                                 <i class="ti ti-plus"></i>
                             </button>
                         </div>
@@ -197,45 +197,80 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
+        // $(document).ready(function() {
             $('#form_type').on('change', function() {
                 handleChangeFormType(this);
             });
+        // });
+        $('#c_late_select_employee').selectize({
+            options: [
+            { company: 'nintendo', value: "nes", name: "Nintendo Entertainment System" },
+            { company: 'nintendo', value: "snes", name: "Super Nintendo Entertainment System" },
+            { company: 'nintendo', value: "n64", name: "Nintendo 64" },
+            { company: 'nintendo', value: "gamecube", name: "GameCube" },
+            { company: 'nintendo', value: "wii", name: "Wii" },
+            { company: 'microsoft', value: 'xss', name: 'Xbox Series S' },
+            { company: 'nintendo', value: "wiiu", name: "Wii U" },
+            { company: 'nintendo', value: "switch", name: "Switch" },
+            { company: 'sony', value: 'ps1', name: 'PlayStation' },
+            { company: 'sony', value: 'ps2', name: 'PlayStation 2' },
+            { company: 'sony', value: 'ps3', name: 'PlayStation 3' },
+            { company: 'sony', value: 'ps4', name: 'PlayStation 4' },
+            { company: 'sony', value: 'ps5', name: 'PlayStation 5' },
+            { company: 'microsoft', value: 'xbox', name: 'Xbox' },
+            { company: 'microsoft', value: '360', name: 'Xbox 360' },
+            { company: 'microsoft', value: 'xbone', name: 'Xbox One' },
+            { company: 'microsoft', value: 'xsx', name: 'Xbox Series X' }
+            ],
+            optionGroupRegister: function (optgroup) {
+            var capitalised = optgroup.charAt(0).toUpperCase() + optgroup.substring(1);
+            var group = {
+                label: 'Company: ' + capitalised
+            };
+
+            group[this.settings.optgroupValueField] = optgroup;
+
+            return group;
+            },
+            optgroupField: 'company',
+            labelField: 'name',
+            searchField: ['name','company'],
+            sortField: 'name'
         });
-        $('#c_select_employee').selectize({
-        options: [
-        { company: 'nintendo', value: "nes", name: "Nintendo Entertainment System" },
-        { company: 'nintendo', value: "snes", name: "Super Nintendo Entertainment System" },
-        { company: 'nintendo', value: "n64", name: "Nintendo 64" },
-        { company: 'nintendo', value: "gamecube", name: "GameCube" },
-        { company: 'nintendo', value: "wii", name: "Wii" },
-        { company: 'microsoft', value: 'xss', name: 'Xbox Series S' },
-        { company: 'nintendo', value: "wiiu", name: "Wii U" },
-        { company: 'nintendo', value: "switch", name: "Switch" },
-        { company: 'sony', value: 'ps1', name: 'PlayStation' },
-        { company: 'sony', value: 'ps2', name: 'PlayStation 2' },
-        { company: 'sony', value: 'ps3', name: 'PlayStation 3' },
-        { company: 'sony', value: 'ps4', name: 'PlayStation 4' },
-        { company: 'sony', value: 'ps5', name: 'PlayStation 5' },
-        { company: 'microsoft', value: 'xbox', name: 'Xbox' },
-        { company: 'microsoft', value: '360', name: 'Xbox 360' },
-        { company: 'microsoft', value: 'xbone', name: 'Xbox One' },
-        { company: 'microsoft', value: 'xsx', name: 'Xbox Series X' }
-        ],
-        optionGroupRegister: function (optgroup) {
-        var capitalised = optgroup.charAt(0).toUpperCase() + optgroup.substring(1);
-        var group = {
-            label: 'Company: ' + capitalised
-        };
+        $('#c_leave_select_employee').selectize({
+            options: [
+            { company: 'nintendo', value: "nes", name: "Nintendo Entertainment System" },
+            { company: 'nintendo', value: "snes", name: "Super Nintendo Entertainment System" },
+            { company: 'nintendo', value: "n64", name: "Nintendo 64" },
+            { company: 'nintendo', value: "gamecube", name: "GameCube" },
+            { company: 'nintendo', value: "wii", name: "Wii" },
+            { company: 'microsoft', value: 'xss', name: 'Xbox Series S' },
+            { company: 'nintendo', value: "wiiu", name: "Wii U" },
+            { company: 'nintendo', value: "switch", name: "Switch" },
+            { company: 'sony', value: 'ps1', name: 'PlayStation' },
+            { company: 'sony', value: 'ps2', name: 'PlayStation 2' },
+            { company: 'sony', value: 'ps3', name: 'PlayStation 3' },
+            { company: 'sony', value: 'ps4', name: 'PlayStation 4' },
+            { company: 'sony', value: 'ps5', name: 'PlayStation 5' },
+            { company: 'microsoft', value: 'xbox', name: 'Xbox' },
+            { company: 'microsoft', value: '360', name: 'Xbox 360' },
+            { company: 'microsoft', value: 'xbone', name: 'Xbox One' },
+            { company: 'microsoft', value: 'xsx', name: 'Xbox Series X' }
+            ],
+            optionGroupRegister: function (optgroup) {
+            var capitalised = optgroup.charAt(0).toUpperCase() + optgroup.substring(1);
+            var group = {
+                label: 'Company: ' + capitalised
+            };
 
-        group[this.settings.optgroupValueField] = optgroup;
+            group[this.settings.optgroupValueField] = optgroup;
 
-        return group;
-        },
-        optgroupField: 'company',
-        labelField: 'name',
-        searchField: ['name','company'],
-        sortField: 'name'
+            return group;
+            },
+            optgroupField: 'company',
+            labelField: 'name',
+            searchField: ['name','company'],
+            sortField: 'name'
         });
 
     </script>

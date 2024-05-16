@@ -162,7 +162,7 @@ class AttendenceController extends Controller
                     $dutySlotEndTime = strtotime("$date $endTime");
                     if($clockOut){
                         if($clockOutTime>$dutySlotEndTime) {
-                            $lateCount = round(($clockOutTime - $dutySlotEndTime) / 60);
+                            $lateCount = floor(($clockOutTime - $dutySlotEndTime) / 60);
                             $hours = floor($lateCount / 60); // Calculate hours
                             $minutes = $lateCount % 60;
                             if($hours>0) $overtime = $hours . 'h ' .$minutes.'m';
@@ -173,7 +173,7 @@ class AttendenceController extends Controller
                     // Early Leaving
                     if(time()>$dutySlotEndTime && $clockOut){
                         if($clockOutTime<$dutySlotEndTime) {
-                            $lateCount = round(($dutySlotEndTime - $clockOutTime) / 60);
+                            $lateCount = floor(($dutySlotEndTime - $clockOutTime) / 60);
                             $hours = floor($lateCount / 60); // Calculate hours
                             $minutes = $lateCount % 60;
                             if($hours>0) $earlyLeaving = $hours . 'h ' .$minutes.'m';
